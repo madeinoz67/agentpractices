@@ -1,7 +1,7 @@
 # author: Stephen Eaton
 # Domain concept scheme — the primary (single-parent) hierarchy. Source of truth.
 # Rules: IDs are permanent; rename = change label only; retire = status: deprecated + replaced_by; never delete.
-version: 0.9.0
+version: 0.10.0
 scheme:
   id: domains
   label: Practice Domains
@@ -39,6 +39,7 @@ concepts:
   - { id: D.SWE.API, broader: D.SWE, label: API & Interface Design, definition: Software Engineering practice governing programmatic interfaces between components. }
   - { id: D.SWE.TST, broader: D.SWE, label: Testing, definition: Software Engineering practice governing how behaviour is proven by automated tests. }
   - { id: D.SWE.VCS, broader: D.SWE, label: Version Control & Review, definition: Software Engineering practice governing commits, branches and code review. }
+  - { id: D.SWE.REL, broader: D.SWE, label: Release Engineering, alt_labels: [release, publishing, packaging, pinning, dependency bump, changelog], definition: Software Engineering practice governing how a changed component is published, pinned and consumed across independently versioned parts., scope_note: Covers release batching, publishing, pin and consumer bumps and release records. Commits and review are D.SWE.VCS; proving tests pass before a release is D.SWE.TST. }
   - { id: D.SWE.QLT, broader: D.SWE, label: Code Quality & Comments, alt_labels: [code comments, readability, self-documenting code, docstrings], definition: Software Engineering practice governing how readable source code is and what comments it carries., scope_note: Covers naming, structure and in-code comments. Separate documentation for people is D.DOC.HUM; for agents D.DOC.AGR. }
   - { id: D.SWE.UI, broader: D.SWE, label: UI & Design Systems, alt_labels: [style guide, design system, design tokens, mockups, UI design], definition: Software Engineering practice governing how user interfaces are specified, built and kept visually consistent., scope_note: Covers style guides, design tokens, component libraries, mockups and visual testing. Written design documents are D.DOC.SPC. }
 

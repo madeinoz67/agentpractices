@@ -12,9 +12,9 @@ describe('repo taxonomy', () => {
   test('has no errors', () => {
     expect(validateTaxonomy(t).filter((i) => i.level === 'error')).toEqual([]);
   });
-  test('has 7 top concepts and 32 narrower', () => {
+  test('has 7 top concepts and 33 narrower', () => {
     expect(t.concepts.filter((x) => !x.broader).length).toBe(7);
-    expect(t.concepts.filter((x) => x.broader).length).toBe(32);
+    expect(t.concepts.filter((x) => x.broader).length).toBe(33);
   });
   test('pathOf returns labels root-first', () => {
     expect(pathOf(t, 'D.SWE.CLI').map((x) => x.label)).toEqual(['Software Engineering', 'CLI Design']);
@@ -52,7 +52,7 @@ describe('dirOf', () => {
 test('D.DOC.HUM sits under Documentation & Writing', () => {
   const tx = loadTaxonomy('taxonomy');
   expect(pathOf(tx, 'D.DOC.HUM').map((x) => x.label)).toEqual(['Documentation & Writing', 'Human-Readable Docs']);
-  expect(tx.version).toBe('0.9.0');
+  expect(tx.version).toBe('0.10.0');
 });
 
 test('D.KNO.KG sits under Knowledge Modelling', () => {
@@ -89,4 +89,9 @@ test('D.SEC.DAT exists under Security & Safety', () => {
 test('D.SEC.OT exists under Security & Safety', () => {
   const tx = loadTaxonomy('taxonomy');
   expect(pathOf(tx, 'D.SEC.OT').map((x) => x.label)).toEqual(['Security & Safety', 'OT & Industrial Systems']);
+});
+
+test('D.SWE.REL exists under Software Engineering', () => {
+  const tx = loadTaxonomy('taxonomy');
+  expect(pathOf(tx, 'D.SWE.REL').map((x) => x.label)).toEqual(['Software Engineering', 'Release Engineering']);
 });

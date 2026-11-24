@@ -2,6 +2,7 @@
 
 ## Unreleased
 
+- Taxonomy 0.10.0: added D.SWE.REL Release Engineering; issue forms regenerated. Added BP-0072 Batch changes so the release round trip is paid once (draft). BP-0014 2.0.0: release rules moved to BP-0072. BP-0004 1.0.1: added BP-0014 to related.
 - Added BP-0071 Design API surfaces contract-first and evolve them without breaking clients (D.SWE.API, draft).
 - Taxonomy 0.9.0: added D.SEC.OT OT & Industrial Systems; issue forms regenerated. Added BP-0070 Keep agents out of the OT control path (draft).
 - Added BP-0069 Design human approvals that people actually read (D.AGT.WF, draft).
