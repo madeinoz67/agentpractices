@@ -44,6 +44,7 @@ body:
         - D.KNO.TAX — Taxonomy
         - D.KNO.ONT — Ontology
         - D.KNO.SEM — Semantics & Metadata
+        - D.KNO.KG — Knowledge Graphs
         - D.SWE — Software Engineering
         - D.SWE.CLI — CLI Design
         - D.SWE.API — API & Interface Design

@@ -2,6 +2,9 @@
 
 ## Unreleased
 
+- Taxonomy 0.3.0: added D.KNO.KG Knowledge Graphs; issue forms regenerated.
+- Added BP-0031 Build knowledge graphs agents can trust (draft, D.KNO.KG).
+- Added BP-0032 Give agents least-privilege, short-lived, attributable access and BP-0033 Keep secrets out of agent context, memory, logs and output (drafts, D.SEC.PRV).
 - `astro.config.mjs` takes `site`, `base` and the social image URLs from `BASE_URL` in `scripts/lib/site.ts`, so the site origin is defined once.
 - Added BP-0030 Structure multi-step workflows inside skills (draft, D.AGT.SKL).
 - Added RAG practices BP-0027 Prepare a corpus for retrieval, BP-0028 Retrieve context with hybrid search, filters and reranking, BP-0029 Evaluate and secure RAG (drafts, D.AGT.CTX).

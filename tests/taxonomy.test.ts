@@ -12,9 +12,9 @@ describe('repo taxonomy', () => {
   test('has no errors', () => {
     expect(validateTaxonomy(t).filter((i) => i.level === 'error')).toEqual([]);
   });
-  test('has 7 top concepts and 24 narrower', () => {
+  test('has 7 top concepts and 25 narrower', () => {
     expect(t.concepts.filter((x) => !x.broader).length).toBe(7);
-    expect(t.concepts.filter((x) => x.broader).length).toBe(24);
+    expect(t.concepts.filter((x) => x.broader).length).toBe(25);
   });
   test('pathOf returns labels root-first', () => {
     expect(pathOf(t, 'D.SWE.CLI').map((x) => x.label)).toEqual(['Software Engineering', 'CLI Design']);
@@ -52,5 +52,10 @@ describe('dirOf', () => {
 test('D.DOC.HUM sits under Documentation & Writing', () => {
   const tx = loadTaxonomy('taxonomy');
   expect(pathOf(tx, 'D.DOC.HUM').map((x) => x.label)).toEqual(['Documentation & Writing', 'Human-Readable Docs']);
-  expect(tx.version).toBe('0.2.0');
+  expect(tx.version).toBe('0.3.0');
+});
+
+test('D.KNO.KG sits under Knowledge Modelling', () => {
+  const tx = loadTaxonomy('taxonomy');
+  expect(pathOf(tx, 'D.KNO.KG').map((x) => x.label)).toEqual(['Knowledge Modelling', 'Knowledge Graphs']);
 });

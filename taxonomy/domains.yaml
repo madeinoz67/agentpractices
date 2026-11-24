@@ -1,7 +1,7 @@
 # author: Stephen Eaton
 # Domain concept scheme — the primary (single-parent) hierarchy. Source of truth.
 # Rules: IDs are permanent; rename = change label only; retire = status: deprecated + replaced_by; never delete.
-version: 0.2.0
+version: 0.3.0
 scheme:
   id: domains
   label: Practice Domains
@@ -30,6 +30,7 @@ concepts:
   - { id: D.KNO.TAX, broader: D.KNO, label: Taxonomy, definition: Knowledge Modelling practice governing hierarchical classification of concepts. }
   - { id: D.KNO.ONT, broader: D.KNO, label: Ontology, definition: Knowledge Modelling practice governing classes, typed relationships and constraints. }
   - { id: D.KNO.SEM, broader: D.KNO, label: Semantics & Metadata, definition: Knowledge Modelling practice governing the meaning of terms and the metadata attached to resources. }
+  - { id: D.KNO.KG, broader: D.KNO, label: Knowledge Graphs, alt_labels: [KG, graph memory, GraphRAG], definition: Knowledge Modelling practice governing graphs of entities and typed relationships that agents build, query and maintain., scope_note: Covers graph construction, entity resolution, provenance and graph retrieval. Schema design is D.KNO.ONT; text-chunk retrieval is D.AGT.CTX. }
 
   - id: D.SWE
     label: Software Engineering
