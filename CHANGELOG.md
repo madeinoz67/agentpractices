@@ -2,6 +2,8 @@
 
 ## Unreleased
 
+- Added BP-0013 Use temporary workflow memory — when, how, and how to secure it (draft, D.AGT.CTX).
+- BP-0011, BP-0012: added BP-0013 to related.
 - Added BP-0011 Manage short-term (working) memory and BP-0012 Manage long-term memory (drafts, D.AGT.CTX).
 - BP-0010: added BP-0011 to related.
 - Added BP-0010 Use a code index to gather context (draft, D.AGT.CTX).

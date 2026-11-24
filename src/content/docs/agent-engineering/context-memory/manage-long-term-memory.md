@@ -9,7 +9,7 @@ stage: [build, operate]
 status: draft
 version: 1.0.0
 updated: 2026-11-24
-related: [BP-0005, BP-0011]
+related: [BP-0005, BP-0011, BP-0013]
 sources:
   - { title: Claude Platform Docs — Memory tool, url: https://platform.claude.com/docs/en/agents-and-tools/tool-use/memory-tool }
   - { title: Anthropic — Effective context engineering for AI agents, url: https://www.anthropic.com/engineering/effective-context-engineering-for-ai-agents }

@@ -9,7 +9,7 @@ stage: [build, operate]
 status: draft
 version: 1.0.0
 updated: 2026-11-24
-related: [BP-0002, BP-0010, BP-0012]
+related: [BP-0002, BP-0010, BP-0012, BP-0013]
 sources:
   - { title: Anthropic — Effective context engineering for AI agents, url: https://www.anthropic.com/engineering/effective-context-engineering-for-ai-agents }
   - { title: 'Claude Cookbook — Context engineering: memory, compaction, and tool clearing', url: https://platform.claude.com/cookbook/tool-use-context-engineering-context-engineering-tools }
