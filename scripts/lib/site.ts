@@ -1,5 +1,5 @@
 // author: Stephen Eaton
-// Site constants shared by build scripts. Keep in sync with astro.config.mjs (site + base).
+// Site constants shared by build scripts and astro.config.mjs.
 export const BASE_URL = 'https://agentpractices.dev/';
 export const TITLE = 'Agent Best Practices';
 export const DESCRIPTION =
