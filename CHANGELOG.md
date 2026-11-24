@@ -4,6 +4,7 @@
 
 - Added BP-0008 Decompose tasks into independently verifiable units (draft, D.AGT.WF).
 - BP-0002: added BP-0008 to related.
+- Social card (public/og.png, 1280×640) with og:image / twitter:card meta; source in scripts/og/.
 
 ## 0.1.0 — 2026-11-24
 

@@ -32,6 +32,14 @@ export default defineConfig({
       social: [{ icon: 'github', label: 'GitHub', href: 'https://github.com/madeinoz67/best-practices' }],
       editLink: { baseUrl: 'https://github.com/madeinoz67/best-practices/edit/main/' },
       lastUpdated: true,
+      head: [
+        { tag: 'meta', attrs: { property: 'og:image', content: 'https://madeinoz67.github.io/best-practices/og.png' } },
+        { tag: 'meta', attrs: { property: 'og:image:width', content: '1280' } },
+        { tag: 'meta', attrs: { property: 'og:image:height', content: '640' } },
+        { tag: 'meta', attrs: { property: 'og:image:alt', content: 'Agent Best Practices — the rules AI agents check before they act.' } },
+        { tag: 'meta', attrs: { name: 'twitter:card', content: 'summary_large_image' } },
+        { tag: 'meta', attrs: { name: 'twitter:image', content: 'https://madeinoz67.github.io/best-practices/og.png' } },
+      ],
       customCss: [
         '@fontsource/ibm-plex-sans/400.css', '@fontsource/ibm-plex-sans/600.css', '@fontsource/ibm-plex-sans/700.css',
         '@fontsource/ibm-plex-mono/400.css', '@fontsource/ibm-plex-mono/600.css',

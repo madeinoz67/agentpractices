@@ -1,0 +1,30 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1280" height="640" viewBox="0 0 1280 640">
+  <!-- author: Stephen Eaton — social card, Theme A "Spec Sheet" -->
+  <rect width="1280" height="640" fill="#F7F7F4"/>
+  <rect x="80" y="62" width="58" height="40" fill="#1A1C1E"/>
+  <text x="109" y="90" font-family="IBM Plex Mono" font-weight="600" font-size="22" fill="#F7F7F4" text-anchor="middle">BP</text>
+  <text x="156" y="92" font-family="IBM Plex Sans" font-weight="700" font-size="30" fill="#1A1C1E">Agent Best Practices</text>
+  <text x="1200" y="91" font-family="IBM Plex Mono" font-size="20" fill="#5B6470" text-anchor="end">madeinoz67.github.io/best-practices</text>
+  <rect x="80" y="126" width="1120" height="3" fill="#1A1C1E"/>
+  <text font-family="IBM Plex Sans" font-weight="700" font-size="74" fill="#1A1C1E" letter-spacing="-1.5">
+    <tspan x="80" y="238">The rules AI agents check</tspan>
+    <tspan x="80" y="324">before they act.</tspan>
+  </text>
+  <text x="80" y="386" font-family="IBM Plex Sans" font-size="30" fill="#3D434A">Short, directive, versioned — and machine-readable first.</text>
+  <rect x="80" y="424" width="820" height="64" fill="#FFFFFF" stroke="#E6E8EB" stroke-width="2"/>
+  <text x="108" y="464" font-family="IBM Plex Mono" font-size="20" fill="#5B6470">R1</text>
+  <rect x="150" y="440" width="78" height="32" fill="#B3261E"/>
+  <text x="189" y="463" font-family="IBM Plex Mono" font-weight="600" font-size="19" fill="#FFFFFF" text-anchor="middle">MUST</text>
+  <text x="248" y="465" font-family="IBM Plex Sans" font-size="25" fill="#1A1C1E">Fetch llms.txt and follow the Rules before you plan.</text>
+  <g font-family="IBM Plex Mono" font-size="20">
+    <rect x="80" y="532" width="132" height="46" fill="#E3ECFA"/><text x="146" y="562" fill="#174A94" text-anchor="middle">llms.txt</text>
+    <rect x="228" y="532" width="180" height="46" fill="#E3ECFA"/><text x="318" y="562" fill="#174A94" text-anchor="middle">catalog.json</text>
+    <rect x="424" y="532" width="216" height="46" fill="#E3ECFA"/><text x="532" y="562" fill="#174A94" text-anchor="middle">taxonomy.jsonld</text>
+    <rect x="656" y="532" width="144" height="46" fill="#E3ECFA"/><text x="728" y="562" fill="#174A94" text-anchor="middle">AGENTS.md</text>
+    <rect x="816" y="532" width="132" height="46" fill="none" stroke="#1A1C1E" stroke-width="2"/><text x="882" y="562" fill="#1A1C1E" text-anchor="middle">BP-0001</text>
+  </g>
+  <rect x="1048" y="424" width="152" height="154" fill="#1F5FBF"/>
+  <text font-family="IBM Plex Mono" font-weight="600" font-size="20" fill="#FFFFFF">
+    <tspan x="1070" y="462">D.AGT</tspan><tspan x="1070" y="492">D.MAS</tspan><tspan x="1070" y="522">D.KNO</tspan><tspan x="1070" y="552">D.SWE …</tspan>
+  </text>
+</svg>
