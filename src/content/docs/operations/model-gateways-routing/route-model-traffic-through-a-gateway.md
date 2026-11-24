@@ -7,7 +7,7 @@ type: guideline
 roles: [orchestrator, implementer]
 stage: [plan, build, operate]
 status: draft
-version: 1.0.0
+version: 1.1.0
 updated: 2026-11-24
 related: [BP-0041, BP-0032, BP-0033, BP-0039, BP-0044]
 sources:
@@ -44,6 +44,7 @@ sources:
 
 10. **SHOULD** log usage per key (tokens, cost, latency, errors) at the gateway and send traces to your tracing system with the agent's run ID ([BP-0039](/operations/observability/trace-agent-runs/)).
 11. **MUST NOT** log full prompts and responses by default; redact secrets and personal data where content logging is needed.
+12. **MUST** keep the gateway's price table current: record source and date for each model price, refresh it on a schedule, and reconcile computed spend against provider invoices monthly ([BP-0047](/operations/model-gateways-routing/route-by-time-of-day-pricing/) rules 12–17).
 
 ## When to apply
 
