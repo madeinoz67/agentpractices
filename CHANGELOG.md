@@ -2,6 +2,7 @@
 
 ## Unreleased
 
+- Added BP-0055 Prefer targeted API wrapper scripts to MCP servers for narrow, repeated work (D.AGT.TOOL, draft).
 - BP-0047 1.1.0: added rules for expiring, refreshing and reconciling pricing windows and prices, with a price-check script; BP-0046 1.1.0: keep the gateway price table current.
 - Taxonomy 0.5.0: added D.SWE.QLT Code Quality & Comments; issue forms regenerated. Added BP-0054 Keep agent-written code comments few, true and about why (draft).
 - Added BP-0052 Prevent and catch hallucinations (D.AGT.WF) and BP-0053 Stop errors amplifying across agents, memory and retrieval (D.MAS.HND) — drafts.
