@@ -2,6 +2,7 @@
 
 ## Unreleased
 
+- Added RAG practices BP-0027 Prepare a corpus for retrieval, BP-0028 Retrieve context with hybrid search, filters and reranking, BP-0029 Evaluate and secure RAG (drafts, D.AGT.CTX).
 - Added BP-0024 Define each term once, BP-0025 Describe resources with standard metadata vocabularies, BP-0026 Map meaning between vocabularies explicitly (drafts, D.KNO.SEM).
 - Added BP-0022 Configure MCP servers at the right scope and BP-0023 Use MCP servers safely and efficiently (drafts, D.AGT.TOOL).
 - Added BP-0020 Author agent hooks and BP-0021 Use hooks for deterministic control (drafts, D.AGT.TOOL).
