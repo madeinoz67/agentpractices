@@ -2,6 +2,7 @@
 
 ## Unreleased
 
+- Added BP-0064 Use decision models for repeated, bounded decisions in agent workflows (D.AGT.WF, draft).
 - Added BP-0063 Broker agent credentials through a secrets vault (for example OpenBao) (D.SEC.PRV, draft).
 - Added BP-0062 Give each sub-agent only the tools and MCP servers its role needs (D.AGT.TOOL, draft).
 - Added BP-0061 Choose agent communication channels for durability, audience and trust (D.MAS.COM, draft).
