@@ -28,7 +28,7 @@ export default defineConfig({
     starlight({
       title: 'Agent Best Practices',
       description: 'Canonical, versioned best practices for AI agents. Agents start at llms.txt or catalog.json.',
-      social: [{ icon: 'github', label: 'GitHub', href: 'https://github.com/madeinoz67/agentpractices' }],
+      social: [],
       editLink: { baseUrl: 'https://github.com/madeinoz67/agentpractices/edit/main/' },
       lastUpdated: true,
       head: [
@@ -44,7 +44,7 @@ export default defineConfig({
         '@fontsource/ibm-plex-mono/400.css', '@fontsource/ibm-plex-mono/600.css',
         './src/styles/theme.css',
       ],
-      components: { PageTitle: './src/components/PageTitle.astro' },
+      components: { PageTitle: './src/components/PageTitle.astro', SocialIcons: './src/components/SocialIcons.astro' },
       sidebar: [
         { label: 'Start here', items: ['index', 'how-agents-use-this-site', { label: 'Contributing', items: [{ autogenerate: { directory: 'contributing' } }] }] },
         ...domainGroups,
