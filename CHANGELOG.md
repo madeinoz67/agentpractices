@@ -2,6 +2,7 @@
 
 ## Unreleased
 
+- Added BP-0065 Benchmark models on your own tasks for accuracy, speed, cost and output format (D.OPS.EVL, draft).
 - Added BP-0064 Use decision models for repeated, bounded decisions in agent workflows (D.AGT.WF, draft).
 - Added BP-0063 Broker agent credentials through a secrets vault (for example OpenBao) (D.SEC.PRV, draft).
 - Added BP-0062 Give each sub-agent only the tools and MCP servers its role needs (D.AGT.TOOL, draft).
