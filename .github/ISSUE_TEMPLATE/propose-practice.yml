@@ -62,6 +62,7 @@ body:
         - D.OPS.EVL — Evaluation
         - D.OPS.CST — Cost & Performance
         - D.OPS.GW — Model Gateways & Routing
+        - D.OPS.BDR — Backup & Recovery
         - D.DOC — Documentation & Writing
         - D.DOC.AGR — Agent-Readable Docs
         - D.DOC.HUM — Human-Readable Docs

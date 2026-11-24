@@ -1,7 +1,7 @@
 # author: Stephen Eaton
 # Domain concept scheme — the primary (single-parent) hierarchy. Source of truth.
 # Rules: IDs are permanent; rename = change label only; retire = status: deprecated + replaced_by; never delete.
-version: 0.6.0
+version: 0.7.0
 scheme:
   id: domains
   label: Practice Domains
@@ -57,6 +57,7 @@ concepts:
   - { id: D.OPS.EVL, broader: D.OPS, label: Evaluation, alt_labels: [evals], definition: Operations practice governing how the quality of agent output is measured. }
   - { id: D.OPS.CST, broader: D.OPS, label: Cost & Performance, definition: Operations practice governing token, time and money spent by agents. }
   - { id: D.OPS.GW, broader: D.OPS, label: Model Gateways & Routing, alt_labels: [LLM proxy, AI gateway, LiteLLM, Claude Code Router], definition: Operations practice governing the proxies and gateways that route agent model traffic between providers and models., scope_note: Covers routing, keys, budgets, fallbacks and logging at the gateway. Per-run budgets in the agent itself are D.OPS.CST. }
+  - { id: D.OPS.BDR, broader: D.OPS, label: Backup & Recovery, alt_labels: [backups, disaster recovery, DR, restore, RPO, RTO], definition: Operations practice governing how data and agent state are backed up, protected from loss and restored., scope_note: Covers backups, restore testing, recovery objectives and protecting data from destructive agent actions. Rolling back a code change is D.SWE.VCS. }
 
   - id: D.DOC
     label: Documentation & Writing

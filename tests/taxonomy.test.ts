@@ -12,9 +12,9 @@ describe('repo taxonomy', () => {
   test('has no errors', () => {
     expect(validateTaxonomy(t).filter((i) => i.level === 'error')).toEqual([]);
   });
-  test('has 7 top concepts and 29 narrower', () => {
+  test('has 7 top concepts and 30 narrower', () => {
     expect(t.concepts.filter((x) => !x.broader).length).toBe(7);
-    expect(t.concepts.filter((x) => x.broader).length).toBe(29);
+    expect(t.concepts.filter((x) => x.broader).length).toBe(30);
   });
   test('pathOf returns labels root-first', () => {
     expect(pathOf(t, 'D.SWE.CLI').map((x) => x.label)).toEqual(['Software Engineering', 'CLI Design']);
@@ -52,7 +52,7 @@ describe('dirOf', () => {
 test('D.DOC.HUM sits under Documentation & Writing', () => {
   const tx = loadTaxonomy('taxonomy');
   expect(pathOf(tx, 'D.DOC.HUM').map((x) => x.label)).toEqual(['Documentation & Writing', 'Human-Readable Docs']);
-  expect(tx.version).toBe('0.6.0');
+  expect(tx.version).toBe('0.7.0');
 });
 
 test('D.KNO.KG sits under Knowledge Modelling', () => {
@@ -74,4 +74,9 @@ test('D.SWE.QLT exists under Software Engineering', () => {
 test('D.SWE.UI exists under Software Engineering', () => {
   const tx = loadTaxonomy('taxonomy');
   expect(pathOf(tx, 'D.SWE.UI').map((x) => x.label)).toEqual(['Software Engineering', 'UI & Design Systems']);
+});
+
+test('D.OPS.BDR exists under Operations', () => {
+  const tx = loadTaxonomy('taxonomy');
+  expect(pathOf(tx, 'D.OPS.BDR').map((x) => x.label)).toEqual(['Operations', 'Backup & Recovery']);
 });
