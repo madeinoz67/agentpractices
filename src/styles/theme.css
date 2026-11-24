@@ -59,3 +59,4 @@ header.header { border-bottom: 2px solid var(--sl-color-white); }
   color: var(--sl-color-white); text-decoration: none; font-family: var(--sl-font-mono); font-size: var(--sl-text-sm); line-height: 1; }
 .bp-star:hover { background: var(--sl-color-gray-6); color: var(--sl-color-white); }
 .bp-star-count { padding-left: 0.45rem; border-left: 1px solid var(--sl-color-gray-5); }
+@media (max-width: 50rem) { .bp-star-long { display: none; } }

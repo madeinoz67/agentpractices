@@ -11,7 +11,7 @@ const label = count ? `Star ${repo} on GitHub (${count} stars)` : `Star ${repo} 
 ---
 <a class="bp-star" href={REPO_URL} aria-label={label} title={label}>
   <svg aria-hidden="true" width="16" height="16" viewBox="0 0 16 16" fill="currentColor"><path d="M8 .25a.75.75 0 0 1 .67.42l1.88 3.81 4.2.61a.75.75 0 0 1 .42 1.28l-3.04 2.96.72 4.19a.75.75 0 0 1-1.09.79L8 12.33l-3.76 1.98a.75.75 0 0 1-1.09-.79l.72-4.19L.83 6.37a.75.75 0 0 1 .42-1.28l4.2-.61L7.33.67A.75.75 0 0 1 8 .25Z"/></svg>
-  <span class="bp-star-label">Star</span>
+  <span class="bp-star-label">Star<span class="bp-star-long"> on GitHub</span></span>
   {count && <span class="bp-star-count">{count}</span>}
 </a>
 <Default />
