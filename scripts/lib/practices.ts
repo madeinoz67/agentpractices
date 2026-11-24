@@ -93,6 +93,10 @@ export function validatePractices(ps: Practice[], t: Taxonomy, opts: { checkPath
     if (!/^[a-z0-9-]+$/.test(p.slug.split('/').pop() ?? ''))
       err('E_SLUG', p, 'file name must be lower-case kebab-case (a-z, 0-9, -) so catalog URLs match site URLs');
     if (!/^##\s+Rules\b/m.test(p.body)) err('E_RULES', p, 'body must contain a "## Rules" section');
+    if (!/\*\*MUST\b/.test(p.body)) err('E_NORMATIVE', p, 'body must state at least one **MUST** rule');
+    for (const s of p.sources)
+      if (!/^https?:\/\//i.test(String(s?.url ?? '')))
+        err('E_SOURCE', p, `source "${s?.title ?? ''}" needs an http:// or https:// url`);
   }
   return issues;
 }
