@@ -2,6 +2,7 @@
 
 ## Unreleased
 
+- Added BP-0014 Close standards-corpus coverage gaps in one batched release (draft, D.KNO.ONT).
 - BP-0013 1.1.0: added provisioning rules (reserved prefix, orchestrator-only minting, retention backstop), lease/compare-and-set/idempotency rules, credential delivery and trust-level rules; added MuninnDB worked example.
 - BP-0010 1.0.1: added Tool options table (Codanna, Gortex, codebase-memory-mcp, Serena, Sourcegraph MCP, LSP, ctags, ripgrep/Zoekt) and selection guidance; Rules unchanged.
 - Added BP-0013 Use temporary workflow memory — when, how, and how to secure it (draft, D.AGT.CTX).
