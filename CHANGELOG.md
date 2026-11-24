@@ -2,6 +2,8 @@
 
 ## Unreleased
 
+- Added BP-0039 Trace agent runs end to end and BP-0040 Keep an audit trail of agent actions (drafts, D.OPS.OBS).
+- Added BP-0041 Budget and control agent cost and latency (draft, D.OPS.CST).
 - Added BP-0034 Make agent commits and PRs reviewable, BP-0035 Isolate parallel agents with worktrees, BP-0036 Review agent-written changes (drafts, D.SWE.VCS).
 - Added BP-0037 Work test-first with agents and BP-0038 Keep tests honest (drafts, D.SWE.TST).
 - Taxonomy 0.3.0: added D.KNO.KG Knowledge Graphs; issue forms regenerated.
