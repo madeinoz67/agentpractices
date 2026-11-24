@@ -40,3 +40,11 @@ describe('validateTaxonomy', () => {
   test('bad id format', () => expect(codes([c('d.lower')])).toContain('E_IDFMT'));
   test('clean taxonomy has no issues', () => expect(codes([c('D.AA'), c('D.AA.BB', 'D.AA'), c('D.AA.CC', 'D.AA')])).toEqual([]));
 });
+
+import { slugify, dirOf } from '../scripts/lib/taxonomy';
+describe('dirOf', () => {
+  test('slugify strips & and punctuation', () => expect(slugify('Security & Safety')).toBe('security-safety'));
+  test('dirOf joins slugified labels root-first', () => {
+    expect(dirOf(loadTaxonomy('taxonomy'), 'D.SWE.CLI')).toBe('software-engineering/cli-design');
+  });
+});

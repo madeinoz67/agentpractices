@@ -1,0 +1,38 @@
+---
+// author: Stephen Eaton
+// PageTitle override: for practice pages, add the domain path, metadata chips and a "For agents" box.
+import Default from '@astrojs/starlight/components/PageTitle.astro';
+import { loadTaxonomy, pathOf } from '../../scripts/lib/taxonomy';
+
+const route = Astro.locals.starlightRoute;
+const d = route.entry.data as Record<string, any>;
+const base = import.meta.env.BASE_URL.replace(/\/$/, '');
+const isPractice = Boolean(d.id);
+const domainPath = isPractice ? pathOf(loadTaxonomy('taxonomy'), d.domain).map((c) => c.label) : [];
+const mdHref = `${base}/${route.id || 'index'}.md`;
+const cite = `${d.id}@${d.version}`;
+const updated = d.updated instanceof Date ? d.updated.toISOString().slice(0, 10) : d.updated;
+---
+{isPractice && <div class="bp-crumb">{domainPath.join(' / ')}</div>}
+<Default />
+{isPractice && (
+  <>
+    <ul class="bp-meta" aria-label="Practice metadata">
+      <li class="bp-chip bp-id">{d.id}</li>
+      <li class="bp-chip">v{d.version}</li>
+      <li class={`bp-chip bp-status-${d.status}`}>{d.status}</li>
+      <li class="bp-chip bp-type">{d.type}</li>
+      {d.roles?.map((r: string) => <li class="bp-chip bp-facet">role: {r}</li>)}
+      {d.stage?.map((s: string) => <li class="bp-chip bp-facet">stage: {s}</li>)}
+      {updated && <li class="bp-chip bp-plain">updated {updated}</li>}
+    </ul>
+    {d.status === 'deprecated' && d.superseded_by && <p class="bp-deprecated">Deprecated — follow <strong>{d.superseded_by}</strong> instead.</p>}
+    <aside class="bp-agents" aria-label="For agents">
+      <div>
+        <div class="bp-label">For agents</div>
+        <p>Cite as <code>{cite}</code>. Fetch the raw page instead of parsing HTML.</p>
+      </div>
+      <a class="bp-btn" href={mdHref}>Raw .md</a>
+    </aside>
+  </>
+)}

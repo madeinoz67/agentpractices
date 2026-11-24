@@ -9,10 +9,15 @@
     "dev": "astro dev",
     "build": "astro build && bun scripts/postbuild.ts",
     "check": "bun scripts/check.ts",
-    "test": "bun test"
+    "test": "bun test",
+    "linkcheck": "bun scripts/linkcheck.ts",
+    "verify": "bun test && bun run check && bun run build && bun run linkcheck"
   },
   "dependencies": {
+    "@astrojs/markdown-remark": "^7.3.10",
     "@astrojs/starlight": "0.43.1",
+    "@fontsource/ibm-plex-mono": "^5.3.0",
+    "@fontsource/ibm-plex-sans": "^5.3.0",
     "astro": "7.4.13",
     "gray-matter": "^4.0.3",
     "jsonld": "^9.0.0",

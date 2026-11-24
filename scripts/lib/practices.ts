@@ -3,7 +3,7 @@
 import { readdirSync, readFileSync, statSync } from 'node:fs';
 import { join, relative } from 'node:path';
 import matter from 'gray-matter';
-import type { Issue, Taxonomy } from './taxonomy';
+import { dirOf, type Issue, type Taxonomy } from './taxonomy';
 
 export interface Source { title: string; url: string }
 export interface Practice {
@@ -53,7 +53,7 @@ export function loadPractices(dir: string): Practice[] {
   return out;
 }
 
-export function validatePractices(ps: Practice[], t: Taxonomy): Issue[] {
+export function validatePractices(ps: Practice[], t: Taxonomy, opts: { checkPath?: boolean } = {}): Issue[] {
   const issues: Issue[] = [];
   const err = (code: string, p: Practice, msg: string) => issues.push({ level: 'error', code, msg: `${p.id} (${p.file}): ${msg}` });
   const ids = new Map<string, number>();
@@ -78,6 +78,8 @@ export function validatePractices(ps: Practice[], t: Taxonomy): Issue[] {
     for (const r of p.related) if (!ids.has(r)) err('E_REL', p, `related ${r} not found`);
     if (p.status === 'deprecated' && !(p.superseded_by && ids.has(p.superseded_by)))
       err('E_SUPER', p, 'deprecated practice needs a valid superseded_by');
+    if (opts.checkPath && c && !p.slug.startsWith(dirOf(t, p.domain) + '/'))
+      err('E_PATH', p, `must live under ${dirOf(t, p.domain)}/ to match its domain`);
     if (!/^##\s+Rules\b/m.test(p.body)) err('E_RULES', p, 'body must contain a "## Rules" section');
   }
   return issues;

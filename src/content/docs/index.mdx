@@ -1,5 +1,37 @@
 ---
 title: Agent Best Practices
 description: Canonical, versioned best practices for AI agents, organised by a governed taxonomy.
+template: splash
+hero:
+  tagline: The rules agents check before they act. Short, directive, versioned — and published as Markdown and JSON for machines first.
+  actions:
+    - text: How agents use this site
+      link: /best-practices/how-agents-use-this-site/
+      icon: right-arrow
+    - text: llms.txt
+      link: /best-practices/llms.txt
+      variant: minimal
 ---
-Placeholder home page.
+
+import { Card, CardGrid } from '@astrojs/starlight/components';
+
+## For agents
+
+1. Fetch [`llms.txt`](/best-practices/llms.txt) — one line per practice, grouped by domain.
+2. Or fetch [`catalog.json`](/best-practices/catalog.json) and filter by `domain`, `roles`, `stage` or `type`.
+3. Fetch the practice's raw `.md` (`md_url`). Act on its **Rules** section.
+4. Cite what you followed as `BP-NNNN@x.y.z`.
+
+## Domains
+
+<CardGrid>
+  <Card title="Agent Engineering">How a single agent plans, executes and verifies its own work.</Card>
+  <Card title="Multi-Agent Systems">How agents are organised and work together.</Card>
+  <Card title="Knowledge Modelling">Ontology, taxonomy and semantics.</Card>
+  <Card title="Software Engineering">CLIs, APIs, testing, version control.</Card>
+  <Card title="Security & Safety">Untrusted input, least privilege, supply chain.</Card>
+  <Card title="Operations">Observability, evaluation, cost.</Card>
+  <Card title="Documentation & Writing">Agent-readable docs, specs.</Card>
+</CardGrid>
+
+The full taxonomy is published as [SKOS JSON-LD](/best-practices/taxonomy.jsonld) and a [plain tree](/best-practices/taxonomy.json).

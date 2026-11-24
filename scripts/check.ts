@@ -5,7 +5,7 @@ import { loadPractices, validatePractices } from './lib/practices';
 
 const t = loadTaxonomy('taxonomy');
 const ps = loadPractices('src/content/docs');
-const issues = [...validateTaxonomy(t), ...validatePractices(ps, t)];
+const issues = [...validateTaxonomy(t), ...validatePractices(ps, t, { checkPath: true })];
 for (const i of issues) console[i.level === 'error' ? 'error' : 'warn'](`${i.level.toUpperCase()} ${i.code} ${i.msg}`);
 const errors = issues.filter((i) => i.level === 'error').length;
 console.log(`checked ${t.concepts.length} concepts, ${ps.length} practices: ${errors} error(s), ${issues.length - errors} warning(s)`);

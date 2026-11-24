@@ -10,7 +10,7 @@ const base: Practice = {
   related: [], superseded_by: null, sources: [], file: 'x.md', slug: 'x', body: '## Rules\n1. MUST x',
 };
 const p = (o: Partial<Practice>): Practice => ({ ...base, ...o });
-const codes = (ps: Practice[], tax = t) => validatePractices(ps, tax).map((i) => i.code);
+const codes = (ps: Practice[], tax = t, checkPath = false) => validatePractices(ps, tax, { checkPath }).map((i) => i.code);
 
 describe('loadPractices', () => {
   test('loads only files with an id and derives slug', () => {
@@ -39,4 +39,11 @@ describe('validatePractices', () => {
   test('bad type facet', () => expect(codes([p({ type: 'essay' })])).toContain('E_FACET'));
   test('missing description', () => expect(codes([p({ description: '' })])).toContain('E_REQ'));
   test('missing Rules heading', () => expect(codes([p({ body: '## Intro\ntext' })])).toContain('E_RULES'));
+});
+
+describe('path follows taxonomy', () => {
+  test('practice outside its domain folder is an error', () =>
+    expect(codes([p({ slug: 'operations/evaluation/x' })], t, true)).toContain('E_PATH'));
+  test('practice inside its domain folder passes', () =>
+    expect(codes([p({ slug: 'software-engineering/cli-design/x' })], t, true)).toEqual([]));
 });

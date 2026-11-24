@@ -24,4 +24,5 @@ for (const f of walk(DOCS)) {
   write(`${slug}.md`, readFileSync(f, 'utf8'));
   n++;
 }
+write('AGENTS.md', readFileSync(join(DOCS, 'how-agents-use-this-site.md'), 'utf8'));
 console.log(`postbuild: ${ps.length} practices, ${t.concepts.length} concepts, ${n} raw .md files → ${OUT}/`);

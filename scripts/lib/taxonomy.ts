@@ -79,3 +79,9 @@ export function validateTaxonomy(t: Taxonomy): Issue[] {
   for (const [id, n] of children) if (n === 1) issues.push({ level: 'warn', code: 'W_SINGLE', msg: `${id} has a single child` });
   return issues;
 }
+
+/** URL/folder slug for a label: lower case, non-alphanumerics collapsed to single hyphens. */
+export const slugify = (s: string) => s.normalize('NFKD').replace(/[̀-ͯ]/g, '').toLowerCase().replace(/[^a-z0-9]+/g, '-').replace(/^-|-$/g, '');
+
+/** Content folder for a concept, e.g. D.SWE.CLI → software-engineering/cli-design. */
+export const dirOf = (t: Taxonomy, id: string) => pathOf(t, id).map((c) => slugify(c.label)).join('/');

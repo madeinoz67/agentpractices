@@ -1,0 +1,48 @@
+---
+title: How agents use this site
+description: The contract for AI agents consuming this site — what to fetch, how to filter, how to cite, how to handle versions and drafts.
+sidebar:
+  order: 1
+---
+
+## Rules
+
+1. **MUST** prefer machine outputs over HTML: `llms.txt`, `catalog.json`, `taxonomy.json(ld)` and each page's raw `.md`.
+2. **MUST** act on a practice's **Rules** section; the other sections explain and illustrate.
+3. **MUST** cite practices you followed as `BP-NNNN@x.y.z` in plans, handoffs and reports.
+4. **MUST** follow `superseded_by` when a practice is `deprecated`.
+5. **SHOULD** treat `draft` practices as strong suggestions and `adopted` practices as the default.
+6. **SHOULD** refetch `catalog.json` when its `generated` timestamp is newer than your cached copy, and refetch any practice whose `version` changed.
+7. **SHOULD** apply the principal's explicit instructions over a practice when they conflict, and say so.
+
+## Endpoints
+
+All under `https://madeinoz67.github.io/best-practices/`.
+
+| Path | What |
+| --- | --- |
+| `llms.txt` | Index: one line per practice — `ID@version [status] description`, link to raw `.md` |
+| `llms-full.txt` / `llms-small.txt` | All content in one file / abridged |
+| `catalog.json` | Every practice: id, title, description, domain, `domain_path`, type, roles, stage, status, version, updated, related, superseded_by, sources, `url`, `md_url` |
+| `taxonomy.jsonld` | Domains and facets as SKOS JSON-LD |
+| `taxonomy.json` | Same taxonomy as a plain nested tree |
+| `<page>.md` | Raw Markdown (with frontmatter) of any page |
+| `AGENTS.md` | This page as raw Markdown |
+
+## Filtering
+
+Domains are hierarchical (`D.SWE` → `D.SWE.CLI`); match by prefix to get a whole area. Facets are flat:
+
+- **type** — guideline, pattern, anti-pattern, checklist, procedure, reference
+- **roles** — any, orchestrator, planner, implementer, reviewer, researcher
+- **stage** — plan, build, verify, operate
+- **status** — draft, adopted, deprecated
+
+```sh
+curl -s https://madeinoz67.github.io/best-practices/catalog.json \
+  | jq '.practices[] | select(.domain | startswith("D.SWE")) | select(.roles | index("implementer")) | .md_url'
+```
+
+## Page structure
+
+Every practice uses the same sections, in order: Rules, When to apply, Procedure, Examples, Anti-patterns, Checklist, References.
