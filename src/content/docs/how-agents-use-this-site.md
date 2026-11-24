@@ -31,7 +31,7 @@ All under `https://madeinoz67.github.io/best-practices/`.
 
 ## Filtering
 
-Domains are hierarchical (`D.SWE` → `D.SWE.CLI`); match by prefix to get a whole area. Facets are flat:
+Domains are hierarchical (`D.SWE` → `D.SWE.CLI`); match the ID or the ID plus `.` to get a whole area. Practices with role `any` apply to every role — include them when filtering by role. Facets are flat:
 
 - **type** — guideline, pattern, anti-pattern, checklist, procedure, reference
 - **roles** — any, orchestrator, planner, implementer, reviewer, researcher
@@ -40,7 +40,10 @@ Domains are hierarchical (`D.SWE` → `D.SWE.CLI`); match by prefix to get a who
 
 ```sh
 curl -s https://madeinoz67.github.io/best-practices/catalog.json \
-  | jq '.practices[] | select(.domain | startswith("D.SWE")) | select(.roles | index("implementer")) | .md_url'
+  | jq '.practices[]
+        | select(.domain == "D.SWE" or (.domain | startswith("D.SWE.")))
+        | select(.roles | index("implementer") or index("any"))
+        | .md_url'
 ```
 
 ## Page structure

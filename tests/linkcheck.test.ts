@@ -15,3 +15,14 @@ test('reports internal links that do not resolve, ignores external and anchors',
     '<a href="/best-practices/missing/">bad</a><a href="https://example.org/">ext</a><a href="#top">anchor</a>');
   expect(checkLinks(d, '/best-practices/')).toEqual([{ from: 'index.html', href: '/best-practices/missing/' }]);
 });
+
+import { checkCatalog } from '../scripts/linkcheck';
+test('every catalog url and md_url must exist in dist', () => {
+  const d = mkdtempSync(join(tmpdir(), 'lc-'));
+  mkdirSync(join(d, 'a/b'), { recursive: true });
+  writeFileSync(join(d, 'a/b/index.html'), '');
+  writeFileSync(join(d, 'a/b.md'), '');
+  const B = 'https://madeinoz67.github.io/best-practices/';
+  const cat = { practices: [{ id: 'BP-0001', url: `${B}a/b/`, md_url: `${B}a/b.md` }, { id: 'BP-0002', url: `${B}A B/`, md_url: `${B}A B.md` }] };
+  expect(checkCatalog(d, cat, B).map((x) => x.href)).toEqual([`${B}A B/`, `${B}A B.md`]);
+});

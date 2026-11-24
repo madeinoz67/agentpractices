@@ -47,3 +47,14 @@ describe('path follows taxonomy', () => {
   test('practice inside its domain folder passes', () =>
     expect(codes([p({ slug: 'software-engineering/cli-design/x' })], t, true)).toEqual([]));
 });
+
+import { findUnidentified } from '../scripts/lib/practices';
+describe('review fixes', () => {
+  test('markdown under a domain folder without an id is an error; root pages are exempt', () => {
+    const issues = findUnidentified('tests/fixtures/noid', t);
+    expect(issues.map((i) => i.code)).toEqual(['E_NOID']);
+    expect(issues[0].msg).toContain('forgot.md');
+  });
+  test('filename must be lower-case kebab so catalog urls match Starlight urls', () =>
+    expect(codes([p({ slug: 'software-engineering/cli-design/My Practice' })])).toContain('E_SLUG'));
+});

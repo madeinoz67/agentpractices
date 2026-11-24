@@ -3,7 +3,7 @@
 import { readdirSync, readFileSync, statSync } from 'node:fs';
 import { join, relative } from 'node:path';
 import matter from 'gray-matter';
-import { dirOf, type Issue, type Taxonomy } from './taxonomy';
+import { dirOf, slugify, type Issue, type Taxonomy } from './taxonomy';
 
 export interface Source { title: string; url: string }
 export interface Practice {
@@ -53,6 +53,16 @@ export function loadPractices(dir: string): Practice[] {
   return out;
 }
 
+/** Markdown files inside a domain folder that lack an `id` would silently drop out of catalog.json and llms.txt. */
+export function findUnidentified(dir: string, t: Taxonomy): Issue[] {
+  const domainDirs = t.concepts.filter((c) => !c.broader).map((c) => slugify(c.label) + '/');
+  return walk(dir).sort().flatMap((file) => {
+    const rel = relative(dir, file).replace(/\\/g, '/');
+    if (!domainDirs.some((d) => rel.startsWith(d)) || matter(readFileSync(file, 'utf8')).data.id) return [];
+    return [{ level: 'error' as const, code: 'E_NOID', msg: `${file}: page inside a domain folder has no practice id` }];
+  });
+}
+
 export function validatePractices(ps: Practice[], t: Taxonomy, opts: { checkPath?: boolean } = {}): Issue[] {
   const issues: Issue[] = [];
   const err = (code: string, p: Practice, msg: string) => issues.push({ level: 'error', code, msg: `${p.id} (${p.file}): ${msg}` });
@@ -80,6 +90,8 @@ export function validatePractices(ps: Practice[], t: Taxonomy, opts: { checkPath
       err('E_SUPER', p, 'deprecated practice needs a valid superseded_by');
     if (opts.checkPath && c && !p.slug.startsWith(dirOf(t, p.domain) + '/'))
       err('E_PATH', p, `must live under ${dirOf(t, p.domain)}/ to match its domain`);
+    if (!/^[a-z0-9-]+$/.test(p.slug.split('/').pop() ?? ''))
+      err('E_SLUG', p, 'file name must be lower-case kebab-case (a-z, 0-9, -) so catalog URLs match site URLs');
     if (!/^##\s+Rules\b/m.test(p.body)) err('E_RULES', p, 'body must contain a "## Rules" section');
   }
   return issues;

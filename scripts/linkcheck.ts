@@ -19,8 +19,21 @@ export function checkLinks(dist: string, base: string): { from: string; href: st
   return broken;
 }
 
+/** Every catalog url / md_url must resolve to a built file (the agent entry points are not HTML, so checkLinks misses them). */
+export function checkCatalog(dist: string, catalog: { practices: { id: string; url: string; md_url: string }[] }, baseUrl: string) {
+  const prefix = new URL(baseUrl).pathname;
+  return catalog.practices.flatMap((p) => [p.url, p.md_url])
+    .filter((u) => {
+      const path = decodeURI(new URL(u).pathname).slice(prefix.length);
+      return !existsSync(path === '' || path.endsWith('/') ? join(dist, path, 'index.html') : join(dist, path));
+    })
+    .map((href) => ({ from: 'catalog.json', href }));
+}
+
 if (import.meta.main) {
-  const broken = checkLinks(process.argv[2] ?? 'dist', '/best-practices/');
+  const dist = process.argv[2] ?? 'dist';
+  const catalog = JSON.parse(readFileSync(join(dist, 'catalog.json'), 'utf8'));
+  const broken = [...checkLinks(dist, '/best-practices/'), ...checkCatalog(dist, catalog, catalog.base_url)];
   for (const b of broken) console.error(`BROKEN ${b.from} → ${b.href}`);
   console.log(`linkcheck: ${broken.length} broken link(s)`);
   process.exit(broken.length ? 1 : 0);
