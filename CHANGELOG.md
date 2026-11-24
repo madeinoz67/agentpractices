@@ -2,6 +2,7 @@
 
 ## Unreleased
 
+- Taxonomy 0.5.0: added D.SWE.QLT Code Quality & Comments; issue forms regenerated. Added BP-0054 Keep agent-written code comments few, true and about why (draft).
 - Added BP-0052 Prevent and catch hallucinations (D.AGT.WF) and BP-0053 Stop errors amplifying across agents, memory and retrieval (D.MAS.HND) — drafts.
 - Added BP-0050 Detect and respond to model drift (D.OPS.EVL) and BP-0051 Observe agent workflows, not just single runs (D.OPS.OBS) — drafts.
 - BP-0049 1.1.0: added Chinese model equivalents (Kimi, DeepSeek, Qwen, GLM, MiniMax) with their thinking controls and data-handling rules.

@@ -50,6 +50,7 @@ body:
         - D.SWE.API — API & Interface Design
         - D.SWE.TST — Testing
         - D.SWE.VCS — Version Control & Review
+        - D.SWE.QLT — Code Quality & Comments
         - D.SEC — Security & Safety
         - D.SEC.INJ — Prompt Injection & Untrusted Input
         - D.SEC.PRV — Least Privilege & Secrets

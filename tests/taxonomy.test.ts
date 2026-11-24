@@ -12,9 +12,9 @@ describe('repo taxonomy', () => {
   test('has no errors', () => {
     expect(validateTaxonomy(t).filter((i) => i.level === 'error')).toEqual([]);
   });
-  test('has 7 top concepts and 27 narrower', () => {
+  test('has 7 top concepts and 28 narrower', () => {
     expect(t.concepts.filter((x) => !x.broader).length).toBe(7);
-    expect(t.concepts.filter((x) => x.broader).length).toBe(27);
+    expect(t.concepts.filter((x) => x.broader).length).toBe(28);
   });
   test('pathOf returns labels root-first', () => {
     expect(pathOf(t, 'D.SWE.CLI').map((x) => x.label)).toEqual(['Software Engineering', 'CLI Design']);
@@ -52,7 +52,7 @@ describe('dirOf', () => {
 test('D.DOC.HUM sits under Documentation & Writing', () => {
   const tx = loadTaxonomy('taxonomy');
   expect(pathOf(tx, 'D.DOC.HUM').map((x) => x.label)).toEqual(['Documentation & Writing', 'Human-Readable Docs']);
-  expect(tx.version).toBe('0.4.0');
+  expect(tx.version).toBe('0.5.0');
 });
 
 test('D.KNO.KG sits under Knowledge Modelling', () => {
@@ -64,4 +64,9 @@ test('D.SEC.DEF and D.OPS.GW exist under their domains', () => {
   const tx = loadTaxonomy('taxonomy');
   expect(pathOf(tx, 'D.SEC.DEF').map((x) => x.label)).toEqual(['Security & Safety', 'Defence Against Hostile Agents']);
   expect(pathOf(tx, 'D.OPS.GW').map((x) => x.label)).toEqual(['Operations', 'Model Gateways & Routing']);
+});
+
+test('D.SWE.QLT exists under Software Engineering', () => {
+  const tx = loadTaxonomy('taxonomy');
+  expect(pathOf(tx, 'D.SWE.QLT').map((x) => x.label)).toEqual(['Software Engineering', 'Code Quality & Comments']);
 });
