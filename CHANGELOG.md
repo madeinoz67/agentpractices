@@ -2,6 +2,7 @@
 
 ## Unreleased
 
+- BP-0049 1.1.0: added Chinese model equivalents (Kimi, DeepSeek, Qwen, GLM, MiniMax) with their thinking controls and data-handling rules.
 - Added BP-0048 Orchestrate agent workflows as gated phases with a durable ledger (D.MAS.HND) and BP-0049 Match model and thinking effort to each role (D.AGT.WF) — drafts.
 - Added BP-0047 Cut cost with time-of-day (peak/off-peak) routing.
 - Taxonomy 0.4.0: added D.SEC.DEF Defence Against Hostile Agents and D.OPS.GW Model Gateways & Routing; issue forms regenerated.

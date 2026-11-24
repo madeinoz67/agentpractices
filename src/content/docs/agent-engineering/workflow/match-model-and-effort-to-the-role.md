@@ -7,7 +7,7 @@ type: guideline
 roles: [orchestrator, planner, implementer, reviewer, researcher]
 stage: [plan, build, operate]
 status: draft
-version: 1.0.0
+version: 1.1.0
 updated: 2026-11-24
 related: [BP-0048, BP-0042, BP-0041, BP-0006, BP-0046]
 sources:
@@ -16,6 +16,11 @@ sources:
   - { title: Claude Code docs — Subagents (model and effort fields), url: https://code.claude.com/docs/en/sub-agents }
   - { title: OpenAI docs — Reasoning models, url: https://developers.openai.com/api/docs/guides/reasoning }
   - { title: Google Cloud docs — Gemini thinking, url: https://docs.cloud.google.com/vertex-ai/generative-ai/docs/thinking }
+  - { title: DeepSeek API docs — Thinking mode, url: https://api-docs.deepseek.com/guides/thinking_mode }
+  - { title: Kimi API docs — Thinking models, url: https://platform.kimi.ai/docs/guide/use-kimi-k2-thinking-model }
+  - { title: Alibaba Cloud Model Studio — Deep thinking (Qwen, Kimi, MiniMax), url: https://www.alibabacloud.com/help/en/model-studio/deep-thinking }
+  - { title: Z.ai docs — Deep thinking (GLM), url: https://docs.z.ai/guides/capabilities/thinking }
+  - { title: MiniMax — M3 model page, url: https://www.minimax.io/models/text/m3 }
 ---
 
 ## Rules
@@ -57,6 +62,29 @@ Provider guidance behind the table: Anthropic lists Opus 5.5 for complex agentic
 | Google Gemini 3+ | `thinking_level` | `MINIMAL`, `LOW`, `MEDIUM`, `HIGH` (varies by model) | `LOW` for high-throughput simple work; do not send both `thinking_level` and `thinking_budget` |
 
 Map roles across providers by capability tier, not by name, and re-evaluate after any mapping.
+
+### Chinese models
+
+Equivalent tiers from Chinese providers, as at 2026-11-24. The tier mapping is this site's judgement from each provider's positioning, not a benchmark result; run your own evaluations. Several of these providers expose OpenAI- and Anthropic-compatible endpoints, so they can sit behind the same gateway ([BP-0046](/operations/model-gateways-routing/route-model-traffic-through-a-gateway/)).
+
+| Tier (roles) | Models | Thinking / effort control |
+| --- | --- | --- |
+| Frontier (orchestrator, planner, final review) | Kimi K3.1 Pro (`kimi-k3.1-pro`) | Always thinks; `reasoning_effort` `low` / `high` / `max`, default `max` on Moonshot's API |
+| | DeepSeek V4 Pro (`deepseek-v4-pro`) | Thinking on by default; `reasoning_effort` (or Anthropic-format `output_config.effort`) `low` / `high` / `max`, default `high`. Requested levels are mapped to the model's actual levels; check the mapping table |
+| | Qwen Max (`qwen4-max`, `qwen3.8-max`) | Hybrid, thinking on by default; `enable_thinking`, and `thinking_budget` (max reasoning tokens) on supported models |
+| | GLM-5.3 (`glm-5.3`) | Thinking always on; sending `thinking.type: disabled` is an error |
+| Mid (implementer, coding) | Kimi K2.7 Code (`kimi-k2.7-code`) | Thinking only; coding-focused |
+| | Qwen Plus (`qwen3.7-plus`) | Hybrid, on by default; `enable_thinking`, `thinking_budget` |
+| | MiniMax M3 (`MiniMax-M3`) | Thinking toggled per request; positioned for agentic coding and long context |
+| Small / fast (explorer, extraction, high volume) | DeepSeek V4 Flash (`deepseek-v4-flash`) | `reasoning_effort: low`, or disable thinking |
+| | Qwen Flash (`qwen3.8-flash`) | `enable_thinking: false`, or a small `thinking_budget` |
+| | GLM-5.3-Flash | Thinking cannot be disabled |
+
+Before routing work to any of them:
+
+- **MUST** apply your data-handling rules to the provider and hosting location, not the model name: the same model can be served by its developer, a cloud marketplace, or your own hardware ([BP-0046](/operations/model-gateways-routing/route-model-traffic-through-a-gateway/) rules 6–7, [BP-0044](/security-safety/supply-chain/vet-and-pin-agent-dependencies/)).
+- **SHOULD** consider self-hosting open-weight releases (for example MiniMax M3, Kimi and Qwen open editions) where data must not leave your environment, and evaluate the self-hosted build, not the hosted API.
+- **MUST** check each provider's parameter quirks: defaults differ (Kimi K3.1 Pro defaults to `max`; DeepSeek to `high`), some models reject a disable-thinking request, and some ignore sampling parameters in thinking mode.
 
 ## Examples
 
@@ -116,6 +144,7 @@ export async function run(role: keyof typeof ROLE, prompt: string) {
 - Copying another team's effort settings without running your own evaluations.
 - Changing effort mid-conversation and losing the prompt cache.
 - An undated "best model" table that nobody re-checks.
+- Choosing a cheaper model without checking where it is hosted and who can see the data.
 
 ## Checklist
 
@@ -132,3 +161,8 @@ export async function run(role: keyof typeof ROLE, prompt: string) {
 - [Claude Code — Subagents](https://code.claude.com/docs/en/sub-agents)
 - [OpenAI — Reasoning models](https://developers.openai.com/api/docs/guides/reasoning)
 - [Google Cloud — Gemini thinking](https://docs.cloud.google.com/vertex-ai/generative-ai/docs/thinking)
+- [DeepSeek — Thinking mode](https://api-docs.deepseek.com/guides/thinking_mode)
+- [Kimi — Thinking models](https://platform.kimi.ai/docs/guide/use-kimi-k2-thinking-model)
+- [Alibaba Cloud Model Studio — Deep thinking](https://www.alibabacloud.com/help/en/model-studio/deep-thinking)
+- [Z.ai — Deep thinking](https://docs.z.ai/guides/capabilities/thinking)
+- [MiniMax — M3](https://www.minimax.io/models/text/m3)
