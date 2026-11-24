@@ -2,6 +2,8 @@
 
 ## Unreleased
 
+- Added BP-0034 Make agent commits and PRs reviewable, BP-0035 Isolate parallel agents with worktrees, BP-0036 Review agent-written changes (drafts, D.SWE.VCS).
+- Added BP-0037 Work test-first with agents and BP-0038 Keep tests honest (drafts, D.SWE.TST).
 - Taxonomy 0.3.0: added D.KNO.KG Knowledge Graphs; issue forms regenerated.
 - Added BP-0031 Build knowledge graphs agents can trust (draft, D.KNO.KG).
 - Added BP-0032 Give agents least-privilege, short-lived, attributable access and BP-0033 Keep secrets out of agent context, memory, logs and output (drafts, D.SEC.PRV).
