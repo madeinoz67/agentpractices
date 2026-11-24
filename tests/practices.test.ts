@@ -7,7 +7,7 @@ const t = loadTaxonomy('taxonomy');
 const base: Practice = {
   id: 'BP-0100', title: 'T', description: 'D', domain: 'D.SWE.CLI', type: 'guideline',
   roles: ['implementer'], stage: ['build'], status: 'draft', version: '1.0.0', updated: '2026-11-24',
-  related: [], superseded_by: null, sources: [], file: 'x.md', slug: 'x', body: '## Rules\n1. MUST x',
+  related: [], superseded_by: null, sources: [], file: 'x.md', slug: 'x', body: '## Rules\n1. **MUST** x',
 };
 const p = (o: Partial<Practice>): Practice => ({ ...base, ...o });
 const codes = (ps: Practice[], tax = t, checkPath = false) => validatePractices(ps, tax, { checkPath }).map((i) => i.code);
@@ -39,6 +39,16 @@ describe('validatePractices', () => {
   test('bad type facet', () => expect(codes([p({ type: 'essay' })])).toContain('E_FACET'));
   test('missing description', () => expect(codes([p({ description: '' })])).toContain('E_REQ'));
   test('missing Rules heading', () => expect(codes([p({ body: '## Intro\ntext' })])).toContain('E_RULES'));
+  test('Rules section with no normative language', () =>
+    expect(codes([p({ body: '## Rules\n1. always do the thing' })])).toContain('E_NORMATIVE'));
+  test('bold MUST satisfies the normative rule', () =>
+    expect(codes([p({ body: '## Rules\n1. **MUST** do the thing' })])).toEqual([]));
+  test('source without a url', () =>
+    expect(codes([p({ sources: [{ title: 'x' }] as any })])).toContain('E_SOURCE'));
+  test('source with a non-http url', () =>
+    expect(codes([p({ sources: [{ title: 'x', url: 'ftp://x' }] })])).toContain('E_SOURCE'));
+  test('https source passes', () =>
+    expect(codes([p({ sources: [{ title: 'x', url: 'https://x.test' }] })])).toEqual([]));
 });
 
 describe('path follows taxonomy', () => {
