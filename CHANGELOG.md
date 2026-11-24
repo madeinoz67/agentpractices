@@ -2,6 +2,7 @@
 
 ## Unreleased
 
+- Added BP-0071 Design API surfaces contract-first and evolve them without breaking clients (D.SWE.API, draft).
 - Taxonomy 0.9.0: added D.SEC.OT OT & Industrial Systems; issue forms regenerated. Added BP-0070 Keep agents out of the OT control path (draft).
 - Added BP-0069 Design human approvals that people actually read (D.AGT.WF, draft).
 - Added BP-0068 Workflow patterns for agents — a catalogue (D.AGT.WF, draft).
