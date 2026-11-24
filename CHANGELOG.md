@@ -2,6 +2,7 @@
 
 ## Unreleased
 
+- Added BP-0069 Design human approvals that people actually read (D.AGT.WF, draft).
 - Added BP-0068 Workflow patterns for agents — a catalogue (D.AGT.WF, draft).
 - Taxonomy 0.8.0: added D.SEC.DAT Data Sovereignty & Privacy; issue forms regenerated. Added BP-0067 Keep agent data where it is allowed to be, and personal data to a minimum (draft).
 - Added BP-0066 Counter position and middle-option bias in model decisions (D.AGT.WF, draft).
