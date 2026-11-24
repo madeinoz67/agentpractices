@@ -2,6 +2,7 @@
 
 ## Unreleased
 
+- Added BP-0048 Orchestrate agent workflows as gated phases with a durable ledger (D.MAS.HND) and BP-0049 Match model and thinking effort to each role (D.AGT.WF) — drafts.
 - Added BP-0047 Cut cost with time-of-day (peak/off-peak) routing.
 - Taxonomy 0.4.0: added D.SEC.DEF Defence Against Hostile Agents and D.OPS.GW Model Gateways & Routing; issue forms regenerated.
 - Added BP-0042 Choose the simplest agent team topology (D.MAS.TOP), BP-0043 Communicate between agents with structured, authenticated messages (D.MAS.COM), BP-0044 Vet, pin and track every agent dependency (D.SEC.SUP), BP-0045 Defend against hostile AI agents with the 4Ds (D.SEC.DEF), BP-0046 Route agent model traffic through a governed gateway (D.OPS.GW) — drafts.
