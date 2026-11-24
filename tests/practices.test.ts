@@ -58,3 +58,18 @@ describe('review fixes', () => {
   test('filename must be lower-case kebab so catalog urls match Starlight urls', () =>
     expect(codes([p({ slug: 'software-engineering/cli-design/My Practice' })])).toContain('E_SLUG'));
 });
+
+import { seeAlso } from '../scripts/lib/practices';
+describe('seeAlso', () => {
+  const a = p({ id: 'BP-0100', slug: 'x/a', title: 'A', related: ['BP-0102', 'BP-0101'] });
+  const b = p({ id: 'BP-0101', slug: 'x/b', title: 'B', related: [] });
+  const c = p({ id: 'BP-0102', slug: 'x/c', title: 'C', related: ['BP-0100'] });
+  test('lists related practices in the order given, with title and slug', () =>
+    expect(seeAlso(a, [a, b, c])).toEqual([{ id: 'BP-0102', title: 'C', slug: 'x/c' }, { id: 'BP-0101', title: 'B', slug: 'x/b' }]));
+  test('adds practices that point back (reverse links) after the declared ones, without duplicates', () =>
+    expect(seeAlso(b, [a, b, c]).map((x) => x.id)).toEqual(['BP-0100']));
+  test('unknown related IDs are skipped', () =>
+    expect(seeAlso(p({ id: 'BP-0103', related: ['BP-0999'] }), [a]).map((x) => x.id)).toEqual([]));
+  test('never lists itself', () =>
+    expect(seeAlso(p({ id: 'BP-0104', related: ['BP-0104'] }), [p({ id: 'BP-0104' })])).toEqual([]));
+});

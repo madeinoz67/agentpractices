@@ -44,7 +44,7 @@ export default defineConfig({
         '@fontsource/ibm-plex-mono/400.css', '@fontsource/ibm-plex-mono/600.css',
         './src/styles/theme.css',
       ],
-      components: { PageTitle: './src/components/PageTitle.astro', SocialIcons: './src/components/SocialIcons.astro' },
+      components: { PageTitle: './src/components/PageTitle.astro', SocialIcons: './src/components/SocialIcons.astro', MarkdownContent: './src/components/MarkdownContent.astro' },
       sidebar: [
         { label: 'Start here', items: ['index', 'how-agents-use-this-site', { label: 'Contributing', items: [{ autogenerate: { directory: 'contributing' } }] }] },
         ...domainGroups,

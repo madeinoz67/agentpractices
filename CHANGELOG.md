@@ -2,6 +2,8 @@
 
 ## Unreleased
 
+- Added BP-0015 Write an AGENTS.md, BP-0016 Write CLAUDE.md files that Claude Code follows, BP-0017 Keep one source of truth for agent instruction files (drafts, D.AGT.INS).
+- Practice pages now render a "See also" block from `related`, including reverse links.
 - Header: "Star on GitHub" button ("Star" on narrow screens) with star count fetched at build time (no client script); daily scheduled rebuild refreshes the count.
 - Report a problem: new contributing page; pre-filled "Report a problem" button on every practice page; `report_url` in catalog.json; reporting section in llms.txt; agent rule 8 in How agents use this site.
 - GitHub issue forms (propose a practice, propose a taxonomy change, report a problem), generated from the taxonomy by `bun run issue-forms`; tests keep them in step.

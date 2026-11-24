@@ -1,0 +1,19 @@
+---
+// author: Stephen Eaton
+// MarkdownContent override: append a "See also" block to practice pages, built from `related` (and reverse links).
+import Default from '@astrojs/starlight/components/MarkdownContent.astro';
+import { loadPractices, seeAlso } from '../../scripts/lib/practices';
+
+const d = Astro.locals.starlightRoute.entry.data as Record<string, any>;
+const base = import.meta.env.BASE_URL.replace(/\/$/, '');
+const items = d.id ? seeAlso({ id: d.id, related: d.related ?? [] }, loadPractices('src/content/docs')) : [];
+---
+<Default><slot /></Default>
+{items.length > 0 && (
+  <nav class="bp-see-also" aria-labelledby="bp-see-also-h">
+    <h2 id="bp-see-also-h">See also</h2>
+    <ul>
+      {items.map((x) => <li><a href={`${base}/${x.slug}/`}><span class="bp-see-id">{x.id}</span> {x.title}</a></li>)}
+    </ul>
+  </nav>
+)}

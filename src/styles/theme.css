@@ -60,3 +60,9 @@ header.header { border-bottom: 2px solid var(--sl-color-white); }
 .bp-star:hover { background: var(--sl-color-gray-6); color: var(--sl-color-white); }
 .bp-star-count { padding-left: 0.45rem; border-left: 1px solid var(--sl-color-gray-5); }
 @media (max-width: 50rem) { .bp-star-long { display: none; } }
+
+/* See also (src/components/MarkdownContent.astro) */
+.bp-see-also { margin-top: 2.5rem; padding-top: 1rem; border-top: 2px solid var(--sl-color-white); }
+.bp-see-also h2 { font-size: var(--sl-text-h4); margin: 0 0 0.6rem; }
+.bp-see-also ul { list-style: none; padding: 0; margin: 0; display: grid; gap: 0.4rem; }
+.bp-see-id { font-family: var(--sl-font-mono); font-size: var(--sl-text-xs); color: var(--sl-color-gray-3); margin-right: 0.4rem; }

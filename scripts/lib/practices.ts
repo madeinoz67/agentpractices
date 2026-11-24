@@ -96,3 +96,19 @@ export function validatePractices(ps: Practice[], t: Taxonomy, opts: { checkPath
   }
   return issues;
 }
+
+export interface SeeAlsoItem { id: string; title: string; slug: string }
+/** Related practices for the "See also" block: declared `related` first, then practices that list this one. */
+export function seeAlso(p: Pick<Practice, 'id' | 'related'>, all: Pick<Practice, 'id' | 'title' | 'slug' | 'related'>[]): SeeAlsoItem[] {
+  const byId = new Map(all.map((x) => [x.id, x]));
+  const ids = [...p.related, ...all.filter((x) => x.related.includes(p.id)).map((x) => x.id)];
+  const seen = new Set<string>([p.id]);
+  const out: SeeAlsoItem[] = [];
+  for (const id of ids) {
+    const x = byId.get(id);
+    if (!x || seen.has(id)) continue;
+    seen.add(id);
+    out.push({ id: x.id, title: x.title, slug: x.slug });
+  }
+  return out;
+}
