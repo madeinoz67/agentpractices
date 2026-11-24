@@ -17,7 +17,7 @@ sidebar:
 
 ## Endpoints
 
-All under `https://madeinoz67.github.io/best-practices/`.
+All under `https://agentpractices.dev/`.
 
 | Path | What |
 | --- | --- |
@@ -39,7 +39,7 @@ Domains are hierarchical (`D.SWE` → `D.SWE.CLI`); match the ID or the ID plus 
 - **status** — draft, adopted, deprecated
 
 ```sh
-curl -s https://madeinoz67.github.io/best-practices/catalog.json \
+curl -s https://agentpractices.dev/catalog.json \
   | jq '.practices[]
         | select(.domain == "D.SWE" or (.domain | startswith("D.SWE.")))
         | select(.roles | index("implementer") or index("any"))

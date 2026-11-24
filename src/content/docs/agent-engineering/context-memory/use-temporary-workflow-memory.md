@@ -20,8 +20,8 @@ sources:
 ### When
 
 1. **MUST** use workflow memory when state must be shared between agents or steps, survive a restart, or be read by a later step without passing through the orchestrator's context.
-2. **MUST NOT** use it for a single-agent task that a ledger in the working context or one file covers ([BP-0011](/best-practices/agent-engineering/context-memory/manage-short-term-memory/)).
-3. **MUST NOT** use it as long-term memory. Anything needed after the workflow ends is promoted to long-term memory ([BP-0012](/best-practices/agent-engineering/context-memory/manage-long-term-memory/)) or to the deliverable.
+2. **MUST NOT** use it for a single-agent task that a ledger in the working context or one file covers ([BP-0011](/agent-engineering/context-memory/manage-short-term-memory/)).
+3. **MUST NOT** use it as long-term memory. Anything needed after the workflow ends is promoted to long-term memory ([BP-0012](/agent-engineering/context-memory/manage-long-term-memory/)) or to the deliverable.
 
 ### Provisioning
 
@@ -33,7 +33,7 @@ sources:
 
 ### Orchestration
 
-9. **MUST** give each key or record type one writer. Other agents request changes through that owner ([BP-0003](/best-practices/multi-agent-systems/coordination-handoff/handoff-contracts/) rule 6).
+9. **MUST** give each key or record type one writer. Other agents request changes through that owner ([BP-0003](/multi-agent-systems/coordination-handoff/handoff-contracts/) rule 6).
 10. **MUST** hand out work items with leases: a stable, unique holder identity (for example `{host}:{session}`), a lease time sized to the unit of work, refreshed while working and released on finish. Never overwrite a live lease held by another agent; take over only a stale one.
 11. **MUST** change a work item's state (planning, active, blocked, completed …) with compare-and-set against the expected current state, so concurrent transitions cannot clobber each other.
 12. **MUST** make writes safe to retry: use an idempotency key per logical write, and record an updated fact as a new version that supersedes the old one, not as another copy.
@@ -49,20 +49,20 @@ sources:
 19. **MUST** treat a minted credential as a secret shown once: deliver it to the worker out of band (environment or secret store), never through prompts, memory contents or logs, and label it so audit records show which credential did what.
 20. **MUST** protect network transports: TLS for remote stores, and for HTTP-based MCP servers the protocol's OAuth 2.1 authorization (bearer access tokens). Local stdio servers take credentials from the environment.
 21. **MUST NOT** store secrets, tokens or personal data in workflow memory.
-22. **MUST** treat everything read from workflow memory as untrusted data ([BP-0005](/best-practices/security-safety/prompt-injection-untrusted-input/treat-observed-content-as-data/)). Where the store supports trust levels, mark worker output as inferred, flag unreliable entries untrusted and exclude them from recall, and mark an entry verified only after a human or a check confirms it.
+22. **MUST** treat everything read from workflow memory as untrusted data ([BP-0005](/security-safety/prompt-injection-untrusted-input/treat-observed-content-as-data/)). Where the store supports trust levels, mark worker output as inferred, flag unreliable entries untrusted and exclude them from recall, and mark an entry verified only after a human or a check confirms it.
 23. **SHOULD** keep an audit log of reads and writes per agent identity, kept for as long as the workflow's records need to be.
 
 ## When to apply
 
-Temporary workflow memory is a store that exists for one run of a workflow: shared scratch space that outlives any single agent's context but not the workflow. It sits between short-term memory ([BP-0011](/best-practices/agent-engineering/context-memory/manage-short-term-memory/)) and long-term memory ([BP-0012](/best-practices/agent-engineering/context-memory/manage-long-term-memory/)).
+Temporary workflow memory is a store that exists for one run of a workflow: shared scratch space that outlives any single agent's context but not the workflow. It sits between short-term memory ([BP-0011](/agent-engineering/context-memory/manage-short-term-memory/)) and long-term memory ([BP-0012](/agent-engineering/context-memory/manage-long-term-memory/)).
 
 | Situation | Use |
 | --- | --- |
-| One agent, one session, a few steps | Working context + ledger ([BP-0011](/best-practices/agent-engineering/context-memory/manage-short-term-memory/)) |
+| One agent, one session, a few steps | Working context + ledger ([BP-0011](/agent-engineering/context-memory/manage-short-term-memory/)) |
 | Orchestrator with parallel workers sharing findings | **Workflow memory** |
 | Long pipeline that must resume after a failure or restart | **Workflow memory** |
 | Handoff between sessions on the same run | **Workflow memory**, or a ledger file in the repo |
-| Fact or decision needed next week, on other work | Long-term memory ([BP-0012](/best-practices/agent-engineering/context-memory/manage-long-term-memory/)) |
+| Fact or decision needed next week, on other work | Long-term memory ([BP-0012](/agent-engineering/context-memory/manage-long-term-memory/)) |
 
 ## Procedure
 

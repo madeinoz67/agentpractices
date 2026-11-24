@@ -22,8 +22,7 @@ const domainGroups = tops
   }));
 
 export default defineConfig({
-  site: 'https://madeinoz67.github.io',
-  base: '/best-practices',
+  site: 'https://agentpractices.dev',
   markdown: { rehypePlugins: [rehypeRfc2119] },
   integrations: [
     starlight({
@@ -33,12 +32,12 @@ export default defineConfig({
       editLink: { baseUrl: 'https://github.com/madeinoz67/best-practices/edit/main/' },
       lastUpdated: true,
       head: [
-        { tag: 'meta', attrs: { property: 'og:image', content: 'https://madeinoz67.github.io/best-practices/og.png' } },
+        { tag: 'meta', attrs: { property: 'og:image', content: 'https://agentpractices.dev/og.png' } },
         { tag: 'meta', attrs: { property: 'og:image:width', content: '1280' } },
         { tag: 'meta', attrs: { property: 'og:image:height', content: '640' } },
         { tag: 'meta', attrs: { property: 'og:image:alt', content: 'Agent Best Practices — the rules AI agents check before they act.' } },
         { tag: 'meta', attrs: { name: 'twitter:card', content: 'summary_large_image' } },
-        { tag: 'meta', attrs: { name: 'twitter:image', content: 'https://madeinoz67.github.io/best-practices/og.png' } },
+        { tag: 'meta', attrs: { name: 'twitter:image', content: 'https://agentpractices.dev/og.png' } },
       ],
       customCss: [
         '@fontsource/ibm-plex-sans/400.css', '@fontsource/ibm-plex-sans/600.css', '@fontsource/ibm-plex-sans/700.css',

@@ -17,7 +17,7 @@ sources:
 
 ## Rules
 
-1. **MUST** store only durable information: decisions and their reasons, stated preferences, conventions, constraints, and lessons from failures. Do not store transient task state (that belongs in the short-term ledger, [BP-0011](/best-practices/agent-engineering/context-memory/manage-short-term-memory/)) or data that can be fetched again from its source.
+1. **MUST** store only durable information: decisions and their reasons, stated preferences, conventions, constraints, and lessons from failures. Do not store transient task state (that belongs in the short-term ledger, [BP-0011](/agent-engineering/context-memory/manage-short-term-memory/)) or data that can be fetched again from its source.
 2. **MUST** record the source and date of each entry (who said it, which file, which incident).
 3. **MUST NOT** store secrets, credentials, tokens, or personal data the principal did not ask you to keep.
 4. **MUST** read existing memory before writing, and update or supersede an entry instead of adding a duplicate or a contradiction.
@@ -41,7 +41,7 @@ Agents that work across sessions for the same principal or project: coding agent
 | Semantic | Facts and preferences | "Use Bun for scripts" | Memory files or store, by subject |
 | Episodic | What happened and why | "2026-11-24: Pages deploy failed until Actions was enabled" | Project memory, dated |
 | Procedural | How to do something | "How to deploy this site" | A skill or practice (cite `BP-NNNN`), not a note |
-| Working | Current task state | Ledger, task list | Short-term only ([BP-0011](/best-practices/agent-engineering/context-memory/manage-short-term-memory/)) |
+| Working | Current task state | Ledger, task list | Short-term only ([BP-0011](/agent-engineering/context-memory/manage-short-term-memory/)) |
 
 ## Procedure
 

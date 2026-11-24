@@ -2,6 +2,8 @@
 
 ## Unreleased
 
+- Site moved to https://agentpractices.dev/ (custom apex domain, no base path). Taxonomy concept URIs and catalog URLs now use the new origin; old github.io URLs redirect.
+
 - Added BP-0014 Close standards-corpus coverage gaps in one batched release (draft, D.KNO.ONT).
 - BP-0013 1.1.0: added provisioning rules (reserved prefix, orchestrator-only minting, retention backstop), lease/compare-and-set/idempotency rules, credential delivery and trust-level rules; added MuninnDB worked example.
 - BP-0010 1.0.1: added Tool options table (Codanna, Gortex, codebase-memory-mcp, Serena, Sourcegraph MCP, LSP, ctags, ripgrep/Zoekt) and selection guidance; Rules unchanged.

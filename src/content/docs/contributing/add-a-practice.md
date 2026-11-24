@@ -18,7 +18,7 @@ sidebar:
 
 ## Procedure
 
-1. Pick the domain from [`taxonomy.json`](/best-practices/taxonomy.json). If none fits, [extend the taxonomy](../extend-the-taxonomy/) first.
+1. Pick the domain from [`taxonomy.json`](/taxonomy.json). If none fits, [extend the taxonomy](../extend-the-taxonomy/) first.
 2. Copy the template into the domain folder.
 3. Write the Rules first, then the supporting sections.
 4. Run the checks; fix every error.

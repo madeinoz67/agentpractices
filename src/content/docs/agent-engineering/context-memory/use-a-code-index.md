@@ -76,7 +76,7 @@ The rules do not depend on the tool. These are options as of 2026-11-24; check e
 2. **Agents that refactor and edit at symbol level:** Serena, on top of language servers you already run.
 3. **Many repos on one machine:** Gortex.
 4. **Organisation-wide or very large estates:** Sourcegraph MCP.
-5. **Air-gapped, OT or restricted environments:** a local, single-binary option with telemetry off, pinned to a reviewed release; treat it as third-party code under supply-chain controls ([D.SEC.SUP](/best-practices/taxonomy.json)).
+5. **Air-gapped, OT or restricted environments:** a local, single-binary option with telemetry off, pinned to a reviewed release; treat it as third-party code under supply-chain controls ([D.SEC.SUP](/taxonomy.json)).
 
 ## Anti-patterns
 

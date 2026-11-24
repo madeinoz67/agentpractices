@@ -44,7 +44,7 @@ Any doc that a person reads to do something: runbooks, SOPs, install and upgrade
 
 Apply rules 8–15 to every procedure and warning. Full STE (rule 15) is most valuable in OT and safety work, maintenance documentation, and content that will be translated.
 
-Not intended for persuasive writing, essays or marketing copy. Docs written mainly for agents to fetch and act on follow [BP-0007](/best-practices/documentation-writing/agent-readable-docs/write-agent-readable-docs/). The two sets of rules agree, so a doc can meet both.
+Not intended for persuasive writing, essays or marketing copy. Docs written mainly for agents to fetch and act on follow [BP-0007](/documentation-writing/agent-readable-docs/write-agent-readable-docs/). The two sets of rules agree, so a doc can meet both.
 
 ## Procedure
 

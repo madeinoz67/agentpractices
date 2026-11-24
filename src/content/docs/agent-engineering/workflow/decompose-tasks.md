@@ -31,7 +31,7 @@ sources:
 
 ## When to apply
 
-Before building anything with more than a couple of steps: features, migrations, research questions, documents with several sections, and any work an orchestrator will hand to other agents. It is also the step that produces the task list in [plan, execute, verify](/best-practices/agent-engineering/workflow/plan-execute-verify/).
+Before building anything with more than a couple of steps: features, migrations, research questions, documents with several sections, and any work an orchestrator will hand to other agents. It is also the step that produces the task list in [plan, execute, verify](/agent-engineering/workflow/plan-execute-verify/).
 
 Not needed for a single-step change whose check is obvious (a typo fix, a one-line config change).
 
@@ -43,7 +43,7 @@ Not needed for a single-step change whose check is obvious (a typo fix, a one-li
 4. **Test each unit against rules 1–6.** Merge units with no check; split units whose check needs several unrelated things to pass.
 5. **Order by dependency**, mark parallel groups, and move the riskiest unit as early as its dependencies allow.
 6. **Check coverage:** every requirement maps to at least one unit; every unit maps to a requirement.
-7. **Hand off** each unit with a brief ([handoff contracts](/best-practices/multi-agent-systems/coordination-handoff/handoff-contracts/)) when another agent will do it.
+7. **Hand off** each unit with a brief ([handoff contracts](/multi-agent-systems/coordination-handoff/handoff-contracts/)) when another agent will do it.
 
 Unit template:
 

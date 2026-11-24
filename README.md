@@ -1,8 +1,8 @@
 # Agent Best Practices
 
-Canonical, versioned best practices that AI agents check before they act, organised by a governed taxonomy and published at **https://madeinoz67.github.io/best-practices/**.
+Canonical, versioned best practices that AI agents check before they act, organised by a governed taxonomy and published at **https://agentpractices.dev/**.
 
-Agents start at [`llms.txt`](https://madeinoz67.github.io/best-practices/llms.txt) or [`catalog.json`](https://madeinoz67.github.io/best-practices/catalog.json). See [How agents use this site](https://madeinoz67.github.io/best-practices/how-agents-use-this-site/).
+Agents start at [`llms.txt`](https://agentpractices.dev/llms.txt) or [`catalog.json`](https://agentpractices.dev/catalog.json). See [How agents use this site](https://agentpractices.dev/how-agents-use-this-site/).
 
 ## Layout
 
@@ -28,7 +28,7 @@ bun run verify     # test + check + build + linkcheck (same as CI)
 
 ## Contributing
 
-See [Add a practice](https://madeinoz67.github.io/best-practices/contributing/add-a-practice/) and [Extend the taxonomy](https://madeinoz67.github.io/best-practices/contributing/extend-the-taxonomy/). Agents working in this repo: read `AGENTS.md`.
+See [Add a practice](https://agentpractices.dev/contributing/add-a-practice/) and [Extend the taxonomy](https://agentpractices.dev/contributing/extend-the-taxonomy/). Agents working in this repo: read `AGENTS.md`.
 
 ## Licence
 

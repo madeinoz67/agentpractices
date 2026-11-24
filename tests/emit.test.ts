@@ -5,7 +5,7 @@ import { loadTaxonomy, makeTaxonomy } from '../scripts/lib/taxonomy';
 import { loadPractices } from '../scripts/lib/practices';
 import { buildCatalog, buildSkos, buildTaxonomyJson, buildLlmsTxt } from '../scripts/lib/emit';
 
-const BASE = 'https://madeinoz67.github.io/best-practices/';
+const BASE = 'https://agentpractices.dev/';
 const t = loadTaxonomy('taxonomy');
 const ps = loadPractices('tests/fixtures/docs');
 const SKOS = 'http://www.w3.org/2004/02/skos/core#';

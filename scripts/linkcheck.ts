@@ -2,6 +2,7 @@
 // Check that every internal href/src in the built site resolves to a file in dist/. Usage: bun scripts/linkcheck.ts [dist]
 import { existsSync, readdirSync, readFileSync, statSync } from 'node:fs';
 import { join, relative } from 'node:path';
+import { BASE_URL } from './lib/site.ts';
 
 const walk = (d: string): string[] => readdirSync(d).flatMap((n) => (statSync(join(d, n)).isDirectory() ? walk(join(d, n)) : [join(d, n)]));
 
@@ -33,7 +34,7 @@ export function checkCatalog(dist: string, catalog: { practices: { id: string; u
 if (import.meta.main) {
   const dist = process.argv[2] ?? 'dist';
   const catalog = JSON.parse(readFileSync(join(dist, 'catalog.json'), 'utf8'));
-  const broken = [...checkLinks(dist, '/best-practices/'), ...checkCatalog(dist, catalog, catalog.base_url)];
+  const broken = [...checkLinks(dist, new URL(BASE_URL).pathname), ...checkCatalog(dist, catalog, catalog.base_url)];
   for (const b of broken) console.error(`BROKEN ${b.from} → ${b.href}`);
   console.log(`linkcheck: ${broken.length} broken link(s)`);
   process.exit(broken.length ? 1 : 0);

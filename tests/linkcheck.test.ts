@@ -22,7 +22,7 @@ test('every catalog url and md_url must exist in dist', () => {
   mkdirSync(join(d, 'a/b'), { recursive: true });
   writeFileSync(join(d, 'a/b/index.html'), '');
   writeFileSync(join(d, 'a/b.md'), '');
-  const B = 'https://madeinoz67.github.io/best-practices/';
+  const B = 'https://agentpractices.dev/';
   const cat = { practices: [{ id: 'BP-0001', url: `${B}a/b/`, md_url: `${B}a/b.md` }, { id: 'BP-0002', url: `${B}A B/`, md_url: `${B}A B.md` }] };
   expect(checkCatalog(d, cat, B).map((x) => x.href)).toEqual([`${B}A B/`, `${B}A B.md`]);
 });
