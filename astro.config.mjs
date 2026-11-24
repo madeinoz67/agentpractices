@@ -6,6 +6,7 @@ import starlight from '@astrojs/starlight';
 import starlightLlmsTxt from 'starlight-llms-txt';
 import rehypeRfc2119 from './src/plugins/rehype-rfc2119.mjs';
 import { loadTaxonomy, dirOf } from './scripts/lib/taxonomy.ts';
+import { BASE_URL } from './scripts/lib/site.ts';
 
 const t = loadTaxonomy('taxonomy');
 const DOCS = 'src/content/docs';
@@ -22,7 +23,8 @@ const domainGroups = tops
   }));
 
 export default defineConfig({
-  site: 'https://agentpractices.dev',
+  site: BASE_URL,
+  base: new URL(BASE_URL).pathname,
   markdown: { rehypePlugins: [rehypeRfc2119] },
   integrations: [
     starlight({
@@ -32,12 +34,12 @@ export default defineConfig({
       editLink: { baseUrl: 'https://github.com/madeinoz67/agentpractices/edit/main/' },
       lastUpdated: true,
       head: [
-        { tag: 'meta', attrs: { property: 'og:image', content: 'https://agentpractices.dev/og.png' } },
+        { tag: 'meta', attrs: { property: 'og:image', content: new URL('og.png', BASE_URL).href } },
         { tag: 'meta', attrs: { property: 'og:image:width', content: '1280' } },
         { tag: 'meta', attrs: { property: 'og:image:height', content: '640' } },
         { tag: 'meta', attrs: { property: 'og:image:alt', content: 'Agent Best Practices — the rules AI agents check before they act.' } },
         { tag: 'meta', attrs: { name: 'twitter:card', content: 'summary_large_image' } },
-        { tag: 'meta', attrs: { name: 'twitter:image', content: 'https://agentpractices.dev/og.png' } },
+        { tag: 'meta', attrs: { name: 'twitter:image', content: new URL('og.png', BASE_URL).href } },
       ],
       customCss: [
         '@fontsource/ibm-plex-sans/400.css', '@fontsource/ibm-plex-sans/600.css', '@fontsource/ibm-plex-sans/700.css',
