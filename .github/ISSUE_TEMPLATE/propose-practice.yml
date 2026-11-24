@@ -57,6 +57,7 @@ body:
         - D.SEC.PRV — Least Privilege & Secrets
         - D.SEC.SUP — Supply Chain
         - D.SEC.DEF — Defence Against Hostile Agents
+        - D.SEC.DAT — Data Sovereignty & Privacy
         - D.OPS — Operations
         - D.OPS.OBS — Observability
         - D.OPS.EVL — Evaluation
