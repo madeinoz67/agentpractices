@@ -2,6 +2,7 @@
 
 ## Unreleased
 
+- Added BP-0022 Configure MCP servers at the right scope and BP-0023 Use MCP servers safely and efficiently (drafts, D.AGT.TOOL).
 - Added BP-0020 Author agent hooks and BP-0021 Use hooks for deterministic control (drafts, D.AGT.TOOL).
 - Added BP-0018 Author agent skills and BP-0019 Use skills deliberately and safely (drafts, D.AGT.SKL).
 - Added BP-0015 Write an AGENTS.md, BP-0016 Write CLAUDE.md files that Claude Code follows, BP-0017 Keep one source of truth for agent instruction files (drafts, D.AGT.INS).
