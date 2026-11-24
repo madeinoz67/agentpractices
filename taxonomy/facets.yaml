@@ -1,0 +1,27 @@
+# author: Stephen Eaton
+# Facet vocabularies. Flat, multi-valued (except type), never used as hierarchy levels.
+version: 0.1.0
+facets:
+  type:
+    - { id: guideline, label: Guideline, definition: A practice stating rules to follow when doing a task. }
+    - { id: pattern, label: Pattern, definition: A practice describing a reusable solution to a recurring problem. }
+    - { id: anti-pattern, label: Anti-pattern, definition: A practice describing a common approach that causes harm and what to do instead. }
+    - { id: checklist, label: Checklist, definition: A practice expressed as items to verify before or after a task. }
+    - { id: procedure, label: Procedure, definition: A practice expressed as ordered steps to carry out a task. }
+    - { id: reference, label: Reference, definition: A practice that records facts, formats or vocabularies to look up. }
+  role:
+    - { id: any, label: Any agent, definition: Applies to every agent regardless of role. }
+    - { id: orchestrator, label: Orchestrator, definition: An agent that plans work and delegates it to other agents. }
+    - { id: planner, label: Planner, definition: An agent that turns intent into a plan or specification. }
+    - { id: implementer, label: Implementer, definition: An agent that produces the artefact (code, document, configuration). }
+    - { id: reviewer, label: Reviewer, definition: An agent that checks another agent's output against requirements. }
+    - { id: researcher, label: Researcher, definition: An agent that gathers and synthesises information from sources. }
+  stage:
+    - { id: plan, label: Plan, definition: Work done before building — scoping, design, specification. }
+    - { id: build, label: Build, definition: Producing the artefact. }
+    - { id: verify, label: Verify, definition: Checking the artefact against requirements. }
+    - { id: operate, label: Operate, definition: Running, monitoring and maintaining the artefact or agent. }
+  status:
+    - { id: draft, label: Draft, definition: Proposed practice not yet adopted; follow with judgement. }
+    - { id: adopted, label: Adopted, definition: Agreed practice; follow unless the situation clearly calls otherwise. }
+    - { id: deprecated, label: Deprecated, definition: No longer the practice; follow superseded_by instead. }

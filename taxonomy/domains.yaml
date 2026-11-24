@@ -1,0 +1,60 @@
+# author: Stephen Eaton
+# Domain concept scheme — the primary (single-parent) hierarchy. Source of truth.
+# Rules: IDs are permanent; rename = change label only; retire = status: deprecated + replaced_by; never delete.
+version: 0.1.0
+scheme:
+  id: domains
+  label: Practice Domains
+  definition: Subject areas of practice for AI agents, divided by the kind of work the practice governs.
+concepts:
+  - id: D.AGT
+    label: Agent Engineering
+    definition: A practice domain covering how a single agent plans, executes and verifies its own work.
+    scope_note: Excludes interaction between agents (see D.MAS).
+  - { id: D.AGT.WF, broader: D.AGT, label: Workflow, alt_labels: [agent loop], definition: Agent Engineering practice governing the plan-execute-verify cycle of a task. }
+  - { id: D.AGT.CTX, broader: D.AGT, label: Context & Memory, definition: Agent Engineering practice governing what information an agent holds, loads, persists and discards. }
+  - { id: D.AGT.TOOL, broader: D.AGT, label: Tool Use, definition: Agent Engineering practice governing when and how an agent selects and invokes tools. }
+  - { id: D.AGT.INS, broader: D.AGT, label: Instructions & Prompting, alt_labels: [prompt engineering], definition: Agent Engineering practice governing how instructions given to an agent are written and structured. }
+  - { id: D.AGT.SKL, broader: D.AGT, label: Skills & Reusable Procedures, definition: Agent Engineering practice governing packaged, reusable instructions an agent loads on demand. }
+
+  - id: D.MAS
+    label: Multi-Agent Systems
+    definition: A practice domain covering how several agents are organised and work together toward one outcome.
+  - { id: D.MAS.TOP, broader: D.MAS, label: Team Topologies & Roles, definition: Multi-Agent practice governing how agents are arranged and what each role is responsible for. }
+  - { id: D.MAS.COM, broader: D.MAS, label: Communication & Protocols, alt_labels: [MCP, A2A], definition: Multi-Agent practice governing the messages, formats and protocols agents use to exchange information. }
+  - { id: D.MAS.HND, broader: D.MAS, label: Coordination & Handoff, definition: Multi-Agent practice governing how work, state and responsibility pass between agents. }
+
+  - id: D.KNO
+    label: Knowledge Modelling
+    definition: A practice domain covering how meaning is structured so people and machines interpret it the same way.
+  - { id: D.KNO.TAX, broader: D.KNO, label: Taxonomy, definition: Knowledge Modelling practice governing hierarchical classification of concepts. }
+  - { id: D.KNO.ONT, broader: D.KNO, label: Ontology, definition: Knowledge Modelling practice governing classes, typed relationships and constraints. }
+  - { id: D.KNO.SEM, broader: D.KNO, label: Semantics & Metadata, definition: Knowledge Modelling practice governing the meaning of terms and the metadata attached to resources. }
+
+  - id: D.SWE
+    label: Software Engineering
+    definition: A practice domain covering how agents build and change software artefacts.
+  - { id: D.SWE.CLI, broader: D.SWE, label: CLI Design, alt_labels: [command line, CLI], definition: Software Engineering practice governing command-line tools usable by both agents and humans. }
+  - { id: D.SWE.API, broader: D.SWE, label: API & Interface Design, definition: Software Engineering practice governing programmatic interfaces between components. }
+  - { id: D.SWE.TST, broader: D.SWE, label: Testing, definition: Software Engineering practice governing how behaviour is proven by automated tests. }
+  - { id: D.SWE.VCS, broader: D.SWE, label: Version Control & Review, definition: Software Engineering practice governing commits, branches and code review. }
+
+  - id: D.SEC
+    label: Security & Safety
+    definition: A practice domain covering how systems, data and people are protected from harmful agent actions.
+  - { id: D.SEC.INJ, broader: D.SEC, label: Prompt Injection & Untrusted Input, definition: Security practice governing how an agent treats content it did not receive from its principal. }
+  - { id: D.SEC.PRV, broader: D.SEC, label: Least Privilege & Secrets, definition: Security practice governing the permissions and credentials an agent holds. }
+  - { id: D.SEC.SUP, broader: D.SEC, label: Supply Chain, definition: Security practice governing third-party code, packages, models and tools an agent depends on. }
+
+  - id: D.OPS
+    label: Operations
+    definition: A practice domain covering how agents are run, measured and kept reliable over time.
+  - { id: D.OPS.OBS, broader: D.OPS, label: Observability, definition: Operations practice governing logs, traces and records of what an agent did. }
+  - { id: D.OPS.EVL, broader: D.OPS, label: Evaluation, alt_labels: [evals], definition: Operations practice governing how the quality of agent output is measured. }
+  - { id: D.OPS.CST, broader: D.OPS, label: Cost & Performance, definition: Operations practice governing token, time and money spent by agents. }
+
+  - id: D.DOC
+    label: Documentation & Writing
+    definition: A practice domain covering written material produced for agents or people to consume.
+  - { id: D.DOC.AGR, broader: D.DOC, label: Agent-Readable Docs, alt_labels: [llms.txt], definition: Documentation practice governing writing that agents fetch and act on. }
+  - { id: D.DOC.SPC, broader: D.DOC, label: Specs & Design Docs, definition: Documentation practice governing specifications and design documents that drive implementation. }

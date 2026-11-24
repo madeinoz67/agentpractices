@@ -60,7 +60,7 @@ AGENTS.md, README.md, CHANGELOG.md, LICENSE, LICENSE-CONTENT
 **Files:** `taxonomy/domains.yaml`, `taxonomy/facets.yaml`, `scripts/lib/taxonomy.ts`, `tests/taxonomy.test.ts`, fixtures.
 **Produces:** `loadTaxonomy(dir: string): Taxonomy`; `validateTaxonomy(t: Taxonomy): Issue[]`; `type Concept = {id,label,definition,scope_note?,alt_labels?,broader?,status,replaced_by?}`; `type Issue = {level:'error'|'warn', code:string, msg:string}`; `t.byId: Map<string,Concept>`; `pathOf(t,id): Concept[]`.
 - [ ] Tests: valid repo taxonomy → 0 errors; fixture with orphan `broader` → `E_ORPHAN`; cycle → `E_CYCLE`; missing definition → `E_NODEF`; duplicate id → `E_DUPID`; deprecated without `replaced_by` → `E_DEPREC`; single child → warn `W_SINGLE`; bad id format → `E_IDFMT`.
-- [ ] Run, see fail; implement; run, see pass. Populate `domains.yaml` with the 7 top + 24 narrower concepts from spec §5.3, each with genus+differentia definition.
+- [ ] Run, see fail; implement; run, see pass. Populate `domains.yaml` with the 7 top + 23 narrower concepts from spec §5.3, each with genus+differentia definition.
 - [ ] Commit `feat: taxonomy source and validator`.
 
 ### Task 3: Practice validator + `check` CLI
