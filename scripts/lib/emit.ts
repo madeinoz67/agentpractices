@@ -2,12 +2,17 @@
 // Pure builders for the agent-facing outputs: catalog.json, taxonomy.jsonld (SKOS), taxonomy.json, llms.txt.
 import { pathOf, type Concept, type Taxonomy } from './taxonomy';
 import type { Practice } from './practices';
+import { REPO_URL } from './site';
+
+/** Pre-filled "Report a problem with a practice" issue form URL. */
+export const reportUrl = (id: string, version: string) =>
+  `${REPO_URL}/issues/new?${new URLSearchParams({ template: 'report-practice-problem.yml', title: `[Problem]: ${id}@${version}`, practice: `${id}@${version}` })}`;
 
 export interface EmitOpts { baseUrl: string }
 export const pageUrl = (base: string, slug: string) => (slug ? `${base}${slug}/` : base);
 export const mdUrl = (base: string, slug: string) => `${base}${slug || 'index'}.md`;
 
-export interface CatalogEntry extends Omit<Practice, 'file' | 'body' | 'slug'> { slug: string; domain_path: string[]; url: string; md_url: string }
+export interface CatalogEntry extends Omit<Practice, 'file' | 'body' | 'slug'> { slug: string; domain_path: string[]; url: string; md_url: string; report_url: string }
 export interface Catalog { version: number; taxonomy_version: string; generated: string; base_url: string; count: number; practices: CatalogEntry[] }
 
 export function buildCatalog(ps: Practice[], t: Taxonomy, o: EmitOpts & { generated: string }): Catalog {
@@ -16,6 +21,7 @@ export function buildCatalog(ps: Practice[], t: Taxonomy, o: EmitOpts & { genera
     domain_path: pathOf(t, p.domain).map((c) => c.label),
     url: pageUrl(o.baseUrl, p.slug),
     md_url: mdUrl(o.baseUrl, p.slug),
+    report_url: reportUrl(p.id, p.version),
   }));
   return { version: 1, taxonomy_version: t.version, generated: o.generated, base_url: o.baseUrl, count: practices.length, practices };
 }
@@ -89,6 +95,10 @@ export function buildLlmsTxt(ps: Practice[], t: Taxonomy, o: EmitOpts & { title:
     `- [AGENTS.md](${b}AGENTS.md): how agents should use this site`,
     `- [llms-full.txt](${b}llms-full.txt): all content in one file`,
     `- [llms-small.txt](${b}llms-small.txt): abridged content`,
+    '',
+    '## Report a problem',
+    '',
+    `If a rule is wrong, unclear, out of date or caused a bad outcome, report it: each practice's \`report_url\` in catalog.json opens a pre-filled form (template report-practice-problem.yml). See [Report a problem](${b}contributing/report-a-problem/).`,
   ];
   for (const top of t.concepts.filter((c) => !c.broader)) {
     const inTop = ps.filter((p) => pathOf(t, p.domain)[0]?.id === top.id).sort((a, z) => a.id.localeCompare(z.id));

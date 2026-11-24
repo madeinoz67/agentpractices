@@ -2,7 +2,7 @@
 title: Practice template
 description: Copy-paste template for a new practice page.
 sidebar:
-  order: 3
+  order: 4
 ---
 
 Copy everything in the block below into a new file.

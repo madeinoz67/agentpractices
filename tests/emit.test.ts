@@ -84,3 +84,28 @@ describe('buildLlmsTxt', () => {
     for (const m of txt.matchAll(/\]\(([^)]+)\)/g)) expect(m[1].startsWith(BASE)).toBe(true);
   });
 });
+
+import { reportUrl } from '../scripts/lib/emit';
+describe('report a problem', () => {
+  test('reportUrl pre-fills the problem form with ID@version in title and practice field', () => {
+    const u = new URL(reportUrl('BP-0001', '1.0.0'));
+    expect(`${u.origin}${u.pathname}`).toBe('https://github.com/madeinoz67/agentpractices/issues/new');
+    expect(u.searchParams.get('template')).toBe('report-practice-problem.yml');
+    expect(u.searchParams.get('title')).toBe('[Problem]: BP-0001@1.0.0');
+    expect(u.searchParams.get('practice')).toBe('BP-0001@1.0.0');
+  });
+  test('catalog entries carry report_url', () => {
+    const cat = buildCatalog(ps, t, { baseUrl: BASE, generated: 'x' });
+    expect(cat.practices[0].report_url).toBe(reportUrl(cat.practices[0].id, cat.practices[0].version));
+  });
+  test('the form has a field with id "practice" for the pre-fill to land in', () => {
+    const f = require('yaml').parse(require('fs').readFileSync('.github/ISSUE_TEMPLATE/report-practice-problem.yml', 'utf8'));
+    expect(f.body.some((b: any) => b.id === 'practice')).toBe(true);
+  });
+});
+
+test('llms.txt tells agents how to report a problem', () => {
+  const txt = buildLlmsTxt(ps, t, { baseUrl: BASE, title: 'T', description: 'D' });
+  expect(txt).toContain('report-practice-problem.yml');
+  expect(txt).toContain(`${BASE}contributing/report-a-problem/`);
+});

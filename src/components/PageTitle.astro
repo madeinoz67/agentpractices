@@ -1,8 +1,9 @@
 ---
 // author: Stephen Eaton
-// PageTitle override: for practice pages, add the domain path, metadata chips and a "For agents" box.
+// PageTitle override: for practice pages, add the domain path, metadata chips, a "For agents" box and a pre-filled "Report a problem" link.
 import Default from '@astrojs/starlight/components/PageTitle.astro';
 import { loadTaxonomy, pathOf } from '../../scripts/lib/taxonomy';
+import { reportUrl } from '../../scripts/lib/emit';
 
 const route = Astro.locals.starlightRoute;
 const d = route.entry.data as Record<string, any>;
@@ -11,6 +12,7 @@ const isPractice = Boolean(d.id);
 const domainPath = isPractice ? pathOf(loadTaxonomy('taxonomy'), d.domain).map((c) => c.label) : [];
 const mdHref = `${base}/${route.id || 'index'}.md`;
 const cite = `${d.id}@${d.version}`;
+const reportHref = isPractice ? reportUrl(d.id, d.version) : '';
 const updated = d.updated instanceof Date ? d.updated.toISOString().slice(0, 10) : d.updated;
 ---
 {isPractice && <div class="bp-crumb">{domainPath.join(' / ')}</div>}
@@ -32,7 +34,10 @@ const updated = d.updated instanceof Date ? d.updated.toISOString().slice(0, 10)
         <div class="bp-label">For agents</div>
         <p>Cite as <code>{cite}</code>. Fetch the raw page instead of parsing HTML.</p>
       </div>
-      <a class="bp-btn" href={mdHref}>Raw .md</a>
+      <div class="bp-actions">
+        <a class="bp-btn" href={mdHref}>Raw .md</a>
+        <a class="bp-btn bp-btn-secondary" href={reportHref} rel="noopener">Report a problem</a>
+      </div>
     </aside>
   </>
 )}

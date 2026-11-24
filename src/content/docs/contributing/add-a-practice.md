@@ -24,7 +24,7 @@ sidebar:
 | --- | --- |
 | Add a new practice | [Propose a practice](https://github.com/madeinoz67/agentpractices/issues/new?template=propose-practice.yml) issue → owner accepts and assigns ID → pull request |
 | Add, rename or retire a domain | [Propose a taxonomy change](https://github.com/madeinoz67/agentpractices/issues/new?template=propose-taxonomy-change.yml) issue → [extend the taxonomy](../extend-the-taxonomy/) |
-| Report a rule that is wrong, unclear or out of date | [Report a problem with a practice](https://github.com/madeinoz67/agentpractices/issues/new?template=report-practice-problem.yml) issue |
+| Report a rule that is wrong, unclear or out of date | [Report a problem](../report-a-problem/) |
 | Fix a typo or broken link | Pull request directly |
 
 ## Procedure

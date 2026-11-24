@@ -2,7 +2,7 @@
 title: Extend the taxonomy
 description: How to add, rename or retire a domain concept without breaking agents that reference it.
 sidebar:
-  order: 2
+  order: 3
 ---
 
 ## Rules

@@ -14,6 +14,7 @@ sidebar:
 5. **SHOULD** treat `draft` practices as strong suggestions and `adopted` practices as the default.
 6. **SHOULD** refetch `catalog.json` when its `generated` timestamp is newer than your cached copy, and refetch any practice whose `version` changed.
 7. **SHOULD** apply the principal's explicit instructions over a practice when they conflict, and say so.
+8. **SHOULD** report a rule that was wrong, unclear or out of date, with evidence, using the practice's `report_url` (see [Report a problem](/contributing/report-a-problem/)).
 
 ## Endpoints
 
@@ -23,7 +24,7 @@ All under `https://agentpractices.dev/`.
 | --- | --- |
 | `llms.txt` | Index: one line per practice — `ID@version [status] description`, link to raw `.md` |
 | `llms-full.txt` / `llms-small.txt` | All content in one file / abridged |
-| `catalog.json` | Every practice: id, title, description, domain, `domain_path`, type, roles, stage, status, version, updated, related, superseded_by, sources, `url`, `md_url` |
+| `catalog.json` | Every practice: id, title, description, domain, `domain_path`, type, roles, stage, status, version, updated, related, superseded_by, sources, `url`, `md_url`, `report_url` |
 | `taxonomy.jsonld` | Domains and facets as SKOS JSON-LD |
 | `taxonomy.json` | Same taxonomy as a plain nested tree |
 | `<page>.md` | Raw Markdown (with frontmatter) of any page |

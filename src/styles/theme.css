@@ -44,6 +44,9 @@ header.header { border-bottom: 2px solid var(--sl-color-white); }
 .bp-btn { font-family: var(--sl-font-mono); font-size: var(--sl-text-sm); padding: 0.6rem 0.9rem; min-height: 44px; box-sizing: border-box; display: inline-flex; align-items: center;
   background: var(--sl-color-white); color: var(--sl-color-black); text-decoration: none; }
 .bp-btn:hover { color: var(--sl-color-black); opacity: 0.88; }
+.bp-actions { display: flex; flex-wrap: wrap; gap: 0.6rem; }
+.bp-btn-secondary { background: transparent; color: var(--sl-color-white); border: 1px solid var(--sl-color-white); }
+.bp-btn-secondary:hover { color: var(--sl-color-white); background: var(--sl-color-gray-6); opacity: 1; }
 
 /* RFC 2119 keyword badges (see src/plugins/rehype-rfc2119.mjs) */
 .sl-markdown-content strong.rfc2119 { font-family: var(--sl-font-mono); font-size: 0.75em; font-weight: 600; letter-spacing: 0.04em; padding: 0.15em 0.45em; vertical-align: 0.1em; }

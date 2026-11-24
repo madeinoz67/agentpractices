@@ -2,6 +2,7 @@
 
 ## Unreleased
 
+- Report a problem: new contributing page; pre-filled "Report a problem" button on every practice page; `report_url` in catalog.json; reporting section in llms.txt; agent rule 8 in How agents use this site.
 - GitHub issue forms (propose a practice, propose a taxonomy change, report a problem), generated from the taxonomy by `bun run issue-forms`; tests keep them in step.
 - Contributing: issue first for new practices and taxonomy changes; owner assigns BP IDs on acceptance.
 - Repository renamed madeinoz67/best-practices → madeinoz67/agentpractices to match the domain; GitHub link, edit links and package name updated.
