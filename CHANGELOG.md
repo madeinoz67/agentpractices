@@ -2,6 +2,7 @@
 
 ## Unreleased
 
+- Added BP-0059 Validate agent work with proof, not claims (D.AGT.WF, draft).
 - Added BP-0057 Brainstorm to find intent before writing a spec and BP-0058 Write PRDs that agents can build and test against (D.DOC.SPC) — drafts.
 - Taxonomy 0.6.0: added D.SWE.UI UI & Design Systems; issue forms regenerated. Added BP-0056 Use a style guide and approved mockups for repeated UI (draft).
 - Added BP-0055 Prefer targeted API wrapper scripts to MCP servers for narrow, repeated work (D.AGT.TOOL, draft).
