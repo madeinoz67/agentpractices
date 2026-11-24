@@ -9,7 +9,7 @@ stage: [plan, build, verify]
 status: draft
 version: 1.0.0
 updated: 2026-11-24
-related: [BP-0003, BP-0006]
+related: [BP-0003, BP-0006, BP-0008]
 ---
 
 ## Rules
