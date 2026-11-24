@@ -54,10 +54,12 @@ body:
         - D.SEC.INJ — Prompt Injection & Untrusted Input
         - D.SEC.PRV — Least Privilege & Secrets
         - D.SEC.SUP — Supply Chain
+        - D.SEC.DEF — Defence Against Hostile Agents
         - D.OPS — Operations
         - D.OPS.OBS — Observability
         - D.OPS.EVL — Evaluation
         - D.OPS.CST — Cost & Performance
+        - D.OPS.GW — Model Gateways & Routing
         - D.DOC — Documentation & Writing
         - D.DOC.AGR — Agent-Readable Docs
         - D.DOC.HUM — Human-Readable Docs

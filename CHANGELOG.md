@@ -2,6 +2,8 @@
 
 ## Unreleased
 
+- Taxonomy 0.4.0: added D.SEC.DEF Defence Against Hostile Agents and D.OPS.GW Model Gateways & Routing; issue forms regenerated.
+- Added BP-0042 Choose the simplest agent team topology (D.MAS.TOP), BP-0043 Communicate between agents with structured, authenticated messages (D.MAS.COM), BP-0044 Vet, pin and track every agent dependency (D.SEC.SUP), BP-0045 Defend against hostile AI agents with the 4Ds (D.SEC.DEF), BP-0046 Route agent model traffic through a governed gateway (D.OPS.GW) — drafts.
 - Added BP-0039 Trace agent runs end to end and BP-0040 Keep an audit trail of agent actions (drafts, D.OPS.OBS).
 - Added BP-0041 Budget and control agent cost and latency (draft, D.OPS.CST).
 - Added BP-0034 Make agent commits and PRs reviewable, BP-0035 Isolate parallel agents with worktrees, BP-0036 Review agent-written changes (drafts, D.SWE.VCS).

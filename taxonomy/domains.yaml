@@ -1,7 +1,7 @@
 # author: Stephen Eaton
 # Domain concept scheme — the primary (single-parent) hierarchy. Source of truth.
 # Rules: IDs are permanent; rename = change label only; retire = status: deprecated + replaced_by; never delete.
-version: 0.3.0
+version: 0.4.0
 scheme:
   id: domains
   label: Practice Domains
@@ -46,6 +46,7 @@ concepts:
   - { id: D.SEC.INJ, broader: D.SEC, label: Prompt Injection & Untrusted Input, definition: Security practice governing how an agent treats content it did not receive from its principal. }
   - { id: D.SEC.PRV, broader: D.SEC, label: Least Privilege & Secrets, definition: Security practice governing the permissions and credentials an agent holds. }
   - { id: D.SEC.SUP, broader: D.SEC, label: Supply Chain, definition: Security practice governing third-party code, packages, models and tools an agent depends on. }
+  - { id: D.SEC.DEF, broader: D.SEC, label: Defence Against Hostile Agents, alt_labels: [agentic attacks, AI attack agents, 4Ds, deception, tarpits], definition: Security practice governing how an organisation delays, defends against, detects and disrupts AI agents used to attack it., scope_note: Covers hostile agents acting against you. Protecting systems from your own agents' actions is D.SEC.INJ, D.SEC.PRV and D.SEC.SUP. }
 
   - id: D.OPS
     label: Operations
@@ -53,6 +54,7 @@ concepts:
   - { id: D.OPS.OBS, broader: D.OPS, label: Observability, definition: Operations practice governing logs, traces and records of what an agent did. }
   - { id: D.OPS.EVL, broader: D.OPS, label: Evaluation, alt_labels: [evals], definition: Operations practice governing how the quality of agent output is measured. }
   - { id: D.OPS.CST, broader: D.OPS, label: Cost & Performance, definition: Operations practice governing token, time and money spent by agents. }
+  - { id: D.OPS.GW, broader: D.OPS, label: Model Gateways & Routing, alt_labels: [LLM proxy, AI gateway, LiteLLM, Claude Code Router], definition: Operations practice governing the proxies and gateways that route agent model traffic between providers and models., scope_note: Covers routing, keys, budgets, fallbacks and logging at the gateway. Per-run budgets in the agent itself are D.OPS.CST. }
 
   - id: D.DOC
     label: Documentation & Writing
