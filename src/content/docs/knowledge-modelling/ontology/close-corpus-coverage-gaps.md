@@ -45,7 +45,7 @@ Any corpus of normative standards or reference data consumed outside its own rep
 
 ## Examples
 
-A test-bench SDK ships two independently versioned standards: a device standard that declares 13 device classes, and a UI class reference that covers 8. Four classes — an embedded controller, a spectrum analyser, a switch matrix and a VNA — have no UI reference at all. Nothing forced the two standards to stay in step, so a plugin author discovered the silence at the point of use.
+A test-bench SDK ships two independently versioned standards: a device standard that declares 12 device classes, and a UI class reference that covers 8. Four classes — an embedded controller, a spectrum analyser, a switch matrix and a VNA — have no UI reference at all. Nothing forced the two standards to stay in step, so a plugin author discovered the silence at the point of use.
 
 Closing one gap costs, in full: add the entry to the UI standard, pin it, release the SDK, bump the plugin's pin, resume, and find the next gap. Four gaps meant four times that round trip. The missing field was never the expensive part.
 
