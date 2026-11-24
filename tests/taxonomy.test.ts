@@ -12,9 +12,9 @@ describe('repo taxonomy', () => {
   test('has no errors', () => {
     expect(validateTaxonomy(t).filter((i) => i.level === 'error')).toEqual([]);
   });
-  test('has 7 top concepts and 23 narrower', () => {
+  test('has 7 top concepts and 24 narrower', () => {
     expect(t.concepts.filter((x) => !x.broader).length).toBe(7);
-    expect(t.concepts.filter((x) => x.broader).length).toBe(23);
+    expect(t.concepts.filter((x) => x.broader).length).toBe(24);
   });
   test('pathOf returns labels root-first', () => {
     expect(pathOf(t, 'D.SWE.CLI').map((x) => x.label)).toEqual(['Software Engineering', 'CLI Design']);
@@ -47,4 +47,10 @@ describe('dirOf', () => {
   test('dirOf joins slugified labels root-first', () => {
     expect(dirOf(loadTaxonomy('taxonomy'), 'D.SWE.CLI')).toBe('software-engineering/cli-design');
   });
+});
+
+test('D.DOC.HUM sits under Documentation & Writing', () => {
+  const tx = loadTaxonomy('taxonomy');
+  expect(pathOf(tx, 'D.DOC.HUM').map((x) => x.label)).toEqual(['Documentation & Writing', 'Human-Readable Docs']);
+  expect(tx.version).toBe('0.2.0');
 });

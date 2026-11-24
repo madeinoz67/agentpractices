@@ -2,6 +2,9 @@
 
 ## Unreleased
 
+- Taxonomy 0.2.0: added D.DOC.HUM Human-Readable Docs.
+- Added BP-0009 Write human-readable docs in plain language and Simplified Technical English (draft).
+- BP-0007: added BP-0009 to related.
 - Added BP-0008 Decompose tasks into independently verifiable units (draft, D.AGT.WF).
 - BP-0002: added BP-0008 to related.
 - Social card (public/og.png, 1280×640) with og:image / twitter:card meta; source in scripts/og/.

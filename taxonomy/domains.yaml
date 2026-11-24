@@ -1,7 +1,7 @@
 # author: Stephen Eaton
 # Domain concept scheme — the primary (single-parent) hierarchy. Source of truth.
 # Rules: IDs are permanent; rename = change label only; retire = status: deprecated + replaced_by; never delete.
-version: 0.1.0
+version: 0.2.0
 scheme:
   id: domains
   label: Practice Domains
@@ -57,4 +57,5 @@ concepts:
     label: Documentation & Writing
     definition: A practice domain covering written material produced for agents or people to consume.
   - { id: D.DOC.AGR, broader: D.DOC, label: Agent-Readable Docs, alt_labels: [llms.txt], definition: Documentation practice governing writing that agents fetch and act on. }
+  - { id: D.DOC.HUM, broader: D.DOC, label: Human-Readable Docs, alt_labels: [plain language, STE, Simplified Technical English, controlled language], definition: Documentation practice governing writing that people read and act on — procedures, guides, runbooks and reference text., scope_note: Covers language and structure for human readers. Writing optimised for agents to fetch and act on is D.DOC.AGR. }
   - { id: D.DOC.SPC, broader: D.DOC, label: Specs & Design Docs, definition: Documentation practice governing specifications and design documents that drive implementation. }

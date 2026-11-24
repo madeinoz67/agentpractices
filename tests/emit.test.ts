@@ -18,7 +18,7 @@ describe('buildCatalog', () => {
   });
   test('domain_path labels root-first', () => expect(cat.practices[0].domain_path).toEqual(['Software Engineering', 'CLI Design']));
   test('header fields', () => {
-    expect(cat.taxonomy_version).toBe('0.1.0');
+    expect(cat.taxonomy_version).toBe(t.version);
     expect(cat.base_url).toBe(BASE);
     expect(cat.generated).toBe('2026-11-24T00:00:00Z');
   });
@@ -61,7 +61,7 @@ describe('buildSkos', () => {
 describe('buildTaxonomyJson', () => {
   test('nested tree keyed by id', () => {
     const j = buildTaxonomyJson(t);
-    expect(j.version).toBe('0.1.0');
+    expect(j.version).toBe(t.version);
     expect(j.domains.length).toBe(7);
     expect(j.domains.find((d) => d.id === 'D.SWE')!.children.map((c) => c.id)).toContain('D.SWE.CLI');
     expect(j.facets.stage.map((f) => f.id)).toEqual(['plan', 'build', 'verify', 'operate']);

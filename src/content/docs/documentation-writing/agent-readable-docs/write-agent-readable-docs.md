@@ -9,7 +9,7 @@ stage: [build]
 status: draft
 version: 1.0.0
 updated: 2026-11-24
-related: [BP-0001, BP-0004]
+related: [BP-0001, BP-0004, BP-0009]
 sources:
   - { title: The /llms.txt file, url: https://llmstxt.org/ }
   - { title: 'RFC 2119 — Key words for use in RFCs', url: https://www.rfc-editor.org/rfc/rfc2119 }
