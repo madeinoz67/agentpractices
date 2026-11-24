@@ -9,7 +9,7 @@ stage: [plan, build, verify]
 status: draft
 version: 1.0.0
 updated: 2026-11-24
-related: [BP-0002, BP-0008]
+related: [BP-0002, BP-0008, BP-0011]
 sources:
   - { title: Codanna — local code intelligence MCP server, url: https://github.com/bartolli/codanna }
   - { title: Language Server Protocol, url: https://microsoft.github.io/language-server-protocol/ }

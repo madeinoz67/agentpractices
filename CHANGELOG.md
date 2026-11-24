@@ -2,6 +2,8 @@
 
 ## Unreleased
 
+- Added BP-0011 Manage short-term (working) memory and BP-0012 Manage long-term memory (drafts, D.AGT.CTX).
+- BP-0010: added BP-0011 to related.
 - Added BP-0010 Use a code index to gather context (draft, D.AGT.CTX).
 - BP-0002: added BP-0010 to related.
 - Taxonomy 0.2.0: added D.DOC.HUM Human-Readable Docs.
