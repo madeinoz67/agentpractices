@@ -7,8 +7,9 @@ type: guideline
 roles: [any]
 stage: [build]
 status: draft
-version: 1.0.0
-updated: 2026-11-24
+version: 1.0.1
+updated: 2026-11-25
+related: [BP-0014]
 sources:
   - { title: W3C SKOS Reference, url: https://www.w3.org/TR/skos-reference/ }
   - { title: 'ANSI/NISO Z39.19', url: https://www.niso.org/publications/ansiniso-z3919-2005-r2010 }

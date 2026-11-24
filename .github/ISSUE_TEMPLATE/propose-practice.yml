@@ -50,6 +50,7 @@ body:
         - D.SWE.API — API & Interface Design
         - D.SWE.TST — Testing
         - D.SWE.VCS — Version Control & Review
+        - D.SWE.REL — Release Engineering
         - D.SWE.QLT — Code Quality & Comments
         - D.SWE.UI — UI & Design Systems
         - D.SEC — Security & Safety
