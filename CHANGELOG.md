@@ -2,6 +2,7 @@
 
 ## Unreleased
 
+- Added BP-0052 Prevent and catch hallucinations (D.AGT.WF) and BP-0053 Stop errors amplifying across agents, memory and retrieval (D.MAS.HND) — drafts.
 - Added BP-0050 Detect and respond to model drift (D.OPS.EVL) and BP-0051 Observe agent workflows, not just single runs (D.OPS.OBS) — drafts.
 - BP-0049 1.1.0: added Chinese model equivalents (Kimi, DeepSeek, Qwen, GLM, MiniMax) with their thinking controls and data-handling rules.
 - Added BP-0048 Orchestrate agent workflows as gated phases with a durable ledger (D.MAS.HND) and BP-0049 Match model and thinking effort to each role (D.AGT.WF) — drafts.
