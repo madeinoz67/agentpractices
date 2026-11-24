@@ -2,6 +2,7 @@
 
 ## Unreleased
 
+- Added BP-0061 Choose agent communication channels for durability, audience and trust (D.MAS.COM, draft).
 - Taxonomy 0.7.0: added D.OPS.BDR Backup & Recovery; issue forms regenerated. Added BP-0060 Back up agent systems and keep backups out of agents' reach (draft).
 - Added BP-0059 Validate agent work with proof, not claims (D.AGT.WF, draft).
 - Added BP-0057 Brainstorm to find intent before writing a spec and BP-0058 Write PRDs that agents can build and test against (D.DOC.SPC) — drafts.
