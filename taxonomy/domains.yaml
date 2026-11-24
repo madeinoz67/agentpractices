@@ -1,7 +1,7 @@
 # author: Stephen Eaton
 # Domain concept scheme — the primary (single-parent) hierarchy. Source of truth.
 # Rules: IDs are permanent; rename = change label only; retire = status: deprecated + replaced_by; never delete.
-version: 0.8.0
+version: 0.9.0
 scheme:
   id: domains
   label: Practice Domains
@@ -50,6 +50,7 @@ concepts:
   - { id: D.SEC.SUP, broader: D.SEC, label: Supply Chain, definition: Security practice governing third-party code, packages, models and tools an agent depends on. }
   - { id: D.SEC.DEF, broader: D.SEC, label: Defence Against Hostile Agents, alt_labels: [agentic attacks, AI attack agents, 4Ds, deception, tarpits], definition: Security practice governing how an organisation delays, defends against, detects and disrupts AI agents used to attack it., scope_note: Covers hostile agents acting against you. Protecting systems from your own agents' actions is D.SEC.INJ, D.SEC.PRV and D.SEC.SUP. }
   - { id: D.SEC.DAT, broader: D.SEC, label: Data Sovereignty & Privacy, alt_labels: [data residency, privacy, personal information, cross-border transfer, GDPR, Privacy Act, APP 8], definition: Security practice governing where agent data is processed and stored, under which jurisdiction, and how personal information is handled., scope_note: Covers data classification, residency, cross-border transfer, minimisation, retention, individual rights and automated-decision transparency. Credentials and permissions are D.SEC.PRV. }
+  - { id: D.SEC.OT, broader: D.SEC, label: OT & Industrial Systems, alt_labels: [operational technology, ICS, SCADA, industrial control systems, IEC 62443, Purdue model, IT-OT], definition: Security practice governing how agents interact with operational technology and industrial control environments without putting safety or operations at risk., scope_note: Covers placement, data flows, change control and failsafes for agents near OT. General least privilege is D.SEC.PRV. }
 
   - id: D.OPS
     label: Operations
