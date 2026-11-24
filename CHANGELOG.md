@@ -2,6 +2,8 @@
 
 ## Unreleased
 
+- Added BP-0010 Use a code index to gather context (draft, D.AGT.CTX).
+- BP-0002: added BP-0010 to related.
 - Taxonomy 0.2.0: added D.DOC.HUM Human-Readable Docs.
 - Added BP-0009 Write human-readable docs in plain language and Simplified Technical English (draft).
 - BP-0007: added BP-0009 to related.
