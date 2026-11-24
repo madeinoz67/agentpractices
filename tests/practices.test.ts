@@ -1,0 +1,42 @@
+// author: Stephen Eaton
+import { describe, expect, test } from 'bun:test';
+import { loadTaxonomy } from '../scripts/lib/taxonomy';
+import { loadPractices, validatePractices, type Practice } from '../scripts/lib/practices';
+
+const t = loadTaxonomy('taxonomy');
+const base: Practice = {
+  id: 'BP-0100', title: 'T', description: 'D', domain: 'D.SWE.CLI', type: 'guideline',
+  roles: ['implementer'], stage: ['build'], status: 'draft', version: '1.0.0', updated: '2026-11-24',
+  related: [], superseded_by: null, sources: [], file: 'x.md', slug: 'x', body: '## Rules\n1. MUST x',
+};
+const p = (o: Partial<Practice>): Practice => ({ ...base, ...o });
+const codes = (ps: Practice[], tax = t) => validatePractices(ps, tax).map((i) => i.code);
+
+describe('loadPractices', () => {
+  test('loads only files with an id and derives slug', () => {
+    const ps = loadPractices('tests/fixtures/docs');
+    expect(ps.map((x) => x.id)).toEqual(['BP-9001']);
+    expect(ps[0].slug).toBe('software-engineering/cli/sample');
+    expect(ps[0].updated).toBe('2026-11-24');
+  });
+});
+
+describe('validatePractices', () => {
+  test('valid practice has no issues', () => expect(codes([base])).toEqual([]));
+  test('unknown domain', () => expect(codes([p({ domain: 'D.SWE.XYZ' })])).toContain('E_DOMAIN'));
+  test('deprecated domain', () => {
+    const t2 = loadTaxonomy('taxonomy');
+    const cli = t2.byId.get('D.SWE.CLI')!;
+    cli.status = 'deprecated'; cli.replaced_by = 'D.SWE.API';
+    expect(codes([base], t2)).toContain('E_DOMAIN_DEPREC');
+  });
+  test('duplicate id', () => expect(codes([base, p({ slug: 'y', file: 'y.md' })])).toContain('E_DUPID'));
+  test('bad id format', () => expect(codes([p({ id: 'BP-1' })])).toContain('E_IDFMT'));
+  test('unresolved related', () => expect(codes([p({ related: ['BP-0999'] })])).toContain('E_REL'));
+  test('deprecated without superseded_by', () => expect(codes([p({ status: 'deprecated' })])).toContain('E_SUPER'));
+  test('deprecated with unknown superseded_by', () => expect(codes([p({ status: 'deprecated', superseded_by: 'BP-0999' })])).toContain('E_SUPER'));
+  test('bad facet value', () => expect(codes([p({ roles: ['wizard'] })])).toContain('E_FACET'));
+  test('bad type facet', () => expect(codes([p({ type: 'essay' })])).toContain('E_FACET'));
+  test('missing description', () => expect(codes([p({ description: '' })])).toContain('E_REQ'));
+  test('missing Rules heading', () => expect(codes([p({ body: '## Intro\ntext' })])).toContain('E_RULES'));
+});
