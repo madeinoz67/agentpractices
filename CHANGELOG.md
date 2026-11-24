@@ -2,6 +2,8 @@
 
 ## Unreleased
 
+- Repository renamed madeinoz67/best-practices → madeinoz67/agentpractices to match the domain; GitHub link, edit links and package name updated.
+
 - Site moved to https://agentpractices.dev/ (custom apex domain, no base path). Taxonomy concept URIs and catalog URLs now use the new origin; old github.io URLs redirect.
 
 - Added BP-0014 Close standards-corpus coverage gaps in one batched release (draft, D.KNO.ONT).

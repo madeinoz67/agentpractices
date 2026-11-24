@@ -28,8 +28,8 @@ export default defineConfig({
     starlight({
       title: 'Agent Best Practices',
       description: 'Canonical, versioned best practices for AI agents. Agents start at llms.txt or catalog.json.',
-      social: [{ icon: 'github', label: 'GitHub', href: 'https://github.com/madeinoz67/best-practices' }],
-      editLink: { baseUrl: 'https://github.com/madeinoz67/best-practices/edit/main/' },
+      social: [{ icon: 'github', label: 'GitHub', href: 'https://github.com/madeinoz67/agentpractices' }],
+      editLink: { baseUrl: 'https://github.com/madeinoz67/agentpractices/edit/main/' },
       lastUpdated: true,
       head: [
         { tag: 'meta', attrs: { property: 'og:image', content: 'https://agentpractices.dev/og.png' } },

@@ -53,7 +53,7 @@ Agents that work across sessions for the same principal or project: coding agent
 ```markdown
 ---
 subject: best-practices-site
-description: Agent best-practices site (madeinoz67/best-practices) — decisions and constraints
+description: Agent best-practices site (madeinoz67/agentpractices) — decisions and constraints
 ---
 - 2026-11-24 (Stephen): site is public on GitHub Pages; built with Astro Starlight + Bun.
 - 2026-11-24 (Stephen): Theme A "Spec Sheet" chosen.
