@@ -2,6 +2,8 @@
 
 ## Unreleased
 
+- GitHub issue forms (propose a practice, propose a taxonomy change, report a problem), generated from the taxonomy by `bun run issue-forms`; tests keep them in step.
+- Contributing: issue first for new practices and taxonomy changes; owner assigns BP IDs on acceptance.
 - Repository renamed madeinoz67/best-practices → madeinoz67/agentpractices to match the domain; GitHub link, edit links and package name updated.
 
 - Site moved to https://agentpractices.dev/ (custom apex domain, no base path). Taxonomy concept URIs and catalog URLs now use the new origin; old github.io URLs redirect.

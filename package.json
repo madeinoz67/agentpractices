@@ -11,7 +11,8 @@
     "check": "bun scripts/check.ts",
     "test": "bun test",
     "linkcheck": "bun scripts/linkcheck.ts",
-    "verify": "bun test && bun run check && bun run build && bun run linkcheck"
+    "verify": "bun test && bun run check && bun run build && bun run linkcheck",
+    "issue-forms": "bun scripts/gen-issue-forms.ts"
   },
   "dependencies": {
     "@astrojs/markdown-remark": "^7.3.10",

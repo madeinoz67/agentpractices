@@ -1,0 +1,10 @@
+# author: Stephen Eaton
+# Issue template chooser config.
+blank_issues_enabled: true
+contact_links:
+  - name: How to contribute
+    url: https://agentpractices.dev/contributing/add-a-practice/
+    about: Read before proposing a practice.
+  - name: How agents use this site
+    url: https://agentpractices.dev/how-agents-use-this-site/
+    about: Endpoints and citation format for agents.
