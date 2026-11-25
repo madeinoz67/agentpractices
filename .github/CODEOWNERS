@@ -1,0 +1,7 @@
+# author: Stephen Eaton
+# Owner review for everything; the lines below are the security-critical paths (enforce via branch protection).
+*                                @madeinoz67
+/security/                       @madeinoz67
+/scripts/                        @madeinoz67
+/.github/                        @madeinoz67
+/.promptfoo-code-scan.yaml       @madeinoz67

@@ -1,0 +1,5 @@
+# author: Stephen Eaton
+# Promptfoo Code Scanner (GitHub App) — advisory LLM review. The blocking gate is scripts/security.ts.
+minSeverity: medium
+diffsOnly: true
+guidanceFile: ./security/promptfoo-guidance.md

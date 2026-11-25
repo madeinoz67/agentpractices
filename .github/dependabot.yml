@@ -1,0 +1,20 @@
+# author: Stephen Eaton
+# Keep pinned action SHAs and Bun dependencies current. Majors arrive as separate PRs for review.
+version: 2
+updates:
+  - package-ecosystem: github-actions
+    directory: /
+    schedule: { interval: weekly, day: tuesday, time: '06:00', timezone: Australia/Perth }
+    cooldown: { default-days: 7 }   # skip releases younger than a week (supply-chain hygiene); security updates are exempt
+    groups:
+      actions-minor-patch: { update-types: [minor, patch] }
+  - package-ecosystem: bun
+    directory: /
+    schedule: { interval: weekly, day: tuesday, time: '06:00', timezone: Australia/Perth }
+    cooldown: { default-days: 7 }   # skip releases younger than a week (supply-chain hygiene); security updates are exempt
+    groups:
+      deps-minor-patch: { update-types: [minor, patch] }
+  - package-ecosystem: bun
+    directory: /security/classifier
+    schedule: { interval: weekly, day: tuesday, time: '06:00', timezone: Australia/Perth }
+    cooldown: { default-days: 7 }   # skip releases younger than a week (supply-chain hygiene); security updates are exempt

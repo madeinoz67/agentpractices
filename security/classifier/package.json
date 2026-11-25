@@ -1,0 +1,12 @@
+{
+  "name": "agentpractices-classifier",
+  "description": "ML prompt-injection classifier for CI (advisory layer). author: Stephen Eaton",
+  "author": "Stephen Eaton",
+  "license": "MIT",
+  "type": "module",
+  "private": true,
+  "dependencies": {
+    "@huggingface/transformers": "4.3.2",
+    "yaml": "^2.9.1"
+  }
+}
