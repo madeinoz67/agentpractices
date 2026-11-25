@@ -5,7 +5,19 @@
 import { appendFileSync } from 'node:fs';
 import { scanText } from './lib/injection';
 
-const text = [process.env.SCAN_TITLE ?? '', process.env.SCAN_BODY ?? ''].join('\n');
+export const DEPENDABOT = 'dependabot[bot]';
+const BADGE = /^.*\]\(https:\/\/dependabot-badges\.githubapp\.com\/badges\/compatibility_score\?[^)\s]*\).*$/gm;
+
+/** Neutralise Dependabot's three known body artefacts, and nothing else: the zero-width space it puts after `@` in
+ *  release notes (to stop mentions), its compatibility-score badge, and the renderer's literal
+ *  `<!-- raw HTML omitted -->` placeholder. Upstream release-note text is still scanned. */
+export function normaliseDependabot(body: string): string {
+  return body.replace(/@\u200B/g, '@').replace(BADGE, '').replace(/<!-- raw HTML omitted -->/g, '');
+}
+
+const author = process.env.SCAN_AUTHOR ?? '';
+const body = author === DEPENDABOT ? normaliseDependabot(process.env.SCAN_BODY ?? '') : process.env.SCAN_BODY ?? '';
+const text = [process.env.SCAN_TITLE ?? '', body].join('\n');
 const findings = scanText('issue.md', text).filter((f) => f.level === 'error');
 const rules = [...new Set(findings.map((f) => f.rule))].sort();
 console.log(`issue scan: ${findings.length} finding(s)${rules.length ? `: ${rules.join(', ')}` : ''}`);

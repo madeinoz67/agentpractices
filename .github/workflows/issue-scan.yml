@@ -69,6 +69,7 @@ jobs:
         env:
           SCAN_TITLE: ${{ github.event.pull_request.title }}
           SCAN_BODY: ${{ github.event.pull_request.body }}
+          SCAN_AUTHOR: ${{ github.event.pull_request.user.login }}
         run: |
           if [ ! -f scripts/scan-issue.ts ]; then
             echo "::notice::scanner not on the default branch yet (bootstrap PR); skipping"
