@@ -7,7 +7,7 @@ type: pattern
 roles: [implementer, reviewer]
 stage: [build, verify, operate]
 status: draft
-version: 1.0.0
+version: 1.1.0
 updated: 2026-11-25
 reviewed: 2026-11-25
 review_by: 2027-05-25
