@@ -3,6 +3,9 @@ import { afterAll, beforeAll, describe, expect, test } from 'bun:test';
 import { existsSync, mkdtempSync, readFileSync, rmSync } from 'node:fs';
 import { tmpdir } from 'node:os';
 import { join } from 'node:path';
+
+// Every path here is anchored to the repo root, so the suite runs from any working directory.
+const ROOT = join(import.meta.dir, '..');
 import { loadTaxonomy } from '../scripts/lib/taxonomy';
 import {
   filterPractices, flattenDomains, isAllowed, isFresh, isGeneratedNewer, isOverdue, matchesDomain, matchesRole,
@@ -189,11 +192,11 @@ describe('md_url resolution', () => {
 });
 
 describe('plugin packaging', () => {
-  const plugin = JSON.parse(readFileSync('.claude-plugin/plugin.json', 'utf8'));
-  const market = JSON.parse(readFileSync('.claude-plugin/marketplace.json', 'utf8'));
-  const skill = readFileSync('skills/agentpractices/SKILL.md', 'utf8');
-  const script = readFileSync('skills/agentpractices/scripts/practices.ts', 'utf8');
-  const taxonomy = loadTaxonomy('taxonomy');
+  const plugin = JSON.parse(readFileSync(join(ROOT, '.claude-plugin/plugin.json'), 'utf8'));
+  const market = JSON.parse(readFileSync(join(ROOT, '.claude-plugin/marketplace.json'), 'utf8'));
+  const skill = readFileSync(join(ROOT, 'skills/agentpractices/SKILL.md'), 'utf8');
+  const script = readFileSync(join(ROOT, 'skills/agentpractices/scripts/practices.ts'), 'utf8');
+  const taxonomy = loadTaxonomy(join(ROOT, 'taxonomy'));
 
   test('the plugin and the skill carry the same version', () => {
     const fmVersion = /^\s+version:\s*(\S+)$/m.exec(skill)![1];
@@ -218,7 +221,7 @@ describe('plugin packaging', () => {
     expect(commands.length).toBeGreaterThan(0);
     for (const line of commands) expect(line).toContain('<skill base directory>/scripts/practices.ts');
     expect(skill).not.toContain('bun skills/agentpractices/scripts/practices.ts');
-    expect(existsSync('skills/agentpractices/scripts/practices.ts')).toBe(true);
+    expect(existsSync(SCRIPT)).toBe(true);
   });
   // Bug 2c: a domain ID in SKILL.md that does not exist sends the agent to an empty result.
   test('every domain ID in SKILL.md exists in the taxonomy', () => {
@@ -249,8 +252,8 @@ describe('plugin packaging', () => {
 });
 
 // End to end: the script as a subprocess against a local build of the site.
-const SCRIPT = 'skills/agentpractices/scripts/practices.ts';
-const DIST = 'dist';
+const SCRIPT = join(ROOT, 'skills/agentpractices/scripts/practices.ts');
+const DIST = join(ROOT, 'dist');
 
 /** dist/ is usable when the catalogue carries the fields this suite reads. */
 const distIsCurrent = () => {
@@ -262,7 +265,7 @@ const distIsCurrent = () => {
 
 // Build once, here, rather than per test. shortcut: a build inside `bun test` can race another
 // suite reading dist/; upgrade to a temp output dir if that ever bites.
-const built = distIsCurrent() || Bun.spawnSync(['bun', 'run', 'build'], { stdout: 'ignore', stderr: 'ignore' }).exitCode === 0;
+const built = distIsCurrent() || Bun.spawnSync(['bun', 'run', 'build'], { cwd: ROOT, stdout: 'ignore', stderr: 'ignore' }).exitCode === 0;
 if (!built) console.warn('plugin e2e: SKIPPED — `bun run build` failed, so dist/ could not be served. Not a pass.');
 
 (built ? describe : describe.skip)('script against a local build', () => {
