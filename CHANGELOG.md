@@ -2,6 +2,7 @@
 
 ## Unreleased
 
+- Added BP-0076 Make agent dashboards single, self-contained HTML files (D.SWE.UI, draft).
 - Added BP-0075 Keep repositories safe when agents read and act on them (D.SEC.SUP, draft).
 - Added BP-0074 Choose skills, MCP servers, CLIs or hooks for each capability (D.AGT.SKL, draft).
 - Added BP-0073 Build CLIs and MCP servers from one core, and choose daemon or per-client deliberately (D.AGT.TOOL, draft).
