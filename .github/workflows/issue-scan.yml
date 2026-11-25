@@ -31,7 +31,13 @@ jobs:
         env:
           SCAN_TITLE: ${{ github.event_name == 'issues' && github.event.issue.title || '' }}
           SCAN_BODY: ${{ github.event.comment.body || github.event.issue.body }}
-        run: bun scripts/scan-issue.ts
+        run: |
+          if [ ! -f scripts/scan-issue.ts ]; then
+            echo "::notice::scanner not on the default branch yet (bootstrap PR); skipping"
+            echo "count=0" >> "$GITHUB_OUTPUT"
+            exit 0
+          fi
+          bun scripts/scan-issue.ts
       - if: steps.scan.outputs.count != '0'
         env:
           GH_TOKEN: ${{ github.token }}
@@ -61,7 +67,13 @@ jobs:
         env:
           SCAN_TITLE: ${{ github.event.pull_request.title }}
           SCAN_BODY: ${{ github.event.pull_request.body }}
-        run: bun scripts/scan-issue.ts
+        run: |
+          if [ ! -f scripts/scan-issue.ts ]; then
+            echo "::notice::scanner not on the default branch yet (bootstrap PR); skipping"
+            echo "count=0" >> "$GITHUB_OUTPUT"
+            exit 0
+          fi
+          bun scripts/scan-issue.ts
       - if: steps.scan.outputs.count != '0'
         env:
           RULES: ${{ steps.scan.outputs.rules }}
