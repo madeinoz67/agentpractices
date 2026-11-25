@@ -1,11 +1,12 @@
 // author: Stephen Eaton
 // Fetch, filter and cite agentpractices.dev practices. Deterministic: the skill runs this, it does not re-derive the logic.
-// Usage: bun skills/agentpractices/scripts/practices.ts <list|get|check|sync> [flags]
-//   list  [--domain D.SWE] [--role implementer] [--stage plan] [--type guideline] [--status draft] [--limit N]
+// Usage: bun <skill base directory>/scripts/practices.ts <list|get|check|domains|sync> [flags]
+//   list  [--domain D.SWE] [--domain D.AGT.SKL] [--role implementer] [--stage plan] [--type guideline] [--status draft] [--limit N]
 //   get   BP-NNNN
 //   check BP-NNNN@x.y.z [more...]
-//   sync  force a refetch of catalog.json
-// Output: JSON on stdout. Network failure: one line on stderr, exit 1.
+//   domains  the domain tree from taxonomy.json
+//   sync  force a refetch of catalog.json and taxonomy.json
+// Output: JSON on stdout. Network or usage failure: one line on stderr, exit 1.
 import { mkdirSync, readFileSync, statSync, writeFileSync } from 'node:fs';
 import { homedir } from 'node:os';
 import { join } from 'node:path';
@@ -17,10 +18,14 @@ const TTL_MS = 15 * 60 * 1000;
 export interface Record_ {
   id: string; title: string; description: string; domain: string; domain_path: string[];
   type: string; roles: string[]; stage: string[]; status: string; version: string;
-  updated: string; superseded_by: string | null; url: string; md_url: string; report_url: string;
+  updated: string; reviewed?: string; review_by?: string; content_hash?: string;
+  superseded_by: string | null; url: string; md_url: string; report_url: string;
 }
 export interface Catalog { version: number; taxonomy_version: string; generated: string; count: number; practices: Record_[] }
 export interface Filters { domain?: string; role?: string; stage?: string; type?: string; status?: string; limit?: number }
+export interface DomainNode { id: string; label: string; children: DomainNode[] }
+export interface TaxonomyJson { version: string; domains: DomainNode[]; facets: Record<string, { id: string }[]> }
+export interface Vocabulary { domains: string[]; facets: Record<string, string[]> }
 
 /** A domain filter matches the exact ID or its children: D.SWE covers D.SWE and D.SWE.CLI. */
 export const matchesDomain = (domain: string, filter: string) => domain === filter || domain.startsWith(filter + '.');
@@ -60,6 +65,38 @@ export const nearestIds = (practices: { id: string }[], id: string, n = 3): stri
     .sort((a, b) => a.d - b.d).slice(0, n).map((p) => p.id);
 };
 
+/** Valid IDs closest to an unknown one, for the unknown-domain error: shared prefix first. */
+export const nearestDomains = (ids: string[], id: string, n = 3): string[] => {
+  const shared = (c: string) => { let i = 0; while (i < c.length && i < id.length && c[i] === id[i]) i++; return i; };
+  return [...ids].sort((a, b) => shared(b) - shared(a) || a.length - b.length || a.localeCompare(b)).slice(0, n);
+};
+
+/** Semver change from the cited version to the current one, compared numerically (1.10.0 > 1.9.0). */
+export function versionChange(cited: string, current: string): 'none' | 'patch' | 'minor' | 'major' | 'older' {
+  const part = (v: string) => v.split('.').map((x) => Number.parseInt(x, 10) || 0);
+  const [major, minor, patch] = part(cited);
+  const now = part(current);
+  for (let i = 0; i < 3; i++) {
+    const citedPart = [major, minor, patch][i];
+    if (citedPart === now[i]) continue;
+    if (citedPart > now[i]) return 'older';
+    return (['major', 'minor', 'patch'] as const)[i];
+  }
+  return 'none';
+}
+
+/** A practice is overdue when its review_by date is before today. Dates are YYYY-MM-DD, so they sort as text. */
+export const isOverdue = (reviewBy: string | undefined, today = new Date().toISOString().slice(0, 10)) =>
+  !!reviewBy && reviewBy < today;
+
+export const flattenDomains = (nodes: DomainNode[]): DomainNode[] => nodes.flatMap((n) => [n, ...flattenDomains(n.children)]);
+
+/** The values a flag may take: every domain ID and every facet value in the taxonomy. */
+export const vocabulary = (t: TaxonomyJson): Vocabulary => ({
+  domains: flattenDomains(t.domains).map((d) => d.id),
+  facets: Object.fromEntries(Object.entries(t.facets).map(([facet, values]) => [facet, values.map((v) => v.id)])),
+});
+
 /** The catalogue is stale when its generation time is not newer than the cached copy. */
 export const isGeneratedNewer = (remote: string, cached: string) => Date.parse(remote) > Date.parse(cached);
 export const isFresh = (fetchedAtMs: number, nowMs: number, ttlMs = TTL_MS) => nowMs - fetchedAtMs < ttlMs;
@@ -87,6 +124,9 @@ export const isAllowed = (url: string, base: string): boolean => {
   try { return new URL(url).origin === new URL(base).origin; } catch { return false; }
 };
 
+/** A catalogue md_url is an absolute production URL: fetch its path from the configured base instead. */
+export const resolveMd = (mdUrl: string, base: string): string => new URL(new URL(mdUrl, base).pathname, base).href;
+
 async function getText(path: string): Promise<string> {
   const url = /^https?:/i.test(path) ? path : new URL(path, BASE_URL).href;
   if (!isAllowed(url, BASE_URL)) throw new Error(`refusing ${url}: outside ${BASE_URL}`);
@@ -95,43 +135,84 @@ async function getText(path: string): Promise<string> {
   return res.text();
 }
 
-/** Fetch catalog.json when the cached copy is older than the TTL or the network copy is newer. */
-export async function loadCatalog(force = false): Promise<Catalog> {
-  const cached = readCache<Catalog>('catalog.json');
-  if (cached && !force && isFresh(cacheAge('catalog.json'), Date.now())) return cached;
-  let remote: Catalog;
-  try { remote = JSON.parse(await getText('catalog.json')) as Catalog; } catch (e) {
+/** Read a published JSON file from the cache when it is fresh, else from the network. A stale cache beats no data. */
+async function loadCached<T>(name: string, force: boolean, isNewer: (remote: T, cached: T) => boolean): Promise<T> {
+  const cached = readCache<T>(name);
+  if (cached && !force && isFresh(cacheAge(name), Date.now())) return cached;
+  let remote: T;
+  try { remote = JSON.parse(await getText(name)) as T; } catch (e) {
     // A stale cache beats no practice; the skill reports staleness from catalog_generated.
     if (cached) return cached;
     throw e;
   }
-  if (!force && cached && !isGeneratedNewer(remote.generated, cached.generated)) return cached;
-  writeCache('catalog.json', remote);
+  if (!force && cached && !isNewer(remote, cached)) return cached;
+  writeCache(name, remote);
   return remote;
 }
+
+/** Fetch catalog.json when the cached copy is older than the TTL or the network copy is newer. */
+export const loadCatalog = (force = false) =>
+  loadCached<Catalog>('catalog.json', force, (remote, cached) => isGeneratedNewer(remote.generated, cached.generated));
+
+/** Fetch taxonomy.json, the domain tree and facet values that every flag value is checked against. */
+export const loadTaxonomy = (force = false) =>
+  loadCached<TaxonomyJson>('taxonomy.json', force, (remote, cached) => remote.version !== cached.version);
 
 async function getPracticeMd(p: Record_): Promise<string> {
   const name = `${p.id}@${p.version}.md`;
   try { return readFileSync(cachePath(name), 'utf8'); } catch { /* cache miss */ }
-  const md = await getText(p.md_url);
+  const md = await getText(resolveMd(p.md_url, BASE_URL));
   mkdirSync(CACHE, { recursive: true });
   writeFileSync(cachePath(name), md);
   return md;
 }
 
-function flags(argv: string[]): Filters {
+const FLAGS = ['domain', 'role', 'stage', 'type', 'status', 'limit'] as const;
+const FLAG_LIST = FLAGS.map((n) => `--${n}`).join(' ');
+
+/** Parse and validate the list flags. Throws on an unknown flag or a value outside the taxonomy. */
+export function parseFlags(argv: string[], vocab: Vocabulary): Filters {
   const f: Filters = {};
   for (let i = 0; i < argv.length; i += 2) {
-    const key = argv[i].replace(/^--/, '') as keyof Filters;
+    const token = argv[i];
+    const name = token.startsWith('--') ? token.slice(2) : '';
+    if (!(FLAGS as readonly string[]).includes(name)) {
+      throw new Error(`agentpractices: unknown flag ${token}. Flags: ${FLAG_LIST}`);
+    }
     const v = argv[i + 1];
-    if (v === undefined) die(`agentpractices: ${argv[i]} needs a value`);
-    if (key === 'limit') {
+    if (v === undefined || v.startsWith('--')) throw new Error(`agentpractices: ${token} needs a value`);
+
+    if (name === 'limit') {
       const n = Number(v);
-      if (!Number.isInteger(n) || n < 1) die(`agentpractices: --limit needs a positive integer, got ${v}`);
+      if (!Number.isInteger(n) || n < 1) throw new Error(`agentpractices: --limit needs a positive integer, got ${v}`);
       f.limit = n;
-    } else f[key] = v;
+      continue;
+    }
+    if (name === 'domain') {
+      const ids = v.split(',').map((d) => d.trim()).filter(Boolean);
+      for (const id of ids) {
+        if (!vocab.domains.includes(id)) {
+          throw new Error(`agentpractices: unknown domain ${id}. Nearest: ${nearestDomains(vocab.domains, id).join(', ')}`);
+        }
+      }
+      // Repeated flags add up, the same as the comma form.
+      f.domain = f.domain ? `${f.domain},${ids.join(',')}` : ids.join(',');
+      continue;
+    }
+    const allowed = vocab.facets[name] ?? [];
+    if (!allowed.includes(v)) throw new Error(`agentpractices: unknown ${token} ${v}. Valid: ${allowed.join(', ')}`);
+    (f as Record<string, unknown>)[name] = v;
   }
   return f;
+}
+
+/** Parsed flags, or a one-line usage error on stderr and exit 1. */
+function flagsOrDie(argv: string[], vocab: Vocabulary): Filters {
+  try { return parseFlags(argv, vocab); } catch (e) { die((e as Error).message); }
+}
+
+function domainTree(nodes: DomainNode[]): unknown[] {
+  return nodes.map((n) => ({ id: n.id, label: n.label, children: domainTree(n.children) }));
 }
 
 async function main() {
@@ -139,9 +220,10 @@ async function main() {
   const out = (v: unknown) => console.log(JSON.stringify(v, null, 2));
 
   if (cmd === 'list') {
+    const vocab = vocabulary(await loadTaxonomy());
+    const f = flagsOrDie(rest, vocab);
     const cat = await loadCatalog();
-    const f = flags(rest);
-    const hits = filterPractices(cat.practices, f);
+    const hits = filterPractices(cat.practices, f).map((p) => ({ ...p, review_overdue: isOverdue(p.review_by) }));
     return out({ catalog_generated: cat.generated, count: hits.length, applied_filters: f, practices: hits });
   }
 
@@ -159,6 +241,7 @@ async function main() {
     return out({
       ...p, catalog_generated: cat.generated, rules,
       citation: `${p.id}@${p.version}`,
+      review_overdue: isOverdue(p.review_by),
       deprecated_notice: p.status === 'deprecated' ? `Deprecated. Follow ${p.superseded_by} instead.` : null,
     });
   }
@@ -172,19 +255,26 @@ async function main() {
       const p = cat.practices.find((x) => x.id === c.id);
       if (!p) return { citation: s, error: `no practice ${c.id}` };
       return {
-        citation: s, current_version: p.version, version_matches: p.version === c.version,
-        status: p.status, superseded_by: p.superseded_by, md_url: p.md_url,
+        citation: s, current_version: p.version, change: versionChange(c.version, p.version),
+        version_matches: p.version === c.version,
+        status: p.status, superseded_by: p.superseded_by, review_overdue: isOverdue(p.review_by), md_url: p.md_url,
       };
     });
     return out({ catalog_generated: cat.generated, results });
   }
 
-  if (cmd === 'sync') {
-    const cat = await loadCatalog(true);
-    return out({ cached_at: CACHE, catalog_generated: cat.generated, count: cat.count });
+  if (cmd === 'domains') {
+    const tax = await loadTaxonomy();
+    return out({ version: tax.version, domains: domainTree(tax.domains) });
   }
 
-  die('agentpractices: usage: practices.ts <list|get|check|sync> [args]');
+  if (cmd === 'sync') {
+    const cat = await loadCatalog(true);
+    const tax = await loadTaxonomy(true);
+    return out({ cached_at: CACHE, catalog_generated: cat.generated, taxonomy_version: tax.version, count: cat.count });
+  }
+
+  die('agentpractices: usage: practices.ts <list|get|check|domains|sync> [args]');
 }
 
 if (import.meta.main) {
