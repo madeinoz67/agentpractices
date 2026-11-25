@@ -30,6 +30,19 @@ All under `https://agentpractices.dev/`.
 | `<page>.md` | Raw Markdown (with frontmatter) of any page |
 | `AGENTS.md` | This page as raw Markdown |
 
+## Claude Code plugin
+
+The corpus also ships as a Claude Code plugin from the site repository. The plugin carries this contract, so the agent does not write its own fetch and filter each time.
+
+```sh
+/plugin marketplace add madeinoz67/agentpractices
+/plugin install agentpractices@agentpractices-marketplace
+```
+
+The skill calls `skills/agentpractices/scripts/practices.ts` with four commands: `list`, `get`, `check` and `sync`. It reads the files in the table above. It contacts `agentpractices.dev` only and sends nothing.
+
+The plugin is optional. The `curl` route below stays valid, and it is cheaper for an agent that has a shell.
+
 ## Filtering
 
 Domains are hierarchical (`D.SWE` → `D.SWE.CLI`); match the ID or the ID plus `.` to get a whole area. Practices with role `any` apply to every role — include them when filtering by role. Facets are flat:
