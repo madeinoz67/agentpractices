@@ -31,6 +31,9 @@ test('issue scan never interpolates untrusted event fields into run scripts', ()
   const w = parse(wf);
   expect(w.on.pull_request_target).toBeUndefined();
   for (const job of Object.values<any>(w.jobs))
+    for (const s of job.steps.filter((x: any) => String(x.uses).startsWith('actions/checkout@')))
+      expect(s.with?.ref).toBe('${{ github.event.repository.default_branch }}');
+  for (const job of Object.values<any>(w.jobs))
     for (const run of job.steps.filter((s: any) => s.run).map((s: any) => s.run))
       expect(run).not.toMatch(/\$\{\{\s*github\.event\.(issue|comment|pull_request)\.(title|body)/);
 });

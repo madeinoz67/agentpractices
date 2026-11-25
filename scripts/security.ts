@@ -56,7 +56,7 @@ const warnings = reported.length - (errors - invalid.length) + stale.length;
 const summary = `security: scanned ${files} files: ${errors} error(s), ${warnings} warning(s), ${suppressed.length} allowlisted`;
 console.log(summary);
 if (process.env.GITHUB_STEP_SUMMARY) {
-  const rows = reported.map((f) => `| ${f.level} | \`${f.rule}\` | \`${f.file}:${f.line}\` | ${f.msg.replace(/\|/g, '\\|')} |`).join('\n');
+  const rows = reported.map((f) => `| ${f.level} | \`${f.rule}\` | \`${f.file}:${f.line}\` | ${f.msg.replace(/\\/g, '\\\\').replace(/\|/g, '\\|')} |`).join('\n');
   appendFileSync(process.env.GITHUB_STEP_SUMMARY, `### Prompt-injection scan\n\n${summary}\n\n${rows ? `| Level | Rule | Location | Finding |\n| --- | --- | --- | --- |\n${rows}\n` : ''}`);
 }
 process.exit(errors ? 1 : 0);
