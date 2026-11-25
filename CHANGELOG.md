@@ -2,6 +2,7 @@
 
 ## Unreleased
 
+- Added BP-0075 Keep repositories safe when agents read and act on them (D.SEC.SUP, draft).
 - Added BP-0074 Choose skills, MCP servers, CLIs or hooks for each capability (D.AGT.SKL, draft).
 - Added BP-0073 Build CLIs and MCP servers from one core, and choose daemon or per-client deliberately (D.AGT.TOOL, draft).
 - Security CI: prompt-injection and hidden-content scanner (`bun run security`) gates every deploy, scanning source and built output; reviewed exceptions in `security/injection-allowlist.yaml`. Added Security workflow (gitleaks, zizmor, CodeQL, `bun audit`, dependency review), Dependabot, CODEOWNERS, SECURITY.md and Promptfoo Code Scanner guidance. Deploy workflow: actions SHA-pinned, per-job least-privilege permissions. Added an advisory ML classifier job (ProtectAI DeBERTa v3, pinned revision, isolated package) and an Issue scan workflow that labels issues and comments `needs-security-review` and fails PRs whose description trips the scanner.
