@@ -9,6 +9,8 @@ stage: [build, verify]
 status: draft
 version: 1.0.0
 updated: 2026-11-24
+reviewed: 2026-11-24
+review_by: 2027-05-24
 related: [BP-0064, BP-0065, BP-0006, BP-0028, BP-0052, BP-0040]
 sources:
   - { title: 'Zheng et al. — Large Language Models Are Not Robust Multiple Choice Selectors (ICLR 2024)', url: https://arxiv.org/abs/2309.03882 }

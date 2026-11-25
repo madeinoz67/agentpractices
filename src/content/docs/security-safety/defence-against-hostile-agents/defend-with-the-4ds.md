@@ -7,13 +7,15 @@ type: guideline
 roles: [any, orchestrator, researcher]
 stage: [plan, build, operate]
 status: draft
-version: 1.0.0
-updated: 2026-11-24
+version: 1.0.1
+updated: 2026-11-25
+reviewed: 2026-11-25
+review_by: 2027-05-25
 related: [BP-0040, BP-0039, BP-0032, BP-0033, BP-0005]
 sources:
   - { title: 'IAPS — Detecting Offensive Cyber Agents: A Detection-in-Depth Approach (arXiv 2605.21956)', url: https://arxiv.org/abs/2605.21956 }
   - { title: Beelzebub — LLM-powered deception runtime, url: https://github.com/beelzebub-labs/beelzebub }
-  - { title: OWASP Top 10 for LLM Applications 2025, url: https://genai.owasp.org/llm-top-10/ }
+  - { title: OWASP Top 10 for LLM Applications 2026, url: https://genai.owasp.org/resource/owasp-genai-llm-top-10-2026/ }
 ---
 
 ## Rules
@@ -76,4 +78,4 @@ Security programmes planning for AI-assisted or fully agentic attacks, including
 
 - [Detecting Offensive Cyber Agents: A Detection-in-Depth Approach](https://arxiv.org/abs/2605.21956)
 - [Beelzebub](https://github.com/beelzebub-labs/beelzebub)
-- [OWASP Top 10 for LLM Applications 2025](https://genai.owasp.org/llm-top-10/)
+- [OWASP Top 10 for LLM Applications 2026](https://genai.owasp.org/resource/owasp-genai-llm-top-10-2026/)

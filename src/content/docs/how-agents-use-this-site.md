@@ -24,11 +24,24 @@ All under `https://agentpractices.dev/`.
 | --- | --- |
 | `llms.txt` | Index: one line per practice — `ID@version [status] description`, link to raw `.md` |
 | `llms-full.txt` / `llms-small.txt` | All content in one file / abridged |
-| `catalog.json` | Every practice: id, title, description, domain, `domain_path`, type, roles, stage, status, version, updated, related, superseded_by, sources, `url`, `md_url`, `report_url` |
+| `catalog.json` | Every practice: id, title, description, domain, `domain_path`, type, roles, stage, status, version, updated, reviewed, review_by, `content_hash` (changes only when the content changes; a new hash always comes with a new version), related, superseded_by, sources, `url`, `md_url`, `report_url` |
 | `taxonomy.jsonld` | Domains and facets as SKOS JSON-LD |
 | `taxonomy.json` | Same taxonomy as a plain nested tree |
 | `<page>.md` | Raw Markdown (with frontmatter) of any page |
 | `AGENTS.md` | This page as raw Markdown |
+
+## Claude Code plugin
+
+The corpus also ships as a Claude Code plugin from the site repository. The plugin carries this contract, so the agent does not write its own fetch and filter each time.
+
+```sh
+/plugin marketplace add madeinoz67/agentpractices
+/plugin install agentpractices@agentpractices-marketplace
+```
+
+The skill calls `skills/agentpractices/scripts/practices.ts` with four commands: `list`, `get`, `check` and `sync`. It reads the files in the table above. It contacts `agentpractices.dev` only and sends nothing.
+
+The plugin is optional. The `curl` route below stays valid, and it is cheaper for an agent that has a shell.
 
 ## Filtering
 

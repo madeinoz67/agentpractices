@@ -9,6 +9,8 @@ stage: [plan, build, operate]
 status: draft
 version: 1.1.0
 updated: 2026-11-24
+reviewed: 2026-11-24
+review_by: 2027-02-24
 related: [BP-0046, BP-0041, BP-0006, BP-0039]
 sources:
   - { title: LiteLLM docs — Off-peak pricing, url: https://docs.litellm.ai/docs/proxy/off_peak_pricing }

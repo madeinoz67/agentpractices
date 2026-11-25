@@ -9,6 +9,8 @@ stage: [plan, build, operate]
 status: draft
 version: 1.0.0
 updated: 2026-11-24
+reviewed: 2026-11-24
+review_by: 2027-05-24
 related: [BP-0046, BP-0033, BP-0012, BP-0031, BP-0039, BP-0040, BP-0060, BP-0061, BP-0064, BP-0049]
 sources:
   - { title: OAIC — APP 8 Cross-border disclosure of personal information, url: https://www.oaic.gov.au/privacy/australian-privacy-principles/australian-privacy-principles-guidelines/chapter-8-app-8-cross-border-disclosure-of-personal-information }

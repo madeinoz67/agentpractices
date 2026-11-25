@@ -9,6 +9,8 @@ stage: [plan, build]
 status: draft
 version: 1.0.0
 updated: 2026-11-24
+reviewed: 2026-11-24
+review_by: 2027-05-24
 related: [BP-0032, BP-0042, BP-0022, BP-0023, BP-0049, BP-0055, BP-0035, BP-0021]
 sources:
   - { title: Claude Code docs — Subagents, url: https://code.claude.com/docs/en/sub-agents }

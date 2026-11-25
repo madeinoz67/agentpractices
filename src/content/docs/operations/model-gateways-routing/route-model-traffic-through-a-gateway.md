@@ -9,6 +9,8 @@ stage: [plan, build, operate]
 status: draft
 version: 1.1.0
 updated: 2026-11-24
+reviewed: 2026-11-24
+review_by: 2027-02-24
 related: [BP-0041, BP-0032, BP-0033, BP-0039, BP-0044]
 sources:
   - { title: LiteLLM AI Gateway docs, url: https://docs.litellm.ai/docs/simple_proxy/ }

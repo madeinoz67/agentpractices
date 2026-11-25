@@ -7,11 +7,13 @@ type: guideline
 roles: [orchestrator, implementer, reviewer]
 stage: [build, operate]
 status: draft
-version: 1.0.0
-updated: 2026-11-24
+version: 1.0.1
+updated: 2026-11-25
+reviewed: 2026-11-25
+review_by: 2027-05-25
 related: [BP-0039, BP-0032, BP-0021, BP-0023, BP-0013]
 sources:
-  - { title: OWASP LLM06:2025 Excessive Agency, url: https://genai.owasp.org/llmrisk/llm062025-excessive-agency/ }
+  - { title: OWASP LLM03:2026 Excessive Agency, url: https://genai.owasp.org/resource/owasp-genai-llm-top-10-2026/ }
   - { title: W3C PROV-O, url: https://www.w3.org/TR/prov-o/ }
 ---
 
@@ -62,5 +64,5 @@ Any agent that changes systems or data, especially on behalf of users, in regula
 
 ## References
 
-- [OWASP LLM06:2025 Excessive Agency](https://genai.owasp.org/llmrisk/llm062025-excessive-agency/)
+- [OWASP LLM03:2026 Excessive Agency](https://genai.owasp.org/resource/owasp-genai-llm-top-10-2026/)
 - [W3C PROV-O](https://www.w3.org/TR/prov-o/)

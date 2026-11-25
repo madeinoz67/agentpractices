@@ -9,6 +9,8 @@ stage: [plan, build, verify, operate]
 status: draft
 version: 1.0.0
 updated: 2026-11-25
+reviewed: 2026-11-25
+review_by: 2027-05-25
 related: [BP-0001, BP-0055, BP-0058, BP-0037, BP-0034, BP-0043, BP-0024]
 sources:
   - { title: OpenAPI Specification v3.2.0, url: https://spec.openapis.org/oas/v3.2.0.html }

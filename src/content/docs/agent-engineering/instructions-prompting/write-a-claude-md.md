@@ -9,6 +9,8 @@ stage: [plan, build]
 status: draft
 version: 1.0.0
 updated: 2026-11-24
+reviewed: 2026-11-24
+review_by: 2027-05-24
 related: [BP-0015, BP-0017, BP-0012, BP-0005]
 sources:
   - { title: Claude Code docs — How Claude remembers your project, url: https://code.claude.com/docs/en/claude-md }

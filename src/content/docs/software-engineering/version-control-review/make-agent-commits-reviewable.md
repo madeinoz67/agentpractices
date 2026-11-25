@@ -9,6 +9,8 @@ stage: [build]
 status: draft
 version: 1.0.0
 updated: 2026-11-24
+reviewed: 2026-11-24
+review_by: 2027-05-24
 related: [BP-0035, BP-0036, BP-0037, BP-0002, BP-0033]
 sources:
   - { title: Conventional Commits 1.0.0, url: https://www.conventionalcommits.org/en/v1.0.0/ }

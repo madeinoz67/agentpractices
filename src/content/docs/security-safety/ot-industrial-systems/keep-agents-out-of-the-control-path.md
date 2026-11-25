@@ -9,6 +9,8 @@ stage: [plan, build, operate]
 status: draft
 version: 1.0.0
 updated: 2026-11-25
+reviewed: 2026-11-25
+review_by: 2027-05-25
 related: [BP-0032, BP-0062, BP-0069, BP-0067, BP-0052, BP-0050, BP-0040, BP-0060, BP-0005]
 sources:
   - { title: 'CISA, ASD''s ACSC et al. — Principles for the Secure Integration of AI in Operational Technology (Dec 2025)', url: https://www.cyber.gov.au/business-government/secure-design/operational-technology-environments/principles-for-the-secure-integration-of-artificial-intelligence-in-operational-technology }

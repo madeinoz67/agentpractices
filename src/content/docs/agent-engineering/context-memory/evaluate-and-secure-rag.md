@@ -7,11 +7,13 @@ type: guideline
 roles: [reviewer, implementer, orchestrator]
 stage: [verify, operate]
 status: draft
-version: 1.0.0
-updated: 2026-11-24
+version: 1.0.1
+updated: 2026-11-25
+reviewed: 2026-11-25
+review_by: 2027-05-25
 related: [BP-0027, BP-0028, BP-0006, BP-0005]
 sources:
-  - { title: OWASP LLM08:2025 Vector and Embedding Weaknesses, url: https://genai.owasp.org/llmrisk/llm082025-vector-and-embedding-weaknesses/ }
+  - { title: OWASP LLM09:2026 Vector and Embedding Weaknesses, url: https://genai.owasp.org/resource/owasp-genai-llm-top-10-2026/ }
   - { title: Anthropic — Introducing Contextual Retrieval, url: https://www.anthropic.com/news/contextual-retrieval }
 ---
 
@@ -63,5 +65,5 @@ Before shipping a RAG system or a change to one, and continuously while it runs.
 
 ## References
 
-- [OWASP LLM08:2025 Vector and Embedding Weaknesses](https://genai.owasp.org/llmrisk/llm082025-vector-and-embedding-weaknesses/)
+- [OWASP LLM09:2026 Vector and Embedding Weaknesses](https://genai.owasp.org/resource/owasp-genai-llm-top-10-2026/)
 - [Anthropic — Introducing Contextual Retrieval](https://www.anthropic.com/news/contextual-retrieval)

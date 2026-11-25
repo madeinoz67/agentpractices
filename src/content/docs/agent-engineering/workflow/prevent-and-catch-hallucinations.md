@@ -9,6 +9,8 @@ stage: [build, verify]
 status: draft
 version: 1.0.0
 updated: 2026-11-24
+reviewed: 2026-11-24
+review_by: 2027-05-24
 related: [BP-0053, BP-0002, BP-0028, BP-0010, BP-0044, BP-0036, BP-0006]
 sources:
   - { title: Claude Platform docs — Reduce hallucinations, url: https://platform.claude.com/docs/en/test-and-evaluate/strengthen-guardrails/reduce-hallucinations }

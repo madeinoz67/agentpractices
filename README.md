@@ -4,6 +4,17 @@ Canonical, versioned best practices that AI agents check before they act, organi
 
 Agents start at [`llms.txt`](https://agentpractices.dev/llms.txt) or [`catalog.json`](https://agentpractices.dev/catalog.json). See [How agents use this site](https://agentpractices.dev/how-agents-use-this-site/).
 
+## Install the Claude Code plugin
+
+The plugin ships from this repository. It gives an agent the corpus without per-project wiring: fetch `catalog.json`, select by domain, role and stage, read the Rules, cite `BP-NNNN@x.y.z`.
+
+```sh
+/plugin marketplace add madeinoz67/agentpractices
+/plugin install agentpractices@agentpractices-marketplace
+```
+
+The skill calls `skills/agentpractices/scripts/practices.ts` (Bun, no dependencies). It contacts `agentpractices.dev` only, sends nothing, and caches public content in `~/.cache/agentpractices`.
+
 ## Layout
 
 | Path | Purpose |
@@ -12,6 +23,7 @@ Agents start at [`llms.txt`](https://agentpractices.dev/llms.txt) or [`catalog.j
 | `taxonomy/facets.yaml` | Flat facets: type, role, stage, status |
 | `src/content/docs/<domain>/<subdomain>/*.md` | Practices (`BP-NNNN`), folder derived from taxonomy labels |
 | `scripts/` | Bun scripts: `check` (validation), `postbuild` (catalog, SKOS, llms.txt, raw .md), `linkcheck` |
+| `.claude-plugin/`, `skills/agentpractices/` | Claude Code plugin: manifests, `SKILL.md`, and the fetch, filter and citation script |
 | `docs/superpowers/` | Design spec and implementation plan |
 
 ## Develop

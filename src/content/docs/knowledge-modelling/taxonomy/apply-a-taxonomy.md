@@ -9,6 +9,8 @@ stage: [build]
 status: draft
 version: 1.0.1
 updated: 2026-11-25
+reviewed: 2026-11-25
+review_by: 2027-05-25
 related: [BP-0014]
 sources:
   - { title: W3C SKOS Reference, url: https://www.w3.org/TR/skos-reference/ }
