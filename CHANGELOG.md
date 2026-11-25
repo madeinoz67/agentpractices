@@ -2,6 +2,7 @@
 
 ## Unreleased
 
+- Security CI: prompt-injection and hidden-content scanner (`bun run security`) gates every deploy, scanning source and built output; reviewed exceptions in `security/injection-allowlist.yaml`. Added Security workflow (gitleaks, zizmor, CodeQL, `bun audit`, dependency review), Dependabot, CODEOWNERS, SECURITY.md and Promptfoo Code Scanner guidance. Deploy workflow: actions SHA-pinned, per-job least-privilege permissions. Added an advisory ML classifier job (ProtectAI DeBERTa v3, pinned revision, isolated package) and an Issue scan workflow that labels issues and comments `needs-security-review` and fails PRs whose description trips the scanner.
 - Taxonomy 0.10.0: added D.SWE.REL Release Engineering; issue forms regenerated. Added BP-0072 Batch changes so the release round trip is paid once (draft). BP-0014 2.0.0: release rules moved to BP-0072. BP-0004 1.0.1: added BP-0014 to related.
 - Added BP-0071 Design API surfaces contract-first and evolve them without breaking clients (D.SWE.API, draft).
 - Taxonomy 0.9.0: added D.SEC.OT OT & Industrial Systems; issue forms regenerated. Added BP-0070 Keep agents out of the OT control path (draft).

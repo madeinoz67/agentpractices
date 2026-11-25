@@ -1,0 +1,10 @@
+# author: Stephen Eaton
+# Reviewed exceptions for scripts/security.ts. Each entry suppresses ONE rule on ONE exact line (hash of the
+# normalised line), so any edit to that line brings it back for review. Hard rules (INJ_INVISIBLE, INJ_TAG_CHARS,
+# INJ_CONTROL) cannot be listed. Changes to this file need code-owner review (.github/CODEOWNERS).
+# Regenerate candidates with: bun scripts/security.ts --baseline
+- { file: src/content/docs/agent-engineering/context-memory/evaluate-and-secure-rag.md, rule: INJ_OVERRIDE, hash: bf65745c2f2901dc, reason: "Anti-patterns: quoted attack string as an example of what not to follow" }
+- { file: src/content/docs/multi-agent-systems/communication-protocols/communicate-between-agents.md, rule: INJ_OVERRIDE, hash: c467961752a884f4, reason: "Anti-patterns: quoted agent-to-agent injection example" }
+- { file: src/content/docs/security-safety/prompt-injection-untrusted-input/treat-observed-content-as-data.md, rule: INJ_OVERRIDE, hash: 9783a0b0b3b5bc90, reason: "BP-0005 Examples: quoted README injection with the correct (refusing) response" }
+- { file: src/content/docs/security-safety/prompt-injection-untrusted-input/treat-observed-content-as-data.md, rule: INJ_AGENT_ADDRESS, hash: 9783a0b0b3b5bc90, reason: "BP-0005 Examples: same quoted line, addresses 'AI agents' inside quotes" }
+- { file: src/content/docs/software-engineering/cli-design/design-clis-for-agents.md, rule: INJ_SAFETY_OFF, hash: 7f00a9120f5f1775, reason: "CLI design rule: an explicit --yes flag, not an instruction to agents to skip approval" }
