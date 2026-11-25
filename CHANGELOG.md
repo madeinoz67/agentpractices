@@ -2,6 +2,7 @@
 
 ## Unreleased
 
+- Version guard: catalog.json now carries a `content_hash` per practice, and `bun run versions` (in `verify` and the deploy workflow) fails when a published practice's content changed without a version bump, its version went backwards, or it was deleted. Bumping versions is now a MUST for any content change, not only Rules changes.
 - BP-0076 1.1.0: version bump for the sensitivity-label rules (13–16) added after 1.0.0 was published.
 - Added `reviewed` and `review_by` dates to every practice (required). `bun run check` errors on an invalid date order or a gap of more than 12 months, and warns when a review is overdue; the dates appear on each page and in catalog.json. Backfilled: 3 months for fast-moving pages (BP-0046, BP-0047, BP-0049, BP-0065, BP-0073, BP-0074, BP-0077), 6 months for the rest.
 - BP-0077 1.1.0: the risk register records `last_reviewed` as well as `next_review`, and the CI check validates both.

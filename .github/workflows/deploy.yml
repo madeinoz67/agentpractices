@@ -24,6 +24,7 @@ jobs:
       - run: bun run build
         env: { GITHUB_TOKEN: '${{ secrets.GITHUB_TOKEN }}' }
       - run: bun run linkcheck
+      - run: bun run versions
       - run: bun run security
       - if: github.event_name != 'pull_request'
         uses: actions/configure-pages@983d7736d9b0ae728b81ab479565c72886d7745b # v5.0.0
