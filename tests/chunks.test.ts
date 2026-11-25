@@ -30,6 +30,7 @@ test('issue scan never interpolates untrusted event fields into run scripts', ()
   const wf = readFileSync('.github/workflows/issue-scan.yml', 'utf8');
   const w = parse(wf);
   expect(w.on.pull_request_target).toBeUndefined();
+  expect(w.on.pull_request.types).toEqual(expect.arrayContaining(['opened', 'edited', 'reopened', 'synchronize']));
   for (const job of Object.values<any>(w.jobs))
     for (const s of job.steps.filter((x: any) => String(x.uses).startsWith('actions/checkout@')))
       expect(s.with?.ref).toBe('${{ github.event.repository.default_branch }}');
