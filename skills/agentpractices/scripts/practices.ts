@@ -7,7 +7,7 @@
 //   domains  the domain tree from taxonomy.json
 //   sync  force a refetch of catalog.json and taxonomy.json
 // Output: JSON on stdout. Network or usage failure: one line on stderr, exit 1.
-import { mkdirSync, readFileSync, statSync, writeFileSync } from 'node:fs';
+import { existsSync, mkdirSync, readdirSync, readFileSync, renameSync, rmSync, statSync, writeFileSync } from 'node:fs';
 import { homedir } from 'node:os';
 import { join } from 'node:path';
 
@@ -114,9 +114,15 @@ function cacheAge(name: string): number {
   try { return statSync(cachePath(name)).mtimeMs; } catch { return 0; }
 }
 
+/** Temp file then rename: a concurrent reader never sees a partial file, and a killed writer leaves no damage. */
+function writeAtomic(path: string, text: string) {
+  writeFileSync(`${path}.tmp`, text);
+  renameSync(`${path}.tmp`, path);
+}
+
 function writeCache(name: string, value: unknown) {
   mkdirSync(CACHE, { recursive: true });
-  writeFileSync(cachePath(name), JSON.stringify(value, null, 2));
+  writeAtomic(cachePath(name), JSON.stringify(value, null, 2));
 }
 
 /** Only the configured origin is reachable: a hostile catalogue cannot redirect the fetch to another host. */
@@ -163,7 +169,7 @@ async function getPracticeMd(p: Record_): Promise<string> {
   try { return readFileSync(cachePath(name), 'utf8'); } catch { /* cache miss */ }
   const md = await getText(resolveMd(p.md_url, BASE_URL));
   mkdirSync(CACHE, { recursive: true });
-  writeFileSync(cachePath(name), md);
+  writeAtomic(cachePath(name), md);
   return md;
 }
 
@@ -271,6 +277,8 @@ async function main() {
   if (cmd === 'sync') {
     const cat = await loadCatalog(true);
     const tax = await loadTaxonomy(true);
+    // Practice bodies are keyed id@version, so a corrupt one would be served forever without this.
+    if (existsSync(CACHE)) for (const f of readdirSync(CACHE)) if (f.endsWith('.md')) rmSync(join(CACHE, f));
     return out({ cached_at: CACHE, catalog_generated: cat.generated, taxonomy_version: tax.version, count: cat.count });
   }
 

@@ -130,7 +130,7 @@ A non-zero exit is a failure, not an empty result. If no practice matches the ta
 
 If Bun is not installed (`bun --version` fails), say so in one line and continue without a practice. Do not install it.
 
-`bun ... sync` forces a refetch of `catalog.json` and `taxonomy.json`. The cache refreshes on its own: each practice is cached under its `id@version`, so a practice is fetched again only when its content changed. Run `sync` to recover a failed or corrupt cache, not on a schedule. A newer `catalog_generated` does not mean any practice changed.
+`bun ... sync` forces a refetch of `catalog.json` and `taxonomy.json`, and drops the cached practice bodies so the next `get` fetches them again. The cache is otherwise self-maintaining: each practice is stored as `<ID>@<version>.md`, so it is fetched again when its version changes, and a content change always ships with a version bump. A newer `catalog_generated` does not mean any practice changed. Run `sync` when the cache looks wrong, not on a schedule.
 
 ## Scripts
 

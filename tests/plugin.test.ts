@@ -1,6 +1,6 @@
 // author: Stephen Eaton
 import { afterAll, beforeAll, describe, expect, test } from 'bun:test';
-import { existsSync, mkdtempSync, readFileSync, rmSync } from 'node:fs';
+import { existsSync, mkdtempSync, readFileSync, rmSync, writeFileSync } from 'node:fs';
 import { tmpdir } from 'node:os';
 import { join } from 'node:path';
 
@@ -339,6 +339,19 @@ if (!built) console.warn('plugin e2e: SKIPPED — `bun run build` failed, so dis
     expect(j.rules.startsWith('## Rules')).toBe(true);
     expect(j.rules).toContain('MUST');
     expect(typeof j.review_overdue).toBe('boolean');
+  });
+
+  // A practice body is cached under id@version, so a corrupt one would be served forever. sync must heal it.
+  test('sync clears a corrupt practice body so the next get succeeds', async () => {
+    const first = await run('get', 'BP-0074');
+    expect(first.code).toBe(0);
+    const j = JSON.parse(first.out);
+    writeFileSync(join(cache, `${j.id}@${j.version}.md`), '## Truncated');
+    expect((await run('get', 'BP-0074')).code).toBe(1);
+    expect((await run('sync')).code).toBe(0);
+    const healed = await run('get', 'BP-0074');
+    expect(healed.code).toBe(0);
+    expect(JSON.parse(healed.out).rules.startsWith('## Rules')).toBe(true);
   });
 
   test('check names the change, and the version comparison is numeric', async () => {
