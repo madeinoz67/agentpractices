@@ -1,0 +1,20 @@
+{
+  "$schema": "https://json.schemastore.org/claude-code-plugin.json",
+  "name": "agentpractices",
+  "version": "0.1.0",
+  "displayName": "Agent Practices",
+  "description": "Applies the published best practices at agentpractices.dev to the current task. Fetches catalog.json, selects practices by domain, role and stage, reads each Rules section, and cites BP-NNNN@x.y.z. Read-only, no telemetry, one network endpoint.",
+  "author": {
+    "name": "Stephen Eaton"
+  },
+  "homepage": "https://agentpractices.dev/",
+  "repository": "https://github.com/madeinoz67/agentpractices",
+  "license": "MIT",
+  "keywords": [
+    "best-practices",
+    "agent-skills",
+    "standards",
+    "code-review",
+    "agent-engineering"
+  ]
+}
