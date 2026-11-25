@@ -2,6 +2,8 @@
 
 ## Unreleased
 
+- `catalog.json`'s `generated` is now the source commit's time, not the build's wall clock, and the build job has its own `pages-build-*` concurrency group with `cancel-in-progress: true`. A scheduled build that checked out an older commit can no longer deploy after a newer build, and if it did its old timestamp would lose to the newer cached copy. Agent contract rule 6 now says a metadata-only commit moves `generated` and the daily star-count refresh does not (#27).
+
 - BP-0007 1.1.0: rules 10–12 define the caching contract that rule 3 named but never stated — publish a `content_hash` per page in the machine-readable catalogue (10), never move a version or hash when only metadata refreshes (11), and have consumers cache by content identity rather than on a clock (12). Examples, anti-patterns and checklist follow (#26).
 - Agent contract rule 6 now separates the two objects: refetch `catalog.json` at task start or when its `generated` is newer, then refetch a practice only when its `version` or `content_hash` differs. The daily star-count refresh moves `generated` without changing any practice, which made every agent refetch daily for nothing (#21). `content_hash` detects change; it is not a signature.
 - Plugin skill 0.2.1: the `sync` guidance no longer says to refetch when `catalog_generated` is older than a day. `sync` now also drops the cached practice bodies, so it really does recover a corrupt cache; practice files are cached as `<ID>@<version>.md` and are otherwise refetched only on a version bump. Cache writes go through a temp file and a rename, so an interrupted fetch cannot leave a truncated body behind.

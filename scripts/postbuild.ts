@@ -6,6 +6,7 @@ import { loadTaxonomy } from './lib/taxonomy';
 import { loadPractices } from './lib/practices';
 import { buildCatalog, buildLlmsTxt, buildSkos, buildTaxonomyJson } from './lib/emit';
 import { BASE_URL, DESCRIPTION, TITLE } from './lib/site';
+import { sourceCommitTime } from './lib/generated';
 
 const DOCS = 'src/content/docs';
 const OUT = process.argv[2] ?? 'dist';
@@ -14,7 +15,7 @@ const walk = (d: string): string[] => readdirSync(d).flatMap((n) => (statSync(jo
 
 const t = loadTaxonomy('taxonomy');
 const ps = loadPractices(DOCS);
-write('catalog.json', JSON.stringify(buildCatalog(ps, t, { baseUrl: BASE_URL, generated: new Date().toISOString() }), null, 2));
+write('catalog.json', JSON.stringify(buildCatalog(ps, t, { baseUrl: BASE_URL, generated: sourceCommitTime() }), null, 2));
 write('taxonomy.jsonld', JSON.stringify(buildSkos(t, { baseUrl: BASE_URL }), null, 2));
 write('taxonomy.json', JSON.stringify(buildTaxonomyJson(t), null, 2));
 write('llms.txt', buildLlmsTxt(ps, t, { baseUrl: BASE_URL, title: TITLE, description: DESCRIPTION }));

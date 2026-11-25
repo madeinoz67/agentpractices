@@ -4,8 +4,12 @@ import { readFileSync } from 'node:fs';
 import { parse } from 'yaml';
 
 const wf = parse(readFileSync('.github/workflows/deploy.yml', 'utf8'));
-test('PR runs cannot cancel a pending deploy: concurrency lives on the deploy job only', () => {
+// A superseded build must not deploy (#27): its checkout is older than the build that replaced it.
+test('a superseded build is cancelled before it can deploy', () => {
   expect(wf.concurrency).toBeUndefined();
+  expect(wf.jobs.build.concurrency).toEqual({ group: 'pages-build-${{ github.ref }}', 'cancel-in-progress': true });
+  // The build keeps its own group: cancelling a build must never cancel a deploy in progress.
+  expect(wf.jobs.build.concurrency.group).not.toBe('pages');
   expect(wf.jobs.deploy.concurrency.group).toBe('pages');
   expect(wf.jobs.deploy.concurrency['cancel-in-progress']).toBe(false);
 });
