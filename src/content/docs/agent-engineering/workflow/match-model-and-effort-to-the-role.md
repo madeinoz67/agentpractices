@@ -9,6 +9,8 @@ stage: [plan, build, operate]
 status: draft
 version: 1.1.0
 updated: 2026-11-24
+reviewed: 2026-11-24
+review_by: 2027-02-24
 related: [BP-0048, BP-0042, BP-0041, BP-0006, BP-0046]
 sources:
   - { title: Claude Platform docs — Choosing a model, url: https://platform.claude.com/docs/en/about-claude/models/choosing-a-model }

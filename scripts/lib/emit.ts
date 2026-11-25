@@ -3,6 +3,7 @@
 import { pathOf, type Concept, type Taxonomy } from './taxonomy';
 import type { Practice } from './practices';
 import { REPO_URL } from './site';
+import { contentHash } from './version-guard';
 
 /** Pre-filled "Report a problem with a practice" issue form URL. */
 export const reportUrl = (id: string, version: string) =>
@@ -12,12 +13,13 @@ export interface EmitOpts { baseUrl: string }
 export const pageUrl = (base: string, slug: string) => (slug ? `${base}${slug}/` : base);
 export const mdUrl = (base: string, slug: string) => `${base}${slug || 'index'}.md`;
 
-export interface CatalogEntry extends Omit<Practice, 'file' | 'body' | 'slug'> { slug: string; domain_path: string[]; url: string; md_url: string; report_url: string }
+export interface CatalogEntry extends Omit<Practice, 'file' | 'body' | 'slug'> { slug: string; content_hash: string; domain_path: string[]; url: string; md_url: string; report_url: string }
 export interface Catalog { version: number; taxonomy_version: string; generated: string; base_url: string; count: number; practices: CatalogEntry[] }
 
 export function buildCatalog(ps: Practice[], t: Taxonomy, o: EmitOpts & { generated: string }): Catalog {
   const practices = ps.map(({ file: _f, body: _b, ...p }) => ({
     ...p,
+    content_hash: contentHash({ ...p, file: _f, body: _b }),
     domain_path: pathOf(t, p.domain).map((c) => c.label),
     url: pageUrl(o.baseUrl, p.slug),
     md_url: mdUrl(o.baseUrl, p.slug),

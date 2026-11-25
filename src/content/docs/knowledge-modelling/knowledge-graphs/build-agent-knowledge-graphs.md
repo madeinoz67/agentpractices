@@ -9,6 +9,8 @@ stage: [plan, build, operate]
 status: draft
 version: 1.0.0
 updated: 2026-11-24
+reviewed: 2026-11-24
+review_by: 2027-05-24
 related: [BP-0014, BP-0024, BP-0025, BP-0026, BP-0012, BP-0028, BP-0029]
 sources:
   - { title: 'Edge et al. — From Local to Global: A GraphRAG Approach to Query-Focused Summarization', url: https://arxiv.org/abs/2404.16130 }

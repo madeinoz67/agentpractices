@@ -21,6 +21,8 @@ export const collections = {
         status: z.enum(['draft', 'adopted', 'deprecated']).optional(),
         version: z.string().regex(/^\d+\.\d+\.\d+$/).optional(),
         updated: z.coerce.date().optional(),
+        reviewed: z.coerce.date().optional(),
+        review_by: z.coerce.date().optional(),
         related: z.array(z.string()).optional(),
         superseded_by: z.string().nullable().optional(),
         sources: z.array(source).optional(),

@@ -13,7 +13,11 @@ const domainPath = isPractice ? pathOf(loadTaxonomy('taxonomy'), d.domain).map((
 const mdHref = `${base}/${route.id || 'index'}.md`;
 const cite = `${d.id}@${d.version}`;
 const reportHref = isPractice ? reportUrl(d.id, d.version) : '';
-const updated = d.updated instanceof Date ? d.updated.toISOString().slice(0, 10) : d.updated;
+const day = (v: unknown) => (v instanceof Date ? v.toISOString().slice(0, 10) : (v as string | undefined));
+const updated = day(d.updated);
+const reviewed = day(d.reviewed);
+const reviewBy = day(d.review_by);
+const reviewDue = Boolean(reviewBy && reviewBy < new Date().toISOString().slice(0, 10));
 ---
 {isPractice && <div class="bp-crumb">{domainPath.join(' / ')}</div>}
 <Default />
@@ -27,6 +31,8 @@ const updated = d.updated instanceof Date ? d.updated.toISOString().slice(0, 10)
       {d.roles?.map((r: string) => <li class="bp-chip bp-facet">role: {r}</li>)}
       {d.stage?.map((s: string) => <li class="bp-chip bp-facet">stage: {s}</li>)}
       {updated && <li class="bp-chip bp-plain">updated {updated}</li>}
+      {reviewed && <li class="bp-chip bp-plain">reviewed {reviewed}</li>}
+      {reviewBy && <li class={`bp-chip bp-plain${reviewDue ? ' bp-review-due' : ''}`}>{reviewDue ? 'review overdue since' : 'next review'} {reviewBy}</li>}
     </ul>
     {d.status === 'deprecated' && d.superseded_by && <p class="bp-deprecated">Deprecated — follow <strong>{d.superseded_by}</strong> instead.</p>}
     <aside class="bp-agents" aria-label="For agents">

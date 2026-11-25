@@ -9,6 +9,8 @@ stage: [plan, build]
 status: draft
 version: 1.0.0
 updated: 2026-11-24
+reviewed: 2026-11-24
+review_by: 2027-05-24
 related: [BP-0022, BP-0023, BP-0001, BP-0018, BP-0032, BP-0033, BP-0005, BP-0041]
 sources:
   - { title: Anthropic Engineering — Code execution with MCP, url: https://www.anthropic.com/engineering/code-execution-with-mcp }

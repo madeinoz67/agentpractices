@@ -4,6 +4,7 @@ import jsonld from 'jsonld';
 import { loadTaxonomy, makeTaxonomy } from '../scripts/lib/taxonomy';
 import { loadPractices } from '../scripts/lib/practices';
 import { buildCatalog, buildSkos, buildTaxonomyJson, buildLlmsTxt } from '../scripts/lib/emit';
+import { contentHash } from '../scripts/lib/version-guard';
 
 const BASE = 'https://agentpractices.dev/';
 const t = loadTaxonomy('taxonomy');
@@ -16,6 +17,8 @@ describe('buildCatalog', () => {
     expect(cat.practices[0].url).toBe(`${BASE}software-engineering/cli/sample/`);
     expect(cat.practices[0].md_url).toBe(`${BASE}software-engineering/cli/sample.md`);
   });
+  test('each entry carries the content hash used by the version guard', () =>
+    expect(cat.practices[0].content_hash).toBe(contentHash(ps[0])));
   test('domain_path labels root-first', () => expect(cat.practices[0].domain_path).toEqual(['Software Engineering', 'CLI Design']));
   test('header fields', () => {
     expect(cat.taxonomy_version).toBe(t.version);

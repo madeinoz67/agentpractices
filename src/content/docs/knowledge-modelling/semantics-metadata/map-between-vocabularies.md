@@ -9,6 +9,8 @@ stage: [plan, build, verify]
 status: draft
 version: 1.0.0
 updated: 2026-11-24
+reviewed: 2026-11-24
+review_by: 2027-05-24
 related: [BP-0024, BP-0025, BP-0004, BP-0014]
 sources:
   - { title: W3C SKOS Reference — Mapping properties, url: https://www.w3.org/TR/skos-reference/#mapping }

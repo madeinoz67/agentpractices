@@ -1,0 +1,14 @@
+{
+  "name": "agentpractices-marketplace",
+  "description": "Single-plugin marketplace for the agentpractices skill",
+  "owner": {
+    "name": "Stephen Eaton"
+  },
+  "plugins": [
+    {
+      "name": "agentpractices",
+      "source": "./",
+      "description": "Apply the published best practices at agentpractices.dev: fetch the catalogue, select by domain, role and stage, read the Rules, cite BP-NNNN@x.y.z"
+    }
+  ]
+}

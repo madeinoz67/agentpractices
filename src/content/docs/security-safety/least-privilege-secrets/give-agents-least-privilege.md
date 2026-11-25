@@ -7,11 +7,13 @@ type: guideline
 roles: [orchestrator, implementer, any]
 stage: [plan, build, operate]
 status: draft
-version: 1.0.0
-updated: 2026-11-24
+version: 1.0.1
+updated: 2026-11-25
+reviewed: 2026-11-25
+review_by: 2027-05-25
 related: [BP-0033, BP-0013, BP-0021, BP-0023, BP-0005]
 sources:
-  - { title: OWASP LLM06:2025 Excessive Agency, url: https://genai.owasp.org/llmrisk/llm062025-excessive-agency/ }
+  - { title: OWASP LLM03:2026 Excessive Agency, url: https://genai.owasp.org/resource/owasp-genai-llm-top-10-2026/ }
   - { title: MCP Specification — Security best practices (scope minimization), url: https://modelcontextprotocol.io/specification/latest/basic/security_best_practices }
 ---
 
@@ -67,5 +69,5 @@ Every agent with tools, credentials or the ability to act. The usual root causes
 
 ## References
 
-- [OWASP LLM06:2025 Excessive Agency](https://genai.owasp.org/llmrisk/llm062025-excessive-agency/)
+- [OWASP LLM03:2026 Excessive Agency](https://genai.owasp.org/resource/owasp-genai-llm-top-10-2026/)
 - [MCP Security best practices](https://modelcontextprotocol.io/specification/latest/basic/security_best_practices)

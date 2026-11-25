@@ -9,6 +9,8 @@ stage: [plan, build]
 status: draft
 version: 1.0.0
 updated: 2026-11-24
+reviewed: 2026-11-24
+review_by: 2027-05-24
 related: [BP-0034, BP-0036, BP-0008, BP-0013]
 sources:
   - { title: git-worktree documentation, url: https://git-scm.com/docs/git-worktree }

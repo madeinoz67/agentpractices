@@ -9,6 +9,8 @@ stage: [build, verify]
 status: draft
 version: 1.0.0
 updated: 2026-11-24
+reviewed: 2026-11-24
+review_by: 2027-05-24
 related: [BP-0036, BP-0034, BP-0052, BP-0018, BP-0037]
 sources:
   - { title: pstack (Cursor plugins) — no-comments skill and comment-sicko agent, url: https://github.com/cursor/plugins/tree/main/pstack }

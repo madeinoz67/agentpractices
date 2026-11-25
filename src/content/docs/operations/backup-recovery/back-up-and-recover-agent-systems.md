@@ -9,6 +9,8 @@ stage: [plan, operate]
 status: draft
 version: 1.0.0
 updated: 2026-11-24
+reviewed: 2026-11-24
+review_by: 2027-05-24
 related: [BP-0032, BP-0021, BP-0040, BP-0053, BP-0012, BP-0013, BP-0031, BP-0046, BP-0059]
 sources:
   - { title: 'CISA — #StopRansomware Guide', url: https://www.cisa.gov/stopransomware/ransomware-guide }

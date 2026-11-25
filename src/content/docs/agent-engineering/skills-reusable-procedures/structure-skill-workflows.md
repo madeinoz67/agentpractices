@@ -9,6 +9,8 @@ stage: [plan, build, verify]
 status: draft
 version: 1.0.0
 updated: 2026-11-24
+reviewed: 2026-11-24
+review_by: 2027-05-24
 related: [BP-0018, BP-0019, BP-0002, BP-0008]
 sources:
   - { title: Claude Platform docs — Skill authoring best practices (workflows and feedback loops), url: https://platform.claude.com/docs/en/agents-and-tools/agent-skills/best-practices }

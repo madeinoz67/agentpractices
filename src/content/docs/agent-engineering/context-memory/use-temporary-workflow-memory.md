@@ -9,6 +9,8 @@ stage: [plan, build, operate]
 status: draft
 version: 1.1.0
 updated: 2026-11-24
+reviewed: 2026-11-24
+review_by: 2027-05-24
 related: [BP-0003, BP-0005, BP-0011, BP-0012]
 sources:
   - { title: MCP Specification — Authorization, url: https://modelcontextprotocol.io/specification/latest/basic/authorization }

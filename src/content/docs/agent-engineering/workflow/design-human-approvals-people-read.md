@@ -9,6 +9,8 @@ stage: [plan, build, operate]
 status: draft
 version: 1.0.0
 updated: 2026-11-24
+reviewed: 2026-11-24
+review_by: 2027-05-24
 related: [BP-0068, BP-0048, BP-0061, BP-0005, BP-0021, BP-0040, BP-0064, BP-0057]
 sources:
   - { title: Claude blog — Auto mode is now the default in Claude Code (approval data), url: https://claude.com/blog/auto-mode-default-in-claude-code }

@@ -9,6 +9,8 @@ stage: [plan, build, operate]
 status: draft
 version: 1.0.0
 updated: 2026-11-24
+reviewed: 2026-11-24
+review_by: 2027-05-24
 related: [BP-0049, BP-0047, BP-0041, BP-0040, BP-0050, BP-0006, BP-0062, BP-0059]
 sources:
   - { title: OMG — Decision Model and Notation (DMN), url: https://www.omg.org/dmn/ }

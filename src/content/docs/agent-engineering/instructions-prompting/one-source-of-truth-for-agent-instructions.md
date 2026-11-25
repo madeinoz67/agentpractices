@@ -9,6 +9,8 @@ stage: [plan, build, operate]
 status: draft
 version: 1.0.0
 updated: 2026-11-24
+reviewed: 2026-11-24
+review_by: 2027-05-24
 related: [BP-0015, BP-0016]
 sources:
   - { title: AGENTS.md, url: https://agents.md/ }

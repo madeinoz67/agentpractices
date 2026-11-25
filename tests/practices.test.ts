@@ -7,10 +7,12 @@ const t = loadTaxonomy('taxonomy');
 const base: Practice = {
   id: 'BP-0100', title: 'T', description: 'D', domain: 'D.SWE.CLI', type: 'guideline',
   roles: ['implementer'], stage: ['build'], status: 'draft', version: '1.0.0', updated: '2026-11-24',
+  reviewed: '2026-11-24', review_by: '2027-05-24',
   related: [], superseded_by: null, sources: [], file: 'x.md', slug: 'x', body: '## Rules\n1. **MUST** x',
 };
 const p = (o: Partial<Practice>): Practice => ({ ...base, ...o });
-const codes = (ps: Practice[], tax = t, checkPath = false) => validatePractices(ps, tax, { checkPath }).map((i) => i.code);
+const TODAY = '2026-11-25';
+const codes = (ps: Practice[], tax = t, checkPath = false) => validatePractices(ps, tax, { checkPath, today: TODAY }).map((i) => i.code);
 
 describe('loadPractices', () => {
   test('loads only files with an id and derives slug', () => {
@@ -18,6 +20,8 @@ describe('loadPractices', () => {
     expect(ps.map((x) => x.id)).toEqual(['BP-9001']);
     expect(ps[0].slug).toBe('software-engineering/cli/sample');
     expect(ps[0].updated).toBe('2026-11-24');
+    expect(ps[0].reviewed).toBe('2026-11-24');
+    expect(ps[0].review_by).toBe('2027-05-24');
   });
 });
 
@@ -82,4 +86,19 @@ describe('seeAlso', () => {
     expect(seeAlso(p({ id: 'BP-0103', related: ['BP-0999'] }), [a]).map((x) => x.id)).toEqual([]));
   test('never lists itself', () =>
     expect(seeAlso(p({ id: 'BP-0104', related: ['BP-0104'] }), [p({ id: 'BP-0104' })])).toEqual([]));
+});
+
+describe('review dates', () => {
+  test('missing reviewed', () => expect(codes([p({ reviewed: '' })])).toContain('E_REQ'));
+  test('missing review_by', () => expect(codes([p({ review_by: '' })])).toContain('E_REQ'));
+  test('review_by must be after reviewed', () => expect(codes([p({ review_by: '2026-11-24' })])).toContain('E_REVIEW'));
+  test('reviewed cannot be in the future', () =>
+    expect(codes([p({ updated: '2026-11-24', reviewed: '2026-12-01', review_by: '2027-03-01' })])).toContain('E_REVIEW'));
+  test('review interval at most 12 months', () => expect(codes([p({ review_by: '2027-12-01' })])).toContain('E_REVIEW'));
+  test('changing a page counts as reviewing it', () =>
+    expect(codes([p({ updated: '2026-11-25', reviewed: '2026-11-24' })])).toContain('E_REVIEW'));
+  test('overdue review is a warning, not an error', () => {
+    const issues = validatePractices([p({ reviewed: '2026-01-10', updated: '2026-01-10', review_by: '2026-07-10' })], t, { today: TODAY });
+    expect(issues.map((i) => [i.level, i.code])).toEqual([['warn', 'W_REVIEW_DUE']]);
+  });
 });

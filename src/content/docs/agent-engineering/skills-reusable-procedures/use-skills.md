@@ -9,6 +9,8 @@ stage: [plan, build, operate]
 status: draft
 version: 1.0.0
 updated: 2026-11-24
+reviewed: 2026-11-24
+review_by: 2027-05-24
 related: [BP-0018, BP-0016, BP-0005, BP-0011]
 sources:
   - { title: Claude Code docs — Skills, url: https://code.claude.com/docs/en/skills }

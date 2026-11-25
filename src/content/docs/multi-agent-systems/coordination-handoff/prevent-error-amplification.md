@@ -9,6 +9,8 @@ stage: [build, verify, operate]
 status: draft
 version: 1.0.0
 updated: 2026-11-24
+reviewed: 2026-11-24
+review_by: 2027-05-24
 related: [BP-0052, BP-0003, BP-0048, BP-0043, BP-0012, BP-0031, BP-0029, BP-0051]
 sources:
   - { title: 'Singh & Pawar — The Hallucination Snowball: error propagation in multi-agent LLM pipelines (ICML 2026)', url: https://icml.cc/virtual/2026/77915 }

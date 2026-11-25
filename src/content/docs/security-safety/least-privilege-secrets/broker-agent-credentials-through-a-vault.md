@@ -9,6 +9,8 @@ stage: [plan, build, operate]
 status: draft
 version: 1.0.0
 updated: 2026-11-24
+reviewed: 2026-11-24
+review_by: 2027-05-24
 related: [BP-0032, BP-0033, BP-0062, BP-0055, BP-0046, BP-0040, BP-0060, BP-0044]
 sources:
   - { title: OpenBao documentation, url: https://openbao.org/docs/ }
