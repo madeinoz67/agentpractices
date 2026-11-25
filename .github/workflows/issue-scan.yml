@@ -9,7 +9,7 @@ on:
   # Safe here: no PR code is checked out (default branch only) and event text reaches the scanner only via env;
   # tests/chunks.test.ts enforces both. Comments must be scanned because agents read them.
   issue_comment: { types: [created, edited] } # zizmor: ignore[dangerous-triggers]
-  pull_request: { types: [opened, edited, reopened] }
+  pull_request: { types: [opened, edited, reopened, synchronize] }   # synchronize: the check exists on every head commit (required-check safe)
 permissions: {}
 concurrency:
   group: issue-scan-${{ github.event.issue.number || github.event.pull_request.number }}
