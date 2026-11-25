@@ -9,6 +9,8 @@ stage: [build, operate]
 status: draft
 version: 1.0.0
 updated: 2026-11-25
+reviewed: 2026-11-25
+review_by: 2027-05-25
 related: [BP-0014]
 sources:
   - { title: Semantic Versioning 2.0.0, url: https://semver.org/ }

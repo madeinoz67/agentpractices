@@ -9,6 +9,8 @@ stage: [build, verify]
 status: draft
 version: 1.0.0
 updated: 2026-11-24
+reviewed: 2026-11-24
+review_by: 2027-05-24
 related: [BP-0007]
 sources:
   - { title: ASD-STE100 Simplified Technical English (Issue 9, 2025), url: https://www.asd-ste100.org/ }

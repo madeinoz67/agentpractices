@@ -2,6 +2,8 @@
 
 ## Unreleased
 
+- Added `reviewed` and `review_by` dates to every practice (required). `bun run check` errors on an invalid date order or a gap of more than 12 months, and warns when a review is overdue; the dates appear on each page and in catalog.json. Backfilled: 3 months for fast-moving pages (BP-0046, BP-0047, BP-0049, BP-0065, BP-0073, BP-0074, BP-0077), 6 months for the rest.
+- BP-0077 1.1.0: the risk register records `last_reviewed` as well as `next_review`, and the CI check validates both.
 - Updated OWASP Top 10 for LLM Applications references from the 2025 edition to the 2026 edition (IDs renumbered) in BP-0005, BP-0027, BP-0029, BP-0032, BP-0033, BP-0036, BP-0040, BP-0044 and BP-0045.
 - BP-0077 Map agent risks to the AI security frameworks (ATLAS, NIST AI RMF, OWASP LLM and Agentic Top 10s, CoSAI); new concept D.SEC.FRM.
 - Added BP-0076 Make agent dashboards single, self-contained HTML files (D.SWE.UI, draft).

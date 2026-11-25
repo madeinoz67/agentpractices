@@ -9,6 +9,8 @@ stage: [build, operate]
 status: draft
 version: 1.0.1
 updated: 2026-11-25
+reviewed: 2026-11-25
+review_by: 2027-05-25
 related: [BP-0039, BP-0032, BP-0021, BP-0023, BP-0013]
 sources:
   - { title: OWASP LLM03:2026 Excessive Agency, url: https://genai.owasp.org/resource/owasp-genai-llm-top-10-2026/ }

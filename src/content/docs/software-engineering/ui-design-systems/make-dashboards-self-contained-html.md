@@ -9,6 +9,8 @@ stage: [build, verify, operate]
 status: draft
 version: 1.0.0
 updated: 2026-11-25
+reviewed: 2026-11-25
+review_by: 2027-05-25
 related: [BP-0056, BP-0059, BP-0067, BP-0051, BP-0065, BP-0033, BP-0052]
 sources:
   - title: "Microsoft Learn — File types supported by the Microsoft Information Protection SDK"

@@ -9,6 +9,8 @@ stage: [plan, build, operate]
 status: draft
 version: 1.0.0
 updated: 2026-11-24
+reviewed: 2026-11-24
+review_by: 2027-05-24
 related: [BP-0043, BP-0003, BP-0005, BP-0013, BP-0040, BP-0048, BP-0051, BP-0033]
 sources:
   - { title: Claude Code docs — Channels (push events into a running session), url: https://code.claude.com/docs/en/channels }

@@ -9,6 +9,8 @@ stage: [build, verify]
 status: draft
 version: 1.0.0
 updated: 2026-11-24
+reviewed: 2026-11-24
+review_by: 2027-05-24
 related: [BP-0002, BP-0006, BP-0038, BP-0036, BP-0021, BP-0052, BP-0053, BP-0048]
 sources:
   - { title: Claude Code docs — Best practices (Give Claude a check to run), url: https://code.claude.com/docs/en/best-practices }

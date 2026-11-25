@@ -9,6 +9,8 @@ stage: [build, operate]
 status: draft
 version: 1.0.1
 updated: 2026-11-25
+reviewed: 2026-11-25
+review_by: 2027-05-25
 related: [BP-0032, BP-0012, BP-0013, BP-0016, BP-0022]
 sources:
   - { title: OWASP LLM02:2026 Sensitive Information Disclosure, url: https://genai.owasp.org/resource/owasp-genai-llm-top-10-2026/ }

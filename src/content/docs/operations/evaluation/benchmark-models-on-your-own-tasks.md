@@ -9,6 +9,8 @@ stage: [plan, verify, operate]
 status: draft
 version: 1.0.0
 updated: 2026-11-24
+reviewed: 2026-11-24
+review_by: 2027-02-24
 related: [BP-0049, BP-0006, BP-0050, BP-0041, BP-0046, BP-0064, BP-0059]
 sources:
   - { title: 'Alzahrani et al. — When Benchmarks are Targets: Revealing the Sensitivity of LLM Leaderboards', url: https://arxiv.org/abs/2402.01781 }

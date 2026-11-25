@@ -9,6 +9,8 @@ stage: [build, operate]
 status: draft
 version: 1.0.1
 updated: 2026-11-25
+reviewed: 2026-11-25
+review_by: 2027-05-25
 related: [BP-0028, BP-0029, BP-0025, BP-0024]
 sources:
   - { title: Anthropic — Introducing Contextual Retrieval, url: https://www.anthropic.com/news/contextual-retrieval }

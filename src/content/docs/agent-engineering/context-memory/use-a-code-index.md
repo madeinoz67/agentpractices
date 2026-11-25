@@ -9,6 +9,8 @@ stage: [plan, build, verify]
 status: draft
 version: 1.0.1
 updated: 2026-11-24
+reviewed: 2026-11-24
+review_by: 2027-05-24
 related: [BP-0002, BP-0008, BP-0011]
 sources:
   - { title: Codanna — local code intelligence MCP server, url: https://github.com/bartolli/codanna }

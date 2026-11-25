@@ -9,6 +9,8 @@ stage: [build, verify]
 status: draft
 version: 1.0.0
 updated: 2026-11-24
+reviewed: 2026-11-24
+review_by: 2027-05-24
 related: [BP-0038, BP-0002, BP-0008, BP-0034]
 sources:
   - { title: Anthropic — Claude Code best practices, url: https://www.anthropic.com/engineering/claude-code-best-practices }

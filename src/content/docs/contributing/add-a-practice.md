@@ -16,7 +16,8 @@ sidebar:
 7. **SHOULD** start new practices as `status: draft`; the owner promotes them to `adopted`.
 8. **SHOULD** bump `version` on any change to Rules — minor for added or relaxed rules, major for changed or removed rules, patch for wording.
 9. **MUST NOT** delete a practice; set `status: deprecated` and `superseded_by`.
-10. **MAY** send typo, link and wording fixes that do not change a rule's meaning straight to a pull request, without an issue.
+10. **MUST** set `reviewed` (the date the page was last checked against its sources and current practice) and `review_by` (when it must be checked again, at most 12 months later; 3 months for fast-moving topics such as model choice, pricing and protocol specs). Any change to a page counts as a review, so `reviewed` must be on or after `updated`. `bun run check` warns when a review is overdue.
+11. **MAY** send typo, link and wording fixes that do not change a rule's meaning straight to a pull request, without an issue.
 
 ## Which route
 

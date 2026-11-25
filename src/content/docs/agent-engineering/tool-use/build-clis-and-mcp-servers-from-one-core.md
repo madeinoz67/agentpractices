@@ -9,6 +9,8 @@ stage: [plan, build, verify]
 status: draft
 version: 1.0.0
 updated: 2026-11-25
+reviewed: 2026-11-25
+review_by: 2027-02-25
 related: [BP-0001, BP-0055, BP-0022, BP-0023, BP-0062, BP-0071, BP-0044, BP-0063, BP-0005]
 sources:
   - { title: MCP specification 2026-07-28 — changelog, url: https://modelcontextprotocol.io/specification/2026-07-28/changelog }

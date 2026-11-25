@@ -9,6 +9,8 @@ stage: [plan, build, verify]
 status: draft
 version: 1.0.0
 updated: 2026-11-24
+reviewed: 2026-11-24
+review_by: 2027-05-24
 related: [BP-0015, BP-0018, BP-0002, BP-0036, BP-0054, BP-0024]
 sources:
   - { title: Design Tokens Community Group — Format Module 2025.10 (stable), url: https://www.designtokens.org/TR/2025.10/format/ }

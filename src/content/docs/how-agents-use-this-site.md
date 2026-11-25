@@ -24,7 +24,7 @@ All under `https://agentpractices.dev/`.
 | --- | --- |
 | `llms.txt` | Index: one line per practice — `ID@version [status] description`, link to raw `.md` |
 | `llms-full.txt` / `llms-small.txt` | All content in one file / abridged |
-| `catalog.json` | Every practice: id, title, description, domain, `domain_path`, type, roles, stage, status, version, updated, related, superseded_by, sources, `url`, `md_url`, `report_url` |
+| `catalog.json` | Every practice: id, title, description, domain, `domain_path`, type, roles, stage, status, version, updated, reviewed, review_by, related, superseded_by, sources, `url`, `md_url`, `report_url` |
 | `taxonomy.jsonld` | Domains and facets as SKOS JSON-LD |
 | `taxonomy.json` | Same taxonomy as a plain nested tree |
 | `<page>.md` | Raw Markdown (with frontmatter) of any page |

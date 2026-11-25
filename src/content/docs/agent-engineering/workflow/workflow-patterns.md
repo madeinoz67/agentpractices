@@ -9,6 +9,8 @@ stage: [plan, build]
 status: draft
 version: 1.0.0
 updated: 2026-11-24
+reviewed: 2026-11-24
+review_by: 2027-05-24
 related: [BP-0042, BP-0048, BP-0064, BP-0002, BP-0008, BP-0059, BP-0041, BP-0061, BP-0066]
 sources:
   - { title: Anthropic — Building effective agents, url: https://www.anthropic.com/research/building-effective-agents }

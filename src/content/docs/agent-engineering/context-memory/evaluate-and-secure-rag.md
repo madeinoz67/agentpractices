@@ -9,6 +9,8 @@ stage: [verify, operate]
 status: draft
 version: 1.0.1
 updated: 2026-11-25
+reviewed: 2026-11-25
+review_by: 2027-05-25
 related: [BP-0027, BP-0028, BP-0006, BP-0005]
 sources:
   - { title: OWASP LLM09:2026 Vector and Embedding Weaknesses, url: https://genai.owasp.org/resource/owasp-genai-llm-top-10-2026/ }

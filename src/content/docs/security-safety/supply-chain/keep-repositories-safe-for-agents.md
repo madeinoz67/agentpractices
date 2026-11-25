@@ -9,6 +9,8 @@ stage: [build, verify, operate]
 status: draft
 version: 1.0.0
 updated: 2026-11-25
+reviewed: 2026-11-25
+review_by: 2027-05-25
 related: [BP-0044, BP-0005, BP-0032, BP-0033, BP-0036, BP-0034, BP-0062, BP-0053, BP-0063]
 sources:
   - { title: 'Aikido Security — PromptPwnd: prompt injection in GitHub Actions using AI agents', url: https://aikido.dev/blog/promptpwnd-github-actions-ai-agents }

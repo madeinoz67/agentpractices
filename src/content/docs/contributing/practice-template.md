@@ -19,6 +19,8 @@ stage: [build]         # plan | build | verify | operate
 status: draft          # draft | adopted | deprecated
 version: 1.0.0
 updated: YYYY-MM-DD
+reviewed: YYYY-MM-DD   # last checked against sources and current practice; on or after updated
+review_by: YYYY-MM-DD  # next review due; at most 12 months after reviewed (3 months for fast-moving topics)
 related: []
 superseded_by: null
 sources:

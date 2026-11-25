@@ -9,6 +9,8 @@ stage: [plan, build, operate]
 status: draft
 version: 1.0.0
 updated: 2026-11-24
+reviewed: 2026-11-24
+review_by: 2027-05-24
 related: [BP-0039, BP-0011, BP-0028, BP-0008, BP-0006]
 sources:
   - { title: Claude Platform docs — Prompt caching, url: https://platform.claude.com/docs/en/build-with-claude/prompt-caching }

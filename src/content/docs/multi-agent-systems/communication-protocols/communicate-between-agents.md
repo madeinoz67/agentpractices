@@ -9,6 +9,8 @@ stage: [plan, build]
 status: draft
 version: 1.0.0
 updated: 2026-11-24
+reviewed: 2026-11-24
+review_by: 2027-05-24
 related: [BP-0042, BP-0003, BP-0023, BP-0039, BP-0005, BP-0032]
 sources:
   - { title: A2A Protocol specification, url: https://a2a-protocol.org/latest/specification/ }

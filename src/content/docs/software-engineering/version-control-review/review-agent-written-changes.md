@@ -9,6 +9,8 @@ stage: [verify]
 status: draft
 version: 1.0.1
 updated: 2026-11-25
+reviewed: 2026-11-25
+review_by: 2027-05-25
 related: [BP-0034, BP-0038, BP-0006, BP-0005]
 sources:
   - { title: OWASP Top 10 for LLM Applications 2026, url: https://genai.owasp.org/resource/owasp-genai-llm-top-10-2026/ }

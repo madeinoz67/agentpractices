@@ -9,6 +9,8 @@ stage: [plan, build, operate]
 status: draft
 version: 1.0.1
 updated: 2026-11-25
+reviewed: 2026-11-25
+review_by: 2027-05-25
 related: [BP-0019, BP-0021, BP-0023, BP-0036, BP-0046]
 sources:
   - { title: OWASP LLM04:2026 Supply Chain, url: https://genai.owasp.org/resource/owasp-genai-llm-top-10-2026/ }

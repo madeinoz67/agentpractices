@@ -9,6 +9,8 @@ stage: [plan, build, operate]
 status: draft
 version: 1.0.1
 updated: 2026-11-25
+reviewed: 2026-11-25
+review_by: 2027-05-25
 related: [BP-0040, BP-0039, BP-0032, BP-0033, BP-0005]
 sources:
   - { title: 'IAPS — Detecting Offensive Cyber Agents: A Detection-in-Depth Approach (arXiv 2605.21956)', url: https://arxiv.org/abs/2605.21956 }

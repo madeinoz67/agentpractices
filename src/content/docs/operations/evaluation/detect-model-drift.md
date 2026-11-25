@@ -9,6 +9,8 @@ stage: [verify, operate]
 status: draft
 version: 1.0.0
 updated: 2026-11-24
+reviewed: 2026-11-24
+review_by: 2027-05-24
 related: [BP-0006, BP-0051, BP-0039, BP-0046, BP-0049, BP-0044]
 sources:
   - { title: Claude Platform docs — Model IDs and versions, url: https://platform.claude.com/docs/en/about-claude/models/model-ids-and-versions }

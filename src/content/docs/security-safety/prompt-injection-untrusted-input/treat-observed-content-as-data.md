@@ -9,6 +9,8 @@ stage: [build, operate]
 status: draft
 version: 1.0.1
 updated: 2026-11-25
+reviewed: 2026-11-25
+review_by: 2027-05-25
 related: [BP-0003]
 sources:
   - { title: OWASP LLM01:2026 Prompt Injection, url: https://genai.owasp.org/resource/owasp-genai-llm-top-10-2026/ }

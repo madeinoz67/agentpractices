@@ -17,6 +17,10 @@ export interface Practice {
   status: string;
   version: string;
   updated: string;
+  /** Date the page was last checked against its sources and current practice. */
+  reviewed: string;
+  /** Date by which the page must be reviewed again. */
+  review_by: string;
   related: string[];
   superseded_by: string | null;
   sources: Source[];
@@ -26,7 +30,10 @@ export interface Practice {
 }
 
 export const PRACTICE_ID = /^BP-\d{4}$/;
-const REQUIRED = ['title', 'description', 'domain', 'type', 'roles', 'stage', 'status', 'version', 'updated'] as const;
+const REQUIRED = ['title', 'description', 'domain', 'type', 'roles', 'stage', 'status', 'version', 'updated', 'reviewed', 'review_by'] as const;
+const MAX_REVIEW_DAYS = 366;
+const ISO_DAY = /^\d{4}-\d{2}-\d{2}$/;
+const days = (a: string, b: string) => (Date.parse(b) - Date.parse(a)) / 86_400_000;
 
 function walk(dir: string): string[] {
   return readdirSync(dir).flatMap((n) => {
@@ -46,6 +53,7 @@ export function loadPractices(dir: string): Practice[] {
       id: String(data.id), title: data.title ?? '', description: data.description ?? '',
       domain: data.domain ?? '', type: data.type ?? '', roles: data.roles ?? [], stage: data.stage ?? [],
       status: data.status ?? '', version: data.version ? String(data.version) : '', updated: isoDate(data.updated),
+      reviewed: isoDate(data.reviewed), review_by: isoDate(data.review_by),
       related: data.related ?? [], superseded_by: data.superseded_by ?? null, sources: data.sources ?? [],
       file, slug: relative(dir, file).replace(/\\/g, '/').replace(/\.mdx?$/, '').replace(/\/index$/, ''), body: content,
     });
@@ -63,7 +71,8 @@ export function findUnidentified(dir: string, t: Taxonomy): Issue[] {
   });
 }
 
-export function validatePractices(ps: Practice[], t: Taxonomy, opts: { checkPath?: boolean } = {}): Issue[] {
+export function validatePractices(ps: Practice[], t: Taxonomy, opts: { checkPath?: boolean; today?: string } = {}): Issue[] {
+  const today = opts.today ?? new Date().toISOString().slice(0, 10);
   const issues: Issue[] = [];
   const err = (code: string, p: Practice, msg: string) => issues.push({ level: 'error', code, msg: `${p.id} (${p.file}): ${msg}` });
   const ids = new Map<string, number>();
@@ -94,6 +103,17 @@ export function validatePractices(ps: Practice[], t: Taxonomy, opts: { checkPath
       err('E_SLUG', p, 'file name must be lower-case kebab-case (a-z, 0-9, -) so catalog URLs match site URLs');
     if (!/^##\s+Rules\b/m.test(p.body)) err('E_RULES', p, 'body must contain a "## Rules" section');
     if (!/\*\*MUST\b/.test(p.body)) err('E_NORMATIVE', p, 'body must state at least one **MUST** rule');
+    if (p.reviewed && p.review_by) {
+      const rev = (msg: string) => err('E_REVIEW', p, msg);
+      if (!ISO_DAY.test(p.reviewed) || !ISO_DAY.test(p.review_by)) rev('reviewed and review_by must be YYYY-MM-DD');
+      else {
+        if (p.review_by <= p.reviewed) rev(`review_by ${p.review_by} must be after reviewed ${p.reviewed}`);
+        if (p.reviewed > today) rev(`reviewed ${p.reviewed} is in the future`);
+        if (days(p.reviewed, p.review_by) > MAX_REVIEW_DAYS) rev(`review_by is more than 12 months after reviewed`);
+        if (p.updated && p.reviewed < p.updated) rev(`updated ${p.updated} after reviewed ${p.reviewed}; changing a page counts as reviewing it`);
+        if (p.review_by < today) issues.push({ level: 'warn', code: 'W_REVIEW_DUE', msg: `${p.id} (${p.file}): review was due ${p.review_by}` });
+      }
+    }
     for (const s of p.sources)
       if (!/^https?:\/\//i.test(String(s?.url ?? '')))
         err('E_SOURCE', p, `source "${s?.title ?? ''}" needs an http:// or https:// url`);

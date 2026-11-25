@@ -9,6 +9,8 @@ stage: [plan, build]
 status: draft
 version: 1.0.0
 updated: 2026-11-25
+reviewed: 2026-11-25
+review_by: 2027-02-25
 related: [BP-0018, BP-0019, BP-0030, BP-0055, BP-0073, BP-0021, BP-0015, BP-0017, BP-0062]
 sources:
   - { title: Anthropic Engineering — Equipping agents for the real world with Agent Skills, url: https://www.anthropic.com/engineering/equipping-agents-for-the-real-world-with-agent-skills }

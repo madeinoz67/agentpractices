@@ -1,14 +1,16 @@
 ---
 title: Map agent risks to the AI security frameworks (ATLAS, NIST AI RMF, OWASP, CoSAI)
-description: Use the main AI security frameworks for what each is good at — NIST AI RMF as the governance spine, the OWASP LLM and Agentic Top 10s to find risks, MITRE ATLAS to name attacker techniques, and the CoSAI Risk Map and crosswalks to reach controls — then keep one versioned risk register per agent system that ties every risk to edition-qualified framework IDs, an implemented control, evidence, an owner and a review date.
+description: Use the main AI security frameworks for what each is good at — NIST AI RMF as the governance spine, the OWASP LLM and Agentic Top 10s to find risks, MITRE ATLAS to name attacker techniques, and the CoSAI Risk Map and crosswalks to reach controls — then keep one versioned risk register per agent system that ties every risk to edition-qualified framework IDs, an implemented control, evidence, an owner and review dates.
 id: BP-0077
 domain: D.SEC.FRM
 type: guideline
 roles: [orchestrator, planner, reviewer]
 stage: [plan, build, verify, operate]
 status: draft
-version: 1.0.0
+version: 1.1.0
 updated: 2026-11-25
+reviewed: 2026-11-25
+review_by: 2027-02-25
 related: [BP-0005, BP-0032, BP-0044, BP-0053, BP-0061, BP-0069, BP-0070, BP-0075, BP-0040, BP-0051]
 sources:
   - { title: NIST — AI Risk Management Framework (AI RMF 1.0, Generative AI Profile NIST AI 600-1), url: https://www.nist.gov/itl/ai-risk-management-framework }
@@ -43,7 +45,7 @@ No single framework covers agent security. They answer different questions, and 
 ### Threat-model each agent system
 
 3. **MUST** threat-model each agent system before release and on significant change: walk ASI01–ASI10 and LLM01–LLM10 against its components, describe the attack paths that apply, and name the ATLAS techniques for each path.
-4. **MUST** record the result in a versioned risk register kept with the system's code. Each risk carries its framework references, the control that addresses it, evidence the control works (a test, a configuration check, a log query), an owner and a next-review date. A risk without a control is an accepted risk with a named owner and an expiry.
+4. **MUST** record the result in a versioned risk register kept with the system's code. Each risk carries its framework references, the control that addresses it, evidence the control works (a test, a configuration check, a log query), an owner, the date it was last reviewed and the date the next review is due. A risk without a control is an accepted risk with a named owner and an expiry.
 5. **MUST** write framework IDs with their edition or release. IDs are renumbered between editions: LLM06 is Excessive Agency in the 2025 list and Unbounded Consumption in the 2026 list. Record the ATLAS release you mapped against.
 6. **MUST** map risks to controls you have implemented, not to framework clauses. "Addresses ASI03" is a claim; "token is scoped to one repository and expires in 15 minutes, checked by test X" is a control.
 
@@ -95,6 +97,7 @@ risks:
     practices: [BP-0005, BP-0069]
     evidence: tests/injection-fixtures.test.ts
     owner: platform-security
+    last_reviewed: 2026-11-25
     next_review: 2027-02-25
   - id: R-02
     title: The agent's token can push to protected branches
@@ -103,16 +106,17 @@ risks:
     practices: [BP-0032, BP-0063]
     evidence: ""
     owner: platform-security
+    last_reviewed: 2026-07-01
     next_review: 2026-10-01
 ```
 
-CI check (Bun) that fails on unversioned IDs, missing controls, evidence or owners, and overdue reviews:
+CI check (Bun) that fails on unversioned IDs, missing controls, evidence or owners, missing or future review dates, and overdue reviews:
 
 ```ts
 // author: Stephen Eaton
 // check-risk-register.ts — fail CI when an agent risk register is incomplete, unversioned or overdue.
 // usage: bun check-risk-register.ts risk-register.yaml
-type Risk = { id: string; title: string; refs: string[]; control: string; evidence: string; owner: string; next_review: string };
+type Risk = { id: string; title: string; refs: string[]; control: string; evidence: string; owner: string; last_reviewed: string; next_review: string };
 type Register = { service: string; frameworks: Record<string, string>; risks: Risk[] };
 
 export function check(r: Register, today = new Date().toISOString().slice(0, 10)): string[] {
@@ -126,7 +130,11 @@ export function check(r: Register, today = new Date().toISOString().slice(0, 10)
       if (/^(LLM|ASI)\d\d$/.test(ref)) errors.push(`${at}: ${ref} has no edition (write ${ref}:2026); IDs are renumbered between editions`);
       else if (!/^(LLM|ASI)\d\d:\d{4}$|^AML\.T\d{4}(\.\d{3})?$/.test(String(ref))) errors.push(`${at}: unrecognised reference ${ref}`);
     for (const f of ['control', 'evidence', 'owner'] as const) if (!String(x[f] ?? '').trim()) errors.push(`${at}: missing ${f}`);
-    if (!x.next_review || String(x.next_review) < today) errors.push(`${at}: review overdue (${x.next_review})`);
+    const last = String(x.last_reviewed ?? ''), next = String(x.next_review ?? '');
+    if (!last) errors.push(`${at}: missing last_reviewed`);
+    else if (last > today) errors.push(`${at}: last_reviewed ${last} is in the future`);
+    if (last && next && next <= last) errors.push(`${at}: next_review ${next} must be after last_reviewed ${last}`);
+    if (!next || next < today) errors.push(`${at}: review overdue (${next})`);
   }
   return errors;
 }
@@ -148,7 +156,7 @@ R-02: review overdue (2026-10-01)
 2 risk(s), 2 problem(s)
 ```
 
-Tested with Bun 1.4: the register above fails on R-02 as shown, and writing `LLM03` without `:2026` fails with "has no edition".
+Tested with Bun 1.4: the register above fails on R-02 as shown, and writing `LLM03` without `:2026` fails with "has no edition", and a missing or future `last_reviewed` is reported.
 
 ## Anti-patterns
 
@@ -164,7 +172,7 @@ Tested with Bun 1.4: the register above fails on R-02 as shown, and writing `LLM
 - [ ] One governance spine chosen; other frameworks mapped into it
 - [ ] Inventory of agent systems and their components
 - [ ] Threat model per system using ASI01–ASI10, LLM01–LLM10 and ATLAS techniques
-- [ ] Versioned risk register in the repository: edition-qualified IDs, control, evidence, owner, review date
+- [ ] Versioned risk register in the repository: edition-qualified IDs, control, evidence, owner, last-reviewed and next-review dates
 - [ ] Crosswalks used and checked; ATLAS IDs used in red-team, detection and incident records
 - [ ] Register checked in CI; re-reviewed on new framework editions and system changes
 - [ ] Nobody claims framework coverage as assurance
