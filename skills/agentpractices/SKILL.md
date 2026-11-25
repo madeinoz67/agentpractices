@@ -3,7 +3,7 @@ name: agentpractices
 description: Apply the published agent best practices at agentpractices.dev to the task at hand. USE WHEN starting a plan, implementation, review, security or documentation task that should follow published practice, or when someone asks which practice or BP rule applies, or when a citation such as BP-NNNN@x.y.z needs checking. Fetches catalog.json, selects practices by domain, role and stage, reads each Rules section, and cites BP-NNNN@x.y.z. Use it before the work starts, not after. NOT FOR editing the corpus itself, or when the task has no software or agent-engineering content.
 compatibility: Requires Bun 1.0 or later to run scripts/practices.ts.
 metadata:
-  version: 0.2.0
+  version: 0.2.1
 ---
 
 # Agentpractices
@@ -130,7 +130,7 @@ A non-zero exit is a failure, not an empty result. If no practice matches the ta
 
 If Bun is not installed (`bun --version` fails), say so in one line and continue without a practice. Do not install it.
 
-`bun ... sync` forces a refetch of `catalog.json` and `taxonomy.json`. Run it when `catalog_generated` is older than a day.
+`bun ... sync` forces a refetch of `catalog.json` and `taxonomy.json`, and drops the cached practice bodies so the next `get` fetches them again. The cache is otherwise self-maintaining: each practice is stored as `<ID>@<version>.md`, so it is fetched again when its version changes, and a content change always ships with a version bump. A newer `catalog_generated` does not mean any practice changed. Run `sync` when the cache looks wrong, not on a schedule.
 
 ## Scripts
 

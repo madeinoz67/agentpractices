@@ -7,7 +7,7 @@
 //   domains  the domain tree from taxonomy.json
 //   sync  force a refetch of catalog.json and taxonomy.json
 // Output: JSON on stdout. Network or usage failure: one line on stderr, exit 1.
-import { mkdirSync, readFileSync, statSync, writeFileSync } from 'node:fs';
+import { existsSync, mkdirSync, readdirSync, readFileSync, renameSync, rmSync, statSync, writeFileSync } from 'node:fs';
 import { homedir } from 'node:os';
 import { join } from 'node:path';
 
@@ -103,7 +103,13 @@ export const isFresh = (fetchedAtMs: number, nowMs: number, ttlMs = TTL_MS) => n
 
 const die = (msg: string): never => { console.error(msg); process.exit(1); };
 
-function cachePath(name: string) { return join(CACHE, name); }
+/** A cache file name must stay inside the cache directory: `version` arrives from the catalogue unvalidated. */
+export const isCacheName = (name: string) => /^[A-Za-z0-9._@-]+$/.test(name);
+
+function cachePath(name: string) {
+  if (!isCacheName(name)) throw new Error(`refusing cache file name ${name}`);
+  return join(CACHE, name);
+}
 
 function readCache<T>(name: string): T | null {
   try { return JSON.parse(readFileSync(cachePath(name), 'utf8')) as T; } catch { return null; }
@@ -114,9 +120,18 @@ function cacheAge(name: string): number {
   try { return statSync(cachePath(name)).mtimeMs; } catch { return 0; }
 }
 
+/** Temp file then rename: a concurrent reader never sees a partial file, and a killed writer leaves no damage. */
+function writeAtomic(path: string, text: string) {
+  writeFileSync(`${path}.tmp`, text);
+  renameSync(`${path}.tmp`, path);
+}
+
+/** Best effort: a read-only cache directory must not lose a value already fetched. */
 function writeCache(name: string, value: unknown) {
-  mkdirSync(CACHE, { recursive: true });
-  writeFileSync(cachePath(name), JSON.stringify(value, null, 2));
+  try {
+    mkdirSync(CACHE, { recursive: true });
+    writeAtomic(cachePath(name), JSON.stringify(value, null, 2));
+  } catch { /* read-only cache: the fetched value is still returned */ }
 }
 
 /** Only the configured origin is reachable: a hostile catalogue cannot redirect the fetch to another host. */
@@ -127,12 +142,22 @@ export const isAllowed = (url: string, base: string): boolean => {
 /** A catalogue md_url is an absolute production URL: fetch its path from the configured base instead. */
 export const resolveMd = (mdUrl: string, base: string): string => new URL(new URL(mdUrl, base).pathname, base).href;
 
+/** Follow redirects by hand, so every hop is checked against the configured origin. */
 async function getText(path: string): Promise<string> {
-  const url = /^https?:/i.test(path) ? path : new URL(path, BASE_URL).href;
-  if (!isAllowed(url, BASE_URL)) throw new Error(`refusing ${url}: outside ${BASE_URL}`);
-  const res = await fetch(url).catch((e: Error) => { throw new Error(`cannot reach ${url}: ${e.message}`); });
-  if (!res.ok) throw new Error(`cannot reach ${url}: HTTP ${res.status}`);
-  return res.text();
+  let url = /^https?:/i.test(path) ? path : new URL(path, BASE_URL).href;
+  for (let hop = 0; hop < 4; hop++) {
+    if (!isAllowed(url, BASE_URL)) throw new Error(`refusing ${url}: outside ${BASE_URL}`);
+    const res = await fetch(url, { redirect: 'manual' }).catch((e: Error) => { throw new Error(`cannot reach ${url}: ${e.message}`); });
+    if (res.status >= 300 && res.status < 400) {
+      const location = res.headers.get('location');
+      if (!location) throw new Error(`cannot reach ${url}: HTTP ${res.status} without a Location header`);
+      url = new URL(location, url).href;
+      continue;
+    }
+    if (!res.ok) throw new Error(`cannot reach ${url}: HTTP ${res.status}`);
+    return res.text();
+  }
+  throw new Error(`cannot reach ${path}: too many redirects`);
 }
 
 /** Read a published JSON file from the cache when it is fresh, else from the network. A stale cache beats no data. */
@@ -162,8 +187,10 @@ async function getPracticeMd(p: Record_): Promise<string> {
   const name = `${p.id}@${p.version}.md`;
   try { return readFileSync(cachePath(name), 'utf8'); } catch { /* cache miss */ }
   const md = await getText(resolveMd(p.md_url, BASE_URL));
-  mkdirSync(CACHE, { recursive: true });
-  writeFileSync(cachePath(name), md);
+  try {
+    mkdirSync(CACHE, { recursive: true });
+    writeAtomic(cachePath(name), md);
+  } catch { /* read-only cache: the fetched body is still returned */ }
   return md;
 }
 
@@ -271,6 +298,8 @@ async function main() {
   if (cmd === 'sync') {
     const cat = await loadCatalog(true);
     const tax = await loadTaxonomy(true);
+    // Practice bodies are keyed id@version, so a corrupt one would be served forever without this.
+    if (existsSync(CACHE)) for (const f of readdirSync(CACHE)) if (f.endsWith('.md')) rmSync(join(CACHE, f));
     return out({ cached_at: CACHE, catalog_generated: cat.generated, taxonomy_version: tax.version, count: cat.count });
   }
 

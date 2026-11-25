@@ -1,6 +1,6 @@
 // author: Stephen Eaton
 import { afterAll, beforeAll, describe, expect, test } from 'bun:test';
-import { existsSync, mkdtempSync, readFileSync, rmSync } from 'node:fs';
+import { chmodSync, existsSync, mkdtempSync, readFileSync, rmSync, writeFileSync } from 'node:fs';
 import { tmpdir } from 'node:os';
 import { join } from 'node:path';
 
@@ -8,7 +8,7 @@ import { join } from 'node:path';
 const ROOT = join(import.meta.dir, '..');
 import { loadTaxonomy } from '../scripts/lib/taxonomy';
 import {
-  filterPractices, flattenDomains, isAllowed, isFresh, isGeneratedNewer, isOverdue, matchesDomain, matchesRole,
+  filterPractices, flattenDomains, isAllowed, isCacheName, isFresh, isGeneratedNewer, isOverdue, matchesDomain, matchesRole,
   nearestDomains, nearestIds, parseCitation, parseFlags, resolveMd, rulesSection, versionChange, vocabulary,
   type Catalog, type Record_, type TaxonomyJson,
 } from '../skills/agentpractices/scripts/practices';
@@ -191,6 +191,16 @@ describe('md_url resolution', () => {
   });
 });
 
+describe('cache file names', () => {
+  // A catalogue supplies `version` unvalidated, so it must not be able to name a file outside the cache.
+  test('a practice id and version are accepted', () => expect(isCacheName('BP-0001@1.0.0.md')).toBe(true));
+  test('a version that would escape the cache directory is refused', () => {
+    expect(isCacheName('BP-0001@../../../../tmp/evil.md')).toBe(false);
+    expect(isCacheName('/etc/passwd')).toBe(false);
+    expect(isCacheName('a\\b.md')).toBe(false);
+  });
+});
+
 describe('plugin packaging', () => {
   const plugin = JSON.parse(readFileSync(join(ROOT, '.claude-plugin/plugin.json'), 'utf8'));
   const market = JSON.parse(readFileSync(join(ROOT, '.claude-plugin/marketplace.json'), 'utf8'));
@@ -292,14 +302,15 @@ if (!built) console.warn('plugin e2e: SKIPPED — `bun run build` failed, so dis
   });
 
   // Async on purpose: the local server runs in this process, so a blocking spawn would deadlock.
-  const run = async (...args: string[]) => {
+  const spawnAt = async (url: string, cacheDir: string, ...args: string[]) => {
     const p = Bun.spawn(['bun', SCRIPT, ...args], {
-      env: { ...process.env, AGENTPRACTICES_URL: base, AGENTPRACTICES_CACHE: cache },
+      env: { ...process.env, AGENTPRACTICES_URL: url, AGENTPRACTICES_CACHE: cacheDir },
       stdout: 'pipe', stderr: 'pipe',
     });
     const [out, err, code] = await Promise.all([new Response(p.stdout).text(), new Response(p.stderr).text(), p.exited]);
     return { code, out, err };
   };
+  const run = (...args: string[]) => spawnAt(base, cache, ...args);
 
   test('list with a repeated --domain returns both domains', async () => {
     const r = await run('list', '--domain', 'D.AGT.SKL', '--domain', 'D.AGT.TOOL');
@@ -339,6 +350,55 @@ if (!built) console.warn('plugin e2e: SKIPPED — `bun run build` failed, so dis
     expect(j.rules.startsWith('## Rules')).toBe(true);
     expect(j.rules).toContain('MUST');
     expect(typeof j.review_overdue).toBe('boolean');
+  });
+
+  // A practice body is cached under id@version, so a corrupt one would be served forever. sync must heal it.
+  test('sync clears a corrupt practice body so the next get succeeds', async () => {
+    const first = await run('get', 'BP-0074');
+    expect(first.code).toBe(0);
+    const j = JSON.parse(first.out);
+    writeFileSync(join(cache, `${j.id}@${j.version}.md`), '## Truncated');
+    expect((await run('get', 'BP-0074')).code).toBe(1);
+    expect((await run('sync')).code).toBe(0);
+    const healed = await run('get', 'BP-0074');
+    expect(healed.code).toBe(0);
+    expect(JSON.parse(healed.out).rules.startsWith('## Rules')).toBe(true);
+  });
+
+  // fetch follows redirects unless told not to, so a 302 would carry the catalogue off the configured origin.
+  test('a redirect off the base origin is refused', async () => {
+    const elsewhere = Bun.serve({ port: 0, fetch: () => new Response('{"practices":[]}') });
+    const redirector = Bun.serve({
+      port: 0,
+      fetch: () => new Response(null, { status: 302, headers: { location: `http://localhost:${elsewhere.port}/catalog.json` } }),
+    });
+    const fresh = mkdtempSync(join(tmpdir(), 'agentpractices-redirect-'));
+    try {
+      const r = await spawnAt(`http://localhost:${redirector.port}/`, fresh, 'list');
+      expect(r.code).toBe(1);
+      expect(r.out).toBe('');
+      expect(r.err.trim().split('\n')).toHaveLength(1);
+      expect(r.err).toContain('outside');
+    } finally {
+      redirector.stop(true);
+      elsewhere.stop(true);
+      rmSync(fresh, { recursive: true, force: true });
+    }
+  });
+
+  // An agent sandbox often has a read-only cache: a failed write must not discard a value already fetched.
+  test('a read-only cache directory still returns the fetched catalogue', async () => {
+    const dir = mkdtempSync(join(tmpdir(), 'agentpractices-ro-'));
+    chmodSync(dir, 0o555);
+    try {
+      const r = await spawnAt(base, join(dir, 'cache'), 'list', '--limit', '1');
+      expect(r.err).toBe('');
+      expect(r.code).toBe(0);
+      expect(JSON.parse(r.out).count).toBe(1);
+    } finally {
+      chmodSync(dir, 0o755);
+      rmSync(dir, { recursive: true, force: true });
+    }
   });
 
   test('check names the change, and the version comparison is numeric', async () => {

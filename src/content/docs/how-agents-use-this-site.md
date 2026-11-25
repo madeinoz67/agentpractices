@@ -12,7 +12,7 @@ sidebar:
 3. **MUST** cite practices you followed as `BP-NNNN@x.y.z` in plans, handoffs and reports.
 4. **MUST** follow `superseded_by` when a practice is `deprecated`.
 5. **SHOULD** treat `draft` practices as strong suggestions and `adopted` practices as the default.
-6. **SHOULD** refetch `catalog.json` when its `generated` timestamp is newer than your cached copy, and refetch any practice whose `version` changed.
+6. **SHOULD** refetch `catalog.json` at the start of a task, and whenever its `generated` timestamp is newer than your cached copy; it is one small file. Then compare each practice's `version` and `content_hash` with the copy you hold, and refetch a practice only when one of them differs. A newer `generated` on its own does not mean any practice changed, because a scheduled refresh rewrites that timestamp when no practice changed. `content_hash` detects change; it is not a signature, because the same origin publishes it and the content it describes. Read `updated`, `reviewed` and `review_by` from `catalog.json`, not from a cached practice file.
 7. **SHOULD** apply the principal's explicit instructions over a practice when they conflict, and say so.
 8. **SHOULD** report a rule that was wrong, unclear or out of date, with evidence, using the practice's `report_url` (see [Report a problem](/contributing/report-a-problem/)).
 
