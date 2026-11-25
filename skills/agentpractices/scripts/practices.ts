@@ -6,7 +6,7 @@
 //   check BP-NNNN@x.y.z [more...]
 //   sync  force a refetch of catalog.json
 // Output: JSON on stdout. Network failure: one line on stderr, exit 1.
-import { existsSync, mkdirSync, readFileSync, writeFileSync, statSync } from 'node:fs';
+import { mkdirSync, readFileSync, statSync, writeFileSync } from 'node:fs';
 import { homedir } from 'node:os';
 import { join } from 'node:path';
 
@@ -69,9 +69,12 @@ const die = (msg: string): never => { console.error(msg); process.exit(1); };
 function cachePath(name: string) { return join(CACHE, name); }
 
 function readCache<T>(name: string): T | null {
-  const p = cachePath(name);
-  if (!existsSync(p)) return null;
-  try { return JSON.parse(readFileSync(p, 'utf8')) as T; } catch { return null; }
+  try { return JSON.parse(readFileSync(cachePath(name), 'utf8')) as T; } catch { return null; }
+}
+
+/** mtime of a cache file, or 0 when it is absent. No separate stamp file. */
+function cacheAge(name: string): number {
+  try { return statSync(cachePath(name)).mtimeMs; } catch { return 0; }
 }
 
 function writeCache(name: string, value: unknown) {
@@ -79,8 +82,14 @@ function writeCache(name: string, value: unknown) {
   writeFileSync(cachePath(name), JSON.stringify(value, null, 2));
 }
 
+/** Only the configured origin is reachable: a hostile catalogue cannot redirect the fetch to another host. */
+export const isAllowed = (url: string, base: string): boolean => {
+  try { return new URL(url).origin === new URL(base).origin; } catch { return false; }
+};
+
 async function getText(path: string): Promise<string> {
   const url = /^https?:/i.test(path) ? path : new URL(path, BASE_URL).href;
+  if (!isAllowed(url, BASE_URL)) throw new Error(`refusing ${url}: outside ${BASE_URL}`);
   const res = await fetch(url).catch((e: Error) => { throw new Error(`cannot reach ${url}: ${e.message}`); });
   if (!res.ok) throw new Error(`cannot reach ${url}: HTTP ${res.status}`);
   return res.text();
@@ -88,33 +97,25 @@ async function getText(path: string): Promise<string> {
 
 /** Fetch catalog.json when the cached copy is older than the TTL or the network copy is newer. */
 export async function loadCatalog(force = false): Promise<Catalog> {
-  const stamped = cachePath('catalog.stamp');
   const cached = readCache<Catalog>('catalog.json');
-  const at = existsSync(stamped) ? statSync(stamped).mtimeMs : 0;
-  if (cached && !force && isFresh(at, Date.now())) return cached;
+  if (cached && !force && isFresh(cacheAge('catalog.json'), Date.now())) return cached;
   let remote: Catalog;
   try { remote = JSON.parse(await getText('catalog.json')) as Catalog; } catch (e) {
     // A stale cache beats no practice; the skill reports staleness from catalog_generated.
     if (cached) return cached;
     throw e;
   }
-  if (!cached || force || isGeneratedNewer(remote.generated, cached.generated)) {
-    writeCache('catalog.json', remote);
-    mkdirSync(CACHE, { recursive: true });
-    writeFileSync(stamped, '');
-    return remote;
-  }
-  writeFileSync(stamped, '');
-  return cached;
+  if (!force && cached && !isGeneratedNewer(remote.generated, cached.generated)) return cached;
+  writeCache('catalog.json', remote);
+  return remote;
 }
 
 async function getPracticeMd(p: Record_): Promise<string> {
   const name = `${p.id}@${p.version}.md`;
-  const cached = cachePath(name);
-  if (existsSync(cached)) return readFileSync(cached, 'utf8');
+  try { return readFileSync(cachePath(name), 'utf8'); } catch { /* cache miss */ }
   const md = await getText(p.md_url);
   mkdirSync(CACHE, { recursive: true });
-  writeFileSync(cached, md);
+  writeFileSync(cachePath(name), md);
   return md;
 }
 

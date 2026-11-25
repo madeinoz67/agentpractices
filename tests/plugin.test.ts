@@ -2,7 +2,7 @@
 import { describe, expect, test } from 'bun:test';
 import { existsSync, readFileSync } from 'node:fs';
 import {
-  filterPractices, isFresh, isGeneratedNewer, matchesDomain, matchesRole, nearestIds,
+  filterPractices, isAllowed, isFresh, isGeneratedNewer, matchesDomain, matchesRole, nearestIds,
   parseCitation, rulesSection, type Catalog, type Record_,
 } from '../skills/agentpractices/scripts/practices';
 
@@ -109,6 +109,13 @@ describe('plugin packaging', () => {
     const hosts = [...script.matchAll(/https?:\/\/[^\s'"`)]+/g)].map((m) => new URL(m[0]).host);
     expect([...new Set(hosts)]).toEqual(['agentpractices.dev']);
     expect(/analytics|telemetry|sentry|posthog|mixpanel/i.test(script)).toBe(false);
+  });
+  // A catalogue is remote data, so its md_url must not be able to move the fetch to another host.
+  test('only the configured origin is fetched', () => {
+    expect(isAllowed('https://agentpractices.dev/a.md', 'https://agentpractices.dev/')).toBe(true);
+    expect(isAllowed('https://agentpractices.dev.evil.test/a.md', 'https://agentpractices.dev')).toBe(false);
+    expect(isAllowed('https://evil.test/a.md', 'https://agentpractices.dev/')).toBe(false);
+    expect(isAllowed('file:///etc/passwd', 'https://agentpractices.dev/')).toBe(false);
   });
   test('a cached catalogue still satisfies the type', () => {
     const cat: Catalog = { version: 1, taxonomy_version: '0.0.0', generated: '', count: 0, practices: [] };
