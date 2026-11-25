@@ -7,11 +7,11 @@ type: checklist
 roles: [reviewer, any]
 stage: [verify]
 status: draft
-version: 1.0.0
-updated: 2026-11-24
+version: 1.0.1
+updated: 2026-11-25
 related: [BP-0034, BP-0038, BP-0006, BP-0005]
 sources:
-  - { title: OWASP Top 10 for LLM Applications 2025, url: https://genai.owasp.org/llm-top-10/ }
+  - { title: OWASP Top 10 for LLM Applications 2026, url: https://genai.owasp.org/resource/owasp-genai-llm-top-10-2026/ }
 ---
 
 ## Rules
@@ -42,4 +42,4 @@ Every pull request or change set produced wholly or partly by an agent.
 
 ## References
 
-- [OWASP Top 10 for LLM Applications 2025](https://genai.owasp.org/llm-top-10/)
+- [OWASP Top 10 for LLM Applications 2026](https://genai.owasp.org/resource/owasp-genai-llm-top-10-2026/)

@@ -2,6 +2,7 @@
 
 ## Unreleased
 
+- Updated OWASP Top 10 for LLM Applications references from the 2025 edition to the 2026 edition (IDs renumbered) in BP-0005, BP-0027, BP-0029, BP-0032, BP-0033, BP-0036, BP-0040, BP-0044 and BP-0045.
 - BP-0077 Map agent risks to the AI security frameworks (ATLAS, NIST AI RMF, OWASP LLM and Agentic Top 10s, CoSAI); new concept D.SEC.FRM.
 - Added BP-0076 Make agent dashboards single, self-contained HTML files (D.SWE.UI, draft).
 - Added BP-0075 Keep repositories safe when agents read and act on them (D.SEC.SUP, draft).

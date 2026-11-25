@@ -7,11 +7,11 @@ type: guideline
 roles: [any, implementer, orchestrator]
 stage: [build, operate]
 status: draft
-version: 1.0.0
-updated: 2026-11-24
+version: 1.0.1
+updated: 2026-11-25
 related: [BP-0032, BP-0012, BP-0013, BP-0016, BP-0022]
 sources:
-  - { title: OWASP LLM02:2025 Sensitive Information Disclosure, url: https://genai.owasp.org/llmrisk/llm022025-sensitive-information-disclosure/ }
+  - { title: OWASP LLM02:2026 Sensitive Information Disclosure, url: https://genai.owasp.org/resource/owasp-genai-llm-top-10-2026/ }
   - { title: OWASP Secrets Management Cheat Sheet, url: https://cheatsheetseries.owasp.org/cheatsheets/Secrets_Management_Cheat_Sheet.html }
 ---
 
@@ -54,5 +54,5 @@ Bad: "Here is the API key: sk-…" pasted into chat; the agent stores it in long
 
 ## References
 
-- [OWASP LLM02:2025 Sensitive Information Disclosure](https://genai.owasp.org/llmrisk/llm022025-sensitive-information-disclosure/)
+- [OWASP LLM02:2026 Sensitive Information Disclosure](https://genai.owasp.org/resource/owasp-genai-llm-top-10-2026/)
 - [OWASP Secrets Management Cheat Sheet](https://cheatsheetseries.owasp.org/cheatsheets/Secrets_Management_Cheat_Sheet.html)

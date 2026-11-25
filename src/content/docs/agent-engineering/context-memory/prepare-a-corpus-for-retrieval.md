@@ -7,12 +7,12 @@ type: guideline
 roles: [implementer, any]
 stage: [build, operate]
 status: draft
-version: 1.0.0
-updated: 2026-11-24
+version: 1.0.1
+updated: 2026-11-25
 related: [BP-0028, BP-0029, BP-0025, BP-0024]
 sources:
   - { title: Anthropic — Introducing Contextual Retrieval, url: https://www.anthropic.com/news/contextual-retrieval }
-  - { title: OWASP LLM08:2025 Vector and Embedding Weaknesses, url: https://genai.owasp.org/llmrisk/llm082025-vector-and-embedding-weaknesses/ }
+  - { title: OWASP LLM09:2026 Vector and Embedding Weaknesses, url: https://genai.owasp.org/resource/owasp-genai-llm-top-10-2026/ }
 ---
 
 ## Rules
@@ -70,4 +70,4 @@ A chunk record:
 ## References
 
 - [Anthropic — Introducing Contextual Retrieval](https://www.anthropic.com/news/contextual-retrieval)
-- [OWASP LLM08:2025 Vector and Embedding Weaknesses](https://genai.owasp.org/llmrisk/llm082025-vector-and-embedding-weaknesses/)
+- [OWASP LLM09:2026 Vector and Embedding Weaknesses](https://genai.owasp.org/resource/owasp-genai-llm-top-10-2026/)

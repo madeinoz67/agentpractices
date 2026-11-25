@@ -7,11 +7,11 @@ type: guideline
 roles: [implementer, reviewer, orchestrator]
 stage: [plan, build, operate]
 status: draft
-version: 1.0.0
-updated: 2026-11-24
+version: 1.0.1
+updated: 2026-11-25
 related: [BP-0019, BP-0021, BP-0023, BP-0036, BP-0046]
 sources:
-  - { title: OWASP LLM03:2025 Supply Chain, url: https://genai.owasp.org/llmrisk/llm032025-supply-chain/ }
+  - { title: OWASP LLM04:2026 Supply Chain, url: https://genai.owasp.org/resource/owasp-genai-llm-top-10-2026/ }
   - { title: 'Trend Micro — Slopsquatting: when AI agents hallucinate malicious packages', url: https://www.trendmicro.com/vinfo/us/security/news/cybercrime-and-digital-threats/slopsquatting-when-ai-agents-hallucinate-malicious-packages }
 ---
 
@@ -53,5 +53,5 @@ Bad: the agent installs whatever names it remembers, unpinned, and enables a ski
 
 ## References
 
-- [OWASP LLM03:2025 Supply Chain](https://genai.owasp.org/llmrisk/llm032025-supply-chain/)
+- [OWASP LLM04:2026 Supply Chain](https://genai.owasp.org/resource/owasp-genai-llm-top-10-2026/)
 - [Trend Micro — Slopsquatting](https://www.trendmicro.com/vinfo/us/security/news/cybercrime-and-digital-threats/slopsquatting-when-ai-agents-hallucinate-malicious-packages)
