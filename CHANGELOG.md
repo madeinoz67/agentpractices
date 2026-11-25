@@ -2,6 +2,7 @@
 
 ## Unreleased
 
+- BP-0077 Map agent risks to the AI security frameworks (ATLAS, NIST AI RMF, OWASP LLM and Agentic Top 10s, CoSAI); new concept D.SEC.FRM.
 - Added BP-0076 Make agent dashboards single, self-contained HTML files (D.SWE.UI, draft).
 - Added BP-0075 Keep repositories safe when agents read and act on them (D.SEC.SUP, draft).
 - Added BP-0074 Choose skills, MCP servers, CLIs or hooks for each capability (D.AGT.SKL, draft).

@@ -60,6 +60,7 @@ body:
         - D.SEC.DEF — Defence Against Hostile Agents
         - D.SEC.DAT — Data Sovereignty & Privacy
         - D.SEC.OT — OT & Industrial Systems
+        - D.SEC.FRM — AI Security Frameworks & Threat Modelling
         - D.OPS — Operations
         - D.OPS.OBS — Observability
         - D.OPS.EVL — Evaluation
