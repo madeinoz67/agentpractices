@@ -2,6 +2,7 @@
 
 ## Unreleased
 
+- BP-0007 1.1.0: rules 10–12 define the caching contract that rule 3 named but never stated — publish a `content_hash` per page in the machine-readable catalogue (10), never move a version or hash when only metadata refreshes (11), and have consumers cache by content identity rather than on a clock (12). Examples, anti-patterns and checklist follow (#26).
 - Agent contract rule 6 now separates the two objects: refetch `catalog.json` at task start or when its `generated` is newer, then refetch a practice only when its `version` or `content_hash` differs. The daily star-count refresh moves `generated` without changing any practice, which made every agent refetch daily for nothing (#21). `content_hash` detects change; it is not a signature.
 - Plugin skill 0.2.1: the `sync` guidance no longer says to refetch when `catalog_generated` is older than a day. `sync` now also drops the cached practice bodies, so it really does recover a corrupt cache; practice files are cached as `<ID>@<version>.md` and are otherwise refetched only on a version bump. Cache writes go through a temp file and a rename, so an interrupted fetch cannot leave a truncated body behind.
 - Plugin skill 0.2.1 hardening, from the branch review's backlog: a catalogue `version` can no longer name a cache file outside the cache directory; redirects are followed only while every hop stays on the configured origin; and a read-only cache directory no longer discards a value already fetched.
