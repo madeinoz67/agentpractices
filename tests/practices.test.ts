@@ -102,3 +102,13 @@ describe('review dates', () => {
     expect(issues.map((i) => [i.level, i.code])).toEqual([['warn', 'W_REVIEW_DUE']]);
   });
 });
+
+import { sourceLinks } from '../scripts/lib/practices';
+describe('sourceLinks', () => {
+  test('returns title, url and host for each http(s) source, in order', () =>
+    expect(sourceLinks([{ title: 'NIST AI RMF', url: 'https://www.nist.gov/itl/ai-risk-management-framework' }, { title: 'Paper', url: 'http://arxiv.org/abs/1' }]))
+      .toEqual([{ title: 'NIST AI RMF', url: 'https://www.nist.gov/itl/ai-risk-management-framework', host: 'nist.gov' }, { title: 'Paper', url: 'http://arxiv.org/abs/1', host: 'arxiv.org' }]));
+  test('drops anything that is not an http(s) URL', () =>
+    expect(sourceLinks([{ title: 'bad', url: 'javascript:alert(1)' }, { title: 'rel', url: '/x' }, { title: 'ok', url: 'https://example.org' }]).map((s) => s.title)).toEqual(['ok']));
+  test('handles missing sources', () => expect(sourceLinks(undefined)).toEqual([]));
+});

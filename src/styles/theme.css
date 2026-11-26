@@ -67,3 +67,6 @@ header.header { border-bottom: 2px solid var(--sl-color-white); }
 .bp-see-also ul { list-style: none; padding: 0; margin: 0; display: grid; gap: 0.4rem; }
 .bp-see-id { font-family: var(--sl-font-mono); font-size: var(--sl-text-xs); color: var(--sl-color-gray-3); margin-right: 0.4rem; }
 .bp-review-due { color: var(--sl-color-orange, #b45309); font-weight: 600; }
+.bp-sources ol { padding-left: 1.4rem; }
+.bp-sources li { margin: 0.25rem 0; }
+.bp-source-host { color: var(--sl-color-gray-3); font-size: var(--sl-text-sm); }

@@ -136,3 +136,16 @@ export function seeAlso(p: Pick<Practice, 'id' | 'related'>, all: Pick<Practice,
   }
   return out;
 }
+
+export interface SourceLink { title: string; url: string; host: string }
+/** Sources to show on a practice page: http(s) only, in the order the page lists them. */
+export function sourceLinks(sources: { title: string; url: string }[] | undefined): SourceLink[] {
+  const out: SourceLink[] = [];
+  for (const s of sources ?? []) {
+    let u: URL;
+    try { u = new URL(s.url); } catch { continue; }
+    if (u.protocol !== 'https:' && u.protocol !== 'http:') continue;
+    out.push({ title: s.title, url: s.url, host: u.hostname.replace(/^www\./, '') });
+  }
+  return out;
+}
