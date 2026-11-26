@@ -8,6 +8,7 @@
 - Plugin skill 0.2.1 hardening, from the branch review's backlog: a catalogue `version` can no longer name a cache file outside the cache directory; redirects are followed only while every hop stays on the configured origin; and a read-only cache directory no longer discards a value already fetched.
 - BP-0079 Classify by function, service and activity, not by org chart or system (D.KNO.TAX), with a tested Bun validator for schemes and filed items.
 - BP-0082 Run a validated threat intelligence cycle with agents (direction, collection, processing, analysis, dissemination, feedback), with a tested indicator pipeline and TLP gate.
+- BP-0083 Build self-improving agents that cannot grade their own homework, with a tested improvement gate.
 - BP-0081 Detect coordinated disinformation campaigns by behaviour, not viewpoint, including campaigns aimed at AI sources; new concept D.SEC.INF (Information Integrity & Influence Operations).
 - BP-0080 Apply AI and agents across the six NIST CSF functions, with autonomy set per action and a tested action gate; new concept D.SEC.CYD (AI-Enabled Cyber Defence).
 - BP-0078 Agents never push to main — issue, branch, pull request, then clean up the branch and worktree after merge. AGENTS.md rule 1 now requires the same flow for agents working on this repository, and `.githooks/pre-push` refuses pushes to `main` (enable with `git config core.hooksPath .githooks`).
