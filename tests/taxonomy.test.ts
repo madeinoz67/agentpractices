@@ -12,9 +12,9 @@ describe('repo taxonomy', () => {
   test('has no errors', () => {
     expect(validateTaxonomy(t).filter((i) => i.level === 'error')).toEqual([]);
   });
-  test('has 7 top concepts and 35 narrower', () => {
+  test('has 7 top concepts and 36 narrower', () => {
     expect(t.concepts.filter((x) => !x.broader).length).toBe(7);
-    expect(t.concepts.filter((x) => x.broader).length).toBe(35);
+    expect(t.concepts.filter((x) => x.broader).length).toBe(36);
   });
   test('pathOf returns labels root-first', () => {
     expect(pathOf(t, 'D.SWE.CLI').map((x) => x.label)).toEqual(['Software Engineering', 'CLI Design']);
@@ -104,4 +104,9 @@ test('D.SEC.FRM exists under Security & Safety', () => {
 test('D.SEC.CYD exists under Security & Safety', () => {
   const tx = loadTaxonomy('taxonomy');
   expect(pathOf(tx, 'D.SEC.CYD').map((x) => x.label)).toEqual(['Security & Safety', 'AI-Enabled Cyber Defence']);
+});
+
+test('D.SEC.INF exists under Security & Safety', () => {
+  const tx = loadTaxonomy('taxonomy');
+  expect(pathOf(tx, 'D.SEC.INF').map((x) => x.label)).toEqual(['Security & Safety', 'Information Integrity & Influence Operations']);
 });
