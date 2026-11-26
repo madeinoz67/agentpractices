@@ -15,6 +15,16 @@ The plugin ships from this repository. It gives an agent the corpus without per-
 
 The skill calls `skills/agentpractices/scripts/practices.ts` (Bun, no dependencies). It contacts `agentpractices.dev` only, sends nothing, and caches public content in `~/.cache/agentpractices`.
 
+### Contribute practices: `create-practice`
+
+A second plugin walks a person or agent through adding a practice the governed way: search for duplicates, pick the domain, draft MUST/SHOULD/MAY rules, file the *Propose a practice* issue, and — once the owner assigns a `BP-NNNN` — scaffold the page in its domain folder, add the CHANGELOG line, run `bun run verify` and open the pull request.
+
+```sh
+/plugin install create-practice@agentpractices-marketplace
+```
+
+It calls `plugins/create-practice/skills/create-practice/scripts/practice.ts` (Bun, no dependencies) and contacts `agentpractices.dev` only.
+
 ## Layout
 
 | Path | Purpose |
@@ -23,7 +33,8 @@ The skill calls `skills/agentpractices/scripts/practices.ts` (Bun, no dependenci
 | `taxonomy/facets.yaml` | Flat facets: type, role, stage, status |
 | `src/content/docs/<domain>/<subdomain>/*.md` | Practices (`BP-NNNN`), folder derived from taxonomy labels |
 | `scripts/` | Bun scripts: `check` (validation), `postbuild` (catalog, SKOS, llms.txt, raw .md), `linkcheck` |
-| `.claude-plugin/`, `skills/agentpractices/` | Claude Code plugin: manifests, `SKILL.md`, and the fetch, filter and citation script |
+| `.claude-plugin/`, `skills/agentpractices/` | Claude Code plugin `agentpractices` and the marketplace: manifests, `SKILL.md`, and the fetch, filter and citation script |
+| `plugins/create-practice/` | Claude Code plugin `create-practice`: propose, scaffold and verify new practices |
 | `docs/superpowers/` | Design spec and implementation plan |
 
 ## Develop

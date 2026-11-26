@@ -1,6 +1,6 @@
 {
   "name": "agentpractices-marketplace",
-  "description": "Single-plugin marketplace for the agentpractices skill",
+  "description": "Marketplace for the agentpractices.dev plugins: apply the published practices, and propose or write new ones",
   "owner": {
     "name": "Stephen Eaton"
   },
@@ -9,6 +9,11 @@
       "name": "agentpractices",
       "source": "./",
       "description": "Apply the published best practices at agentpractices.dev: fetch the catalogue, select by domain, role and stage, read the Rules, cite BP-NNNN@x.y.z"
+    },
+    {
+      "name": "create-practice",
+      "source": "./plugins/create-practice",
+      "description": "Propose and write new practices for agentpractices.dev: duplicate search, domain choice, MUST/SHOULD/MAY rules, the proposal issue, then the page, verify and pull request once the owner assigns a BP-NNNN ID"
     }
   ]
 }

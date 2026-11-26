@@ -10,7 +10,7 @@ import { applyAllowlist, HARD_RULES, scanText, type AllowEntry, type Finding } f
 
 const ALLOWLIST = 'security/injection-allowlist.yaml';
 // Everything an agent reads from the site, or that becomes part of it.
-const SOURCE_ROOTS = ['src/content/docs', 'taxonomy', '.github/ISSUE_TEMPLATE', 'AGENTS.md', 'README.md', 'CHANGELOG.md', '.claude-plugin', 'skills', 'public'];
+const SOURCE_ROOTS = ['src/content/docs', 'taxonomy', '.github/ISSUE_TEMPLATE', 'AGENTS.md', 'README.md', 'CHANGELOG.md', '.claude-plugin', 'skills', 'plugins', 'public'];
 const SOURCE_EXT = /\.(md|mdx|ya?ml|json|txt|svg)$/i;
 const DIST_EXT = /\.(html|md|txt|json|jsonld|xml|svg)$/i;
 
@@ -27,7 +27,7 @@ let findings: Finding[] = [];
 let files = 0;
 for (const f of SOURCE_ROOTS.flatMap((r) => walk(r, SOURCE_EXT))) { findings.push(...scanText(rel(f), readFileSync(f, 'utf8'))); files++; }
 // Repo code and workflows: hard rules only (Trojan Source: bidi and invisible characters in code).
-const CODE_ROOTS = ['scripts', 'skills', 'tests', 'src/plugins', 'src/components', '.github/workflows', 'astro.config.mjs', 'package.json'];
+const CODE_ROOTS = ['scripts', 'skills', 'plugins', 'tests', 'src/plugins', 'src/components', '.github/workflows', 'astro.config.mjs', 'package.json'];
 for (const f of CODE_ROOTS.flatMap((r) => walk(r, /\.(ts|mjs|js|astro|ya?ml|json)$/i))) { findings.push(...scanText(rel(f), readFileSync(f, 'utf8'), { hardOnly: true })); files++; }
 if (dist) for (const f of walk(dist, DIST_EXT)) { findings.push(...scanText(rel(f), readFileSync(f, 'utf8'), { hardOnly: true })); files++; }
 
