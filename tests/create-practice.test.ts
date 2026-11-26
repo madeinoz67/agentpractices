@@ -143,6 +143,15 @@ describe('scaffold end to end on a copy of the repo', () => {
     expect(r.exitCode).toBe(1);
     expect(r.stderr.toString()).toContain('already used');
   });
+  test('refuses to overwrite an existing page and leaves it untouched', () => {
+    expect(run('--id', 'BP-0999', ...base).exitCode).toBe(0);
+    const file = join(repo, 'src/content/docs/agent-engineering/tool-use/pin-mcp-server-versions.md');
+    writeFileSync(file, 'mine');
+    const r = run('--id', 'BP-0998', ...base);
+    expect(r.exitCode).toBe(1);
+    expect(r.stderr.toString()).toContain('already exists');
+    expect(readFileSync(file, 'utf8')).toBe('mine');
+  });
   test('refuses an unknown domain and a non-repo directory', () => {
     expect(run('--id', 'BP-0999', ...base.map((x) => (x === 'D.AGT.TOOL' ? 'D.AGT.TLS' : x))).stderr.toString()).toContain('unknown domain');
     const r = Bun.spawnSync(['bun', SCRIPT, 'scaffold', '--repo', tmpdir(), '--id', 'BP-0999', ...base], { stderr: 'pipe' });

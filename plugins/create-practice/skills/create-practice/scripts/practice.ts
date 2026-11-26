@@ -352,9 +352,12 @@ async function main(argv: string[]) {
       const taken = findId(docs, id);
       if (taken.length) throw new Error(`${id} is already used by ${taken.map((f) => relative(repo, f)).join(', ')}`);
       const file = join(docs, folder, `${typeof a.slug === 'string' ? slugify(a.slug) : fileSlug(o.title)}.md`);
-      if (existsSync(file)) throw new Error(`${relative(repo, file)} already exists`);
       mkdirSync(dirname(file), { recursive: true });
-      writeFileSync(file, practiceMarkdown(o));
+      // Exclusive create: the existence check and the write are one operation, so nothing can slip in between.
+      try { writeFileSync(file, practiceMarkdown(o), { flag: 'wx' }); } catch (e) {
+        if ((e as NodeJS.ErrnoException).code === 'EEXIST') throw new Error(`${relative(repo, file)} already exists`);
+        throw e;
+      }
       const issue = typeof a.issue === 'string' ? ` (#${a.issue.replace(/^#/, '')})` : '';
       const line = `- ${id} ${o.title} (${domain}, draft)${issue}.`;
       const cl = join(repo, 'CHANGELOG.md');
