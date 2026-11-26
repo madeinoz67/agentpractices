@@ -7,11 +7,11 @@ type: guideline
 roles: [planner, orchestrator, reviewer]
 stage: [plan, verify]
 status: draft
-version: 1.0.0
-updated: 2026-11-24
-reviewed: 2026-11-24
-review_by: 2027-05-24
-related: [BP-0057, BP-0048, BP-0008, BP-0037, BP-0006, BP-0024, BP-0009]
+version: 1.0.1
+updated: 2026-11-26
+reviewed: 2026-11-26
+review_by: 2027-05-26
+related: [BP-0057, BP-0048, BP-0008, BP-0037, BP-0006, BP-0024, BP-0009, BP-0085]
 sources:
   - { title: GitHub Spec Kit — spec-driven development, url: https://github.com/github/spec-kit }
   - { title: Kiro docs — Specs (requirements in EARS notation), url: https://kiro.dev/docs/specs/concepts }
@@ -65,7 +65,7 @@ A product requirements document (PRD) says **what** to build and **why**, not ho
 
 9. **MUST** trace work to it: every planned unit names the requirement IDs it delivers, every requirement maps to at least one unit and one test, and the final review checks each criterion ([BP-0008](/agent-engineering/workflow/decompose-tasks/), [BP-0048](/multi-agent-systems/coordination-handoff/orchestrate-agent-workflows/)).
 10. **SHOULD** write acceptance tests from the criteria before implementation ([BP-0037](/software-engineering/testing/test-first-with-agents/)).
-11. **MUST** change the PRD when the requirement changes, through review with a version bump and change note. If code and PRD disagree, decide which is right and fix the other; never leave both.
+11. **MUST** change the PRD when the requirement changes, through review with a version bump and change note. If code and PRD disagree, decide which is right and fix the other; never leave both. Find where they have drifted apart with [BP-0085](/documentation-writing/specs-design-docs/detect-prd-drift/).
 12. **SHOULD** store PRDs in the repository as Markdown in plain language, where agents and people read the same file ([BP-0009](/documentation-writing/human-readable-docs/write-human-readable-docs/)).
 
 ## When to apply
