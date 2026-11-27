@@ -2,6 +2,7 @@
 
 ## Unreleased
 
+- BP-0106 Give agents a control skill and a feature map (D.AGT.WF, draft) (#95).
 - BP-0105 Enforce codebase invariants in the compiler and CI, not in review (D.SWE.QLT, draft) (#94).
 - BP-0018 1.1.0: add R14 on deriving a skill from recorded interventions (#92).
 - BP-0104 Sample review when agent output outpaces review (D.SWE.VCS, draft) (#88).
