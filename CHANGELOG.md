@@ -2,6 +2,15 @@
 
 ## Unreleased
 
+- BP-0001 1.1.0: rules 10–16 add the output switches (`--plain`, `-q`, `-` for stdin and stdout, the pager), confirmation levels for a severe action, the rule against a secret as a flag value, the help entry points, and `TERM=dumb` (#58).
+- BP-0093 Choose a CLI name and argument shape that callers can remember (D.SWE.CLI, draft) (#62).
+- BP-0092 Make a command declare the files and network calls it uses (D.SWE.CLI, draft) (#61).
+- BP-0091 Evolve a CLI without breaking its callers (D.SWE.CLI, draft) (#60).
+- BP-0090 Document a CLI on the web, in the terminal and in man pages (D.SWE.CLI, draft) (#59).
+- BP-0089 Distribute a CLI so it is easy to install and remove (D.SWE.CLI, draft) (#57).
+- BP-0088 Configure a CLI with one predictable precedence (D.SWE.CLI, draft) (#56).
+- BP-0087 Write CLI error messages that say what to do (D.SWE.CLI, draft) (#55).
+- BP-0086 Keep long-running commands responsive and resumable (D.SWE.CLI, draft) (#53).
 - Site: new page [Contribute with the create-practice skill](/contributing/create-practice-skill/) (install, phases, script commands, safety). *How agents use this site* now lists both plugins, the home page links contributors to it, and *Add a practice* points agents at it.
 - New Claude Code plugin `create-practice` 0.1.0 in the marketplace (`/plugin install create-practice@agentpractices-marketplace`): guides a contributor through the governed route for a new practice — duplicate search against `catalog.json`, domain and facet choice from the taxonomy, rule drafting with MUST/SHOULD/MAY, a validated *Propose a practice* issue body and prefilled URL, then, after the owner assigns the ID, `scaffold` writes the page in its `dirOf` folder with draft status and review dates and adds the CHANGELOG line. Never assigns a `BP-NNNN` itself. `bun run security` now also scans `plugins/`.
 - BP-0007 1.1.0: rules 10–12 define the caching contract that rule 3 named but never stated — publish a `content_hash` per page in the machine-readable catalogue (10), never move a version or hash when only metadata refreshes (11), and have consumers cache by content identity rather than on a clock (12). Examples, anti-patterns and checklist follow (#26).
