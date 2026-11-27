@@ -2,6 +2,7 @@
 
 ## Unreleased
 
+- BP-0108 Nudge the agent at the moment a rule applies (D.AGT.TOOL, draft) (#106).
 - BP-0107 Enrich records with agents: when, why, and how (D.KNO.SEM, draft) (#104).
 - BP-0041 1.1.0: add R11 on environment work as a cost offset (#102).
 - BP-0102 1.1.0: add R13 on the fleet and cloud stage (#100).
