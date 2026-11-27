@@ -2,6 +2,7 @@
 
 ## Unreleased
 
+- BP-0041 1.1.0: add R11 on environment work as a cost offset (#102).
 - BP-0102 1.1.0: add R13 on the fleet and cloud stage (#100).
 - BP-0018 1.2.0: add R15 to R17 on skill evals (#98).
 - BP-0106 Give agents a control skill and a feature map (D.AGT.WF, draft) (#95).
