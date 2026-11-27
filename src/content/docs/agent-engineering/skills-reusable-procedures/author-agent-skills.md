@@ -7,7 +7,7 @@ type: guideline
 roles: [implementer, any]
 stage: [plan, build, verify]
 status: draft
-version: 1.0.1
+version: 1.1.0
 updated: 2026-11-27
 reviewed: 2026-11-27
 review_by: 2027-05-27
@@ -22,6 +22,9 @@ sources:
   - title: "Claude Platform docs — Skill authoring best practices"
     url: https://platform.claude.com/docs/en/agents-and-tools/agent-skills/best-practices
     note: Progressive disclosure discipline, the under-500-line SKILL.md limit and testing skills on real tasks before relying on them
+  - title: "Ai insider — Lauren Tan reveals how 30+ AI agents ship PRs while you sleep"
+    url: https://www.youtube.com/watch?v=6hxp0SpGxz8
+    note: Past chats as the record of the real process, and the instruction to turn repeated interventions into lint rules or new skills; behind rule 14
 ---
 ## Rules
 
@@ -38,6 +41,7 @@ sources:
 11. **SHOULD** version the skill (for example `metadata.version`) and keep a short change log; cite practices by `BP-ID@version` rather than copying them.
 12. **SHOULD** validate the skill's format with a validator (for example `skills-ref validate ./my-skill`) in CI.
 13. **MAY** add `compatibility` when the skill needs specific tools, packages or network access.
+14. **MUST** derive each new skill from recorded interventions: search the session transcripts for corrections and re-prompts made twice or more, and cite the run that shows the pattern.
 
 ## When to apply
 
@@ -46,10 +50,11 @@ Write a skill when you keep pasting the same instructions, when a procedure is t
 ## Procedure
 
 1. Do the task by hand with an agent two or three times; note what you had to explain each time.
-2. Write the description first, then the steps; move anything the steps do not always need into `references/`.
-3. Turn repeated logic into scripts with tests.
-4. Write a few trigger tests (prompts that should and should not load it) and output checks.
-5. Validate, version, and publish to the right scope (personal, project, plugin or organisation).
+2. Search the session transcripts for the prompts, corrections and re-prompts you repeat, and cite the run that shows each pattern.
+3. Write the description first, then the steps; move anything the steps do not always need into `references/`.
+4. Turn repeated logic into scripts with tests.
+5. Write a few trigger tests (prompts that should and should not load it) and output checks.
+6. Validate, version, and publish to the right scope (personal, project, plugin or organisation).
 
 ## Examples
 
@@ -83,6 +88,7 @@ Poor description: `description: Helps with documents.` It never says when to use
 - Logic described in prose that should be a script.
 - Skills that silently deploy or delete when the model decides they are relevant.
 - Copying the same practice text into many skills instead of citing it.
+- Writing a skill from memory when the transcripts already show the repeated correction.
 
 ## Checklist
 
@@ -92,4 +98,5 @@ Poor description: `description: Helps with documents.` It never says when to use
 - [ ] Deterministic work in tested scripts
 - [ ] No secrets; side-effect skills user-invoked only
 - [ ] Trigger and output tests pass; version recorded
+- [ ] Derived from recorded interventions, with the run cited
 
