@@ -7,7 +7,7 @@ type: guideline
 roles: [orchestrator, reviewer]
 stage: [build, verify, operate]
 status: draft
-version: 1.0.0
+version: 1.1.0
 updated: 2026-11-27
 reviewed: 2026-11-27
 review_by: 2027-05-27
@@ -23,6 +23,9 @@ sources:
   - title: "Google SRE Workbook — Canarying Releases"
     url: https://sre.google/workbook/canarying-releases/
     note: Gradual exposure to a small share, comparison against a control, and abort and rollback criteria; behind rule 9.
+  - title: "Ai insider — Lauren Tan reveals how to build a 21+ agent GrokBot team"
+    url: https://www.youtube.com/watch?v=PcO998TSzIz
+    note: The trust curve from observing a few local agents to cloud agents, auto-merge and review on main, with the warning that jumping to many cloud agents before local trust is earned wastes tokens; behind rule 13.
 ---
 
 An agent is usually switched between two states: every action needs a person, or the agent runs unsupervised. The switch is flipped by configuration, by a good demo, or by fatigue, not by evidence. When a defect escapes, the reaction is to turn everything off, which discards the evidence that justified the earlier levels and leaves nobody knowing where the real boundary was.
@@ -43,6 +46,7 @@ This practice makes autonomy a ladder with evidence at each rung. Verification i
 10. **MUST** review each level and its evidence on a fixed cadence, and demote when the evidence is stale or the sample has not run.
 11. **SHOULD** compare the cost of the constraint (human wait time) with the cost of an escaped defect, so the decision is economic and recorded.
 12. **MUST NOT** promote a domain that cannot be verified (a migration, a payment path, an irreversible action) past act-and-report.
+13. **SHOULD** add the fleet and cloud level only after act-and-report is earned locally, and widen the number of concurrent agents as its own scope, one step at a time.
 
 ## When to apply
 
@@ -64,7 +68,7 @@ A one-off task does not need a ladder; it needs a reviewer. A domain with no wor
 
 ## Examples
 
-A coding agent climbs four rungs. At propose it writes patches a person applies. At act-with-approval it opens pull requests. At act-and-report it merges when the checks pass. At deploy it ships behind a flag. Entry to act-and-report is 200 merged changes, a random sample of 40 reviewed with no severity-1 or severity-2 finding, and 30 days without a revert caused by the agent. One escaped severity-1 defect, or one skipped check, returns it to act-with-approval until the cause is fixed and the sample is repeated.
+A coding agent climbs four rungs. At propose it writes patches a person applies. At act-with-approval it opens pull requests. At act-and-report it merges when the checks pass. At deploy it ships behind a flag. Entry to act-and-report is 200 merged changes, a random sample of 40 reviewed with no severity-1 or severity-2 finding, and 30 days without a revert caused by the agent. One escaped severity-1 defect, or one skipped check, returns it to act-with-approval until the cause is fixed and the sample is repeated. A cloud fleet level, where many agents pick up reported issues from the same briefs, comes only after act-and-report holds locally, and the number of concurrent agents rises one step at a time.
 
 A support agent drafts replies. The levels are draft-only, send after a person approves, and send and report. Entry to send-and-report is 95 percent agreement with the reviewer on 100 sampled drafts over two weeks. Refunds and account closures stay at approval at every level. When the sample agreement drops below 90 percent, the agent returns to draft-only.
 

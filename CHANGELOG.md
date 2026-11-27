@@ -2,6 +2,7 @@
 
 ## Unreleased
 
+- BP-0102 1.1.0: add R13 on the fleet and cloud stage (#100).
 - BP-0018 1.2.0: add R15 to R17 on skill evals (#98).
 - BP-0106 Give agents a control skill and a feature map (D.AGT.WF, draft) (#95).
 - BP-0105 Enforce codebase invariants in the compiler and CI, not in review (D.SWE.QLT, draft) (#94).
