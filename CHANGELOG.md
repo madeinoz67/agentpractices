@@ -3,6 +3,8 @@
 ## Unreleased
 
 - BP-0098 Measure agent line flow, not just individual runs (D.OPS.OBS, draft) (#70).
+- BP-0097 Carry one definition of done from work item to delivery (D.MAS.HND, draft) (#69).
+- BP-0096 Design repeatable agent work as a production line with station checks (D.MAS.TOP, draft) (#68).
 - BP-0073 1.1.0: rules 23–24 add the surface inventory and the per-pair gate, so an API, a UI, a TUI or the documentation cannot drift behind the CLI and the MCP server (#67).
 - BP-0095 Run concurrent agents on disjoint work and settle conflicts with evidence (D.MAS.HND, draft) (#65).
 - BP-0094 Name CLI flags and subcommands so callers can guess them (D.SWE.CLI, draft) (#54).
