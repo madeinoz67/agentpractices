@@ -2,6 +2,7 @@
 
 ## Unreleased
 
+- BP-0018 1.1.0: add R14 on deriving a skill from recorded interventions (#92).
 - BP-0104 Sample review when agent output outpaces review (D.SWE.VCS, draft) (#88).
 - BP-0103 Amend the agent environment when the same failure repeats (D.AGT.WF, draft) (#87).
 - BP-0102 Earn agent autonomy with verification evidence (D.AGT.WF, draft) (#86).
