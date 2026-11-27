@@ -7,16 +7,19 @@ type: pattern
 roles: [implementer, any]
 stage: [plan, build, verify]
 status: draft
-version: 1.0.0
-updated: 2026-11-24
-reviewed: 2026-11-24
-review_by: 2027-05-24
+version: 1.0.1
+updated: 2026-11-27
+reviewed: 2026-11-27
+review_by: 2027-05-27
 related: [BP-0018, BP-0019, BP-0002, BP-0008]
 sources:
-  - { title: Claude Platform docs — Skill authoring best practices (workflows and feedback loops), url: https://platform.claude.com/docs/en/agents-and-tools/agent-skills/best-practices }
-  - { title: Agent Skills specification, url: https://agentskills.io/specification }
+  - title: "Claude Platform docs — Skill authoring best practices (workflows and feedback loops)"
+    url: https://platform.claude.com/docs/en/agents-and-tools/agent-skills/best-practices
+    note: The validate-fix-repeat loop and plan-validate-execute gate patterns for steps whose output can be checked
+  - title: Agent Skills specification
+    url: https://agentskills.io/specification
+    note: The one-level-deep reference rule that limits how deeply workflow files may chain, forcing a flat router
 ---
-
 ## Rules
 
 ### Routing
@@ -109,7 +112,3 @@ Copy this checklist and tick it off:
 - [ ] Specific validation errors; intermediate results in files
 - [ ] Final verification and report; workflows tested including failures
 
-## References
-
-- [Claude Platform — Skill authoring best practices](https://platform.claude.com/docs/en/agents-and-tools/agent-skills/best-practices)
-- [Agent Skills specification](https://agentskills.io/specification)

@@ -7,18 +7,25 @@ type: guideline
 roles: [implementer, reviewer]
 stage: [build, verify]
 status: draft
-version: 1.0.0
-updated: 2026-11-24
-reviewed: 2026-11-24
-review_by: 2027-05-24
+version: 1.0.1
+updated: 2026-11-27
+reviewed: 2026-11-27
+review_by: 2027-05-27
 related: [BP-0036, BP-0034, BP-0052, BP-0018, BP-0037]
 sources:
-  - { title: pstack (Cursor plugins) — no-comments skill and comment-sicko agent, url: https://github.com/cursor/plugins/tree/main/pstack }
-  - { title: 'Macke & Doyle — Testing the Effect of Code Documentation on LLM Code Understanding (2024)', url: https://arxiv.org/abs/2404.03114 }
-  - { title: 'On the Impact of Code Comments for Automated Bug-Fixing: An Empirical Study (2026)', url: https://arxiv.org/abs/2601.23059 }
-  - { title: 'Inside Out: Uncovering How Comment Internalization Steers LLMs for Better or Worse (2025)', url: https://arxiv.org/abs/2512.16790 }
+  - title: "pstack (Cursor plugins) — no-comments skill and comment-sicko agent"
+    url: https://github.com/cursor/plugins/tree/main/pstack
+    note: The strict end of the policy this practice adopts, with its explicit keep list and refusal of self-explaining comments
+  - title: "Macke & Doyle — Testing the Effect of Code Documentation on LLM Code Understanding (2024)"
+    url: https://arxiv.org/abs/2404.03114
+    note: Found wrong documentation severely hurt LLM code understanding while missing documentation barely did
+  - title: "On the Impact of Code Comments for Automated Bug-Fixing: An Empirical Study (2026)"
+    url: https://arxiv.org/abs/2601.23059
+    note: Comment types differ in effect on bug fixing, with how-it-works comments helping more than what-it-does ones
+  - title: "Inside Out: Uncovering How Comment Internalization Steers LLMs for Better or Worse (2025)"
+    url: https://arxiv.org/abs/2512.16790
+    note: Probing work showing models treat comments as distinct concepts, helping some tasks and hurting others
 ---
-
 **Position:** few comments, every one true, each saying *why* or *what must not change*. Not zero.
 
 pstack's `no-comments` skill takes the strict end: a reviewer agent deletes comments by default and keeps only a short list of exceptions (licence headers, behaviour forced by something outside your control, public API doc comments, justified lint suppressions, links to an issue or RFC). A comment explaining a surprise in *your own* code is treated as a sign the code should be renamed, typed or restructured instead.
@@ -112,9 +119,3 @@ Agent-instruction snippet:
 - [ ] Comments of unknown purpose investigated before deletion
 - [ ] Policy in AGENTS.md / CLAUDE.md; reviewer checks comments
 
-## References
-
-- [pstack — no-comments skill and comment-sicko agent](https://github.com/cursor/plugins/tree/main/pstack)
-- [Macke & Doyle — Testing the Effect of Code Documentation on LLM Code Understanding](https://arxiv.org/abs/2404.03114)
-- [On the Impact of Code Comments for Automated Bug-Fixing](https://arxiv.org/abs/2601.23059)
-- [Inside Out: How Comment Internalization Steers LLMs](https://arxiv.org/abs/2512.16790)

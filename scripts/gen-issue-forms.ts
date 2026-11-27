@@ -28,7 +28,7 @@ out('propose-practice.yml', {
     { type: 'dropdown', id: 'stage', attributes: { label: 'Stage', multiple: true, options: t.facets.stage.map((f) => f.id) }, validations: { required: true } },
     { type: 'textarea', id: 'rules', attributes: { label: 'Draft rules', description: 'Numbered, using MUST / SHOULD / MAY.', placeholder: '1. **MUST** …\n2. **SHOULD** …' }, validations: { required: true } },
     { type: 'textarea', id: 'related', attributes: { label: 'Related or overlapping practices', description: 'BP-IDs this relates to, extends or might duplicate.' } },
-    { type: 'textarea', id: 'sources', attributes: { label: 'Sources', description: 'Links to standards, docs or evidence.' } },
+    { type: 'textarea', id: 'sources', attributes: { label: 'Sources', description: 'Links to standards, docs or evidence. Each line is the link, then a note that says what it contributes to the rules.' } },
     { type: 'checkboxes', id: 'checks', attributes: { label: 'Checks', options: [
       { label: 'I searched existing practices and open issues for duplicates', required: true },
       { label: 'The proposal contains no secrets or personal data', required: true },

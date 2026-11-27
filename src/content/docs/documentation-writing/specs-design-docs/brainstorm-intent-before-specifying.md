@@ -7,16 +7,19 @@ type: procedure
 roles: [planner, orchestrator]
 stage: [plan]
 status: draft
-version: 1.0.0
-updated: 2026-11-24
-reviewed: 2026-11-24
-review_by: 2027-05-24
+version: 1.0.1
+updated: 2026-11-27
+reviewed: 2026-11-27
+review_by: 2027-05-27
 related: [BP-0058, BP-0048, BP-0008, BP-0002, BP-0056]
 sources:
-  - { title: obra/superpowers — brainstorming skill, url: https://github.com/obra/superpowers/blob/main/skills/brainstorming/SKILL.md }
-  - { title: GitHub Spec Kit — spec-driven development, url: https://github.com/github/spec-kit }
+  - title: "obra/superpowers — brainstorming skill"
+    url: https://github.com/obra/superpowers/blob/main/skills/brainstorming/SKILL.md
+    note: "The one-question-at-a-time interview behind rules 4 to 10: reading what exists first, playback, then comparing two or three approaches before any design"
+  - title: "GitHub Spec Kit — spec-driven development"
+    url: https://github.com/github/spec-kit
+    note: The requirements, then design, then tasks sequence rule 12's written design has to slot into before any build starts
 ---
-
 Agents build what they believe the person wants, and that belief is usually thinner than it feels. A short, structured conversation before any spec or code surfaces the *why*, which is what lets the agent make the hundred small decisions nobody wrote down the way the person would have.
 
 ## Rules
@@ -78,7 +81,3 @@ Playback chunk:
 - [ ] Written design or PRD; builder check for projects
 - [ ] Nothing built before approval
 
-## References
-
-- [obra/superpowers — brainstorming skill](https://github.com/obra/superpowers/blob/main/skills/brainstorming/SKILL.md)
-- [GitHub Spec Kit](https://github.com/github/spec-kit)

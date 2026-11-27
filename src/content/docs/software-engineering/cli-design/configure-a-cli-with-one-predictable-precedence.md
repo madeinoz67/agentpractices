@@ -7,19 +7,26 @@ type: guideline
 roles: [implementer]
 stage: [build]
 status: draft
-version: 1.0.0
+version: 1.0.1
 updated: 2026-11-27
 reviewed: 2026-11-27
 review_by: 2027-05-27
 related: [BP-0001, BP-0033, BP-0055]
 superseded_by: null
 sources:
-  - { title: Command Line Interface Guidelines — Configuration, url: https://clig.dev/#configuration }
-  - { title: Command Line Interface Guidelines — Environment variables, url: https://clig.dev/#environment-variables }
-  - { title: XDG Base Directory Specification, url: https://specifications.freedesktop.org/basedir-spec/basedir-spec-latest.html }
-  - { title: 'POSIX — Environment Variables', url: https://pubs.opengroup.org/onlinepubs/009695399/basedefs/xbd_chap08.html }
+  - title: "Command Line Interface Guidelines — Configuration"
+    url: https://clig.dev/#configuration
+    note: Fixes the precedence of flag, environment and config file, and argues each setting belongs in one place
+  - title: "Command Line Interface Guidelines — Environment variables"
+    url: https://clig.dev/#environment-variables
+    note: Names standard variables such as NO_COLOR, PAGER and EDITOR that a tool should read rather than reinvent
+  - title: XDG Base Directory Specification
+    url: https://specifications.freedesktop.org/basedir-spec/basedir-spec-latest.html
+    note: Defines where user configuration and data files belong on a Unix system, the path layout the rule requires
+  - title: "POSIX — Environment Variables"
+    url: https://pubs.opengroup.org/onlinepubs/009695399/basedefs/xbd_chap08.html
+    note: "Specifies the naming rules for environment variables: uppercase letters, digits and underscores, and no leading digit"
 ---
-
 The same setting can arrive four ways: a flag, an environment variable, a project file and a user file. Without a fixed order, a value that wins on one machine loses on another, and a caller cannot tell which source took effect. An agent that passes a flag needs to know that the flag wins.
 
 These rules fix the order, give each kind of setting one channel, and pin the environment variable names. Secrets are separate: take them from a credential file, a secret manager or the environment, as [BP-0033](/security-safety/least-privilege-secrets/keep-secrets-out-of-agent-context/) requires.
@@ -86,9 +93,3 @@ SETTINGS (highest first)
 - [ ] Environment names are uppercase and do not collide
 - [ ] Standard variables are honoured
 
-## References
-
-- [Command Line Interface Guidelines — Configuration](https://clig.dev/#configuration)
-- [Command Line Interface Guidelines — Environment variables](https://clig.dev/#environment-variables)
-- [XDG Base Directory Specification](https://specifications.freedesktop.org/basedir-spec/basedir-spec-latest.html)
-- [POSIX — Environment Variables](https://pubs.opengroup.org/onlinepubs/009695399/basedefs/xbd_chap08.html)

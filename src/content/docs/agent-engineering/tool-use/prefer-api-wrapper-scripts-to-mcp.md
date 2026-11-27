@@ -7,19 +7,28 @@ type: guideline
 roles: [implementer, orchestrator]
 stage: [plan, build]
 status: draft
-version: 1.0.0
-updated: 2026-11-24
-reviewed: 2026-11-24
-review_by: 2027-05-24
+version: 1.0.1
+updated: 2026-11-27
+reviewed: 2026-11-27
+review_by: 2027-05-27
 related: [BP-0022, BP-0023, BP-0001, BP-0018, BP-0032, BP-0033, BP-0005, BP-0041]
 sources:
-  - { title: Anthropic Engineering — Code execution with MCP, url: https://www.anthropic.com/engineering/code-execution-with-mcp }
-  - { title: Mario Zechner — What if you don't need MCP at all?, url: https://mariozechner.at/posts/2025-11-02-what-if-you-dont-need-mcp/ }
-  - { title: Simon Willison — Too many MCPs, url: https://simonwillison.net/2025/Aug/22/too-many-mcps/ }
-  - { title: Checkly — CLIs are more token-efficient than MCP. Or are they?, url: https://www.checklyhq.com/blog/mcp-vs-cli-token-efficiency/ }
-  - { title: Claude Code docs — Permissions, url: https://code.claude.com/docs/en/permissions }
+  - title: "Anthropic Engineering — Code execution with MCP"
+    url: https://www.anthropic.com/engineering/code-execution-with-mcp
+    note: The measured cut from about 150,000 to 2,000 tokens when intermediate results stay in code instead of passing through the model
+  - title: "Mario Zechner — What if you don't need MCP at all?"
+    url: https://mariozechner.at/posts/2025-11-02-what-if-you-dont-need-mcp/
+    note: The case for a CLI plus its help text over a tool list, which is the narrow-work half of the decision table
+  - title: "Simon Willison — Too many MCPs"
+    url: https://simonwillison.net/2025/Aug/22/too-many-mcps/
+    note: The accumulating context cost of connecting many servers, which argues for removing unused ones and preferring narrow alternatives
+  - title: "Checkly — CLIs are more token-efficient than MCP. Or are they?"
+    url: https://www.checklyhq.com/blog/mcp-vs-cli-token-efficiency/
+    note: A measured counterweight to the token argument, showing CLI cost depends on output size rather than transport alone
+  - title: "Claude Code docs — Permissions"
+    url: https://code.claude.com/docs/en/permissions
+    note: The permission rule syntax for allowing one wrapper path instead of the whole shell
 ---
-
 Direct MCP tool calls have two costs. Tool definitions sit in the context, and every intermediate result passes through the model, which often copies it into the next call. Anthropic's example of moving that work into code cut token use from about 150,000 to 2,000. A small script the agent runs from its shell avoids both costs for the operations it covers. It composes with other tools (`| jq`, files), and frontier models already know common CLIs such as `gh`.
 
 The picture is not one-sided. Deferred tool loading (tool search) removes most of the definitions cost of idle MCP servers, and a server with a handful of well-designed tools is cheap. The strongest case for scripts is the *results* cost and narrow, repeated work.
@@ -143,10 +152,3 @@ Prefer these to the GitHub MCP server for these operations.
 - [ ] Discoverable via AGENTS.md or a skill; narrowly allow-listed; output treated as untrusted
 - [ ] Remaining MCP servers scoped and deferred; tokens and success measured
 
-## References
-
-- [Anthropic — Code execution with MCP](https://www.anthropic.com/engineering/code-execution-with-mcp)
-- [Mario Zechner — What if you don't need MCP at all?](https://mariozechner.at/posts/2025-11-02-what-if-you-dont-need-mcp/)
-- [Simon Willison — Too many MCPs](https://simonwillison.net/2025/Aug/22/too-many-mcps/)
-- [Checkly — CLIs are more token-efficient than MCP. Or are they?](https://www.checklyhq.com/blog/mcp-vs-cli-token-efficiency/)
-- [Claude Code — Permissions](https://code.claude.com/docs/en/permissions)

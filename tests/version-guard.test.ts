@@ -7,7 +7,7 @@ const base: Practice = {
   id: 'BP-0100', title: 'T', description: 'D', domain: 'D.SWE.CLI', type: 'guideline',
   roles: ['implementer'], stage: ['build'], status: 'draft', version: '1.0.0', updated: '2026-11-24',
   reviewed: '2026-11-24', review_by: '2027-05-24', related: [], superseded_by: null,
-  sources: [{ title: 'S', url: 'https://example.org' }], file: 'x.md', slug: 'x', body: '## Rules\n1. **MUST** x\n',
+  sources: [{ title: 'S', url: 'https://example.org', note: 'N' }], file: 'x.md', slug: 'x', body: '## Rules\n1. **MUST** x\n',
 };
 const p = (o: Partial<Practice>): Practice => ({ ...base, ...o });
 const entry = (q: Practice, over: Record<string, unknown> = {}) => ({ id: q.id, version: q.version, content_hash: contentHash(q), ...over });
@@ -21,7 +21,9 @@ describe('contentHash', () => {
     expect(contentHash(p({ body: '## Rules  \r\n1. **MUST** x\r\n' }))).toBe(contentHash(base)));
   test('changes when the body changes', () => expect(contentHash(p({ body: '## Rules\n1. **MUST** y\n' }))).not.toBe(contentHash(base)));
   test('changes when sources change', () =>
-    expect(contentHash(p({ sources: [{ title: 'S', url: 'https://example.com' }] }))).not.toBe(contentHash(base)));
+    expect(contentHash(p({ sources: [{ title: 'S', url: 'https://example.com', note: 'N' }] }))).not.toBe(contentHash(base)));
+  test('changes when a source note changes', () =>
+    expect(contentHash(p({ sources: [{ title: 'S', url: 'https://example.org', note: 'Another reason' }] }))).not.toBe(contentHash(base)));
   test('changes when related changes', () => expect(contentHash(p({ related: ['BP-0001'] }))).not.toBe(contentHash(base)));
 });
 

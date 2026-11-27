@@ -7,17 +7,20 @@ type: guideline
 roles: [implementer]
 stage: [build]
 status: draft
-version: 1.0.0
+version: 1.0.1
 updated: 2026-11-27
 reviewed: 2026-11-27
 review_by: 2027-05-27
 related: [BP-0001, BP-0055, BP-0071]
 superseded_by: null
 sources:
-  - { title: Command Line Interface Guidelines — Output, url: https://clig.dev/#output }
-  - { title: Command Line Interface Guidelines — Configuration, url: https://clig.dev/#configuration }
+  - title: "Command Line Interface Guidelines — Output"
+    url: https://clig.dev/#output
+    note: Backs naming each file a command writes so the caller can see what the tool put on disk
+  - title: "Command Line Interface Guidelines — Configuration"
+    url: https://clig.dev/#configuration
+    note: The configuration guidance behind not reading a dotfile the caller never named
 ---
-
 A command that reads a config file the caller did not name, or calls a remote service, can surprise a person and break an agent's assumptions. The caller cannot predict the side effects, and a permission rule cannot allow the right host if the host is not declared.
 
 These rules make each boundary explicit before it is crossed. Where the configuration lives is [BP-0088](/software-engineering/cli-design/configure-a-cli-with-one-predictable-precedence/); this practice covers what the command touches.
@@ -76,7 +79,3 @@ calling index.example.com ...
 - [ ] `--offline` exists where a call is optional
 - [ ] External services are listed in the help text
 
-## References
-
-- [Command Line Interface Guidelines — Output](https://clig.dev/#output)
-- [Command Line Interface Guidelines — Configuration](https://clig.dev/#configuration)

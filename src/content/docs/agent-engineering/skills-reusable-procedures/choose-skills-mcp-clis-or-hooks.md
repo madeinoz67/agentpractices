@@ -7,18 +7,25 @@ type: guideline
 roles: [planner, implementer]
 stage: [plan, build]
 status: draft
-version: 1.0.0
-updated: 2026-11-25
-reviewed: 2026-11-25
-review_by: 2027-02-25
+version: 1.0.1
+updated: 2026-11-27
+reviewed: 2026-11-27
+review_by: 2027-02-27
 related: [BP-0018, BP-0019, BP-0030, BP-0055, BP-0073, BP-0021, BP-0015, BP-0017, BP-0062]
 sources:
-  - { title: Anthropic Engineering — Equipping agents for the real world with Agent Skills, url: https://www.anthropic.com/engineering/equipping-agents-for-the-real-world-with-agent-skills }
-  - { title: Agent Skills specification, url: https://agentskills.io/specification }
-  - { title: MCP — Skills extension overview, url: https://modelcontextprotocol.io/extensions/skills/overview }
-  - { title: MCP — SEP-2640 Skills Extension, url: https://modelcontextprotocol.io/seps/2640-skills-extension }
+  - title: "Anthropic Engineering — Equipping agents for the real world with Agent Skills"
+    url: https://www.anthropic.com/engineering/equipping-agents-for-the-real-world-with-agent-skills
+    note: Anthropic's split of skills as procedural knowledge from MCP as access to external tools, the distinction the whole table rests on
+  - title: Agent Skills specification
+    url: https://agentskills.io/specification
+    note: The portable SKILL.md format that keeps a server's skills installable as plain Agent Skills where the client lacks the extension
+  - title: "MCP — Skills extension overview"
+    url: https://modelcontextprotocol.io/extensions/skills/overview
+    note: How MCP clients discover a server's usage skills alongside its tools, so instructions arrive with the connection
+  - title: "MCP — SEP-2640 Skills Extension"
+    url: https://modelcontextprotocol.io/seps/2640-skills-extension
+    note: "The normative io.modelcontextprotocol/skills extension and its final status, which lets a server ship instructions with its tool definitions"
 ---
-
 "Skills or MCP?" is usually the wrong question: they solve different problems and work best together. A skill is know-how: a folder with a `SKILL.md`, references and scripts, where only the name and description sit in context until the task needs the rest. An MCP server is access: a connection to a system, with authentication, scopes and tools. Anthropic describes skills as procedural knowledge and MCP as access to external tools and software.
 
 ## Rules
@@ -81,9 +88,3 @@ Deciding how to give agents a new capability, packaging an integration, or revie
 - [ ] Server usage skills shipped with the server where supported; one source of truth
 - [ ] Context cost compared; supply-chain review for skills and servers alike
 
-## References
-
-- [Anthropic — Equipping agents for the real world with Agent Skills](https://www.anthropic.com/engineering/equipping-agents-for-the-real-world-with-agent-skills)
-- [Agent Skills specification](https://agentskills.io/specification)
-- [MCP — Skills extension](https://modelcontextprotocol.io/extensions/skills/overview)
-- [SEP-2640 — Skills Extension](https://modelcontextprotocol.io/seps/2640-skills-extension)

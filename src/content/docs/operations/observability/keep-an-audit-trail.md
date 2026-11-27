@@ -7,16 +7,19 @@ type: guideline
 roles: [orchestrator, implementer, reviewer]
 stage: [build, operate]
 status: draft
-version: 1.0.1
-updated: 2026-11-25
-reviewed: 2026-11-25
-review_by: 2027-05-25
+version: 1.0.2
+updated: 2026-11-27
+reviewed: 2026-11-27
+review_by: 2027-05-27
 related: [BP-0039, BP-0032, BP-0021, BP-0023, BP-0013]
 sources:
-  - { title: OWASP LLM03:2026 Excessive Agency, url: https://genai.owasp.org/resource/owasp-genai-llm-top-10-2026/ }
-  - { title: W3C PROV-O, url: https://www.w3.org/TR/prov-o/ }
+  - title: "OWASP LLM03:2026 Excessive Agency"
+    url: https://genai.owasp.org/resource/owasp-genai-llm-top-10-2026/
+    note: Names excessive agency as a top LLM risk, the reason every side-effecting attempt is recorded, not only what succeeded
+  - title: W3C PROV-O
+    url: https://www.w3.org/TR/prov-o/
+    note: "The provenance vocabulary rule 8 offers for interchange: agent, activity, entity and the relations between them"
 ---
-
 ## Rules
 
 1. **MUST** write an audit record for every side-effecting action an agent takes or attempts: writes, deletes, sends, deploys, permission changes, payments, and blocked or denied attempts.
@@ -62,7 +65,3 @@ Any agent that changes systems or data, especially on behalf of users, in regula
 - [ ] Separate from debug logs; retention matches the records changed
 - [ ] Emitted at the enforcement point; reviewed regularly
 
-## References
-
-- [OWASP LLM03:2026 Excessive Agency](https://genai.owasp.org/resource/owasp-genai-llm-top-10-2026/)
-- [W3C PROV-O](https://www.w3.org/TR/prov-o/)

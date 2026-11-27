@@ -7,16 +7,19 @@ type: guideline
 roles: [any]
 stage: [plan, build, operate]
 status: draft
-version: 1.0.0
-updated: 2026-11-24
-reviewed: 2026-11-24
-review_by: 2027-05-24
+version: 1.0.1
+updated: 2026-11-27
+reviewed: 2026-11-27
+review_by: 2027-05-27
 related: [BP-0018, BP-0016, BP-0005, BP-0011]
 sources:
-  - { title: Claude Code docs — Skills, url: https://code.claude.com/docs/en/skills }
-  - { title: Agent Skills — What are skills, url: https://agentskills.io/what-are-skills }
+  - title: "Claude Code docs — Skills"
+    url: https://code.claude.com/docs/en/skills
+    note: Description-driven matching and the compaction behaviour that makes a loaded skill need re-loading later in a session
+  - title: "Agent Skills — What are skills"
+    url: https://agentskills.io/what-are-skills
+    note: The progressive loading model behind the rule to read only the reference file the current step needs
 ---
-
 ## Rules
 
 ### Choosing a skill
@@ -77,7 +80,3 @@ Bad: the agent ignores the matching skill and invents its own tag names; or it i
 - [ ] Third-party skills reviewed and pinned
 - [ ] Side-effect skills user-invoked with confirmation
 
-## References
-
-- [Claude Code — Skills](https://code.claude.com/docs/en/skills)
-- [Agent Skills — What are skills](https://agentskills.io/what-are-skills)

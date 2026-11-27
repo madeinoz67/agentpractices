@@ -7,16 +7,19 @@ type: guideline
 roles: [any]
 stage: [build, operate]
 status: draft
-version: 1.0.0
-updated: 2026-11-24
-reviewed: 2026-11-24
-review_by: 2027-05-24
+version: 1.0.1
+updated: 2026-11-27
+reviewed: 2026-11-27
+review_by: 2027-05-27
 related: [BP-0005, BP-0011, BP-0013]
 sources:
-  - { title: Claude Platform Docs — Memory tool, url: https://platform.claude.com/docs/en/agents-and-tools/tool-use/memory-tool }
-  - { title: Anthropic — Effective context engineering for AI agents, url: https://www.anthropic.com/engineering/effective-context-engineering-for-ai-agents }
+  - title: "Claude Platform Docs — Memory tool"
+    url: https://platform.claude.com/docs/en/agents-and-tools/tool-use/memory-tool
+    note: File-based create, read, update and delete operations the read-before-write and forget-on-request rules assume
+  - title: "Anthropic — Effective context engineering for AI agents"
+    url: https://www.anthropic.com/engineering/effective-context-engineering-for-ai-agents
+    note: Argues memory should hold durable decisions and preferences outside the window, not replayable task state
 ---
-
 ## Rules
 
 1. **MUST** store only durable information: decisions and their reasons, stated preferences, conventions, constraints, and lessons from failures. Do not store transient task state (that belongs in the short-term ledger, [BP-0011](/agent-engineering/context-memory/manage-short-term-memory/)) or data that can be fetched again from its source.
@@ -77,7 +80,3 @@ description: Agent best-practices site (madeinoz67/agentpractices) — decisions
 - [ ] Existing entry updated, not duplicated
 - [ ] Filed under the right subject and scope
 
-## References
-
-- [Claude Platform Docs — Memory tool](https://platform.claude.com/docs/en/agents-and-tools/tool-use/memory-tool)
-- [Anthropic — Effective context engineering for AI agents](https://www.anthropic.com/engineering/effective-context-engineering-for-ai-agents)

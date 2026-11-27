@@ -7,17 +7,22 @@ type: pattern
 roles: [orchestrator, planner]
 stage: [plan, build, verify]
 status: draft
-version: 1.0.0
-updated: 2026-11-24
-reviewed: 2026-11-24
-review_by: 2027-05-24
+version: 1.0.1
+updated: 2026-11-27
+reviewed: 2026-11-27
+review_by: 2027-05-27
 related: [BP-0049, BP-0042, BP-0003, BP-0002, BP-0008, BP-0013, BP-0036, BP-0041]
 sources:
-  - { title: Anthropic — Building effective agents, url: https://www.anthropic.com/research/building-effective-agents }
-  - { title: Anthropic — How we built our multi-agent research system, url: https://www.anthropic.com/engineering/multi-agent-research-system }
-  - { title: Claude Code docs — Subagents, url: https://code.claude.com/docs/en/sub-agents }
+  - title: "Anthropic — Building effective agents"
+    url: https://www.anthropic.com/research/building-effective-agents
+    note: "The phase composition idea: fixed, named steps with gates beat a free-running agent loop when the steps are known"
+  - title: "Anthropic — How we built our multi-agent research system"
+    url: https://www.anthropic.com/engineering/multi-agent-research-system
+    note: The orchestrator delegating to subagents with a detailed brief each, and scaling the effort to the query, which rule 7 adopts
+  - title: "Claude Code docs — Subagents"
+    url: https://code.claude.com/docs/en/sub-agents
+    note: Subagents run in their own context window and return only a summary, the mechanism behind rules 7 and 9 on briefs and conclusions
 ---
-
 ## Rules
 
 ### Shape the workflow
@@ -90,7 +95,3 @@ Research: orchestrator plans angles → parallel researcher workers (small model
 - [ ] Retry cap, escalation path and stop conditions defined
 - [ ] Independent final review; findings fixed with tests
 
-## References
-
-- [Anthropic — Building effective agents](https://www.anthropic.com/research/building-effective-agents)
-- [Anthropic — How we built our multi-agent research system](https://www.anthropic.com/engineering/multi-agent-research-system)

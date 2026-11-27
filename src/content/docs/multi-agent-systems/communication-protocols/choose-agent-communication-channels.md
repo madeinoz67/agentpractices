@@ -7,16 +7,19 @@ type: guideline
 roles: [orchestrator, implementer]
 stage: [plan, build, operate]
 status: draft
-version: 1.0.0
-updated: 2026-11-24
-reviewed: 2026-11-24
-review_by: 2027-05-24
+version: 1.0.1
+updated: 2026-11-27
+reviewed: 2026-11-27
+review_by: 2027-05-27
 related: [BP-0043, BP-0003, BP-0005, BP-0013, BP-0040, BP-0048, BP-0051, BP-0033]
 sources:
-  - { title: Claude Code docs — Channels (push events into a running session), url: https://code.claude.com/docs/en/channels }
-  - { title: A2A Protocol specification, url: https://a2a-protocol.org/latest/specification/ }
+  - title: "Claude Code docs — Channels (push events into a running session)"
+    url: https://code.claude.com/docs/en/channels
+    note: "The worked example for rules 4 and 5: per-plugin sender allowlists, pairing to bootstrap them, and managed settings deciding which channels may run"
+  - title: A2A Protocol specification
+    url: https://a2a-protocol.org/latest/specification/
+    note: The protocol whose messages the practice says can be safe on one channel and dangerous on another, because the channel sets audience and trust
 ---
-
 [BP-0043](/multi-agent-systems/communication-protocols/communicate-between-agents/) covers **protocols**: the structure and meaning of messages (A2A tasks, MCP tool calls, typed schemas). This practice covers **channels**: the medium a message travels over (a function call, a shared file, a queue, an issue thread, a chat app, a webhook, a push into a running session) and therefore who can read it, who can write to it, whether it survives, and whether anyone notices. The same A2A message can be safe on one channel and dangerous on another.
 
 ## Rules
@@ -115,7 +118,3 @@ loops:     { respond_only_when: mentioned, ignore: [self, bots], max_replies_per
 - [ ] Durable record outside chat; task IDs and one thread per task
 - [ ] Urgency routing and escalation owner; loop limits; delivery failures detected
 
-## References
-
-- [Claude Code — Channels](https://code.claude.com/docs/en/channels)
-- [A2A Protocol specification](https://a2a-protocol.org/latest/specification/)

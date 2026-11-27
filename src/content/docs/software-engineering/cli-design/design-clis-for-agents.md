@@ -7,16 +7,19 @@ type: guideline
 roles: [implementer]
 stage: [build]
 status: draft
-version: 1.1.0
+version: 1.1.1
 updated: 2026-11-27
 reviewed: 2026-11-27
 review_by: 2027-05-27
 related: [BP-0007]
 sources:
-  - { title: Command Line Interface Guidelines, url: https://clig.dev/ }
-  - { title: 'POSIX Utility Conventions', url: https://pubs.opengroup.org/onlinepubs/9799919799/basedefs/V1_chap12.html }
+  - title: Command Line Interface Guidelines
+    url: https://clig.dev/
+    note: "The human-and-machine CLI guidance this practice condenses: stdout for data, stderr for everything else, and a JSON path"
+  - title: POSIX Utility Conventions
+    url: https://pubs.opengroup.org/onlinepubs/9799919799/basedefs/V1_chap12.html
+    note: The older standard behind the conventions the rules keep, such as option syntax and exit status meaning
 ---
-
 ## Rules
 
 1. **MUST** provide `--json` with a stable, documented schema on every command that outputs data.
@@ -93,7 +96,3 @@ The bad version mixes decoration with data, has no machine format, and blocks an
 - [ ] Bare run and `-h` both show help, with a support and docs link
 - [ ] Colour is off for `TERM=dumb` and checked per stream
 
-## References
-
-- [Command Line Interface Guidelines](https://clig.dev/)
-- [POSIX Utility Conventions](https://pubs.opengroup.org/onlinepubs/9799919799/basedefs/V1_chap12.html)

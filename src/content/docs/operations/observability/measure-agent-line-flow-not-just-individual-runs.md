@@ -7,18 +7,23 @@ type: guideline
 roles: [orchestrator]
 stage: [operate]
 status: draft
-version: 1.0.0
+version: 1.0.1
 updated: 2026-11-27
 reviewed: 2026-11-27
 review_by: 2027-05-27
 related: [BP-0051, BP-0041, BP-0042, BP-0095]
 superseded_by: null
 sources:
-  - { title: Little's law — work in progress, throughput and cycle time, url: https://en.wikipedia.org/wiki/Little%27s_law }
-  - { title: DORA — the four keys, including lead time for changes, url: https://dora.dev/guides/dora-metrics-four-keys/ }
-  - { title: Actionable Agile — flow metrics for predictability, url: https://actionableagile.com/ }
+  - title: "Little's law — work in progress, throughput and cycle time"
+    url: https://en.wikipedia.org/wiki/Little%27s_law
+    note: The identity rule 4 checks the line against, average work in progress equals throughput times average cycle time
+  - title: "DORA — the four keys, including lead time for changes"
+    url: https://dora.dev/guides/dora-metrics-four-keys/
+    note: The four delivery metrics that made lead time and deployment frequency standard reporting for a delivery line
+  - title: "Actionable Agile — flow metrics for predictability"
+    url: https://actionableagile.com/
+    note: The flow-metric set behind reporting cycle time as a distribution with percentile bands rather than a mean
 ---
-
 Per-run telemetry can show every workflow finishing green while the line that runs them stalls. Items wait in queues, work in progress grows, cycle time has a long tail, and the same station causes most of the rework. Without flow metrics the only visible numbers are cost and success per run, so capacity gets added where it is cheap to add rather than at the bottleneck.
 
 This practice measures the line as a system: throughput, work in progress and cycle time per station, the queue and wait that separate them, and the rework that flows back. It sits alongside [BP-0051](/operations/observability/observe-agent-workflows/), which traces individual workflows, and [BP-0041](/operations/cost-performance/budget-and-control-agent-cost/), which budgets cost and latency per task.
@@ -101,8 +106,3 @@ The next week the review cap of 3 is breached at 4 items, and the alert names it
 - [ ] Bottleneck identified from the longest wait and capacity added there first
 - [ ] Rework counted as flow, with the returned station and the extra cycle time
 
-## References
-
-- [Little's law](https://en.wikipedia.org/wiki/Little%27s_law)
-- [DORA — the four keys](https://dora.dev/guides/dora-metrics-four-keys/)
-- [Actionable Agile](https://actionableagile.com/)

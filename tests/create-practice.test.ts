@@ -19,7 +19,7 @@ const repoTax = loadTaxonomy(join(ROOT, 'taxonomy'));
 const draft = (over: Partial<Draft> = {}): Draft => ({
   title: 'Pin MCP server versions', problem: 'Upstream releases change tools without review.', domain: 'D.AGT.TOOL',
   type: 'guideline', roles: ['implementer'], stage: ['build'], rules: '1. **MUST** pin every server.\n2. **SHOULD NOT** float tags.',
-  related: ['BP-0062'], sources: [{ title: 'MCP spec', url: 'https://modelcontextprotocol.io/' }], ...over,
+  related: ['BP-0062'], sources: [{ title: 'MCP spec', url: 'https://modelcontextprotocol.io/', note: 'the protocol the rule pins to' }], ...over,
 });
 
 describe('taxonomy from YAML', () => {
@@ -50,9 +50,13 @@ describe('draft validation', () => {
     expect(validateDraft(draft({ domain: 'none', taxonomy_note: 'D.OPS.X Incident Response' }), vocab)).toEqual([]);
   });
   test('bad related IDs and source URLs are refused', () => {
-    const e = validateDraft(draft({ related: ['BP-62'], sources: [{ title: 'x', url: 'javascript:alert(1)' }] }), vocab).join();
+    const e = validateDraft(draft({ related: ['BP-62'], sources: [{ title: 'x', url: 'javascript:alert(1)', note: 'n' }] }), vocab).join();
     expect(e).toContain('BP-62');
     expect(e).toContain('bad URL');
+  });
+  test('a source without a note is refused', () => {
+    const e = validateDraft(draft({ sources: [{ title: 'MCP spec', url: 'https://modelcontextprotocol.io/' }] as any }), vocab).join();
+    expect(e).toContain('note');
   });
 });
 
@@ -104,8 +108,10 @@ describe('scaffold pieces', () => {
     expect(md).toContain('title: "Pin: versions"');
     expect(md).toContain('status: draft\nversion: 1.0.0');
     expect(md).toContain('review_by: 2027-05-27');
-    const order = ['## Rules', '## When to apply', '## Procedure', '## Examples', '## Anti-patterns', '## Checklist', '## References'];
+    const order = ['## Rules', '## When to apply', '## Procedure', '## Examples', '## Anti-patterns', '## Checklist'];
     expect(order.map((h) => md.indexOf(h))).toEqual([...order.map((h) => md.indexOf(h))].sort((a, b) => a - b));
+    expect(md).not.toContain('## References');
+    expect(md).toContain('note: TODO');
   });
   test('the changelog line lands first under Unreleased', () => {
     expect(changelogWith('# Changelog\n\n## Unreleased\n\n- old\n', '- new')).toBe('# Changelog\n\n## Unreleased\n\n- new\n- old\n');

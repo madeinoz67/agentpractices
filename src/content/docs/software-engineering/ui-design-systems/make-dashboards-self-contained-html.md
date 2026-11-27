@@ -7,21 +7,28 @@ type: pattern
 roles: [implementer, reviewer]
 stage: [build, verify, operate]
 status: draft
-version: 1.1.0
-updated: 2026-11-25
-reviewed: 2026-11-25
-review_by: 2027-05-25
+version: 1.1.1
+updated: 2026-11-27
+reviewed: 2026-11-27
+review_by: 2027-05-27
 related: [BP-0056, BP-0059, BP-0067, BP-0051, BP-0065, BP-0033, BP-0052]
 sources:
   - title: "Microsoft Learn — File types supported by the Microsoft Information Protection SDK"
     url: https://learn.microsoft.com/en-us/information-protection/develop/concept-supported-filetypes
+    note: Names which file types the labelling SDK covers, and that plain HTML is not one of them
   - title: "Microsoft Learn — Extend sensitivity labeling on Windows (Purview Information Protection client)"
     url: https://learn.microsoft.com/purview/information-protection-client
-  - { title: MDN — Content Security Policy, url: https://developer.mozilla.org/en-US/docs/Web/HTTP/Guides/CSP }
-  - { title: MDN — Subresource Integrity, url: https://developer.mozilla.org/en-US/docs/Web/Security/Defenses/Subresource_Integrity }
-  - { title: W3C WAI — Complex images (charts and graphs), url: https://www.w3.org/WAI/tutorials/images/complex/ }
+    note: How the client extends a sensitivity label to files, which is why a labelled share beats a raw attachment
+  - title: "MDN — Content Security Policy"
+    url: https://developer.mozilla.org/en-US/docs/Web/HTTP/Guides/CSP
+    note: The header that limits what a page may load, backing the rule to allow only what the dashboard needs
+  - title: "MDN — Subresource Integrity"
+    url: https://developer.mozilla.org/en-US/docs/Web/Security/Defenses/Subresource_Integrity
+    note: The mechanism that pins an external library to known bytes if a third-party script is unavoidable
+  - title: "W3C WAI — Complex images (charts and graphs)"
+    url: https://www.w3.org/WAI/tutorials/images/complex/
+    note: Sets how a chart must be described in text, behind the rule to give every chart a title and summary
 ---
-
 The fastest way for an agent to give people a dashboard they can share is a single HTML file: it opens in any browser, can be attached to an email, dropped in a chat, published as a static page or artifact, and printed. No server, no framework build, no account. The catch is that whatever is in the file goes wherever the file goes, and a dashboard nobody can trace back to its data is worse than none.
 
 ## Rules
@@ -156,8 +163,3 @@ Tested: the generated file is about 2.6 KB, pure ASCII, contains no script, and 
 - [ ] Labelled at or above the highest source label; banner top and bottom, title, file name, root attribute; shared through a channel that enforces the label when it must
 - [ ] Rendered and screenshotted headless; no console errors; edge cases tested
 
-## References
-
-- [MDN — Content Security Policy](https://developer.mozilla.org/en-US/docs/Web/HTTP/Guides/CSP)
-- [MDN — Subresource Integrity](https://developer.mozilla.org/en-US/docs/Web/Security/Defenses/Subresource_Integrity)
-- [W3C WAI — Complex images](https://www.w3.org/WAI/tutorials/images/complex/)

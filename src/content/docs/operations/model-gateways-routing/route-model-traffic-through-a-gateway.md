@@ -7,16 +7,19 @@ type: guideline
 roles: [orchestrator, implementer]
 stage: [plan, build, operate]
 status: draft
-version: 1.1.0
-updated: 2026-11-24
-reviewed: 2026-11-24
-review_by: 2027-02-24
+version: 1.1.1
+updated: 2026-11-27
+reviewed: 2026-11-27
+review_by: 2027-02-27
 related: [BP-0041, BP-0032, BP-0033, BP-0039, BP-0044]
 sources:
-  - { title: LiteLLM AI Gateway docs, url: https://docs.litellm.ai/docs/simple_proxy/ }
-  - { title: Claude Code Router, url: https://github.com/musistudio/claude-code-router }
+  - title: LiteLLM AI Gateway docs
+    url: https://docs.litellm.ai/docs/simple_proxy/
+    note: The self-hosted central gateway the team option assumes, with per-key budgets, spend tracking and model allow-lists
+  - title: Claude Code Router
+    url: https://github.com/musistudio/claude-code-router
+    note: The local per-developer router option, sending a coding agent's requests to other providers or models per task type
 ---
-
 ## Rules
 
 ### Choosing
@@ -73,7 +76,3 @@ Local: Claude Code runs with `ANTHROPIC_BASE_URL` pointing at a local Claude Cod
 - [ ] Data-to-provider rules enforced; substitute models evaluated
 - [ ] Fallbacks evaluated; usage and traces logged; content redacted
 
-## References
-
-- [LiteLLM AI Gateway](https://docs.litellm.ai/docs/simple_proxy/)
-- [Claude Code Router](https://github.com/musistudio/claude-code-router)

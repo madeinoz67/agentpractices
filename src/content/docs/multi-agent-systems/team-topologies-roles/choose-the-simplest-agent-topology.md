@@ -7,16 +7,19 @@ type: guideline
 roles: [orchestrator, planner]
 stage: [plan]
 status: draft
-version: 1.0.0
-updated: 2026-11-24
-reviewed: 2026-11-24
-review_by: 2027-05-24
+version: 1.0.1
+updated: 2026-11-27
+reviewed: 2026-11-27
+review_by: 2027-05-27
 related: [BP-0043, BP-0003, BP-0008, BP-0035, BP-0041]
 sources:
-  - { title: Anthropic — Building effective agents, url: https://www.anthropic.com/research/building-effective-agents }
-  - { title: Anthropic — How we built our multi-agent research system, url: https://www.anthropic.com/engineering/multi-agent-research-system }
+  - title: "Anthropic — Building effective agents"
+    url: https://www.anthropic.com/research/building-effective-agents
+    note: The topology catalogue rule 2 draws from, with the advice to start with one agent and add patterns only when they clearly pay
+  - title: "Anthropic — How we built our multi-agent research system"
+    url: https://www.anthropic.com/engineering/multi-agent-research-system
+    note: "The evidence for rule 1's caution: multi-agent research burned about fifteen times the tokens of one agent, so parallelism has to earn it"
 ---
-
 ## Rules
 
 1. **MUST** start with a single agent (or a fixed workflow) and add agents only when a single agent demonstrably fails on context size, parallelism or specialisation. More agents add cost, latency and coordination failures.
@@ -63,7 +66,3 @@ Research: orchestrator decomposes the question → parallel researcher workers e
 - [ ] One owner per decision and state; human gate for irreversible actions
 - [ ] Topology measured against the baseline
 
-## References
-
-- [Anthropic — Building effective agents](https://www.anthropic.com/research/building-effective-agents)
-- [Anthropic — Multi-agent research system](https://www.anthropic.com/engineering/multi-agent-research-system)

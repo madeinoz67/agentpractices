@@ -7,16 +7,19 @@ type: guideline
 roles: [reviewer, implementer, orchestrator]
 stage: [verify, operate]
 status: draft
-version: 1.0.1
-updated: 2026-11-25
-reviewed: 2026-11-25
-review_by: 2027-05-25
+version: 1.0.2
+updated: 2026-11-27
+reviewed: 2026-11-27
+review_by: 2027-05-27
 related: [BP-0027, BP-0028, BP-0006, BP-0005]
 sources:
-  - { title: OWASP LLM09:2026 Vector and Embedding Weaknesses, url: https://genai.owasp.org/resource/owasp-genai-llm-top-10-2026/ }
-  - { title: Anthropic — Introducing Contextual Retrieval, url: https://www.anthropic.com/news/contextual-retrieval }
+  - title: "OWASP LLM09:2026 Vector and Embedding Weaknesses"
+    url: https://genai.owasp.org/resource/owasp-genai-llm-top-10-2026/
+    note: "Names the embedding-layer attacks the secure rules defend: cross-tenant leakage, corpus poisoning and inversion of stored vectors"
+  - title: "Anthropic — Introducing Contextual Retrieval"
+    url: https://www.anthropic.com/news/contextual-retrieval
+    note: Quantifies retrieval failure rate on a labelled question set, showing why retrieval is measured apart from answer quality
 ---
-
 ## Rules
 
 ### Evaluate
@@ -63,7 +66,3 @@ Before shipping a RAG system or a change to one, and continuously while it runs.
 - [ ] Tenant isolation tested; corpus write access controlled and logged
 - [ ] Embeddings and backups access-controlled; anomalies monitored
 
-## References
-
-- [OWASP LLM09:2026 Vector and Embedding Weaknesses](https://genai.owasp.org/resource/owasp-genai-llm-top-10-2026/)
-- [Anthropic — Introducing Contextual Retrieval](https://www.anthropic.com/news/contextual-retrieval)

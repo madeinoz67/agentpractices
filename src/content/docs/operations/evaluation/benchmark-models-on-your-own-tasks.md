@@ -7,18 +7,25 @@ type: procedure
 roles: [orchestrator, reviewer]
 stage: [plan, verify, operate]
 status: draft
-version: 1.0.0
-updated: 2026-11-24
-reviewed: 2026-11-24
-review_by: 2027-02-24
+version: 1.0.1
+updated: 2026-11-27
+reviewed: 2026-11-27
+review_by: 2027-02-27
 related: [BP-0049, BP-0006, BP-0050, BP-0041, BP-0046, BP-0064, BP-0059]
 sources:
-  - { title: 'Alzahrani et al. — When Benchmarks are Targets: Revealing the Sensitivity of LLM Leaderboards', url: https://arxiv.org/abs/2402.01781 }
-  - { title: Contamination Inflates Scores but Rarely Reorders LLM Leaderboards (2026), url: https://arxiv.org/abs/2609.02899 }
-  - { title: Claude Platform docs — Structured outputs, url: https://platform.claude.com/docs/en/build-with-claude/structured-outputs }
-  - { title: pstack (Cursor plugins) — benchmark-checklist skill, url: https://github.com/cursor/plugins/tree/main/pstack/skills/benchmark-checklist }
+  - title: "Alzahrani et al. — When Benchmarks are Targets: Revealing the Sensitivity of LLM Leaderboards"
+    url: https://arxiv.org/abs/2402.01781
+    note: Leaderboard ranks shift with prompt format, order and shot count, so public scores are only good enough to shortlist
+  - title: Contamination Inflates Scores but Rarely Reorders LLM Leaderboards (2026)
+    url: https://arxiv.org/abs/2609.02899
+    note: Justifies using relative rank for the shortlist while distrusting absolute scores, because leaking test items lifts the level but not the order
+  - title: "Claude Platform docs — Structured outputs"
+    url: https://platform.claude.com/docs/en/build-with-claude/structured-outputs
+    note: Constrained decoding that guarantees schema-valid JSON, plus the refusal, truncation and unsupported-constraint edges rule 8 says to validate
+  - title: "pstack (Cursor plugins) — benchmark-checklist skill"
+    url: https://github.com/cursor/plugins/tree/main/pstack/skills/benchmark-checklist
+    note: "The ordered checklist this procedure follows: shortlist, fair setup, repeated interleaved runs, then hard gates before price"
 ---
-
 Public benchmarks tell you roughly where a model sits; they do not tell you whether it does *your* work, at *your* latency, in *your* format, for *your* budget. Leaderboard scores are sensitive to small changes in how questions are posed, and training-data contamination inflates absolute scores, although one 2026 study found it rarely changed the ranking. Use them to shortlist, then measure.
 
 ## Rules
@@ -132,9 +139,3 @@ if (import.meta.main) {
 - [ ] Hard gates first, then cheapest or fastest; noise treated as no difference
 - [ ] Decision recorded; role table updated; re-run on releases and drift
 
-## References
-
-- [When Benchmarks are Targets](https://arxiv.org/abs/2402.01781)
-- [Contamination Inflates Scores but Rarely Reorders LLM Leaderboards](https://arxiv.org/abs/2609.02899)
-- [Claude Platform — Structured outputs](https://platform.claude.com/docs/en/build-with-claude/structured-outputs)
-- [pstack — benchmark-checklist](https://github.com/cursor/plugins/tree/main/pstack/skills/benchmark-checklist)

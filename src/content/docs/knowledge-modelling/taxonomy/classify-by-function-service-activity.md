@@ -7,20 +7,31 @@ type: guideline
 roles: [planner, implementer, reviewer]
 stage: [plan, build, operate]
 status: draft
-version: 1.0.0
-updated: 2026-11-26
-reviewed: 2026-11-26
-review_by: 2027-05-26
+version: 1.0.1
+updated: 2026-11-27
+reviewed: 2026-11-27
+review_by: 2027-05-27
 related: [BP-0004, BP-0024, BP-0026, BP-0025, BP-0014, BP-0062]
 sources:
-  - { title: National Archives of Australia — Classifying information (functions, activities, transactions), url: https://www.naa.gov.au/information-management/describing-information/classifying-information }
-  - { title: National Archives of Australia — Develop a business or records classification scheme, url: https://www.naa.gov.au/node/3613 }
-  - { title: Northern Territory Government — Business classification scheme, analyse, url: https://dcdd.nt.gov.au/government-records/business-classification-scheme-bcs/analyse }
-  - { title: ISO 15489-1:2016 Records management — Concepts and principles, url: https://www.iso.org/standard/62542.html }
-  - { title: esd standards (LGA) — Function List, url: https://interoperable-europe.ec.europa.eu/collection/esd-standards/solution/function-list }
-  - { title: ICRM — Functional records classification, clarification and effective usage, url: https://www.icrm.org/sites/default/files/2024-12/Functional%20Records%20Classification_Clarification%20and%20Effective%20Usage.pdf }
+  - title: "National Archives of Australia — Classifying information (functions, activities, transactions)"
+    url: https://www.naa.gov.au/information-management/describing-information/classifying-information
+    note: Australian government guidance that puts functions at the top and keeps org units and systems out of the hierarchy
+  - title: "National Archives of Australia — Develop a business or records classification scheme"
+    url: https://www.naa.gov.au/node/3613
+    note: Method for drafting a scheme from what the organisation does and testing it against real records
+  - title: "Northern Territory Government — Business classification scheme, analyse"
+    url: https://dcdd.nt.gov.au/government-records/business-classification-scheme-bcs/analyse
+    note: Analysis steps for deriving function, service and activity levels from business evidence before drafting
+  - title: "ISO 15489-1:2016 Records management — Concepts and principles"
+    url: https://www.iso.org/standard/62542.html
+    note: Records management principles requiring systematic classification tied to business activity, so retention and access attach consistently
+  - title: "esd standards (LGA) — Function List"
+    url: https://interoperable-europe.ec.europa.eu/collection/esd-standards/solution/function-list
+    note: Published function and service lists for UK local government, a scheme to reuse or map local terms onto
+  - title: "ICRM — Functional records classification, clarification and effective usage"
+    url: https://www.icrm.org/sites/default/files/2024-12/Functional%20Records%20Classification_Clarification%20and%20Effective%20Usage.pdf
+    note: Argues functional classification outlasts restructures and explains how to keep org units and systems as facets
 ---
-
 ## Rules
 
 ### Build the hierarchy from what the organisation does

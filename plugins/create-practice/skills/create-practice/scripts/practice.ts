@@ -112,13 +112,16 @@ export function rankSimilar(records: CatalogRecord[], query: string, limit = 8) 
 
 export interface Draft {
   title: string; problem: string; domain: string; type: string; roles: string[]; stage: string[];
-  rules: string; related?: string[]; sources?: { title: string; url: string }[];
+  rules: string; related?: string[]; sources?: { title: string; url: string; note: string }[];
   /** Set when no domain fits; proposes the new concept in the issue text. */
   taxonomy_note?: string;
 }
 
 const NONE_FITS = 'None fits — needs a taxonomy change';
 const RULE_LINE = /^\s*\d+\.\s+\*\*(MUST NOT|MUST|SHOULD NOT|SHOULD|MAY)\*\*\s+\S/;
+
+/** One source as it appears in a proposal: the link, then the note that says why it matters. */
+export const sourceLine = (x: { title: string; url: string; note: string }) => `- [${x.title}](${x.url}): ${x.note}`;
 
 export function validateDraft(d: Draft, v: Vocab): string[] {
   const errs: string[] = [];
@@ -139,6 +142,7 @@ export function validateDraft(d: Draft, v: Vocab): string[] {
   for (const r of d.related ?? []) if (!/^BP-\d{4}$/.test(r)) errs.push(`related entry ${r} is not a BP-NNNN ID`);
   for (const s of d.sources ?? []) {
     try { if (!/^https?:$/.test(new URL(s.url).protocol)) throw 0; } catch { errs.push(`source "${s.title}" has a bad URL`); }
+    if (!String(s.note ?? '').trim()) errs.push(`source "${s.title}" needs a note that says why it matters to the rules`);
   }
   return errs;
 }
@@ -152,7 +156,7 @@ export function domainOption(v: Vocab, id: string): string {
 /** Issue body in the shape GitHub renders the Propose a practice form, so the owner reads one format. */
 export function issueBody(d: Draft, v: Vocab): string {
   const s = (h: string, body: string) => `### ${h}\n\n${body.trim() || '_No response_'}\n`;
-  const sources = (d.sources ?? []).map((x) => `- [${x.title}](${x.url})`).join('\n');
+  const sources = (d.sources ?? []).map(sourceLine).join('\n');
   const problem = d.domain === 'none' ? `${d.problem.trim()}\n\n**Taxonomy change needed:** ${d.taxonomy_note!.trim()}` : d.problem;
   return [
     s('Practice title', d.title),
@@ -174,7 +178,7 @@ export function prefillUrl(d: Draft, v: Vocab): string {
     practice_title: d.title, problem: d.domain === 'none' ? `${d.problem}\n\nTaxonomy change needed: ${d.taxonomy_note}` : d.problem,
     domain: domainOption(v, d.domain), type: d.type, roles: d.roles.join(','), stage: d.stage.join(','),
     rules: d.rules, related: (d.related ?? []).join(', '),
-    sources: (d.sources ?? []).map((x) => `- [${x.title}](${x.url})`).join('\n'),
+    sources: (d.sources ?? []).map(sourceLine).join('\n'),
   });
   return `${REPO_URL}/issues/new?${p}`;
 }
@@ -223,7 +227,9 @@ review_by: ${reviewBy}
 related: [${(o.related ?? []).join(', ')}]
 superseded_by: null
 sources:
-  - { title: TODO source title, url: https://example.org/TODO }
+  - title: TODO source title
+    url: https://example.org/TODO
+    note: TODO say why this source matters to the rules
 ---
 
 TODO: one or two paragraphs — the problem this practice prevents and why the rules below fix it.
@@ -252,10 +258,6 @@ TODO
 ## Checklist
 
 - [ ] TODO
-
-## References
-
-- TODO
 `;
 }
 

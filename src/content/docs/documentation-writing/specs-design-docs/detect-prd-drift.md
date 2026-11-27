@@ -7,19 +7,26 @@ type: guideline
 roles: [reviewer, orchestrator]
 stage: [verify, operate]
 status: draft
-version: 1.0.0
-updated: 2026-11-26
-reviewed: 2026-11-26
-review_by: 2027-05-26
+version: 1.0.1
+updated: 2026-11-27
+reviewed: 2026-11-27
+review_by: 2027-05-27
 related: [BP-0058, BP-0057, BP-0059, BP-0036, BP-0037, BP-0038, BP-0083, BP-0084, BP-0048, BP-0021]
 superseded_by: null
 sources:
-  - { title: Spec-driven development as prescribed and as practiced (2026), url: https://arxiv.org/abs/2608.25202 }
-  - { title: NASA Software Engineering Handbook — SWE-052 Bidirectional traceability, url: https://swehb.nasa.gov/x/x4AIAw }
-  - { title: GitHub Spec Kit — spec-driven development (analyze step), url: https://github.com/github/spec-kit }
-  - { title: Microsoft DevSquad Copilot — spec amendment during implementation, url: https://microsoft.github.io/devsquad-copilot/concepts/spec-amendment/ }
+  - title: Spec-driven development as prescribed and as practiced (2026)
+    url: https://arxiv.org/abs/2608.25202
+    note: Compares spec-driven development as prescribed with how it is practised, the divergence this practice's drift checks are built to catch
+  - title: "NASA Software Engineering Handbook — SWE-052 Bidirectional traceability"
+    url: https://swehb.nasa.gov/x/x4AIAw
+    note: NASA's SWE-052 requirement for traceability in both directions, the model for every requirement mapping to work and every change citing one
+  - title: "GitHub Spec Kit — spec-driven development (analyze step)"
+    url: https://github.com/github/spec-kit
+    note: "The analyze step: a model-free cross-check of spec, plan and tasks for gaps and ambiguity, the shape rule 4 applies continuously"
+  - title: "Microsoft DevSquad Copilot — spec amendment during implementation"
+    url: https://microsoft.github.io/devsquad-copilot/concepts/spec-amendment/
+    note: A documented route for amending the spec mid-implementation, so the change goes through review rather than being synced quietly to the code
 ---
-
 A PRD ([BP-0058](/documentation-writing/specs-design-docs/write-prds-agents-can-build-from/)) is accurate on the day it is approved. After that, agents change code faster than anyone re-reads the PRD, a requirement is clarified in a chat and never written down, a test is weakened, or a task is marked done that was only half built. The PRD and the system stop describing the same thing, and the next agent builds on whichever one it happens to read. Drift is found only by checking, repeatedly, in both directions: every requirement to the work that proves it, and every piece of work back to a requirement.
 
 Plan-against-PRD alignment before work starts is covered by BP-0058 rule 7. This practice covers the gap that opens during and after delivery.
@@ -177,8 +184,3 @@ R-007  Report a problem on a practice page   STALE      text changed since verif
 - [ ] Full check before release and on a schedule; sampled re-checks of verified requirements
 - [ ] Every finding resolved by an owner decision; divergence register; no silent sync
 
-## References
-
-- [BP-0058 Write PRDs that agents can build and test against](/documentation-writing/specs-design-docs/write-prds-agents-can-build-from/)
-- [BP-0059 Validate agent work with proof, not claims](/agent-engineering/workflow/validate-with-proof-not-claims/)
-- [BP-0084 Detect agents drifting from the practices they follow](/operations/evaluation/detect-agents-drifting-from-practice/)

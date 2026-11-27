@@ -7,18 +7,25 @@ type: reference
 roles: [planner, orchestrator]
 stage: [plan, build]
 status: draft
-version: 1.0.0
-updated: 2026-11-24
-reviewed: 2026-11-24
-review_by: 2027-05-24
+version: 1.0.1
+updated: 2026-11-27
+reviewed: 2026-11-27
+review_by: 2027-05-27
 related: [BP-0042, BP-0048, BP-0064, BP-0002, BP-0008, BP-0059, BP-0041, BP-0061, BP-0066]
 sources:
-  - { title: Anthropic — Building effective agents, url: https://www.anthropic.com/research/building-effective-agents }
-  - { title: Geoffrey Huntley — Ralph (loop until done), url: https://ghuntley.com/ralph/ }
-  - { title: Thoughtworks Technology Radar — Ralph loop, url: https://www.thoughtworks.com/radar/techniques/ralph-loop }
-  - { title: Claude Code docs — Best practices (checks, goals, Stop hooks), url: https://code.claude.com/docs/en/best-practices }
+  - title: "Anthropic — Building effective agents"
+    url: https://www.anthropic.com/research/building-effective-agents
+    note: Defines the composable workflow patterns this catalogue is drawn from, and argues for the simplest that works
+  - title: "Geoffrey Huntley — Ralph (loop until done)"
+    url: https://ghuntley.com/ralph/
+    note: The loop where one prompt runs repeatedly, with progress kept in files and version control
+  - title: "Thoughtworks Technology Radar — Ralph loop"
+    url: https://www.thoughtworks.com/radar/techniques/ralph-loop
+    note: Places the technique on the Technology Radar, noting it works for well-specified work but drifts without honest checks
+  - title: "Claude Code docs — Best practices (checks, goals, Stop hooks)"
+    url: https://code.claude.com/docs/en/best-practices
+    note: Shows the Stop hook and goal settings that keep a loop running until the check passes
 ---
-
 A **workflow** runs models and tools through code paths you define; an **agent** lets the model direct its own steps. Most useful systems sit between the two. This catalogue covers the patterns at the level of one workflow; for how to arrange *multiple agents* (team topologies, roles, ownership), see [BP-0042](/multi-agent-systems/team-topologies-roles/choose-the-simplest-agent-topology/), and for running a long piece of work through gated phases, see [BP-0048](/multi-agent-systems/coordination-handoff/orchestrate-agent-workflows/).
 
 ## Rules
@@ -204,9 +211,3 @@ new ticket (event) → route (typed model + rules)
 - [ ] Pattern named in the design; combinations deliberate
 - [ ] Success, cost and latency measured per pattern
 
-## References
-
-- [Anthropic — Building effective agents](https://www.anthropic.com/research/building-effective-agents)
-- [Geoffrey Huntley — Ralph](https://ghuntley.com/ralph/)
-- [Thoughtworks Radar — Ralph loop](https://www.thoughtworks.com/radar/techniques/ralph-loop)
-- [Claude Code — Best practices](https://code.claude.com/docs/en/best-practices)

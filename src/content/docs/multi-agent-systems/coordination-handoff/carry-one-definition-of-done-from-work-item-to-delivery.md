@@ -7,17 +7,20 @@ type: guideline
 roles: [orchestrator, reviewer]
 stage: [plan, build, verify]
 status: draft
-version: 1.0.0
+version: 1.0.1
 updated: 2026-11-27
 reviewed: 2026-11-27
 review_by: 2027-05-27
 related: [BP-0008, BP-0059, BP-0048, BP-0002]
 superseded_by: null
 sources:
-  - { title: The Scrum Guide — Definition of Done, url: https://scrumguides.org/scrum-guide.html }
-  - { title: Agile Alliance — Definition of Done, url: https://www.agilealliance.org/glossary/definition-of-done/ }
+  - title: "The Scrum Guide — Definition of Done"
+    url: https://scrumguides.org/scrum-guide.html
+    note: Where the term comes from and its standing as a commitment of the increment, not a per-station checklist
+  - title: "Agile Alliance — Definition of Done"
+    url: https://www.agilealliance.org/glossary/definition-of-done/
+    note: The glossary entry that separates done from accepted, which rules 4 and 5 turn into two different gates
 ---
-
 Each station in an agent line has its own exit check, and each is easy to satisfy. A reviewer accepts "tests pass" while the item's acceptance criterion was "the user path works in the real app". The last station's report becomes the working definition of done, the original is never checked, and the item is delivered with the requester's criterion unmet and the ledger recording a success.
 
 This practice keeps one definition of done attached to the item from the moment it is written to the moment it is accepted. Stations may add their own exit checks on top, but they cannot weaken, narrow or replace the item's definition, and the final gate checks the original rather than the last station's account of it.
@@ -101,7 +104,3 @@ A content item: the definition of done names audience, length, sources and a fac
 - [ ] Changes recorded as a new version with the requester's approval
 - [ ] No item accepted on station checks alone
 
-## References
-
-- [The Scrum Guide — Definition of Done](https://scrumguides.org/scrum-guide.html)
-- [Agile Alliance — Definition of Done](https://www.agilealliance.org/glossary/definition-of-done/)

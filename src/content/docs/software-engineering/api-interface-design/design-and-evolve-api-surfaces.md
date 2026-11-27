@@ -7,20 +7,31 @@ type: guideline
 roles: [planner, implementer, reviewer]
 stage: [plan, build, verify, operate]
 status: draft
-version: 1.0.0
-updated: 2026-11-25
-reviewed: 2026-11-25
-review_by: 2027-05-25
+version: 1.0.1
+updated: 2026-11-27
+reviewed: 2026-11-27
+review_by: 2027-05-27
 related: [BP-0001, BP-0055, BP-0058, BP-0037, BP-0034, BP-0043, BP-0024]
 sources:
-  - { title: OpenAPI Specification v3.2.0, url: https://spec.openapis.org/oas/v3.2.0.html }
-  - { title: 'RFC 9457 — Problem Details for HTTP APIs', url: https://www.rfc-editor.org/rfc/rfc9457 }
-  - { title: 'RFC 9745 — The Deprecation HTTP Response Header Field', url: https://www.rfc-editor.org/rfc/rfc9745 }
-  - { title: 'RFC 8594 — The Sunset HTTP Header Field', url: https://www.rfc-editor.org/rfc/rfc8594 }
-  - { title: oasdiff — breaking-change detection for OpenAPI, url: https://github.com/oasdiff/oasdiff }
-  - { title: Buf — breaking-change detection for Protobuf, url: https://buf.build/docs/breaking/ }
+  - title: OpenAPI Specification v3.2.0
+    url: https://spec.openapis.org/oas/v3.2.0.html
+    note: The REST contract format the rules treat as source of truth, with 3.2.0 as the version to target
+  - title: "RFC 9457 — Problem Details for HTTP APIs"
+    url: https://www.rfc-editor.org/rfc/rfc9457
+    note: Supplies the single machine-readable error shape HTTP APIs must return, with a stable type per error
+  - title: "RFC 9745 — The Deprecation HTTP Response Header Field"
+    url: https://www.rfc-editor.org/rfc/rfc9745
+    note: Defines the response header that marks an operation deprecated on the wire, so callers learn before removal
+  - title: "RFC 8594 — The Sunset HTTP Header Field"
+    url: https://www.rfc-editor.org/rfc/rfc8594
+    note: Defines the header that states when a deprecated endpoint stops working, so migration has a deadline
+  - title: "oasdiff — breaking-change detection for OpenAPI"
+    url: https://github.com/oasdiff/oasdiff
+    note: The OpenAPI diff tool named in the CI gate that fails a build on unapproved breaking changes
+  - title: "Buf — breaking-change detection for Protobuf"
+    url: https://buf.build/docs/breaking/
+    note: The Protobuf schema checker named in the same CI gate, for gRPC services
 ---
-
 An API is a promise to every client, including the agents that will call it, generate SDKs from it, or turn it into tools. Agents also write and change APIs quickly, which makes accidental breaking changes cheap to produce and expensive to discover. The contract has to be explicit, checked by machine, and changed deliberately.
 
 ## Rules
@@ -154,11 +165,3 @@ buf breaking --against '.git#branch=main'
 - [ ] Deprecation with notice, Deprecation/Sunset headers and usage tracking before removal
 - [ ] Agents change contract and code together; breaking changes need human approval
 
-## References
-
-- [OpenAPI Specification v3.2.0](https://spec.openapis.org/oas/v3.2.0.html)
-- [RFC 9457 — Problem Details for HTTP APIs](https://www.rfc-editor.org/rfc/rfc9457)
-- [RFC 9745 — Deprecation header](https://www.rfc-editor.org/rfc/rfc9745)
-- [RFC 8594 — Sunset header](https://www.rfc-editor.org/rfc/rfc8594)
-- [oasdiff](https://github.com/oasdiff/oasdiff)
-- [Buf — breaking change detection](https://buf.build/docs/breaking/)

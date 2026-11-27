@@ -7,19 +7,28 @@ type: guideline
 roles: [implementer, reviewer]
 stage: [plan, build, verify]
 status: draft
-version: 1.1.0
+version: 1.1.1
 updated: 2026-11-27
 reviewed: 2026-11-27
 review_by: 2027-02-27
 related: [BP-0001, BP-0055, BP-0022, BP-0023, BP-0062, BP-0071, BP-0044, BP-0063, BP-0005, BP-0014, BP-0085, BP-0090, BP-0091]
 sources:
-  - { title: MCP specification 2026-07-28 — changelog, url: https://modelcontextprotocol.io/specification/2026-07-28/changelog }
-  - { title: MCP blog — The 2026-07-28 specification, url: https://blog.modelcontextprotocol.io/posts/2026-07-28/ }
-  - { title: MCP — Security best practices, url: https://modelcontextprotocol.io/specification/latest/basic/security_best_practices }
-  - { title: MCP blog — MCP Apps (official extension), url: https://blog.modelcontextprotocol.io/posts/2026-01-26-mcp-apps/ }
-  - { title: MCP TypeScript SDK v2 — Tools, url: https://ts.sdk.modelcontextprotocol.io/v2/servers/tools }
+  - title: "MCP specification 2026-07-28 — changelog"
+    url: https://modelcontextprotocol.io/specification/2026-07-28/changelog
+    note: The changes that made the protocol stateless and deprecated HTTP+SSE, Roots, Sampling and Logging, so new servers must not build on them
+  - title: "MCP blog — The 2026-07-28 specification"
+    url: https://blog.modelcontextprotocol.io/posts/2026-07-28/
+    note: The rationale for per-request protocol versions and client capabilities replacing session state in the 2026-07-28 release
+  - title: "MCP — Security best practices"
+    url: https://modelcontextprotocol.io/specification/latest/basic/security_best_practices
+    note: Token audience checks, the ban on passing a client token downstream and Origin validation for localhost daemons
+  - title: "MCP blog — MCP Apps (official extension)"
+    url: https://blog.modelcontextprotocol.io/posts/2026-01-26-mcp-apps/
+    note: "The ui:// resource convention and the hosted-UI model that MCP Apps extend, including the text fallback requirement"
+  - title: "MCP TypeScript SDK v2 — Tools"
+    url: https://ts.sdk.modelcontextprotocol.io/v2/servers/tools
+    note: The registerTool API with its input and output schemas, structuredContent and annotation hints that the adapter example is built from
 ---
-
 The same capability often needs three front ends: a CLI people and shell-using agents can run, an MCP server for MCP clients, and sometimes an MCP App that renders a UI in the conversation. An API, a web UI, a TUI and the documentation usually join them. Build the capability once and keep every surface thin, so behaviour, validation, tests and docs do not drift apart. For whether you need MCP at all, see [BP-0055](/agent-engineering/tool-use/prefer-api-wrapper-scripts-to-mcp/); for CLI design rules, [BP-0001](/software-engineering/cli-design/design-clis-for-agents/).
 
 ## Rules
@@ -240,10 +249,3 @@ WantedBy=default.target
 - [ ] Tested through real clients; versioned, signed or pinned, published
 - [ ] Every surface that exposes the core is listed with a generator or an owner, and each pair that must stay in step has a gate that fails the build
 
-## References
-
-- [MCP 2026-07-28 changelog](https://modelcontextprotocol.io/specification/2026-07-28/changelog)
-- [MCP blog — The 2026-07-28 specification](https://blog.modelcontextprotocol.io/posts/2026-07-28/)
-- [MCP — Security best practices](https://modelcontextprotocol.io/specification/latest/basic/security_best_practices)
-- [MCP blog — MCP Apps](https://blog.modelcontextprotocol.io/posts/2026-01-26-mcp-apps/)
-- [MCP TypeScript SDK v2 — Tools](https://ts.sdk.modelcontextprotocol.io/v2/servers/tools)
