@@ -2,6 +2,7 @@
 
 ## Unreleased
 
+- BP-0094 Name CLI flags and subcommands so callers can guess them (D.SWE.CLI, draft) (#54).
 - BP-0001 1.1.0: rules 10–16 add the output switches (`--plain`, `-q`, `-` for stdin and stdout, the pager), confirmation levels for a severe action, the rule against a secret as a flag value, the help entry points, and `TERM=dumb` (#58).
 - BP-0093 Choose a CLI name and argument shape that callers can remember (D.SWE.CLI, draft) (#62).
 - BP-0092 Make a command declare the files and network calls it uses (D.SWE.CLI, draft) (#61).
