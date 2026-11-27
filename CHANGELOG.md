@@ -2,6 +2,7 @@
 
 ## Unreleased
 
+- BP-0104 Sample review when agent output outpaces review (D.SWE.VCS, draft) (#88).
 - BP-0103 Amend the agent environment when the same failure repeats (D.AGT.WF, draft) (#87).
 - BP-0102 Earn agent autonomy with verification evidence (D.AGT.WF, draft) (#86).
 - BP-0101 Feed inner-loop agents with a separate outer-loop context agent (D.MAS.HND, draft) (#83).
