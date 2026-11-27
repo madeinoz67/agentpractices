@@ -8,8 +8,9 @@ import { join } from 'node:path';
 const ROOT = join(import.meta.dir, '..');
 import { loadTaxonomy } from '../scripts/lib/taxonomy';
 import {
-  filterPractices, flattenDomains, isAllowed, isCacheName, isFresh, isGeneratedNewer, isOverdue, matchesDomain, matchesRole,
-  nearestDomains, nearestIds, parseCitation, parseFlags, resolveMd, rulesSection, versionChange, vocabulary,
+  contentIdentity, filterPractices, flattenDomains, isAllowed, isCacheName, isFresh, isOverdue, isRollback, matchesDomain,
+  matchesRole, nearestCommand, nearestDomains, nearestIds, parseCitation, parseFlags, parseGlobals, resolveMd, rulesSection,
+  versionChange, vocabulary,
   type Catalog, type Record_, type TaxonomyJson,
 } from '../skills/agentpractices/scripts/practices';
 
@@ -71,21 +72,35 @@ describe('rulesSection', () => {
   test('handles Rules as the last section', () => expect(rulesSection('## Rules\n\n1. **MUST** x.')).toBe('## Rules\n\n1. **MUST** x.'));
 });
 
-describe('cache freshness', () => {
-  test('a newer generated timestamp wins', () => {
-    expect(isGeneratedNewer('2026-11-25T03:00:00Z', '2026-11-24T03:00:00Z')).toBe(true);
-    expect(isGeneratedNewer('2026-11-24T03:00:00Z', '2026-11-25T03:00:00Z')).toBe(false);
-    expect(isGeneratedNewer('2026-11-25T03:00:00Z', '2026-11-25T03:00:00Z')).toBe(false);
+describe('cache identity', () => {
+  const at = (generated: string, ...over: Partial<Record_>[]): Catalog => ({
+    version: 1, taxonomy_version: '0.0.0', generated, count: over.length,
+    practices: over.map((o, i) => p({ id: `BP-000${i + 1}`, ...o })),
   });
-  // AC6: a changed `generated` timestamp causes a refetch. A stale cache must not suppress the network copy.
+
+  // BP-0007 rule 12: cache on content identity, never on the build clock (issue #27).
+  test('the same practices have the same identity whatever the generated time', () => {
+    const a = at('2026-11-24T00:00:00Z', { version: '1.0.0', content_hash: 'h1' });
+    const b = at('2026-11-25T00:00:00Z', { version: '1.0.0', content_hash: 'h1' });
+    expect(contentIdentity(a)).toBe(contentIdentity(b));
+  });
+  test('a version or content hash change changes the identity', () => {
+    const a = at('x', { version: '1.0.0', content_hash: 'h1' });
+    expect(contentIdentity(at('x', { version: '1.0.1', content_hash: 'h1' }))).not.toBe(contentIdentity(a));
+    expect(contentIdentity(at('x', { version: '1.0.0', content_hash: 'h2' }))).not.toBe(contentIdentity(a));
+  });
+  // Issue #27: a scheduled build can publish old content with a new timestamp. The older version must lose.
+  test('an older practice in the remote copy is a rollback', () => {
+    const cached = at('2026-11-25T00:00:00Z', { version: '1.1.0', content_hash: 'h2' });
+    const old = at('2026-11-26T00:00:00Z', { version: '1.0.0', content_hash: 'h1' });
+    expect(isRollback(old, cached)).toBe(true);
+    expect(isRollback(cached, old)).toBe(false);
+    expect(isRollback(cached, cached)).toBe(false);
+  });
   test('a stale cache refetches, a fresh one does not', () => {
     const now = 1_000_000;
-    const stale = isFresh(now - 16 * 60 * 1000, now);
-    const fresh = isFresh(now - 60 * 1000, now);
-    expect(stale).toBe(false);
-    expect(fresh).toBe(true);
-    // Stale gate open, remote newer => the fetcher replaces the cache.
-    expect(!stale && isGeneratedNewer('2026-11-25T04:00:00Z', '2026-11-25T03:00:00Z')).toBe(true);
+    expect(isFresh(now - 16 * 60 * 1000, now)).toBe(false);
+    expect(isFresh(now - 60 * 1000, now)).toBe(true);
   });
 });
 
@@ -312,9 +327,13 @@ if (!built) console.warn('plugin e2e: SKIPPED — `bun run build` failed, so dis
   };
   const run = (...args: string[]) => spawnAt(base, cache, ...args);
 
+  // BP-0092 rule 3: a network call names its host on stderr. Every other stderr line is a failure.
+  const networkLines = (err: string) => err.split('\n').filter((l) => l.startsWith('agentpractices: fetching '));
+  const otherErr = (err: string) => err.split('\n').filter((l) => l && !l.startsWith('agentpractices: fetching '));
+
   test('list with a repeated --domain returns both domains', async () => {
     const r = await run('list', '--domain', 'D.AGT.SKL', '--domain', 'D.AGT.TOOL');
-    expect(r.err).toBe('');
+    expect(otherErr(r.err)).toEqual([]);
     expect(r.code).toBe(0);
     const j = JSON.parse(r.out);
     expect(j.applied_filters.domain).toBe('D.AGT.SKL,D.AGT.TOOL');
@@ -323,26 +342,85 @@ if (!built) console.warn('plugin e2e: SKIPPED — `bun run build` failed, so dis
     expect(j.practices.every((x: { review_overdue: boolean }) => typeof x.review_overdue === 'boolean')).toBe(true);
   });
 
-  test('an unknown domain exits 1 with one line naming the closest IDs', async () => {
+  test('an unknown domain exits 2 with one line naming the closest IDs', async () => {
     const r = await run('list', '--domain', 'D.AGT.TLS');
-    expect(r.code).toBe(1);
+    expect(r.code).toBe(2);
     expect(r.out).toBe('');
-    expect(r.err.trim().split('\n')).toHaveLength(1);
+    expect(otherErr(r.err)).toHaveLength(1);
     expect(r.err).toContain('D.AGT.TOOL');
   });
 
-  test('an unknown flag exits 1 with one usage line', async () => {
+  test('an unknown flag exits 2 with one usage line', async () => {
     const r = await run('list', '--foo', 'bar');
-    expect(r.code).toBe(1);
+    expect(r.code).toBe(2);
     expect(r.out).toBe('');
-    expect(r.err.trim().split('\n')).toHaveLength(1);
+    expect(otherErr(r.err)).toHaveLength(1);
     expect(r.err).toContain('--foo');
     expect(r.err).toContain('--domain');
   });
 
+  // BP-0001 rule 15: -h and --help give help and exit 0, with no arguments the usage goes to stderr and exits 2.
+  test('-h and --help print help and exit 0', async () => {
+    for (const flag of ['-h', '--help']) {
+      const r = await run(flag);
+      expect(r.code).toBe(0);
+      expect(r.out).toContain('Usage:');
+      expect(r.out).toContain('Exit codes:');
+      expect(r.out).toContain('agentpractices.dev');
+      expect(otherErr(r.err)).toEqual([]);
+    }
+  });
+  test('no arguments prints help on stderr and exits 2', async () => {
+    const r = await run();
+    expect(r.code).toBe(2);
+    expect(r.out).toBe('');
+    expect(r.err).toContain('Usage:');
+  });
+
+  // BP-0094 rule 9: suggest the near miss and never run it.
+  test('an unknown command suggests the near miss and does not run it', async () => {
+    const r = await run('lis');
+    expect(r.code).toBe(2);
+    expect(r.out).toBe('');
+    expect(r.err).toContain('Did you mean list?');
+  });
+
+  // BP-0086 rule 5: a timeout flag, with a usage error on a bad value.
+  test('--timeout is accepted and validated', async () => {
+    expect((await run('domains', '--timeout', '5000')).code).toBe(0);
+    const bad = await run('domains', '--timeout', 'soon');
+    expect(bad.code).toBe(2);
+    expect(bad.err).toContain('--timeout');
+  });
+
+  // BP-0092 rule 4: --offline uses the cache and makes no request.
+  test('--offline uses the cache, and fails clearly with no cache', async () => {
+    const warm = await run('domains');
+    expect(warm.code).toBe(0);
+    const cached = await run('domains', '--offline');
+    expect(cached.code).toBe(0);
+    expect(networkLines(cached.err)).toEqual([]);
+    const empty = mkdtempSync(join(tmpdir(), 'agentpractices-nocache-'));
+    try {
+      const cold = await spawnAt(base, empty, 'domains', '--offline');
+      expect(cold.code).toBe(1);
+      expect(cold.err).toContain('offline');
+      expect(networkLines(cold.err)).toEqual([]);
+    } finally { rmSync(empty, { recursive: true, force: true }); }
+  });
+
+  // BP-0001 rule 6: --dry-run on the one command that changes state.
+  test('sync --dry-run reports the plan and changes nothing', async () => {
+    const r = await run('sync', '--dry-run');
+    expect(r.code).toBe(0);
+    const j = JSON.parse(r.out);
+    expect(j.dry_run).toBe(true);
+    expect(typeof j.would_delete_bodies).toBe('number');
+  });
+
   test('get BP-0074 returns the rules and a citation', async () => {
     const r = await run('get', 'BP-0074');
-    expect(r.err).toBe('');
+    expect(otherErr(r.err)).toEqual([]);
     expect(r.code).toBe(0);
     const j = JSON.parse(r.out);
     expect(j.id).toBe('BP-0074');
@@ -377,7 +455,9 @@ if (!built) console.warn('plugin e2e: SKIPPED — `bun run build` failed, so dis
       const r = await spawnAt(`http://localhost:${redirector.port}/`, fresh, 'list');
       expect(r.code).toBe(1);
       expect(r.out).toBe('');
-      expect(r.err.trim().split('\n')).toHaveLength(1);
+      // The redirector is announced, then the off-origin hop is refused: one error line, no result.
+      expect(networkLines(r.err)).toHaveLength(1);
+      expect(otherErr(r.err)).toHaveLength(1);
       expect(r.err).toContain('outside');
     } finally {
       redirector.stop(true);
@@ -392,7 +472,7 @@ if (!built) console.warn('plugin e2e: SKIPPED — `bun run build` failed, so dis
     chmodSync(dir, 0o555);
     try {
       const r = await spawnAt(base, join(dir, 'cache'), 'list', '--limit', '1');
-      expect(r.err).toBe('');
+      expect(otherErr(r.err)).toEqual([]);
       expect(r.code).toBe(0);
       expect(JSON.parse(r.out).count).toBe(1);
     } finally {
@@ -416,7 +496,7 @@ if (!built) console.warn('plugin e2e: SKIPPED — `bun run build` failed, so dis
 
   test('domains prints the domain tree', async () => {
     const r = await run('domains');
-    expect(r.err).toBe('');
+    expect(otherErr(r.err)).toEqual([]);
     expect(r.code).toBe(0);
     const j = JSON.parse(r.out);
     const agent = j.domains.find((d: { id: string }) => d.id === 'D.AGT');
