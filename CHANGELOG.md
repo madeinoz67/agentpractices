@@ -2,6 +2,7 @@
 
 ## Unreleased
 
+- BP-0100 Use pstack through poteto-mode (D.AGT.SKL, draft) (#79).
 - BP-0099 Dogfood the product you build before you release it (D.SWE.REL, draft) (#78).
 - Sources and References are now one section. Every `sources` entry carries a required `note` that says what that source contributes to the practice's rules; `bun run check` fails a source with an empty note or a `TODO` note, and the page renders Sources from the frontmatter list. The body's `## References` section is gone from the practice template, the create-practice scaffold and every practice page; its annotations moved into `note`. Every practice that cites sources takes a patch bump (#72).
 - Repaired 20 source titles that flow-style YAML had silently truncated at the first comma inside an unquoted title, such as `Gortex — code intelligence engine (graph, MCP, CLI)` and `pstack (Cursor plugins) — prove-it-works, blast-radius, interrogate, create-verification-skill, show-me-your-work`. Source entries are now block-style with quoted scalars, so a comma in a title cannot do this again (#72).
