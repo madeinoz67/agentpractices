@@ -7,16 +7,22 @@ type: guideline
 roles: [orchestrator, implementer, any]
 stage: [plan, build, operate]
 status: draft
-version: 1.1.0
-updated: 2026-11-24
-reviewed: 2026-11-24
-review_by: 2027-05-24
+version: 1.1.1
+updated: 2026-11-27
+reviewed: 2026-11-27
+review_by: 2027-05-27
 related: [BP-0003, BP-0005, BP-0011, BP-0012]
 sources:
-  - { title: MCP Specification — Authorization, url: https://modelcontextprotocol.io/specification/latest/basic/authorization }
-  - { title: Anthropic — Effective context engineering for AI agents, url: https://www.anthropic.com/engineering/effective-context-engineering-for-ai-agents }
+  - title: "MCP Specification — Authorization"
+    url: https://modelcontextprotocol.io/specification/latest/basic/authorization
+    note: OAuth 2.1 for HTTP-based transports, with stdio servers taking credentials from the environment instead
+  - title: "Anthropic — Effective context engineering for AI agents"
+    url: https://www.anthropic.com/engineering/effective-context-engineering-for-ai-agents
+    note: The note-taking and sub-agent patterns the temporary-memory rules are drawn from
+  - title: MuninnDB
+    url: https://github.com/scrypster/muninndb
+    note: A working implementation of the workflow vault, with capabilities, leases and provenance as first-class primitives
 ---
-
 ## Rules
 
 ### When
@@ -140,8 +146,3 @@ Orchestration flow:
 - [ ] No secrets in memory; contents treated as untrusted
 - [ ] Durable findings promoted; store deleted or expired
 
-## References
-
-- [MCP Specification — Authorization](https://modelcontextprotocol.io/specification/latest/basic/authorization) (OAuth 2.1 for HTTP-based transports; stdio servers use credentials from the environment)
-- [Anthropic — Effective context engineering for AI agents](https://www.anthropic.com/engineering/effective-context-engineering-for-ai-agents) (note-taking and sub-agent patterns)
-- [MuninnDB](https://github.com/scrypster/muninndb) (workflow vaults, capabilities, leases, provenance)

@@ -7,21 +7,34 @@ type: guideline
 roles: [implementer, reviewer, orchestrator]
 stage: [plan, build, verify]
 status: draft
-version: 1.0.1
-updated: 2026-11-24
-reviewed: 2026-11-24
-review_by: 2027-05-24
+version: 1.0.2
+updated: 2026-11-27
+reviewed: 2026-11-27
+review_by: 2027-05-27
 related: [BP-0002, BP-0008, BP-0011]
 sources:
-  - { title: Codanna — local code intelligence MCP server, url: https://github.com/bartolli/codanna }
-  - { title: Gortex — code intelligence engine (graph, MCP, CLI), url: https://github.com/zzet/gortex }
-  - { title: codebase-memory-mcp — tree-sitter knowledge graph MCP server, url: https://github.com/DeusData/codebase-memory-mcp }
-  - { title: Serena — LSP-backed semantic retrieval and editing MCP toolkit, url: https://github.com/oraios/serena }
-  - { title: Sourcegraph MCP Server, url: https://sourcegraph.com/docs/api/mcp }
-  - { title: Language Server Protocol, url: https://microsoft.github.io/language-server-protocol/ }
-  - { title: ripgrep, url: https://github.com/BurntSushi/ripgrep }
+  - title: "Codanna — local code intelligence MCP server"
+    url: https://github.com/bartolli/codanna
+    note: Local code intelligence over MCP with the index on your own machine, the option rule 7 asks for when code cannot leave the estate
+  - title: "Gortex — code intelligence engine (graph, MCP, CLI)"
+    url: https://github.com/zzet/gortex
+    note: Call chains, blast radius and dataflow across many repositories, with telemetry off by default
+  - title: "codebase-memory-mcp — tree-sitter knowledge graph MCP server"
+    url: https://github.com/DeusData/codebase-memory-mcp
+    note: Single binary over a persistent tree-sitter graph, structural queries only and no semantic search
+  - title: "Serena — LSP-backed semantic retrieval and editing MCP toolkit"
+    url: https://github.com/oraios/serena
+    note: Language-server symbol lookup and symbol-level edits, exact enough to check an index result against source
+  - title: Sourcegraph MCP Server
+    url: https://sourcegraph.com/docs/api/mcp
+    note: Cross-repository search and navigation for estates too large to index on the agent's machine
+  - title: Language Server Protocol
+    url: https://microsoft.github.io/language-server-protocol/
+    note: Definitions and references at editor precision from a server teams often already run
+  - title: ripgrep
+    url: https://github.com/BurntSushi/ripgrep
+    note: The fallback when the target is a string, config key or comment rather than a symbol
 ---
-
 ## Rules
 
 1. **MUST** locate code through an index (symbol lookup, references, call graph, semantic search) before opening files, when an index is available.
@@ -96,8 +109,3 @@ The rules do not depend on the tool. These are options as of 2026-11-24; check e
 - [ ] Impact (callers and implementations) listed in the plan
 - [ ] Queries recorded for the reviewer
 
-## References
-
-- [Codanna](https://github.com/bartolli/codanna), [Gortex](https://github.com/zzet/gortex), [codebase-memory-mcp](https://github.com/DeusData/codebase-memory-mcp), [Serena](https://github.com/oraios/serena), [Sourcegraph MCP](https://sourcegraph.com/docs/api/mcp)
-- [Language Server Protocol](https://microsoft.github.io/language-server-protocol/)
-- [ripgrep](https://github.com/BurntSushi/ripgrep)

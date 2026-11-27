@@ -10,7 +10,7 @@ export function contentHash(p: Practice): string {
   const payload = {
     title: p.title, description: norm(p.description), domain: p.domain, type: p.type,
     roles: p.roles, stage: p.stage, status: p.status, related: p.related, superseded_by: p.superseded_by,
-    sources: p.sources.map((s) => ({ title: s.title, url: s.url })), body: norm(p.body),
+    sources: p.sources.map((s) => ({ title: s.title, url: s.url, note: s.note })), body: norm(p.body),
   };
   return 'sha256:' + createHash('sha256').update(JSON.stringify(payload)).digest('hex');
 }

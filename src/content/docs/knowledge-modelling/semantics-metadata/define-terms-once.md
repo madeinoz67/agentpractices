@@ -7,16 +7,19 @@ type: guideline
 roles: [any, planner, implementer]
 stage: [plan, build]
 status: draft
-version: 1.0.0
-updated: 2026-11-24
-reviewed: 2026-11-24
-review_by: 2027-05-24
+version: 1.0.1
+updated: 2026-11-27
+reviewed: 2026-11-27
+review_by: 2027-05-27
 related: [BP-0025, BP-0026, BP-0004, BP-0009]
 sources:
-  - { title: W3C SKOS Simple Knowledge Organization System Reference, url: https://www.w3.org/TR/skos-reference/ }
-  - { title: 'ISO 704:2022 Terminology work — Principles and methods', url: https://www.iso.org/standard/79077.html }
+  - title: W3C SKOS Simple Knowledge Organization System Reference
+    url: https://www.w3.org/TR/skos-reference/
+    note: Concept scheme model behind preferred and alternative labels, stable concept IDs and machine-readable publishing
+  - title: "ISO 704:2022 Terminology work — Principles and methods"
+    url: https://www.iso.org/standard/79077.html
+    note: Terminology principles defining genus plus differentia, and the ban on a definition that restates its label
 ---
-
 ## Rules
 
 1. **MUST** keep one glossary (controlled vocabulary) per project or domain, in version control, as the single place terms are defined.
@@ -72,7 +75,3 @@ Before: "Update the asset" in an OT runbook and in an Intune runbook, meaning tw
 - [ ] Overloaded terms split and qualified
 - [ ] Preferred labels used in code, data, docs and prompts
 
-## References
-
-- [W3C SKOS Reference](https://www.w3.org/TR/skos-reference/)
-- [ISO 704 Terminology work — Principles and methods](https://www.iso.org/standard/79077.html)

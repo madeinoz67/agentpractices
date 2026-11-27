@@ -7,18 +7,25 @@ type: guideline
 roles: [implementer, researcher, any]
 stage: [plan, build, operate]
 status: draft
-version: 1.0.0
-updated: 2026-11-24
-reviewed: 2026-11-24
-review_by: 2027-05-24
+version: 1.0.1
+updated: 2026-11-27
+reviewed: 2026-11-27
+review_by: 2027-05-27
 related: [BP-0014, BP-0024, BP-0025, BP-0026, BP-0012, BP-0028, BP-0029]
 sources:
-  - { title: 'Edge et al. — From Local to Global: A GraphRAG Approach to Query-Focused Summarization', url: https://arxiv.org/abs/2404.16130 }
-  - { title: W3C RDF 1.1 Concepts, url: https://www.w3.org/TR/rdf11-concepts/ }
-  - { title: W3C SHACL Shapes Constraint Language, url: https://www.w3.org/TR/shacl/ }
-  - { title: W3C PROV-O, url: https://www.w3.org/TR/prov-o/ }
+  - title: "Edge et al. — From Local to Global: A GraphRAG Approach to Query-Focused Summarization"
+    url: https://arxiv.org/abs/2404.16130
+    note: Query-focused summarization over entity communities, the basis for whole-corpus answers that rule 12 requires
+  - title: W3C RDF 1.1 Concepts
+    url: https://www.w3.org/TR/rdf11-concepts/
+    note: The triple model and its terms, IRIs, literals and blank nodes, which the node and relationship schema in rule 3 is written against
+  - title: W3C SHACL Shapes Constraint Language
+    url: https://www.w3.org/TR/shacl/
+    note: "Shape constraints that make the every-load schema validation of rule 4 machine-checkable: required properties, allowed relationships, cardinality"
+  - title: W3C PROV-O
+    url: https://www.w3.org/TR/prov-o/
+    note: Vocabulary for recording which agent extracted a fact, from which source document, and when
 ---
-
 ## Rules
 
 ### When
@@ -92,7 +99,3 @@ A fact with provenance, trust and time (property-graph style):
 - [ ] Contradictions kept and flagged
 - [ ] Retrieval combines traversal and text; access control enforced
 
-## References
-
-- [GraphRAG — From Local to Global (Edge et al.)](https://arxiv.org/abs/2404.16130)
-- [RDF 1.1 Concepts](https://www.w3.org/TR/rdf11-concepts/), [SHACL](https://www.w3.org/TR/shacl/), [PROV-O](https://www.w3.org/TR/prov-o/)

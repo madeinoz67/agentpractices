@@ -7,19 +7,28 @@ type: pattern
 roles: [planner, orchestrator, implementer]
 stage: [plan, build, operate]
 status: draft
-version: 1.0.0
-updated: 2026-11-24
-reviewed: 2026-11-24
-review_by: 2027-05-24
+version: 1.0.1
+updated: 2026-11-27
+reviewed: 2026-11-27
+review_by: 2027-05-27
 related: [BP-0049, BP-0047, BP-0041, BP-0040, BP-0050, BP-0006, BP-0062, BP-0059]
 sources:
-  - { title: OMG — Decision Model and Notation (DMN), url: https://www.omg.org/dmn/ }
-  - { title: GoRules ZEN Engine (JSON Decision Model), url: https://github.com/gorules/zen }
-  - { title: TypeSafe docs — Jev, url: https://docs.typesafe.ai/ }
-  - { title: 'Dataiku — Jev inside a Dataiku agent (quality, latency and cost vs LLM agents)', url: https://www.dataiku.com/tech-blog/jev-inside-a-dataiku-agent }
-  - { title: 'InfoQ — Decision Models in Agentic Architectures (Alex Porcelli)', url: https://www.infoq.com/presentations/decision-models-agentic-ai }
+  - title: "OMG — Decision Model and Notation (DMN)"
+    url: https://www.omg.org/dmn/
+    note: The OMG standard for decision tables with hit policies, rule IDs and a model business owners can review
+  - title: GoRules ZEN Engine (JSON Decision Model)
+    url: https://github.com/gorules/zen
+    note: An open-source JSON decision engine that runs DMN-style tables inside application code
+  - title: "TypeSafe docs — Jev"
+    url: https://docs.typesafe.ai/
+    note: Typed judgments (Choice, Score, Noul) that return calibrated probabilities over bounded questions
+  - title: "Dataiku — Jev inside a Dataiku agent (quality, latency and cost vs LLM agents)"
+    url: https://www.dataiku.com/tech-blog/jev-inside-a-dataiku-agent
+    note: "200 supplier requests: Jev was 10x faster and far cheaper, but let through more cases needing review"
+  - title: "InfoQ — Decision Models in Agentic Architectures (Alex Porcelli)"
+    url: https://www.infoq.com/presentations/decision-models-agentic-ai
+    note: Argues decision models belong inside agentic architectures, keeping policy out of prompts and auditable
 ---
-
 Agents make the same small decisions thousands of times: which team gets this ticket, does this tool call need approval, which model should handle this step, is this output good enough. Asking a generative model to decide each one in prose is slow, costly, hard to audit and slightly different every time. A decision model makes the decision explicit, testable and cheap.
 
 There are three kinds of component. Most good designs use more than one.
@@ -123,10 +132,3 @@ Hit policy: first match. Tested by one case per row plus each boundary.
 - [ ] Decision record: inputs, model versions, probabilities, policy version, rule ID
 - [ ] Cascade measured for quality, latency and cost per 1,000 decisions
 
-## References
-
-- [OMG — Decision Model and Notation](https://www.omg.org/dmn/)
-- [GoRules ZEN Engine (JDM)](https://github.com/gorules/zen)
-- [TypeSafe — Jev documentation](https://docs.typesafe.ai/)
-- [Dataiku — Jev inside a Dataiku agent](https://www.dataiku.com/tech-blog/jev-inside-a-dataiku-agent)
-- [InfoQ — Decision Models in Agentic Architectures](https://www.infoq.com/presentations/decision-models-agentic-ai)

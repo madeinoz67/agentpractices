@@ -7,20 +7,31 @@ type: guideline
 roles: [orchestrator, implementer, reviewer]
 stage: [build, verify, operate]
 status: draft
-version: 1.0.0
-updated: 2026-11-26
-reviewed: 2026-11-26
-review_by: 2027-02-26
+version: 1.0.1
+updated: 2026-11-27
+reviewed: 2026-11-27
+review_by: 2027-02-27
 related: [BP-0065, BP-0050, BP-0012, BP-0018, BP-0029, BP-0059, BP-0062, BP-0069, BP-0078, BP-0040]
 sources:
-  - { title: Zhang et al. — Darwin Gödel Machine, open-ended evolution of self-improving agents (ICLR 2026), url: https://arxiv.org/abs/2505.22954 }
-  - { title: The Register — Self-improving AI sometimes cheated, url: https://www.theregister.com/2025/06/02/self_improving_ai_cheat/ }
-  - { title: Agrawal et al. — GEPA, reflective prompt evolution can outperform reinforcement learning (ICLR 2026), url: https://arxiv.org/abs/2507.19457 }
-  - { title: Ren et al. — Self-improvements in modern agentic systems, a survey, url: https://arxiv.org/abs/2607.13104 }
-  - { title: Diving into reliable self-evolving agents, a survey (preprint), url: https://www.preprints.org/manuscript/202609.0913 }
-  - { title: OWASP Top 10 for Agentic Applications 2026 — ASI06 Memory and Context Poisoning, url: https://genai.owasp.org/resource/owasp-top-10-for-agentic-applications/ }
+  - title: "Zhang et al. — Darwin Gödel Machine, open-ended evolution of self-improving agents (ICLR 2026)"
+    url: https://arxiv.org/abs/2505.22954
+    note: Open-ended self-modification of its own code, where each mutation is kept only if benchmarks actually improve it
+  - title: "The Register — Self-improving AI sometimes cheated"
+    url: https://www.theregister.com/2025/06/02/self_improving_ai_cheat/
+    note: Reported cases where a self-improving coding agent patched the tests it was scored on instead of the code
+  - title: "Agrawal et al. — GEPA, reflective prompt evolution can outperform reinforcement learning (ICLR 2026)"
+    url: https://arxiv.org/abs/2507.19457
+    note: Reflective prompt evolution beat reinforcement learning on several tasks with a fraction of the rollouts
+  - title: "Ren et al. — Self-improvements in modern agentic systems, a survey"
+    url: https://arxiv.org/abs/2607.13104
+    note: Surveys self-improvement across memory, prompts, tools and code, which sets the surface an improvement gate must police
+  - title: Diving into reliable self-evolving agents, a survey (preprint)
+    url: https://www.preprints.org/manuscript/202609.0913
+    note: Reliability hazards in agents that rewrite themselves, including drift, and what a gated evolution loop must guard
+  - title: "OWASP Top 10 for Agentic Applications 2026 — ASI06 Memory and Context Poisoning"
+    url: https://genai.owasp.org/resource/owasp-top-10-for-agentic-applications/
+    note: "Memory and context poisoning: instructions planted in retrieved or read content can become persistent agent behaviour"
 ---
-
 A self-improving agent changes the things that shape its later behaviour: what it remembers, the skills and prompts it loads, its tools, or its own code. The changes are cheap to propose and easy to measure, which is the risk: an agent that can see or edit how it is scored will tend to improve the score rather than the work. Design the loop so the agent proposes, something it cannot touch measures, and a person owns anything that changes what the agent is allowed to do.
 
 ## Rules

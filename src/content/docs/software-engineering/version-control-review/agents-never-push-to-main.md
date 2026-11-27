@@ -7,19 +7,28 @@ type: guideline
 roles: [implementer, reviewer, orchestrator]
 stage: [build, verify]
 status: draft
-version: 1.0.0
-updated: 2026-11-25
-reviewed: 2026-11-25
-review_by: 2027-05-25
+version: 1.0.1
+updated: 2026-11-27
+reviewed: 2026-11-27
+review_by: 2027-05-27
 related: [BP-0075, BP-0036, BP-0069, BP-0032, BP-0021, BP-0059]
 sources:
-  - { title: GitHub Docs — Available rules for rulesets, url: https://docs.github.com/en/repositories/configuring-branches-and-merges-in-your-repository/managing-rulesets/available-rules-for-rulesets }
-  - { title: GitHub Docs — Creating rulesets for a repository, url: https://docs.github.com/en/repositories/configuring-branches-and-merges-in-your-repository/managing-rulesets/creating-rulesets-for-a-repository }
-  - { title: GitHub Docs — Linking a pull request to an issue, url: https://docs.github.com/en/issues/tracking-your-work-with-issues/using-issues/linking-a-pull-request-to-an-issue }
-  - { title: GitHub Docs — Managing the automatic deletion of branches, url: https://docs.github.com/en/repositories/configuring-branches-and-merges-in-your-repository/configuring-pull-request-merges/managing-the-automatic-deletion-of-branches }
-  - { title: GitHub Docs — Risks and mitigations for Copilot cloud agent, url: https://docs.github.com/en/copilot/concepts/agents/cloud-agent/risks-and-mitigations }
+  - title: "GitHub Docs — Available rules for rulesets"
+    url: https://docs.github.com/en/repositories/configuring-branches-and-merges-in-your-repository/managing-rulesets/available-rules-for-rulesets
+    note: The rule types a default-branch ruleset can set, such as blocking force pushes and deletion
+  - title: "GitHub Docs — Creating rulesets for a repository"
+    url: https://docs.github.com/en/repositories/configuring-branches-and-merges-in-your-repository/managing-rulesets/creating-rulesets-for-a-repository
+    note: The procedure behind the ruleset the practice requires, rather than an instruction agents can skip
+  - title: "GitHub Docs — Linking a pull request to an issue"
+    url: https://docs.github.com/en/issues/tracking-your-work-with-issues/using-issues/linking-a-pull-request-to-an-issue
+    note: The closing keyword that ties a pull request to its issue, and the default-branch condition it needs
+  - title: "GitHub Docs — Managing the automatic deletion of branches"
+    url: https://docs.github.com/en/repositories/configuring-branches-and-merges-in-your-repository/configuring-pull-request-merges/managing-the-automatic-deletion-of-branches
+    note: The repository setting that deletes head branches on merge, so remote cleanup does not depend on the agent
+  - title: "GitHub Docs — Risks and mitigations for Copilot cloud agent"
+    url: https://docs.github.com/en/copilot/concepts/agents/cloud-agent/risks-and-mitigations
+    note: The hosted-agent risk framing behind giving an agent its own identity and a restricted push scope
 ---
-
 ## Rules
 
 ### The flow

@@ -7,17 +7,22 @@ type: guideline
 roles: [planner, implementer, reviewer]
 stage: [plan, build, verify]
 status: draft
-version: 1.0.0
-updated: 2026-11-24
-reviewed: 2026-11-24
-review_by: 2027-05-24
+version: 1.0.1
+updated: 2026-11-27
+reviewed: 2026-11-27
+review_by: 2027-05-27
 related: [BP-0015, BP-0018, BP-0002, BP-0036, BP-0054, BP-0024]
 sources:
-  - { title: Design Tokens Community Group — Format Module 2025.10 (stable), url: https://www.designtokens.org/TR/2025.10/format/ }
-  - { title: Playwright — Visual comparisons, url: https://playwright.dev/docs/test-snapshots }
-  - { title: W3C — Web Content Accessibility Guidelines (WCAG) 2.2, url: https://www.w3.org/TR/WCAG22/ }
+  - title: "Design Tokens Community Group — Format Module 2025.10 (stable)"
+    url: https://www.designtokens.org/TR/2025.10/format/
+    note: The token format the practice asks for, stable since 2025.10, so a guide is machine-readable
+  - title: "Playwright — Visual comparisons"
+    url: https://playwright.dev/docs/test-snapshots
+    note: The tool named for the visual regression baseline, generated and compared in one environment
+  - title: "W3C — Web Content Accessibility Guidelines (WCAG) 2.2"
+    url: https://www.w3.org/TR/WCAG22/
+    note: The accessibility target the guide records, WCAG 2.2 AA, and the checks that follow from it
 ---
-
 Agents are good at producing one screen and poor at producing the twentieth screen to match the first. Left alone, each new page gets slightly different colours, spacing, button styles and layouts. A written style guide in a form agents can read, plus an approved mockup for each kind of page, turns "make it look like the others" into something checkable.
 
 ## Rules
@@ -118,8 +123,3 @@ This site followed the pattern: a style guide and a mockup were agreed before an
 - [ ] Rendered and compared with the mockup; visual and accessibility tests run
 - [ ] Guide changes reviewed, logged and made through tokens
 
-## References
-
-- [Design Tokens Format Module 2025.10](https://www.designtokens.org/TR/2025.10/format/)
-- [Playwright — Visual comparisons](https://playwright.dev/docs/test-snapshots)
-- [WCAG 2.2](https://www.w3.org/TR/WCAG22/)

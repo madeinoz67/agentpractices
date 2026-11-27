@@ -7,19 +7,28 @@ type: guideline
 roles: [orchestrator, implementer, reviewer]
 stage: [build, verify, operate]
 status: draft
-version: 1.0.0
-updated: 2026-11-25
-reviewed: 2026-11-25
-review_by: 2027-05-25
+version: 1.0.1
+updated: 2026-11-27
+reviewed: 2026-11-27
+review_by: 2027-05-27
 related: [BP-0044, BP-0005, BP-0032, BP-0033, BP-0036, BP-0034, BP-0062, BP-0053, BP-0063]
 sources:
-  - { title: 'Aikido Security — PromptPwnd: prompt injection in GitHub Actions using AI agents', url: https://aikido.dev/blog/promptpwnd-github-actions-ai-agents }
-  - { title: Invariant Labs — GitHub MCP exploited (toxic agent flow), url: https://invariantlabs.ai/blog/mcp-github-vulnerability }
-  - { title: CISA — Supply chain compromise of tj-actions/changed-files (CVE-2025-30066), url: https://www.cisa.gov/news-events/alerts/2025/03/18/supply-chain-compromise-third-party-github-action-cve-2025-30066 }
-  - { title: GitHub Docs — Secure use reference for GitHub Actions, url: https://docs.github.com/en/actions/security-for-github-actions/security-guides/security-hardening-for-github-actions }
-  - { title: zizmor — static analysis for GitHub Actions, url: https://github.com/zizmorcore/zizmor }
+  - title: "Aikido Security — PromptPwnd: prompt injection in GitHub Actions using AI agents"
+    url: https://aikido.dev/blog/promptpwnd-github-actions-ai-agents
+    note: The research showing workflows splicing issue bodies into agent prompts that also held high-privilege tokens and shell access
+  - title: "Invariant Labs — GitHub MCP exploited (toxic agent flow)"
+    url: https://invariantlabs.ai/blog/mcp-github-vulnerability
+    note: The toxic agent flow combining untrusted issue text, private repositories and a public write channel in one session
+  - title: "CISA — Supply chain compromise of tj-actions/changed-files (CVE-2025-30066)"
+    url: https://www.cisa.gov/news-events/alerts/2025/03/18/supply-chain-compromise-third-party-github-action-cve-2025-30066
+    note: The March 2025 compromise that moved action tags to code printing CI secrets, the case for pinning to commit SHAs
+  - title: "GitHub Docs — Secure use reference for GitHub Actions"
+    url: https://docs.github.com/en/actions/security-for-github-actions/security-guides/security-hardening-for-github-actions
+    note: GitHub's own hardening guidance for workflow permissions, triggers and token scopes, which the CI rules follow
+  - title: "zizmor — static analysis for GitHub Actions"
+    url: https://github.com/zizmorcore/zizmor
+    note: The static analyser this practice names for finding workflow weaknesses, the tool this site's own repository runs
 ---
-
 A repository is now read by agents as well as people: triage bots read issues, review agents read pull requests, coding agents read the whole tree, and AI steps run inside CI next to tokens and secrets. Anyone who can open an issue, comment or send a pull request can put text in front of those agents. Three incidents show the shape of the risk:
 
 - **Issue text into an agent in CI.** Aikido's PromptPwnd research found workflows that inserted issue bodies, pull-request descriptions or commit messages straight into prompts for AI agents that also held high-privilege tokens and shell access; a crafted issue could make the agent leak those tokens.
@@ -130,10 +139,3 @@ CODEOWNERS for files that change agent behaviour:
 - [ ] Code-owner review for agent instruction files and workflows; branch protection; agents cannot self-merge
 - [ ] Secrets out of repo and logs; leaked secrets rotated
 
-## References
-
-- [Aikido — PromptPwnd](https://aikido.dev/blog/promptpwnd-github-actions-ai-agents)
-- [Invariant Labs — GitHub MCP exploited](https://invariantlabs.ai/blog/mcp-github-vulnerability)
-- [CISA — tj-actions/changed-files compromise](https://www.cisa.gov/news-events/alerts/2025/03/18/supply-chain-compromise-third-party-github-action-cve-2025-30066)
-- [GitHub — Secure use reference for GitHub Actions](https://docs.github.com/en/actions/security-for-github-actions/security-guides/security-hardening-for-github-actions)
-- [zizmor](https://github.com/zizmorcore/zizmor)

@@ -7,16 +7,19 @@ type: guideline
 roles: [any, orchestrator]
 stage: [plan, build, operate]
 status: draft
-version: 1.0.0
-updated: 2026-11-24
-reviewed: 2026-11-24
-review_by: 2027-05-24
+version: 1.0.1
+updated: 2026-11-27
+reviewed: 2026-11-27
+review_by: 2027-05-27
 related: [BP-0020, BP-0019, BP-0016, BP-0005, BP-0013]
 sources:
-  - { title: Claude Code docs — Hooks reference, url: https://code.claude.com/docs/en/hooks }
-  - { title: Claude Code docs — How Claude remembers your project, url: https://code.claude.com/docs/en/claude-md }
+  - title: "Claude Code docs — Hooks reference"
+    url: https://code.claude.com/docs/en/hooks
+    note: "The event list, the /hooks listing that shows each hook's source, and the debug flag for a hook that will not block"
+  - title: "Claude Code docs — How Claude remembers your project"
+    url: https://code.claude.com/docs/en/claude-md
+    note: Why an instruction file is context the agent reads rather than enforcement, which is what pushes musts into hooks and deny rules
 ---
-
 ## Rules
 
 ### When to use a hook
@@ -74,6 +77,3 @@ Any agent harness that supports hooks. Choosing between mechanisms:
 - [ ] Hooks listed in the instruction file
 - [ ] Hooks reviewed periodically; debug log checked before changes
 
-## References
-
-- [Claude Code — Hooks reference](https://code.claude.com/docs/en/hooks)

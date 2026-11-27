@@ -7,19 +7,26 @@ type: pattern
 roles: [orchestrator, reviewer]
 stage: [plan, build, operate]
 status: draft
-version: 1.0.0
+version: 1.0.1
 updated: 2026-11-27
 reviewed: 2026-11-27
 review_by: 2027-05-27
 related: [BP-0042, BP-0048, BP-0095, BP-0003]
 superseded_by: null
 sources:
-  - { title: Atlassian — Work in progress (WIP) limits, url: https://www.atlassian.com/agile/kanban/wip-limits }
-  - { title: Theory of constraints — the bottleneck sets throughput, url: https://en.wikipedia.org/wiki/Theory_of_constraints }
-  - { title: Anthropic — How we built our multi-agent research system, url: https://www.anthropic.com/engineering/multi-agent-research-system }
-  - { title: Google SRE Book — Handling Overload, url: https://sre.google/sre-book/handling-overload/ }
+  - title: "Atlassian — Work in progress (WIP) limits"
+    url: https://www.atlassian.com/agile/kanban/wip-limits
+    note: The case for capping work in progress at a station and pulling only when below the cap, behind rule 3
+  - title: "Theory of constraints — the bottleneck sets throughput"
+    url: https://en.wikipedia.org/wiki/Theory_of_constraints
+    note: The claim that one bottleneck sets the whole line’s throughput, behind the add-capacity-here-first order in rule 5
+  - title: "Anthropic — How we built our multi-agent research system"
+    url: https://www.anthropic.com/engineering/multi-agent-research-system
+    note: The orchestrator-worker split this line design wraps in stations, with the handoff each exit check polices
+  - title: "Google SRE Book — Handling Overload"
+    url: https://sre.google/sre-book/handling-overload/
+    note: Admission control as the alternative to queueing everything a client sends, behind the cap in rule 3
 ---
-
 An agent factory runs the same kind of work many times: tickets, content items, test batches, pull requests. Most teams model each item as its own workflow, with its own brief, its own retries and its own idea of done. Nothing then links the items into a line, so work is pushed downstream before it is ready, queues grow where nobody measures them, and capacity is added where it is cheap to add rather than where it is blocking.
 
 This practice models the repeating work as stations with exit checks and a work-in-progress cap per station, so that flow can be measured and capacity goes to the station with the longest wait. It complements the topology choice in [BP-0042](/multi-agent-systems/team-topologies-roles/choose-the-simplest-agent-topology/), which decides the shape of the team, and the phase and ledger machinery in [BP-0048](/multi-agent-systems/coordination-handoff/orchestrate-agent-workflows/), which governs one item's journey.
@@ -85,9 +92,3 @@ Content line: brief (owner: planner; exit check: the brief names audience, lengt
 - [ ] Queue length and wait time are measured, and capacity goes to the longest wait
 - [ ] No station approves its own work
 
-## References
-
-- [Atlassian — Work in progress (WIP) limits](https://www.atlassian.com/agile/kanban/wip-limits)
-- [Theory of constraints](https://en.wikipedia.org/wiki/Theory_of_constraints)
-- [Anthropic — How we built our multi-agent research system](https://www.anthropic.com/engineering/multi-agent-research-system)
-- [Google SRE Book — Handling Overload](https://sre.google/sre-book/handling-overload/)

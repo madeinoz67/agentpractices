@@ -7,17 +7,22 @@ type: guideline
 roles: [any]
 stage: [build, verify]
 status: draft
-version: 1.0.0
-updated: 2026-11-24
-reviewed: 2026-11-24
-review_by: 2027-05-24
+version: 1.0.1
+updated: 2026-11-27
+reviewed: 2026-11-27
+review_by: 2027-05-27
 related: [BP-0002, BP-0006, BP-0038, BP-0036, BP-0021, BP-0052, BP-0053, BP-0048]
 sources:
-  - { title: Claude Code docs — Best practices (Give Claude a check to run), url: https://code.claude.com/docs/en/best-practices }
-  - { title: obra/superpowers — verification-before-completion skill, url: https://github.com/obra/superpowers/tree/main/skills/verification-before-completion }
-  - { title: pstack (Cursor plugins) — prove-it-works, blast-radius, interrogate, create-verification-skill, show-me-your-work, url: https://github.com/cursor/plugins/tree/main/pstack/skills }
+  - title: "Claude Code docs — Best practices (Give Claude a check to run)"
+    url: https://code.claude.com/docs/en/best-practices
+    note: Tells you to give the agent a check it can run, so completion is a command not a judgement
+  - title: "obra/superpowers — verification-before-completion skill"
+    url: https://github.com/obra/superpowers/tree/main/skills/verification-before-completion
+    note: A skill that refuses completion claims without a fresh verification command and its confirmed output
+  - title: "pstack (Cursor plugins) — prove-it-works, blast-radius, interrogate, create-verification-skill, show-me-your-work"
+    url: https://github.com/cursor/plugins/tree/main/pstack/skills
+    note: A skill built on showing the thing works by running it, not on asserting it does
 ---
-
 An agent stops when the work *looks* done. Without something it can run that says whether the work *is* done, the person becomes the test suite. Claude Code's guidance puts it the same way, and skill packs such as superpowers and pstack build their workflows around one rule: evidence before claims.
 
 ## Rules
@@ -117,8 +122,3 @@ Decision log row:
 - [ ] Review findings kept only when reproduced
 - [ ] Enforcement level chosen (prompt, goal, Stop hook, independent review)
 
-## References
-
-- [Claude Code — Best practices: Give Claude a check to run](https://code.claude.com/docs/en/best-practices)
-- [superpowers — verification-before-completion](https://github.com/obra/superpowers/tree/main/skills/verification-before-completion)
-- [pstack skills](https://github.com/cursor/plugins/tree/main/pstack/skills)

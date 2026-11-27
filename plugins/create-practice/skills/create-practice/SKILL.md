@@ -3,7 +3,7 @@ name: create-practice
 description: Propose and write a new best practice for the agentpractices.dev corpus (madeinoz67/agentpractices) — duplicate search, domain choice from the taxonomy, MUST/SHOULD/MAY rules, the Propose a practice issue, then, once the owner assigns a BP-NNNN ID, the practice page, CHANGELOG line, bun run verify and a pull request. USE WHEN someone wants to add, propose, contribute, draft or write up a practice, turn a lesson learned or a postmortem into a practice, or implement an accepted practice issue, even if they only say "this should be a best practice". NOT FOR applying existing practices to a task (use agentpractices), changing a published practice's rules, or reporting a bad rule.
 compatibility: Requires Bun 1.0 or later to run scripts/practice.ts. Filing issues and pull requests uses the GitHub CLI (gh) when it is available.
 metadata:
-  version: 0.1.0
+  version: 0.2.0
 ---
 
 # Create a practice
@@ -128,8 +128,8 @@ Replace every `TODO`. Order and content:
 
 - **Intro** (before `## Rules`): one or two paragraphs — the failure this prevents, and why these rules fix it.
 - **Rules**: from the accepted issue, refined by the owner's comments. Group long sets under `###` subheadings as other practices do.
-- **When to apply**, **Procedure**, **Examples** (concrete: real commands, config, code), **Anti-patterns** (the tempting wrong way, and why), **Checklist** (one box per MUST), **References**.
-- `sources` in frontmatter: every source the rules lean on, `{ title, url }`.
+- **When to apply**, **Procedure**, **Examples** (concrete: real commands, config, code), **Anti-patterns** (the tempting wrong way, and why), **Checklist** (one box per MUST).
+- `sources` in frontmatter: every source the rules lean on, each with `title`, `url` and a `note` that says what it contributes to the rules. The page renders its Sources section from this list, so do not write one in the body.
 - Link related practices by their site path, e.g. `[BP-0062](/agent-engineering/tool-use/<slug>/)`; `bun run linkcheck` fails on dead links.
 
 Keep `status: draft`; only the owner sets `adopted`. Write invisible characters as escapes (`U+200B`), never literally — the security scan flags them.

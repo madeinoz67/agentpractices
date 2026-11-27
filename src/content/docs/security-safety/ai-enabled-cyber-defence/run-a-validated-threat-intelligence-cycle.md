@@ -7,22 +7,37 @@ type: guideline
 roles: [planner, implementer, reviewer, orchestrator]
 stage: [plan, build, operate]
 status: draft
-version: 1.0.0
-updated: 2026-11-26
-reviewed: 2026-11-26
-review_by: 2027-05-26
+version: 1.0.1
+updated: 2026-11-27
+reviewed: 2026-11-27
+review_by: 2027-05-27
 related: [BP-0080, BP-0081, BP-0077, BP-0005, BP-0052, BP-0067, BP-0033, BP-0064, BP-0040, BP-0059]
 sources:
-  - { title: FIRST — Traffic Light Protocol (TLP) 2.0, url: https://www.first.org/tlp/ }
-  - { title: CISA — TLP 2.0 user guide, url: https://www.cisa.gov/sites/default/files/2023-02/tlp-2-0-user-guide_508c.pdf }
-  - { title: OASIS — STIX 2.1 and TAXII 2.1 (CTI TC), url: https://oasis-open.github.io/cti-documentation/ }
-  - { title: SANS — Enhance your cyber threat intelligence with the Admiralty System, url: https://sans.org/blog/enhance-your-cyber-threat-intelligence-with-the-admiralty-system }
-  - { title: MISP — warninglists (known false positives), url: https://www.github.com/MISP/misp-warninglists }
-  - { title: A SoK for SoCs — AI for cyber threat intelligence generation and sharing, url: https://arxiv.org/pdf/2609.01174 }
-  - { title: LANCE and PRISM — understanding and improving IoC extraction from threat reports, url: https://arxiv.org/pdf/2506.11325 }
-  - { title: MITRE ATT&CK, url: https://attack.mitre.org/ }
+  - title: "FIRST — Traffic Light Protocol (TLP) 2.0"
+    url: https://www.first.org/tlp/
+    note: Defines the five TLP 2.0 markings, including AMBER+STRICT and RED, enforced in this practice's exit gate
+  - title: "CISA — TLP 2.0 user guide"
+    url: https://www.cisa.gov/sites/default/files/2023-02/tlp-2-0-user-guide_508c.pdf
+    note: Sets out what each marking permits and who may receive it, the basis for the no-downward-relabelling rule
+  - title: "OASIS — STIX 2.1 and TAXII 2.1 (CTI TC)"
+    url: https://oasis-open.github.io/cti-documentation/
+    note: The object model and transport the normalisation rule targets, so markings, relationships and provenance travel with the data
+  - title: "SANS — Enhance your cyber threat intelligence with the Admiralty System"
+    url: https://sans.org/blog/enhance-your-cyber-threat-intelligence-with-the-admiralty-system
+    note: Defines the A to F source reliability and 1 to 6 information credibility grades every indicator must carry
+  - title: "MISP — warninglists (known false positives)"
+    url: https://www.github.com/MISP/misp-warninglists
+    note: Maintained benign-value lists the processing step checks before anything else sees an indicator, recording why each was dropped
+  - title: "A SoK for SoCs — AI for cyber threat intelligence generation and sharing"
+    url: https://arxiv.org/pdf/2609.01174
+    note: Surveys where agents help in collection and processing, and why people must still decide validity, relevance and sharing
+  - title: "LANCE and PRISM — understanding and improving IoC extraction from threat reports"
+    url: https://arxiv.org/pdf/2506.11325
+    note: Measures rule-based extraction against model extraction on threat reports, the evidence behind rules-first with models for context
+  - title: MITRE ATT&CK
+    url: https://attack.mitre.org/
+    note: Technique IDs that agents map behaviour to, and that this practice requires checked against the source rather than the model
 ---
-
 Threat intelligence is only useful if it is relevant, accurate, timely and reaches the person or system that acts on it. Agents are good at the volume work in the middle of the cycle: reading reports, extracting and enriching indicators, mapping to ATT&CK, drafting products. They are not reliable enough to decide alone what is true, what is relevant, or who may see it, and much of what they read is adversary-written.
 
 ## Rules

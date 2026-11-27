@@ -7,17 +7,22 @@ type: guideline
 roles: [planner, orchestrator, reviewer]
 stage: [plan, verify]
 status: draft
-version: 1.0.1
-updated: 2026-11-26
-reviewed: 2026-11-26
-review_by: 2027-05-26
+version: 1.0.2
+updated: 2026-11-27
+reviewed: 2026-11-27
+review_by: 2027-05-27
 related: [BP-0057, BP-0048, BP-0008, BP-0037, BP-0006, BP-0024, BP-0009, BP-0085]
 sources:
-  - { title: GitHub Spec Kit — spec-driven development, url: https://github.com/github/spec-kit }
-  - { title: Kiro docs — Specs (requirements in EARS notation), url: https://kiro.dev/docs/specs/concepts }
-  - { title: Easy Approach to Requirements Syntax (EARS), url: https://en.wikipedia.org/wiki/Easy_Approach_to_Requirements_Syntax }
+  - title: "GitHub Spec Kit — spec-driven development"
+    url: https://github.com/github/spec-kit
+    note: "Requirements, then design, then tasks, then code, with a review gate between phases: the pipeline the intro cites"
+  - title: "Kiro docs — Specs (requirements in EARS notation)"
+    url: https://kiro.dev/docs/specs/concepts
+    note: A shipping tool that writes requirement acceptance criteria in EARS patterns, the working example behind rule 4's Always, When, While, If and Where forms
+  - title: Easy Approach to Requirements Syntax (EARS)
+    url: https://en.wikipedia.org/wiki/Easy_Approach_to_Requirements_Syntax
+    note: The five EARS templates rule 4 reproduces, with the requirement categories each pattern is meant to catch
 ---
-
 A product requirements document (PRD) says **what** to build and **why**, not how. For agents it is the contract: plans are argued from it, tasks trace to it, tests prove it, and reviewers grade against it. Spec-driven tools such as GitHub Spec Kit and Kiro make the same split: requirements first, then design or plan, then tasks, then code, with review between steps.
 
 ## Rules
@@ -111,8 +116,3 @@ Unit 4: build check for missing IDs — delivers R-007.3; tests: practices.test.
 - [ ] Units, tests and final review trace to requirement IDs
 - [ ] Changed through review when requirements change
 
-## References
-
-- [GitHub Spec Kit](https://github.com/github/spec-kit)
-- [Kiro — Specs](https://kiro.dev/docs/specs/concepts)
-- [EARS — Easy Approach to Requirements Syntax](https://en.wikipedia.org/wiki/Easy_Approach_to_Requirements_Syntax)

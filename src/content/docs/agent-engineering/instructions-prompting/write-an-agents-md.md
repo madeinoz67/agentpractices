@@ -7,16 +7,19 @@ type: guideline
 roles: [implementer, planner, any]
 stage: [plan, build]
 status: draft
-version: 1.0.0
-updated: 2026-11-24
-reviewed: 2026-11-24
-review_by: 2027-05-24
+version: 1.0.1
+updated: 2026-11-27
+reviewed: 2026-11-27
+review_by: 2027-05-27
 related: [BP-0016, BP-0017, BP-0007, BP-0005]
 sources:
-  - { title: AGENTS.md, url: https://agents.md/ }
-  - { title: Claude Code docs — How Claude remembers your project (AGENTS.md), url: https://code.claude.com/docs/en/claude-md }
+  - title: AGENTS.md
+    url: https://agents.md/
+    note: The tool-neutral format, stewardship and lack of required fields that make one file portable
+  - title: "Claude Code docs — How Claude remembers your project (AGENTS.md)"
+    url: https://code.claude.com/docs/en/claude-md
+    note: Shows that an agent falls back to AGENTS.md when no tool-specific file is present
 ---
-
 ## Rules
 
 1. **MUST** put an `AGENTS.md` at the repository root of any repo that coding agents work in. It is the tool-neutral instruction file; keep tool-specific files thin (see [BP-0017](/agent-engineering/instructions-prompting/one-source-of-truth-for-agent-instructions/)).
@@ -82,7 +85,3 @@ Go CLI for electronics inventory. Single binary; no external services.
 - [ ] No secrets or internal details
 - [ ] Under about 200 lines; links instead of copies
 
-## References
-
-- [AGENTS.md](https://agents.md/)
-- [Claude Code — reading AGENTS.md](https://code.claude.com/docs/en/claude-md)

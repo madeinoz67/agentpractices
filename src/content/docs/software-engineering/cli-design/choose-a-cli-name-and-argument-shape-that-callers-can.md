@@ -7,18 +7,23 @@ type: guideline
 roles: [implementer]
 stage: [plan, build]
 status: draft
-version: 1.0.0
+version: 1.0.1
 updated: 2026-11-27
 reviewed: 2026-11-27
 review_by: 2027-05-27
 related: [BP-0001, BP-0055]
 superseded_by: null
 sources:
-  - { title: Command Line Interface Guidelines — Naming, url: https://clig.dev/#naming }
-  - { title: Command Line Interface Guidelines — Arguments and flags, url: https://clig.dev/#arguments-and-flags }
-  - { title: GNU Coding Standards — Command-Line Interfaces, url: https://www.gnu.org/prep/standards/html_node/Command_002dLine-Interfaces.html }
+  - title: "Command Line Interface Guidelines — Naming"
+    url: https://clig.dev/#naming
+    note: Argues for short lowercase command names and against names that collide with existing system commands
+  - title: "Command Line Interface Guidelines — Arguments and flags"
+    url: https://clig.dev/#arguments-and-flags
+    note: Sets out when a value belongs behind a flag rather than a positional, and why globs must work
+  - title: "GNU Coding Standards — Command-Line Interfaces"
+    url: https://www.gnu.org/prep/standards/html_node/Command_002dLine-Interfaces.html
+    note: The older convention behind long option names, options in any order, and a usage message on bad input
 ---
-
 A command name is typed all day. A name that is hard to type, or too generic, collides with other tools. A program that takes positional arguments for different things cannot grow without ambiguity, and a caller must remember the order. [BP-0001](/software-engineering/cli-design/design-clis-for-agents/) covers what a flag must do; this practice covers the command name and the shape of its input.
 
 ## Rules
@@ -77,8 +82,3 @@ The bad form cannot add a third kind of input later without ambiguity.
 - [ ] A "none" word exists for optional flag values
 - [ ] The common case needs no flag
 
-## References
-
-- [Command Line Interface Guidelines — Naming](https://clig.dev/#naming)
-- [Command Line Interface Guidelines — Arguments and flags](https://clig.dev/#arguments-and-flags)
-- [GNU Coding Standards — Command-Line Interfaces](https://www.gnu.org/prep/standards/html_node/Command_002dLine-Interfaces.html)

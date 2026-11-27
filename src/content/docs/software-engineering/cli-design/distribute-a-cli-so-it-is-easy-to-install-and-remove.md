@@ -7,19 +7,26 @@ type: guideline
 roles: [implementer]
 stage: [build]
 status: draft
-version: 1.0.0
+version: 1.0.1
 updated: 2026-11-27
 reviewed: 2026-11-27
 review_by: 2027-05-27
 related: [BP-0001, BP-0044, BP-0071]
 superseded_by: null
 sources:
-  - { title: Command Line Interface Guidelines — Distribution, url: https://clig.dev/#distribution }
-  - { title: Command Line Interface Guidelines — Analytics, url: https://clig.dev/#analytics }
-  - { title: Command Line Interface Guidelines — Future-proofing, url: https://clig.dev/#future-proofing }
-  - { title: SLSA — Supply-chain Levels for Software Artifacts, url: https://slsa.dev/ }
+  - title: "Command Line Interface Guidelines — Distribution"
+    url: https://clig.dev/#distribution
+    note: Backs the one-binary install with sanctioned write paths and an uninstall shown beside the install
+  - title: "Command Line Interface Guidelines — Analytics"
+    url: https://clig.dev/#analytics
+    note: Sets the consent standard for telemetry in a CLI, off by default and disclosed before anything is sent
+  - title: "Command Line Interface Guidelines — Future-proofing"
+    url: https://clig.dev/#future-proofing
+    note: The guidance behind not depending on a vendor service or silent updater for the tool to work
+  - title: "SLSA — Supply-chain Levels for Software Artifacts"
+    url: https://slsa.dev/
+    note: The supply-chain framework that justifies signing each release artifact and publishing its checksum
 ---
-
 A CLI is installed on a machine you do not control and removed by someone who may not remember installing it. Files scattered outside the package manager, a runtime the user must add, or a phone-home call on first run all make the tool hard to trust. An agent installs tools as part of a task, so a bad install becomes a bad run.
 
 These rules give one clean install, a documented removal, and an explicit answer on data that leaves the machine. Dependencies and supply-chain review are [BP-0044](/security-safety/supply-chain/vet-and-pin-agent-dependencies/).
@@ -85,9 +92,3 @@ usage data is off. to share anonymous crash counts, run: mytool telemetry on
 - [ ] The tool starts with no vendor service
 - [ ] Release artifact is signed and has a checksum
 
-## References
-
-- [Command Line Interface Guidelines — Distribution](https://clig.dev/#distribution)
-- [Command Line Interface Guidelines — Analytics](https://clig.dev/#analytics)
-- [Command Line Interface Guidelines — Future-proofing](https://clig.dev/#future-proofing)
-- [SLSA — Supply-chain Levels for Software Artifacts](https://slsa.dev/)

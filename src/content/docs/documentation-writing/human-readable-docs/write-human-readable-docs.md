@@ -7,16 +7,22 @@ type: guideline
 roles: [implementer, reviewer]
 stage: [build, verify]
 status: draft
-version: 1.0.0
-updated: 2026-11-24
-reviewed: 2026-11-24
-review_by: 2027-05-24
+version: 1.0.1
+updated: 2026-11-27
+reviewed: 2026-11-27
+review_by: 2027-05-27
 related: [BP-0007]
 sources:
-  - { title: ASD-STE100 Simplified Technical English (Issue 9, 2025), url: https://www.asd-ste100.org/ }
-  - { title: 'ISO 24495-1:2023 Plain language — Part 1: Governing principles and guidelines', url: https://www.iso.org/standard/78907.html }
+  - title: ASD-STE100 Simplified Technical English (Issue 9, 2025)
+    url: https://www.asd-ste100.org/
+    note: "The controlled-language rule set the plain-language rules draw on: approved word meanings, one term per concept, short procedural sentences"
+  - title: "ISO 24495-1:2023 Plain language — Part 1: Governing principles and guidelines"
+    url: https://www.iso.org/standard/78907.html
+    note: "The four governing principles the practice is structured around: relevant, findable, understandable and usable"
+  - title: Vale prose linter
+    url: https://vale.sh/
+    note: A prose linter the procedure runs over rules 8 to 13, checking sentence length, passive voice and banned synonyms from a configured ruleset
 ---
-
 ## Rules
 
 ### All human-readable docs (plain language, ISO 24495-1)
@@ -100,8 +106,3 @@ Why it is better: the caution comes before the step, each step has one instructi
 - [ ] Conditions before the instruction they control
 - [ ] Tested by someone who did not write it
 
-## References
-
-- [ASD-STE100 Simplified Technical English](https://www.asd-ste100.org/) — Issue 9 (January 2025); free copy available from ASD.
-- [ISO 24495-1:2023 Plain language — Part 1: Governing principles and guidelines](https://www.iso.org/standard/78907.html) — principles: relevant, findable, understandable, usable.
-- [Vale prose linter](https://vale.sh/)

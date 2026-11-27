@@ -7,17 +7,22 @@ type: guideline
 roles: [orchestrator, implementer]
 stage: [plan, build]
 status: draft
-version: 1.0.0
-updated: 2026-11-24
-reviewed: 2026-11-24
-review_by: 2027-05-24
+version: 1.0.1
+updated: 2026-11-27
+reviewed: 2026-11-27
+review_by: 2027-05-27
 related: [BP-0042, BP-0003, BP-0023, BP-0039, BP-0005, BP-0032]
 sources:
-  - { title: A2A Protocol specification, url: https://a2a-protocol.org/latest/specification/ }
-  - { title: A2A Protocol — Agent discovery, url: https://a2a-protocol.org/latest/topics/agent-discovery/ }
-  - { title: MCP Specification, url: https://modelcontextprotocol.io/specification/latest }
+  - title: A2A Protocol specification
+    url: https://a2a-protocol.org/latest/specification/
+    note: "The specification behind the agent delegation half of rule 1: task states, declared security schemes and the Agent Card"
+  - title: "A2A Protocol — Agent discovery"
+    url: https://a2a-protocol.org/latest/topics/agent-discovery/
+    note: Discovery from a well-known endpoint or curated registry, the allow-list rule 7 prefers over crawling arbitrary URLs for agent cards
+  - title: MCP Specification
+    url: https://modelcontextprotocol.io/specification/latest
+    note: The tool and data protocol rule 1 assigns to MCP, with the version negotiation and capability declaration its messages rely on
 ---
-
 ## Rules
 
 1. **MUST** use the right protocol for the relationship: MCP when an agent calls **tools and data**; A2A (or an equivalent agent protocol) when an agent delegates a **task to another agent** that plans and acts on its own. Within one process, plain typed function calls are fine.
@@ -58,7 +63,3 @@ Any system where agents delegate work to other agents, especially across process
 - [ ] Task IDs, trace context, idempotency; explicit task states
 - [ ] Agents discovered from a trusted registry; minimal data shared
 
-## References
-
-- [A2A Protocol specification](https://a2a-protocol.org/latest/specification/)
-- [MCP Specification](https://modelcontextprotocol.io/specification/latest)

@@ -7,15 +7,16 @@ type: pattern
 roles: [orchestrator, implementer]
 stage: [plan, build]
 status: draft
-version: 1.0.0
-updated: 2026-11-24
-reviewed: 2026-11-24
-review_by: 2027-05-24
+version: 1.0.1
+updated: 2026-11-27
+reviewed: 2026-11-27
+review_by: 2027-05-27
 related: [BP-0034, BP-0036, BP-0008, BP-0013]
 sources:
-  - { title: git-worktree documentation, url: https://git-scm.com/docs/git-worktree }
+  - title: git-worktree documentation
+    url: https://git-scm.com/docs/git-worktree
+    note: The command reference behind one working directory and branch per agent, and the add, remove and prune cycle
 ---
-
 ## Rules
 
 1. **MUST** give each agent working at the same time its own working directory: a git worktree (or a separate clone) on its own branch. Never let two agents edit the same working tree.
@@ -59,6 +60,3 @@ git worktree prune
 - [ ] Local state and ports isolated per worktree
 - [ ] Worktrees and merged branches cleaned up
 
-## References
-
-- [git-worktree](https://git-scm.com/docs/git-worktree)

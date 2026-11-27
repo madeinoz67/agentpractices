@@ -7,20 +7,31 @@ type: guideline
 roles: [planner, orchestrator, reviewer]
 stage: [plan, build, operate]
 status: draft
-version: 1.0.0
-updated: 2026-11-26
-reviewed: 2026-11-26
-review_by: 2027-05-26
+version: 1.0.1
+updated: 2026-11-27
+reviewed: 2026-11-27
+review_by: 2027-05-27
 related: [BP-0080, BP-0005, BP-0029, BP-0027, BP-0052, BP-0069, BP-0040, BP-0067, BP-0077]
 sources:
-  - { title: Carnegie Endowment (Pamment) — The EU's role in fighting disinformation, ABCDE framework, url: https://carnegieendowment.org/research/2020/09/the-eus-role-in-fighting-disinformation-crafting-a-disinformation-framework }
-  - { title: UNHCR Information Integrity Toolkit — ABCDE analysis framework, url: https://www.unhcr.org/handbooks/informationintegrity/practical-tools/analysis-potential-impact/abcde-analysis-framework }
-  - { title: DISARM Foundation — FAQs (DISARM Red and Blue frameworks), url: https://www.disarm.foundation/faqs }
-  - { title: Luceri et al. — Coordinated inauthentic behavior on TikTok (ICWSM), url: https://www.arxiv.org/abs/2505.10867 }
-  - { title: Cross-platform coordinated inauthentic activity in the run-up to the 2024 US election, url: https://arxiv.org/html/2410.22716v4 }
-  - { title: Axios — NewsGuard report on the Pravda network and AI chatbots, url: https://www.axios.com/2025/03/06/exclusive-russian-disinfo-floods-ai-chatbots-study-finds }
+  - title: "Carnegie Endowment (Pamment) — The EU's role in fighting disinformation, ABCDE framework"
+    url: https://carnegieendowment.org/research/2020/09/the-eus-role-in-fighting-disinformation-crafting-a-disinformation-framework
+    note: The EU disinformation framework behind this practice's behaviour over viewpoint stance when deciding what counts as a campaign
+  - title: "UNHCR Information Integrity Toolkit — ABCDE analysis framework"
+    url: https://www.unhcr.org/handbooks/informationintegrity/practical-tools/analysis-potential-impact/abcde-analysis-framework
+    note: The actor, behaviour, content, degree, effect framework cited by name in the detection rule and the scope rule
+  - title: "DISARM Foundation — FAQs (DISARM Red and Blue frameworks)"
+    url: https://www.disarm.foundation/faqs
+    note: The Red and Blue technique frameworks used to tag findings and planned countermeasures so reports compare over time
+  - title: "Luceri et al. — Coordinated inauthentic behavior on TikTok (ICWSM)"
+    url: https://www.arxiv.org/abs/2505.10867
+    note: Evidence that coordination shows up as near-duplicate posting and shared infrastructure on a single platform
+  - title: Cross-platform coordinated inauthentic activity in the run-up to the 2024 US election
+    url: https://arxiv.org/html/2410.22716v4
+    note: Shows the same push running across several platforms at once, one of the signals the detection rule requires combining
+  - title: "Axios — NewsGuard report on the Pravda network and AI chatbots"
+    url: https://www.axios.com/2025/03/06/exclusive-russian-disinfo-floods-ai-chatbots-study-finds
+    note: The measured third-of-the-time repetition rate behind the rule that blocking a single network's domains is not enough
 ---
-
 A false claim shared by people who believe it is misinformation; it has no organiser, so it is not a campaign. A campaign has coordination and, usually, deception: fake or hijacked accounts, synchronised posting, laundered sources. That is what can be detected reliably and defended in review, so this practice looks for behaviour, and leaves judgements about claims to sourced fact-checks and people.
 
 ## Rules

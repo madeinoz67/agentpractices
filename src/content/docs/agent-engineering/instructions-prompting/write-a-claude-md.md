@@ -7,15 +7,16 @@ type: guideline
 roles: [implementer, any]
 stage: [plan, build]
 status: draft
-version: 1.0.0
-updated: 2026-11-24
-reviewed: 2026-11-24
-review_by: 2027-05-24
+version: 1.0.1
+updated: 2026-11-27
+reviewed: 2026-11-27
+review_by: 2027-05-27
 related: [BP-0015, BP-0017, BP-0012, BP-0005]
 sources:
-  - { title: Claude Code docs — How Claude remembers your project, url: https://code.claude.com/docs/en/claude-md }
+  - title: "Claude Code docs — How Claude remembers your project"
+    url: https://code.claude.com/docs/en/claude-md
+    note: The load order across user, project, local and subdirectory files that the scope table mirrors
 ---
-
 ## Rules
 
 1. **MUST** keep only facts Claude needs in every session in `CLAUDE.md`: build and test commands, conventions, project layout, and "always do X" rules. Move multi-step procedures to skills and instructions for one part of the codebase to path-scoped rules in `.claude/rules/`.
@@ -89,6 +90,3 @@ paths: ["src/api/**/*.ts"]
 - [ ] Hard limits enforced by hooks or permissions, not prose
 - [ ] Imports `@AGENTS.md` when one exists; under about 200 lines
 
-## References
-
-- [Claude Code — How Claude remembers your project](https://code.claude.com/docs/en/claude-md)

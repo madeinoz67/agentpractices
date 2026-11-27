@@ -7,17 +7,22 @@ type: guideline
 roles: [implementer, reviewer]
 stage: [build, operate]
 status: draft
-version: 1.0.0
-updated: 2026-11-25
-reviewed: 2026-11-25
-review_by: 2027-05-25
+version: 1.0.1
+updated: 2026-11-27
+reviewed: 2026-11-27
+review_by: 2027-05-27
 related: [BP-0014]
 sources:
-  - { title: Semantic Versioning 2.0.0, url: https://semver.org/ }
-  - { title: Keep a Changelog 1.1.0, url: https://keepachangelog.com/en/1.1.0/ }
-  - { title: Renovate documentation — grouped dependency updates, url: https://docs.renovatebot.com/configuration-options/ }
+  - title: Semantic Versioning 2.0.0
+    url: https://semver.org/
+    note: independently versioned artefacts and dependency pinning
+  - title: Keep a Changelog 1.1.0
+    url: https://keepachangelog.com/en/1.1.0/
+    note: a release record written for its consumers
+  - title: "Renovate documentation — grouped dependency updates"
+    url: https://docs.renovatebot.com/configuration-options/
+    note: grouped updates that bump many pinned dependencies in one pass
 ---
-
 ## Rules
 
 1. **MUST** treat the release round trip as the unit of cost: change the source, publish a version, bump the pin in every consumer, rebuild and verify. Count it before choosing how to ship.
@@ -59,8 +64,3 @@ Batched, all four entries land in one corpus change. There is one SDK release, o
 - [ ] One release, one pin bump, one consumer rebuild per batch
 - [ ] The release record names the batch entries and target versions
 
-## References
-
-- [Semantic Versioning 2.0.0](https://semver.org/) — independently versioned artefacts and dependency pinning
-- [Keep a Changelog 1.1.0](https://keepachangelog.com/en/1.1.0/) — a release record written for its consumers
-- [Renovate — configuration options](https://docs.renovatebot.com/configuration-options/) — grouped updates that bump many pinned dependencies in one pass

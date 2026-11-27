@@ -7,16 +7,19 @@ type: guideline
 roles: [implementer, researcher, any]
 stage: [plan, build, verify]
 status: draft
-version: 1.0.0
-updated: 2026-11-24
-reviewed: 2026-11-24
-review_by: 2027-05-24
+version: 1.0.1
+updated: 2026-11-27
+reviewed: 2026-11-27
+review_by: 2027-05-27
 related: [BP-0024, BP-0025, BP-0004, BP-0014]
 sources:
-  - { title: W3C SKOS Reference — Mapping properties, url: https://www.w3.org/TR/skos-reference/#mapping }
-  - { title: SSSOM — Simple Standard for Sharing Ontological Mappings, url: https://mapping-commons.github.io/sssom/ }
+  - title: "W3C SKOS Reference — Mapping properties"
+    url: https://www.w3.org/TR/skos-reference/#mapping
+    note: The five mapping properties the match type table is built from, exact through related
+  - title: "SSSOM — Simple Standard for Sharing Ontological Mappings"
+    url: https://mapping-commons.github.io/sssom/
+    note: Tabular mapping format carrying match type, evidence, confidence and provenance so mappings stop being an ad hoc spreadsheet
 ---
-
 ## Rules
 
 1. **MUST** compare the definitions and scope of two terms before mapping them. Matching labels ("Asset" and "Asset") is not evidence that they mean the same thing.
@@ -73,7 +76,3 @@ Integrating systems (CMDB to asset register, Intune groups to an HR taxonomy), a
 - [ ] No cross-scheme identity links
 - [ ] Mapping file versioned; lossy mappings documented
 
-## References
-
-- [W3C SKOS Reference — Mapping properties](https://www.w3.org/TR/skos-reference/#mapping)
-- [SSSOM](https://mapping-commons.github.io/sssom/)

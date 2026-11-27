@@ -7,20 +7,31 @@ type: pattern
 roles: [orchestrator, implementer]
 stage: [plan, build, operate]
 status: draft
-version: 1.1.0
-updated: 2026-11-24
-reviewed: 2026-11-24
-review_by: 2027-02-24
+version: 1.1.1
+updated: 2026-11-27
+reviewed: 2026-11-27
+review_by: 2027-02-27
 related: [BP-0046, BP-0041, BP-0006, BP-0039]
 sources:
-  - { title: LiteLLM docs — Off-peak pricing, url: https://docs.litellm.ai/docs/proxy/off_peak_pricing }
-  - { title: Claude Code Router — Custom router, url: https://musistudio.github.io/claude-code-router/docs/server/advanced/custom-router }
-  - { title: 'InfoWorld — DeepSeek raises some V4 prices as AI demand strains capacity (2026)', url: https://www.infoworld.com/article/4209439/deepseek-raises-some-v4-prices-by-more-than-10x-as-ai-demand-strains-capacity.html }
-  - { title: OpenRouter API — List models (pricing), url: https://openrouter.ai/docs/api/api-reference/models/get-models }
-  - { title: LiteLLM — model prices and context window map, url: https://github.com/BerriAI/litellm/blob/main/model_prices_and_context_window.json }
-  - { title: Claude Platform docs — Batch processing, url: https://platform.claude.com/docs/en/build-with-claude/batch-processing }
+  - title: "LiteLLM docs — Off-peak pricing"
+    url: https://docs.litellm.ai/docs/proxy/off_peak_pricing
+    note: Gateway cost tracking with hours_utc windows, so reported spend reflects the time-based price rather than the list price
+  - title: "Claude Code Router — Custom router"
+    url: https://musistudio.github.io/claude-code-router/docs/server/advanced/custom-router
+    note: The per-request router hook that chooses provider and model, where the off-peak window check is implemented
+  - title: "InfoWorld — DeepSeek raises some V4 prices as AI demand strains capacity (2026)"
+    url: https://www.infoworld.com/article/4209439/deepseek-raises-some-v4-prices-by-more-than-10x-as-ai-demand-strains-capacity.html
+    note: Evidence that off-peak terms move without warning, which is why every window carries a source date and expiry
+  - title: "OpenRouter API — List models (pricing)"
+    url: https://openrouter.ai/docs/api/api-reference/models/get-models
+    note: Aggregator pricing API that returns per-model rates, which the refresh job diffs against the configured table
+  - title: "LiteLLM — model prices and context window map"
+    url: https://github.com/BerriAI/litellm/blob/main/model_prices_and_context_window.json
+    note: Community-maintained base price map the refresh job checks against, useful but able to lag the provider's own page
+  - title: "Claude Platform docs — Batch processing"
+    url: https://platform.claude.com/docs/en/build-with-claude/batch-processing
+    note: "The alternative to waiting for a cheap window: a batch discount offered independently of time of day"
 ---
-
 ## Rules
 
 ### Know the schedule
@@ -170,8 +181,3 @@ Deferrable job scheduling: a nightly queue (cron in the off-peak window, convert
 - [ ] Scheduled refresh job diffs against provider and reference prices; changes via PR
 - [ ] Monthly reconciliation against the invoice; DST changes handled
 
-## References
-
-- [LiteLLM — Off-peak pricing](https://docs.litellm.ai/docs/proxy/off_peak_pricing)
-- [Claude Code Router — Custom router](https://musistudio.github.io/claude-code-router/docs/server/advanced/custom-router)
-- [Claude Platform — Batch processing](https://platform.claude.com/docs/en/build-with-claude/batch-processing)

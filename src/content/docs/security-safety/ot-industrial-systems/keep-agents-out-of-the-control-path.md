@@ -7,17 +7,22 @@ type: guideline
 roles: [orchestrator, planner, implementer, reviewer]
 stage: [plan, build, operate]
 status: draft
-version: 1.0.0
-updated: 2026-11-25
-reviewed: 2026-11-25
-review_by: 2027-05-25
+version: 1.0.1
+updated: 2026-11-27
+reviewed: 2026-11-27
+review_by: 2027-05-27
 related: [BP-0032, BP-0062, BP-0069, BP-0067, BP-0052, BP-0050, BP-0040, BP-0060, BP-0005]
 sources:
-  - { title: 'CISA, ASD''s ACSC et al. — Principles for the Secure Integration of AI in Operational Technology (Dec 2025)', url: https://www.cyber.gov.au/business-government/secure-design/operational-technology-environments/principles-for-the-secure-integration-of-artificial-intelligence-in-operational-technology }
-  - { title: ISA/IEC 62443 series of standards, url: https://www.isa.org/standards-and-publications/isa-standards/isa-iec-62443-series-of-standards }
-  - { title: NIST SP 800-82 Rev. 3 — Guide to Operational Technology (OT) Security, url: https://csrc.nist.gov/pubs/sp/800/82/r3/final }
+  - title: "CISA, ASD's ACSC et al. — Principles for the Secure Integration of AI in Operational Technology (Dec 2025)"
+    url: https://www.cyber.gov.au/business-government/secure-design/operational-technology-environments/principles-for-the-secure-integration-of-artificial-intelligence-in-operational-technology
+    note: The joint guidance stating LLMs should not make safety decisions and typically belong in business layers 4 to 5
+  - title: "ISA/IEC 62443 series of standards"
+    url: https://www.isa.org/standards-and-publications/isa-standards/isa-iec-62443-series-of-standards
+    note: The zone and conduit model the agent must be designed into, with its own identity and connections through the DMZ
+  - title: "NIST SP 800-82 Rev. 3 — Guide to Operational Technology (OT) Security"
+    url: https://csrc.nist.gov/pubs/sp/800/82/r3/final
+    note: OT security architecture and the Purdue levels used to define where agents may and may not run
 ---
-
 In IT, a bad agent action usually costs data or time. In OT it can cost a process upset, damaged equipment or a safety incident. Joint guidance from CISA, Australia's ASD's ACSC and partners (December 2025) states that LLMs almost certainly should not be used to make safety decisions in OT, and that they typically belong in the business layers (Purdue levels 4–5), working on data exported from OT rather than in real-time control. This practice applies that to agents: coding agents writing control logic, operations agents reading historians, and assistants for engineers and operators.
 
 Priority order for every decision here: safety, then operational continuity, then security, then everything else.
@@ -107,8 +112,3 @@ Coding agent working on PLC logic: works on an exported project copy in a reposi
 - [ ] OT data treated as sensitive; supplier AI disclosed and controllable
 - [ ] Logging with agent identity; drift monitoring; fail-safe and manual fallback tested; incident response updated
 
-## References
-
-- [Principles for the Secure Integration of AI in OT (ASD's ACSC)](https://www.cyber.gov.au/business-government/secure-design/operational-technology-environments/principles-for-the-secure-integration-of-artificial-intelligence-in-operational-technology)
-- [ISA/IEC 62443 series](https://www.isa.org/standards-and-publications/isa-standards/isa-iec-62443-series-of-standards)
-- [NIST SP 800-82 Rev. 3](https://csrc.nist.gov/pubs/sp/800/82/r3/final)
