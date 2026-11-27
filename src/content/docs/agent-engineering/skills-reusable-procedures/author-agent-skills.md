@@ -7,7 +7,7 @@ type: guideline
 roles: [implementer, any]
 stage: [plan, build, verify]
 status: draft
-version: 1.1.0
+version: 1.2.0
 updated: 2026-11-27
 reviewed: 2026-11-27
 review_by: 2027-05-27
@@ -25,6 +25,9 @@ sources:
   - title: "Ai insider — Lauren Tan reveals how 30+ AI agents ship PRs while you sleep"
     url: https://www.youtube.com/watch?v=6hxp0SpGxz8
     note: Past chats as the record of the real process, and the instruction to turn repeated interventions into lint rules or new skills; behind rule 14
+  - title: "Ai insider — Lauren Tan reveals how to build a 21+ agent GrokBot team"
+    url: https://www.youtube.com/watch?v=PcO998TSzIz
+    note: Evals as unit tests for skills, a rubric written by the coordinator, subagents run in directories that hide the evaluation, a model other than the worker as judge, and hill-climbing the score across models; behind rules 15 to 17
 ---
 ## Rules
 
@@ -42,6 +45,9 @@ sources:
 12. **SHOULD** validate the skill's format with a validator (for example `skills-ref validate ./my-skill`) in CI.
 13. **MAY** add `compatibility` when the skill needs specific tools, packages or network access.
 14. **MUST** derive each new skill from recorded interventions: search the session transcripts for corrections and re-prompts made twice or more, and cite the run that shows the pattern.
+15. **MUST** keep an eval suite for each skill you maintain: a rubric, real tasks and a pass threshold, run before and after every change to the skill.
+16. **MUST** judge with a model other than the one that produced the output, and hide the evaluation context from the worker so it does not change behaviour.
+17. **SHOULD** run the suite on the models you use, and hill-climb until the threshold holds on all of them.
 
 ## When to apply
 
@@ -53,7 +59,7 @@ Write a skill when you keep pasting the same instructions, when a procedure is t
 2. Search the session transcripts for the prompts, corrections and re-prompts you repeat, and cite the run that shows each pattern.
 3. Write the description first, then the steps; move anything the steps do not always need into `references/`.
 4. Turn repeated logic into scripts with tests.
-5. Write a few trigger tests (prompts that should and should not load it) and output checks.
+5. Write a few trigger tests (prompts that should and should not load it) and output checks, and keep them as the skill's eval suite with a pass threshold.
 6. Validate, version, and publish to the right scope (personal, project, plugin or organisation).
 
 ## Examples
@@ -89,6 +95,7 @@ Poor description: `description: Helps with documents.` It never says when to use
 - Skills that silently deploy or delete when the model decides they are relevant.
 - Copying the same practice text into many skills instead of citing it.
 - Writing a skill from memory when the transcripts already show the repeated correction.
+- Changing a skill and trusting it because it reads better, with no eval run before and after.
 
 ## Checklist
 
@@ -99,4 +106,6 @@ Poor description: `description: Helps with documents.` It never says when to use
 - [ ] No secrets; side-effect skills user-invoked only
 - [ ] Trigger and output tests pass; version recorded
 - [ ] Derived from recorded interventions, with the run cited
+- [ ] Every maintained skill has an eval suite with a rubric, tasks and a threshold, run on every change
+- [ ] The judge is a different model, and the worker cannot see that it is being evaluated
 
