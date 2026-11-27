@@ -2,6 +2,7 @@
 
 ## Unreleased
 
+- BP-0073 1.1.0: rules 23–24 add the surface inventory and the per-pair gate, so an API, a UI, a TUI or the documentation cannot drift behind the CLI and the MCP server (#67).
 - BP-0095 Run concurrent agents on disjoint work and settle conflicts with evidence (D.MAS.HND, draft) (#65).
 - BP-0094 Name CLI flags and subcommands so callers can guess them (D.SWE.CLI, draft) (#54).
 - BP-0001 1.1.0: rules 10–16 add the output switches (`--plain`, `-q`, `-` for stdin and stdout, the pager), confirmation levels for a severe action, the rule against a secret as a flag value, the help entry points, and `TERM=dumb` (#58).
