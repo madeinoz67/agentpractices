@@ -2,6 +2,7 @@
 
 ## Unreleased
 
+- BP-0103 Amend the agent environment when the same failure repeats (D.AGT.WF, draft) (#87).
 - Plugin skill 0.2.2, from the dogfood audit (#77): `-h`/`--help` and a no-argument help path; exit 2 for a usage error and 1 for a failure; a near-miss suggestion for an unknown command; the host announced on stderr before each network call, with a default timeout, `--timeout`, `--offline`, `--plain`, `--quiet` and `sync --dry-run`; the skill version and the report page on an unexpected error; `XDG_CACHE_HOME` for the cache path. The catalogue cache now compares content identity and refuses a rollback, so a build timestamp can no longer replace good content with old content (BP-0007 rule 12, issue #27).
 - BP-0100 Use pstack through poteto-mode (D.AGT.SKL, draft) (#79).
 - BP-0099 Dogfood the product you build before you release it (D.SWE.REL, draft) (#78).
