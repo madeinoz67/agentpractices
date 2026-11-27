@@ -16,25 +16,25 @@ superseded_by: null
 sources:
   - title: "Google SRE Book — Handling Overload"
     url: https://sre.google/sre-book/handling-overload/
-    note: "admission control and bounded queues when demand exceeds what the system can serve"
+    note: admission control and bounded queues when demand exceeds what the system can serve
   - title: "Anthropic — How we built our multi-agent research system"
     url: https://www.anthropic.com/engineering/multi-agent-research-system
     note: "multi-agent systems use about 15× the tokens of chat, so concurrency is a cost decision as well as a coordination one"
   - title: "Du et al. — Improving Factuality and Reasoning in Language Models through Multiagent Debate"
     url: https://arxiv.org/abs/2305.14325
-    note: "structured exchange of reasoning between instances improves factual validity, which is why a disagreement should be surfaced rather than suppressed"
+    note: structured exchange of reasoning between instances improves factual validity, which is why a disagreement should be surfaced rather than suppressed
   - title: "Khan et al. — Debating with More Persuasive LLMs Leads to More Truthful Answers"
     url: https://arxiv.org/abs/2402.06782
-    note: "two advocates arguing before a separate judge outperformed unsupervised agreement, which is why one named adjudicator decides rather than the pair"
+    note: two advocates arguing before a separate judge outperformed unsupervised agreement, which is why one named adjudicator decides rather than the pair
   - title: "Pro Git — Basic Branching and Merging"
     url: https://git-scm.com/book/en/v2/Git-Branching-Basic-Branching-and-Merging
     note: "Git pauses on a conflict instead of picking a side; the same behaviour is the model for rule 5"
   - title: "Git — git-worktree documentation"
     url: https://git-scm.com/docs/git-worktree
-    note: "separate working trees for parallel branches"
+    note: separate working trees for parallel branches
   - title: "A2A Protocol specification — task states"
     url: https://a2a-protocol.org/latest/specification/
-    note: "the input-required task state, used for a task that needs a person before it can continue"
+    note: the input-required task state, used for a task that needs a person before it can continue
 ---
 Two agents running at once can pick the same task, write the same file, or return contradictory findings about the same artifact. Nothing in the run reports a problem: every agent returns success. The orchestrator then keeps the last write, synthesises a conclusion no artifact supports, or lets the pair argue until the budget runs out. The cost lands later, when the merged result fails a test that no single agent would have failed.
 
