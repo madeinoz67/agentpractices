@@ -1,7 +1,7 @@
 {
   "$schema": "https://json.schemastore.org/claude-code-plugin.json",
   "name": "create-practice",
-  "version": "0.1.0",
+  "version": "0.2.0",
   "displayName": "Create a Practice",
   "description": "Proposes and writes new best practices for agentpractices.dev: duplicate search, domain choice from the taxonomy, MUST/SHOULD/MAY rules, the Propose a practice issue, then the practice page, CHANGELOG line, bun run verify and a pull request once the owner assigns a BP-NNNN ID. Contacts agentpractices.dev only, no telemetry.",
   "author": {

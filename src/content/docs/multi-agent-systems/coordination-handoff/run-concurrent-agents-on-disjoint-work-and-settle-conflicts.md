@@ -7,22 +7,35 @@ type: guideline
 roles: [orchestrator, implementer, reviewer]
 stage: [plan, build, verify]
 status: draft
-version: 1.0.0
+version: 1.0.1
 updated: 2026-11-27
 reviewed: 2026-11-27
 review_by: 2027-05-27
 related: [BP-0042, BP-0003, BP-0043, BP-0053, BP-0035, BP-0048]
 superseded_by: null
 sources:
-  - { title: 'Google SRE Book — Handling Overload', url: https://sre.google/sre-book/handling-overload/ }
-  - { title: 'Anthropic — How we built our multi-agent research system', url: https://www.anthropic.com/engineering/multi-agent-research-system }
-  - { title: 'Du et al. — Improving Factuality and Reasoning in Language Models through Multiagent Debate', url: https://arxiv.org/abs/2305.14325 }
-  - { title: 'Khan et al. — Debating with More Persuasive LLMs Leads to More Truthful Answers', url: https://arxiv.org/abs/2402.06782 }
-  - { title: 'Pro Git — Basic Branching and Merging', url: https://git-scm.com/book/en/v2/Git-Branching-Basic-Branching-and-Merging }
-  - { title: 'Git — git-worktree documentation', url: https://git-scm.com/docs/git-worktree }
-  - { title: 'A2A Protocol specification — task states', url: https://a2a-protocol.org/latest/specification/ }
+  - title: "Google SRE Book — Handling Overload"
+    url: https://sre.google/sre-book/handling-overload/
+    note: "admission control and bounded queues when demand exceeds what the system can serve"
+  - title: "Anthropic — How we built our multi-agent research system"
+    url: https://www.anthropic.com/engineering/multi-agent-research-system
+    note: "multi-agent systems use about 15× the tokens of chat, so concurrency is a cost decision as well as a coordination one"
+  - title: "Du et al. — Improving Factuality and Reasoning in Language Models through Multiagent Debate"
+    url: https://arxiv.org/abs/2305.14325
+    note: "structured exchange of reasoning between instances improves factual validity, which is why a disagreement should be surfaced rather than suppressed"
+  - title: "Khan et al. — Debating with More Persuasive LLMs Leads to More Truthful Answers"
+    url: https://arxiv.org/abs/2402.06782
+    note: "two advocates arguing before a separate judge outperformed unsupervised agreement, which is why one named adjudicator decides rather than the pair"
+  - title: "Pro Git — Basic Branching and Merging"
+    url: https://git-scm.com/book/en/v2/Git-Branching-Basic-Branching-and-Merging
+    note: "Git pauses on a conflict instead of picking a side; the same behaviour is the model for rule 5"
+  - title: "Git — git-worktree documentation"
+    url: https://git-scm.com/docs/git-worktree
+    note: "separate working trees for parallel branches"
+  - title: "A2A Protocol specification — task states"
+    url: https://a2a-protocol.org/latest/specification/
+    note: "the input-required task state, used for a task that needs a person before it can continue"
 ---
-
 Two agents running at once can pick the same task, write the same file, or return contradictory findings about the same artifact. Nothing in the run reports a problem: every agent returns success. The orchestrator then keeps the last write, synthesises a conclusion no artifact supports, or lets the pair argue until the budget runs out. The cost lands later, when the merged result fails a test that no single agent would have failed.
 
 The first half of this practice keeps contention from happening: a ceiling on concurrent agents, disjoint write scopes, and no task dispatched on inputs that do not exist yet. The second half handles what still collides: a disagreement is stated as two checkable claims, settled by running the check that separates them, decided by one named adjudicator when the pair cannot settle it, and escalated to the human when the question is preference, priority or risk rather than fact.
@@ -125,12 +138,3 @@ A disagreement about which of two valid schemas to use has no check that separat
 - [ ] Preference, priority, scope and risk conflicts escalated to the human, with the task blocked or `input-required`
 - [ ] Resolution, evidence and task IDs recorded where the next agent reads them
 
-## References
-
-- [Google SRE Book — Handling Overload](https://sre.google/sre-book/handling-overload/): admission control and bounded queues when demand exceeds what the system can serve.
-- [Anthropic — How we built our multi-agent research system](https://www.anthropic.com/engineering/multi-agent-research-system): multi-agent systems use about 15× the tokens of chat, so concurrency is a cost decision as well as a coordination one.
-- [Du et al. — Improving Factuality and Reasoning in Language Models through Multiagent Debate](https://arxiv.org/abs/2305.14325): structured exchange of reasoning between instances improves factual validity, which is why a disagreement should be surfaced rather than suppressed.
-- [Khan et al. — Debating with More Persuasive LLMs Leads to More Truthful Answers](https://arxiv.org/abs/2402.06782): two advocates arguing before a separate judge outperformed unsupervised agreement, which is why one named adjudicator decides rather than the pair.
-- [Pro Git — Basic Branching and Merging](https://git-scm.com/book/en/v2/Git-Branching-Basic-Branching-and-Merging): Git pauses on a conflict instead of picking a side; the same behaviour is the model for rule 5.
-- [Git — git-worktree documentation](https://git-scm.com/docs/git-worktree): separate working trees for parallel branches.
-- [A2A Protocol specification](https://a2a-protocol.org/latest/specification/): the `input-required` task state, used for a task that needs a person before it can continue.

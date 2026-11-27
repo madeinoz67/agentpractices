@@ -7,16 +7,19 @@ type: guideline
 roles: [orchestrator, implementer, any]
 stage: [plan, build, operate]
 status: draft
-version: 1.0.1
-updated: 2026-11-25
-reviewed: 2026-11-25
-review_by: 2027-05-25
+version: 1.0.2
+updated: 2026-11-27
+reviewed: 2026-11-27
+review_by: 2027-05-27
 related: [BP-0033, BP-0013, BP-0021, BP-0023, BP-0005]
 sources:
-  - { title: OWASP LLM03:2026 Excessive Agency, url: https://genai.owasp.org/resource/owasp-genai-llm-top-10-2026/ }
-  - { title: MCP Specification — Security best practices (scope minimization), url: https://modelcontextprotocol.io/specification/latest/basic/security_best_practices }
+  - title: "OWASP LLM03:2026 Excessive Agency"
+    url: https://genai.owasp.org/resource/owasp-genai-llm-top-10-2026/
+    note: Names excessive functionality, permissions and autonomy as the three root causes this practice's rules each cut
+  - title: "MCP Specification — Security best practices (scope minimization)"
+    url: https://modelcontextprotocol.io/specification/latest/basic/security_best_practices
+    note: Scope minimisation for MCP servers, the protocol-level guidance behind narrowing tools and enforcing scope downstream
 ---
-
 ## Rules
 
 ### Functionality
@@ -67,7 +70,3 @@ Every agent with tools, credentials or the ability to act. The usual root causes
 - [ ] Short-lived credentials; JIT elevation with approval
 - [ ] Sandboxed execution; high-impact actions approved; actions capped and logged
 
-## References
-
-- [OWASP LLM03:2026 Excessive Agency](https://genai.owasp.org/resource/owasp-genai-llm-top-10-2026/)
-- [MCP Security best practices](https://modelcontextprotocol.io/specification/latest/basic/security_best_practices)

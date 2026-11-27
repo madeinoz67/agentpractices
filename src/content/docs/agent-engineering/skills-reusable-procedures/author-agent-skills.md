@@ -7,17 +7,22 @@ type: guideline
 roles: [implementer, any]
 stage: [plan, build, verify]
 status: draft
-version: 1.0.0
-updated: 2026-11-24
-reviewed: 2026-11-24
-review_by: 2027-05-24
+version: 1.0.1
+updated: 2026-11-27
+reviewed: 2026-11-27
+review_by: 2027-05-27
 related: [BP-0019, BP-0016, BP-0007, BP-0006]
 sources:
-  - { title: Agent Skills specification, url: https://agentskills.io/specification }
-  - { title: Claude Code docs — Skills, url: https://code.claude.com/docs/en/skills }
-  - { title: Claude Platform docs — Skill authoring best practices, url: https://platform.claude.com/docs/en/agents-and-tools/agent-skills/best-practices }
+  - title: Agent Skills specification
+    url: https://agentskills.io/specification
+    note: Normative directory and frontmatter contract behind the name pattern, the description length cap and the skills-ref validator
+  - title: "Claude Code docs — Skills"
+    url: https://code.claude.com/docs/en/skills
+    note: How Claude Code loads skills by description and the disable-model-invocation flag that keeps deploy and delete skills user-invoked
+  - title: "Claude Platform docs — Skill authoring best practices"
+    url: https://platform.claude.com/docs/en/agents-and-tools/agent-skills/best-practices
+    note: Progressive disclosure discipline, the under-500-line SKILL.md limit and testing skills on real tasks before relying on them
 ---
-
 ## Rules
 
 1. **MUST** give each skill one capability. If its description needs "and" to join unrelated jobs, split it.
@@ -88,8 +93,3 @@ Poor description: `description: Helps with documents.` It never says when to use
 - [ ] No secrets; side-effect skills user-invoked only
 - [ ] Trigger and output tests pass; version recorded
 
-## References
-
-- [Agent Skills specification](https://agentskills.io/specification)
-- [Claude Code — Skills](https://code.claude.com/docs/en/skills)
-- [Claude Platform — Skill authoring best practices](https://platform.claude.com/docs/en/agents-and-tools/agent-skills/best-practices)

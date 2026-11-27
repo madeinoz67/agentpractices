@@ -7,17 +7,22 @@ type: guideline
 roles: [any, orchestrator, researcher]
 stage: [plan, build, operate]
 status: draft
-version: 1.0.1
-updated: 2026-11-25
-reviewed: 2026-11-25
-review_by: 2027-05-25
+version: 1.0.2
+updated: 2026-11-27
+reviewed: 2026-11-27
+review_by: 2027-05-27
 related: [BP-0040, BP-0039, BP-0032, BP-0033, BP-0005]
 sources:
-  - { title: 'IAPS — Detecting Offensive Cyber Agents: A Detection-in-Depth Approach (arXiv 2605.21956)', url: https://arxiv.org/abs/2605.21956 }
-  - { title: Beelzebub — LLM-powered deception runtime, url: https://github.com/beelzebub-labs/beelzebub }
-  - { title: OWASP Top 10 for LLM Applications 2026, url: https://genai.owasp.org/resource/owasp-genai-llm-top-10-2026/ }
+  - title: "IAPS — Detecting Offensive Cyber Agents: A Detection-in-Depth Approach (arXiv 2605.21956)"
+    url: https://arxiv.org/abs/2605.21956
+    note: The detection-in-depth report the four layers come from, defined at ecosystem level before this page adapts them to one organisation
+  - title: "Beelzebub — LLM-powered deception runtime"
+    url: https://github.com/beelzebub-labs/beelzebub
+    note: An LLM-backed honeypot used to tarpit and decoy automated attackers, the concrete tool behind the Delay layer
+  - title: OWASP Top 10 for LLM Applications 2026
+    url: https://genai.owasp.org/resource/owasp-genai-llm-top-10-2026/
+    note: The prompt-injection and excessive-agency entries that justify hardening your own agents against being turned on you
 ---
-
 ## Rules
 
 The four layers come from the Institute for AI Policy and Strategy's detection-in-depth report, which defines them at ecosystem level. The rules below are this site's adaptation for one organisation defending its own environment.
@@ -74,8 +79,3 @@ Security programmes planning for AI-assisted or fully agentic attacks, including
 - [ ] Disrupt: automated containment inside legal scope; no hack-back
 - [ ] Decoys isolated and protected; exercises run
 
-## References
-
-- [Detecting Offensive Cyber Agents: A Detection-in-Depth Approach](https://arxiv.org/abs/2605.21956)
-- [Beelzebub](https://github.com/beelzebub-labs/beelzebub)
-- [OWASP Top 10 for LLM Applications 2026](https://genai.owasp.org/resource/owasp-genai-llm-top-10-2026/)

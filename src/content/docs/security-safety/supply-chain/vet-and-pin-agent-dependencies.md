@@ -7,16 +7,19 @@ type: guideline
 roles: [implementer, reviewer, orchestrator]
 stage: [plan, build, operate]
 status: draft
-version: 1.0.1
-updated: 2026-11-25
-reviewed: 2026-11-25
-review_by: 2027-05-25
+version: 1.0.2
+updated: 2026-11-27
+reviewed: 2026-11-27
+review_by: 2027-05-27
 related: [BP-0019, BP-0021, BP-0023, BP-0036, BP-0046]
 sources:
-  - { title: OWASP LLM04:2026 Supply Chain, url: https://genai.owasp.org/resource/owasp-genai-llm-top-10-2026/ }
-  - { title: 'Trend Micro — Slopsquatting: when AI agents hallucinate malicious packages', url: https://www.trendmicro.com/vinfo/us/security/news/cybercrime-and-digital-threats/slopsquatting-when-ai-agents-hallucinate-malicious-packages }
+  - title: "OWASP LLM04:2026 Supply Chain"
+    url: https://genai.owasp.org/resource/owasp-genai-llm-top-10-2026/
+    note: The supply chain entry that motivates treating models, MCP servers and skills as dependencies with an inventory
+  - title: "Trend Micro — Slopsquatting: when AI agents hallucinate malicious packages"
+    url: https://www.trendmicro.com/vinfo/us/security/news/cybercrime-and-digital-threats/slopsquatting-when-ai-agents-hallucinate-malicious-packages
+    note: How attackers register package names AI tools invent, the reason a package must be verified to exist before install
 ---
-
 ## Rules
 
 1. **MUST** keep an inventory of everything an agent depends on: models and providers, gateways, MCP servers, skills, plugins, hooks, packages and their versions.
@@ -53,7 +56,3 @@ Bad: the agent installs whatever names it remembers, unpinned, and enables a ski
 - [ ] Third-party agent components reviewed
 - [ ] Installs via approved registry; scanning in CI; SBOM includes agent parts
 
-## References
-
-- [OWASP LLM04:2026 Supply Chain](https://genai.owasp.org/resource/owasp-genai-llm-top-10-2026/)
-- [Trend Micro — Slopsquatting](https://www.trendmicro.com/vinfo/us/security/news/cybercrime-and-digital-threats/slopsquatting-when-ai-agents-hallucinate-malicious-packages)

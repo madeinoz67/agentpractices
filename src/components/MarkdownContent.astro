@@ -14,7 +14,7 @@ const items = d.id ? seeAlso({ id: d.id, related: d.related ?? [] }, loadPractic
   <section class="bp-sources" aria-labelledby="bp-sources-h">
     <h2 id="bp-sources-h">Sources</h2>
     <ol>
-      {sources.map((s) => <li><a href={s.url} rel="noopener noreferrer external">{s.title}</a> <span class="bp-source-host">({s.host})</span></li>)}
+      {sources.map((s) => <li><a href={s.url} rel="noopener noreferrer external">{s.title}</a> <span class="bp-source-host">({s.host})</span>{s.note ? <span class="bp-source-note">: {s.note}</span> : null}</li>)}
     </ol>
   </section>
 )}

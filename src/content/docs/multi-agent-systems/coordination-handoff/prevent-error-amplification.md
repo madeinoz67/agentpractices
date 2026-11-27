@@ -7,17 +7,22 @@ type: guideline
 roles: [orchestrator, reviewer, implementer, researcher]
 stage: [build, verify, operate]
 status: draft
-version: 1.0.0
-updated: 2026-11-24
-reviewed: 2026-11-24
-review_by: 2027-05-24
+version: 1.0.1
+updated: 2026-11-27
+reviewed: 2026-11-27
+review_by: 2027-05-27
 related: [BP-0052, BP-0003, BP-0048, BP-0043, BP-0012, BP-0031, BP-0029, BP-0051]
 sources:
-  - { title: 'Singh & Pawar — The Hallucination Snowball: error propagation in multi-agent LLM pipelines (ICML 2026)', url: https://icml.cc/virtual/2026/77915 }
-  - { title: 'Xie et al. — From Spark to Fire: Modeling and Mitigating Error Cascades in LLM-Based Multi-Agent Collaboration (2026)', url: https://arxiv.org/abs/2603.04474 }
-  - { title: 'Jamshidi et al. — Hallucination Cascade: Analyzing Error Propagation in Multi-Agent LLM Systems (2026)', url: https://arxiv.org/abs/2606.07937 }
+  - title: "Singh & Pawar — The Hallucination Snowball: error propagation in multi-agent LLM pipelines (ICML 2026)"
+    url: https://icml.cc/virtual/2026/77915
+    note: The study behind the intro's claim that an unchecked error gets harder to detect at each stage of a multi-agent pipeline
+  - title: "Xie et al. — From Spark to Fire: Modeling and Mitigating Error Cascades in LLM-Based Multi-Agent Collaboration (2026)"
+    url: https://arxiv.org/abs/2603.04474
+    note: Models how one wrong output cascades through agent collaboration, and what mitigation at the handoff interrupts it
+  - title: "Jamshidi et al. — Hallucination Cascade: Analyzing Error Propagation in Multi-Agent LLM Systems (2026)"
+    url: https://arxiv.org/abs/2606.07937
+    note: Analyses how a hallucination spreads across agents in a multi-agent system, the failure rule 9's retraction path has to undo
 ---
-
 Amplification is what happens to one unchecked error after it is produced: the next agent builds on it, a summary turns it into narrative, a reviewer agrees with it, memory stores it, retrieval serves it back, and it now reads as established fact. Research on multi-agent pipelines finds errors get harder to detect at each stage, and that checks at each handoff catch far more than one check at the end.
 
 ## Rules
@@ -96,8 +101,3 @@ with a gate at analyst: claim checked against API docs → corrected to 50/min b
 - [ ] Generated content kept out of authoritative retrieval sources
 - [ ] Retraction path via provenance; amplification tested with injected errors
 
-## References
-
-- [The Hallucination Snowball (ICML 2026)](https://icml.cc/virtual/2026/77915)
-- [From Spark to Fire: error cascades in LLM multi-agent systems](https://arxiv.org/abs/2603.04474)
-- [Hallucination Cascade: error propagation in multi-agent LLM systems](https://arxiv.org/abs/2606.07937)

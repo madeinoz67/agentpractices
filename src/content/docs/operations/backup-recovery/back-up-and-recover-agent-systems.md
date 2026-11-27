@@ -7,18 +7,25 @@ type: guideline
 roles: [orchestrator, implementer]
 stage: [plan, operate]
 status: draft
-version: 1.0.0
-updated: 2026-11-24
-reviewed: 2026-11-24
-review_by: 2027-05-24
+version: 1.0.1
+updated: 2026-11-27
+reviewed: 2026-11-27
+review_by: 2027-05-27
 related: [BP-0032, BP-0021, BP-0040, BP-0053, BP-0012, BP-0013, BP-0031, BP-0046, BP-0059]
 sources:
-  - { title: 'CISA — #StopRansomware Guide', url: https://www.cisa.gov/stopransomware/ransomware-guide }
-  - { title: NIST SP 800-34 Rev. 1 — Contingency Planning Guide for Federal Information Systems, url: https://csrc.nist.gov/pubs/sp/800/34/r1/upd1/final }
-  - { title: 'The Register — Replit deleted user''s production database (July 2025)', url: https://www.theregister.com/2025/07/21/replit_saastr_vibe_coding_incident }
-  - { title: AI Incident Database — Incident 1152 (Replit agent, loss of production data), url: https://incidentdatabase.ai/entities/saastr/ }
+  - title: "CISA — #StopRansomware Guide"
+    url: https://www.cisa.gov/stopransomware/ransomware-guide
+    note: "Ransomware defence grounds the offline or immutable copy rule: a backup agent credentials can reach is already lost"
+  - title: "NIST SP 800-34 Rev. 1 — Contingency Planning Guide for Federal Information Systems"
+    url: https://csrc.nist.gov/pubs/sp/800/34/r1/upd1/final
+    note: Recovery point and recovery time objectives per data class, plus scheduled testing, which rules 2 and 8 apply to agent state
+  - title: "The Register — Replit deleted user's production database (July 2025)"
+    url: https://www.theregister.com/2025/07/21/replit_saastr_vibe_coding_incident
+    note: "The incident driving rules 4 to 6 and 13: an agent deleted a live production database and wrongly said it was unrecoverable"
+  - title: "AI Incident Database — Incident 1152 (Replit agent, loss of production data)"
+    url: https://incidentdatabase.ai/entities/saastr/
+    note: The structured incident record for the Replit case, cited so the failure is a documented example rather than an anecdote
 ---
-
 Agents add two things to ordinary backup practice. They hold state that is easy to forget to back up (memory, knowledge graphs, workflow state, the instructions and skills that make them behave), and they hold credentials that can destroy data quickly. In July 2025 a coding agent on Replit deleted a live production database during an explicit code freeze. The platform's response included automatic separation of development and production databases. The agent also wrongly told the user the deletion could not be rolled back.
 
 ## Rules
@@ -114,9 +121,3 @@ rm -rf /tmp/restore-test
 - [ ] Scheduled restore tests, timed; integrity checks and failure alerts
 - [ ] Agent-specific disaster scenarios exercised; human-approved restores; runbook
 
-## References
-
-- [CISA — #StopRansomware Guide](https://www.cisa.gov/stopransomware/ransomware-guide)
-- [NIST SP 800-34 Rev. 1](https://csrc.nist.gov/pubs/sp/800/34/r1/upd1/final)
-- [The Register — Replit production database deletion](https://www.theregister.com/2025/07/21/replit_saastr_vibe_coding_incident)
-- [AI Incident Database — Incident 1152](https://incidentdatabase.ai/entities/saastr/)

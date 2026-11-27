@@ -7,17 +7,22 @@ type: guideline
 roles: [orchestrator, planner, implementer]
 stage: [plan, build, operate]
 status: draft
-version: 1.0.0
-updated: 2026-11-24
-reviewed: 2026-11-24
-review_by: 2027-05-24
+version: 1.0.1
+updated: 2026-11-27
+reviewed: 2026-11-27
+review_by: 2027-05-27
 related: [BP-0068, BP-0048, BP-0061, BP-0005, BP-0021, BP-0040, BP-0064, BP-0057]
 sources:
-  - { title: Claude blog — Auto mode is now the default in Claude Code (approval data), url: https://claude.com/blog/auto-mode-default-in-claude-code }
-  - { title: Anthropic — Claude Code auto mode (approval fatigue), url: https://www.anthropic.com/research/claude-code-auto-mode }
-  - { title: EU AI Act — Article 14 Human oversight, url: https://artificialintelligenceact.eu/article/14/ }
+  - title: "Claude blog — Auto mode is now the default in Claude Code (approval data)"
+    url: https://claude.com/blog/auto-mode-default-in-claude-code
+    note: "Reports 97% of permission prompts approved but 39% of plans rejected, the measured case for tiering"
+  - title: "Anthropic — Claude Code auto mode (approval fatigue)"
+    url: https://www.anthropic.com/research/claude-code-auto-mode
+    note: "In a 1,053-tester study, people caught 13.6% of disguised dangerous commands against 89% for a classifier"
+  - title: "EU AI Act — Article 14 Human oversight"
+    url: https://artificialintelligenceact.eu/article/14/
+    note: "Human oversight for high-risk systems: understand the limits, resist over-reliance, override the output, stop the system"
 ---
-
 A human checkpoint is only a control if the human reads it. Claude Code's own data shows how quickly it stops being one: users approved 97% of permission prompts, and in a controlled study of 1,053 testers, people caught 13.6% of disguised dangerous commands where an automated classifier blocked 89%. The same users rejected 39% of the *plans* Claude presented, against 3% of individual permission requests. People engage with decisions; they click through keystrokes.
 
 ## Rules
@@ -111,8 +116,3 @@ Tiers in Claude Code permissions (`settings.json`):
 - [ ] Working stop control
 - [ ] Approval rate and decision time watched; records kept
 
-## References
-
-- [Claude blog — Auto mode is now the default in Claude Code](https://claude.com/blog/auto-mode-default-in-claude-code)
-- [Anthropic — Claude Code auto mode](https://www.anthropic.com/research/claude-code-auto-mode)
-- [EU AI Act — Article 14](https://artificialintelligenceact.eu/article/14/)

@@ -2,6 +2,10 @@
 
 ## Unreleased
 
+- Sources and References are now one section. Every `sources` entry carries a required `note` that says what that source contributes to the practice's rules; `bun run check` fails a source with an empty note or a `TODO` note, and the page renders Sources from the frontmatter list. The body's `## References` section is gone from the practice template, the create-practice scaffold and all 95 practice pages; its 23 annotations moved into `note`. Every practice that cites sources takes a patch bump (#72).
+- Repaired 20 source titles that flow-style YAML had silently truncated at the first comma inside an unquoted title, such as `Gortex — code intelligence engine (graph, MCP, CLI)` and `pstack (Cursor plugins) — prove-it-works, blast-radius, interrogate, create-verification-skill, show-me-your-work`. Source entries are now block-style with quoted scalars, so a comma in a title cannot do this again (#72).
+- create-practice plugin 0.2.0: `validateDraft` refuses a source with no note, the scaffold writes `note:` and no longer emits a References section, and the proposal body renders each source with its note. Plugin and skill versions bump together (#72).
+- Site: *How agents use this site* and *Practice template* describe the required `note` and the generated Sources section, and the *Propose a practice* form asks for it.
 - BP-0073 1.1.0: rules 23–24 add the surface inventory and the per-pair gate, so an API, a UI, a TUI or the documentation cannot drift behind the CLI and the MCP server (#67).
 - BP-0095 Run concurrent agents on disjoint work and settle conflicts with evidence (D.MAS.HND, draft) (#65).
 - BP-0094 Name CLI flags and subcommands so callers can guess them (D.SWE.CLI, draft) (#54).

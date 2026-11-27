@@ -7,13 +7,16 @@ type: pattern
 roles: [any]
 stage: [plan, build, verify]
 status: draft
-version: 1.0.0
-updated: 2026-11-24
-reviewed: 2026-11-24
-review_by: 2027-05-24
+version: 1.0.1
+updated: 2026-11-27
+reviewed: 2026-11-27
+review_by: 2027-05-27
 related: [BP-0003, BP-0006, BP-0008, BP-0010]
+sources:
+  - title: "Anthropic — Building effective agents"
+    url: https://www.anthropic.com/research/building-effective-agents
+    note: Composable patterns beat frameworks, and complexity is added only where a measured need appears
 ---
-
 ## Rules
 
 1. **MUST** restate the goal and its success criteria before acting on any task with more than a couple of steps.
@@ -55,6 +58,3 @@ Bad report: "Done! Everything should work now."
 - [ ] Final check done against the request
 - [ ] Assumptions and gaps reported
 
-## References
-
-- [Anthropic — Building effective agents](https://www.anthropic.com/research/building-effective-agents)

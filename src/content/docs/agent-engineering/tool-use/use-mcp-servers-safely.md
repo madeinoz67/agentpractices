@@ -7,17 +7,22 @@ type: guideline
 roles: [any, orchestrator]
 stage: [build, operate]
 status: draft
-version: 1.0.0
-updated: 2026-11-24
-reviewed: 2026-11-24
-review_by: 2027-05-24
+version: 1.0.1
+updated: 2026-11-27
+reviewed: 2026-11-27
+review_by: 2027-05-27
 related: [BP-0022, BP-0005, BP-0021, BP-0011, BP-0010]
 sources:
-  - { title: Claude Code docs — Connect Claude Code to tools via MCP, url: https://code.claude.com/docs/en/mcp }
-  - { title: MCP Specification — Authorization, url: https://modelcontextprotocol.io/specification/latest/basic/authorization }
-  - { title: MCP Specification — Security best practices, url: https://modelcontextprotocol.io/specification/latest/basic/security_best_practices }
+  - title: "Claude Code docs — Connect Claude Code to tools via MCP"
+    url: https://code.claude.com/docs/en/mcp
+    note: The client's OAuth sign-in flow and tool search, which keep remote grants short-lived and idle tool definitions out of context
+  - title: "MCP Specification — Authorization"
+    url: https://modelcontextprotocol.io/specification/latest/basic/authorization
+    note: Audience-bound tokens, minimal scopes and PKCE, the rules a server builder must follow for remote transports
+  - title: "MCP Specification — Security best practices"
+    url: https://modelcontextprotocol.io/specification/latest/basic/security_best_practices
+    note: Confused-deputy and token-passthrough attacks, plus the server-side request forgery risk in tools that fetch URLs
 ---
-
 ## Rules
 
 ### Trust and access
@@ -68,8 +73,3 @@ Bad: a "do everything" server with an admin token, auto-approved, whose web-fetc
 - [ ] Output kept small; tool count controlled
 - [ ] Grants and servers reviewed; side-effect calls audited
 
-## References
-
-- [Claude Code — MCP](https://code.claude.com/docs/en/mcp)
-- [MCP Specification — Authorization](https://modelcontextprotocol.io/specification/latest/basic/authorization)
-- [MCP Specification — Security best practices](https://modelcontextprotocol.io/specification/latest/basic/security_best_practices)

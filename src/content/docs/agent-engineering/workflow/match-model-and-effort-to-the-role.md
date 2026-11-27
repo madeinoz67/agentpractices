@@ -7,24 +7,43 @@ type: guideline
 roles: [orchestrator, planner, implementer, reviewer, researcher]
 stage: [plan, build, operate]
 status: draft
-version: 1.1.0
-updated: 2026-11-24
-reviewed: 2026-11-24
-review_by: 2027-02-24
+version: 1.1.1
+updated: 2026-11-27
+reviewed: 2026-11-27
+review_by: 2027-02-27
 related: [BP-0048, BP-0042, BP-0041, BP-0006, BP-0046]
 sources:
-  - { title: Claude Platform docs — Choosing a model, url: https://platform.claude.com/docs/en/about-claude/models/choosing-a-model }
-  - { title: Claude Platform docs — Effort, url: https://platform.claude.com/docs/en/build-with-claude/effort }
-  - { title: Claude Code docs — Subagents (model and effort fields), url: https://code.claude.com/docs/en/sub-agents }
-  - { title: OpenAI docs — Reasoning models, url: https://developers.openai.com/api/docs/guides/reasoning }
-  - { title: Google Cloud docs — Gemini thinking, url: https://docs.cloud.google.com/vertex-ai/generative-ai/docs/thinking }
-  - { title: DeepSeek API docs — Thinking mode, url: https://api-docs.deepseek.com/guides/thinking_mode }
-  - { title: Kimi API docs — Thinking models, url: https://platform.kimi.ai/docs/guide/use-kimi-k2-thinking-model }
-  - { title: Alibaba Cloud Model Studio — Deep thinking (Qwen, Kimi, MiniMax), url: https://www.alibabacloud.com/help/en/model-studio/deep-thinking }
-  - { title: Z.ai docs — Deep thinking (GLM), url: https://docs.z.ai/guides/capabilities/thinking }
-  - { title: MiniMax — M3 model page, url: https://www.minimax.io/models/text/m3 }
+  - title: "Claude Platform docs — Choosing a model"
+    url: https://platform.claude.com/docs/en/about-claude/models/choosing-a-model
+    note: Opus for complex agentic coding, Haiku for subagents and high volume, and tune effort before switching
+  - title: "Claude Platform docs — Effort"
+    url: https://platform.claude.com/docs/en/build-with-claude/effort
+    note: The low to max effort ladder, with a large output budget at the highest levels
+  - title: "Claude Code docs — Subagents (model and effort fields)"
+    url: https://code.claude.com/docs/en/sub-agents
+    note: How a subagent's model and effort are resolved, including the field order and environment overrides
+  - title: "OpenAI docs — Reasoning models"
+    url: https://developers.openai.com/api/docs/guides/reasoning
+    note: reasoning.effort levels that vary by model, with pro variants reserved for the hardest problems
+  - title: "Google Cloud docs — Gemini thinking"
+    url: https://docs.cloud.google.com/vertex-ai/generative-ai/docs/thinking
+    note: thinking_level is the Gemini 3 control, with LOW for high-throughput work and no thinking_budget alongside
+  - title: "DeepSeek API docs — Thinking mode"
+    url: https://api-docs.deepseek.com/guides/thinking_mode
+    note: Thinking on by default with reasoning_effort, where requested levels are mapped to the model's own
+  - title: "Kimi API docs — Thinking models"
+    url: https://platform.kimi.ai/docs/guide/use-kimi-k2-thinking-model
+    note: Always-on thinking with reasoning_effort low, high or max, defaulting to max on Moonshot's API
+  - title: "Alibaba Cloud Model Studio — Deep thinking (Qwen, Kimi, MiniMax)"
+    url: https://www.alibabacloud.com/help/en/model-studio/deep-thinking
+    note: Qwen's enable_thinking switch and thinking_budget cap, hybrid and on by default
+  - title: "Z.ai docs — Deep thinking (GLM)"
+    url: https://docs.z.ai/guides/capabilities/thinking
+    note: GLM thinking cannot be turned off, so a disable request fails rather than quietly reducing effort
+  - title: "MiniMax — M3 model page"
+    url: https://www.minimax.io/models/text/m3
+    note: M3's per-request thinking toggle, positioned for agentic coding and long context work
 ---
-
 ## Rules
 
 1. **MUST** set the model and effort for each role explicitly (orchestrator, planner, implementer, explorer, reviewer, high-volume worker), not once for the whole session. Defaults differ by model and change between releases.
@@ -156,15 +175,3 @@ export async function run(role: keyof typeof ROLE, prompt: string) {
 - [ ] Effort stable within cached conversations; output budget allows for thinking
 - [ ] Escalation path defined; model and effort recorded in traces
 
-## References
-
-- [Claude Platform — Choosing a model](https://platform.claude.com/docs/en/about-claude/models/choosing-a-model)
-- [Claude Platform — Effort](https://platform.claude.com/docs/en/build-with-claude/effort)
-- [Claude Code — Subagents](https://code.claude.com/docs/en/sub-agents)
-- [OpenAI — Reasoning models](https://developers.openai.com/api/docs/guides/reasoning)
-- [Google Cloud — Gemini thinking](https://docs.cloud.google.com/vertex-ai/generative-ai/docs/thinking)
-- [DeepSeek — Thinking mode](https://api-docs.deepseek.com/guides/thinking_mode)
-- [Kimi — Thinking models](https://platform.kimi.ai/docs/guide/use-kimi-k2-thinking-model)
-- [Alibaba Cloud Model Studio — Deep thinking](https://www.alibabacloud.com/help/en/model-studio/deep-thinking)
-- [Z.ai — Deep thinking](https://docs.z.ai/guides/capabilities/thinking)
-- [MiniMax — M3](https://www.minimax.io/models/text/m3)

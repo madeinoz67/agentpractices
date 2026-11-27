@@ -7,23 +7,40 @@ type: guideline
 roles: [orchestrator, planner, reviewer]
 stage: [plan, build, verify, operate]
 status: draft
-version: 1.1.0
-updated: 2026-11-25
-reviewed: 2026-11-25
-review_by: 2027-02-25
+version: 1.1.1
+updated: 2026-11-27
+reviewed: 2026-11-27
+review_by: 2027-02-27
 related: [BP-0005, BP-0032, BP-0044, BP-0053, BP-0061, BP-0069, BP-0070, BP-0075, BP-0040, BP-0051]
 sources:
-  - { title: NIST — AI Risk Management Framework (AI RMF 1.0, Generative AI Profile NIST AI 600-1), url: https://www.nist.gov/itl/ai-risk-management-framework }
-  - { title: NIST IR 8596 (preliminary draft) — Cybersecurity Framework Profile for Artificial Intelligence (Cyber AI Profile), url: https://csrc.nist.gov/pubs/ir/8596/iprd }
-  - { title: OWASP GenAI Security Project — Top 10 for LLM Applications 2026, url: https://genai.owasp.org/resource/owasp-genai-llm-top-10-2026/ }
-  - { title: OWASP GenAI Security Project — Top 10 for Agentic Applications for 2026, url: https://genai.owasp.org/resource/owasp-top-10-for-agentic-applications/ }
-  - { title: OWASP GenAI Security Project — GenAI Security Industry Framework Crosswalk, url: https://genai.owasp.org/resource/genai-security-industry-framework-crosswalk/ }
-  - { title: MITRE ATLAS, url: https://atlas.mitre.org/ }
-  - { title: MITRE ATLAS data releases (GitHub), url: https://github.com/mitre-atlas/atlas-data/releases }
-  - { title: Coalition for Secure AI (CoSAI) — Risk Map and tooling (GitHub), url: https://github.com/cosai-oasis/secure-ai-tooling }
-  - { title: Coalition for Secure AI — mission, scope and workstreams, url: https://www.coalitionforsecureai.org/about/ }
+  - title: "NIST — AI Risk Management Framework (AI RMF 1.0, Generative AI Profile NIST AI 600-1)"
+    url: https://www.nist.gov/itl/ai-risk-management-framework
+    note: "The governance spine this practice defaults to: GOVERN, MAP, MEASURE and MANAGE, with inventory, roles and risk tolerance"
+  - title: "NIST IR 8596 (preliminary draft) — Cybersecurity Framework Profile for Artificial Intelligence (Cyber AI Profile)"
+    url: https://csrc.nist.gov/pubs/ir/8596/iprd
+    note: Places AI into an existing CSF 2.0 programme, the option this practice names for organisations already running one
+  - title: "OWASP GenAI Security Project — Top 10 for LLM Applications 2026"
+    url: https://genai.owasp.org/resource/owasp-genai-llm-top-10-2026/
+    note: The LLM01 to LLM10 list walked in each threat model, with the warning that IDs are renumbered between editions
+  - title: "OWASP GenAI Security Project — Top 10 for Agentic Applications for 2026"
+    url: https://genai.owasp.org/resource/owasp-top-10-for-agentic-applications/
+    note: ASI01 to ASI10, the agent-level risks that make the LLM list insufficient for anything with tools, memory and credentials
+  - title: "OWASP GenAI Security Project — GenAI Security Industry Framework Crosswalk"
+    url: https://genai.owasp.org/resource/genai-security-industry-framework-crosswalk/
+    note: A published crosswalk to start from rather than mapping by hand, with the caveat that some mappings are coarse
+  - title: MITRE ATLAS
+    url: https://atlas.mitre.org/
+    note: The AML.T technique IDs used to name attack paths in threat models, red-team plans, detections and incident records
+  - title: MITRE ATLAS data releases (GitHub)
+    url: https://github.com/mitre-atlas/atlas-data/releases
+    note: The monthly release history that tells you which ATLAS edition a risk register was mapped against
+  - title: "Coalition for Secure AI (CoSAI) — Risk Map and tooling (GitHub)"
+    url: https://github.com/cosai-oasis/secure-ai-tooling
+    note: The YAML risk-to-control map with persona ownership and ATLAS and NIST AI RMF mappings, a crosswalk to check
+  - title: "Coalition for Secure AI — mission, scope and workstreams"
+    url: https://www.coalitionforsecureai.org/about/
+    note: Who the coalition is and why its outputs are an OASIS Open Project, useful when deciding how much weight to give them
 ---
-
 No single framework covers agent security. They answer different questions, and they overlap. Use each one for the question it answers well, map them into one register per agent system, and tie every risk to a control you can prove. Coverage of a framework is not the goal; risks with working controls are.
 
 | Framework | Question it answers | Use it for | Status (checked 2026-11-25) |

@@ -7,15 +7,16 @@ type: guideline
 roles: [implementer, orchestrator]
 stage: [build, operate]
 status: draft
-version: 1.0.0
-updated: 2026-11-24
-reviewed: 2026-11-24
-review_by: 2027-05-24
+version: 1.0.1
+updated: 2026-11-27
+reviewed: 2026-11-27
+review_by: 2027-05-27
 related: [BP-0040, BP-0041, BP-0006, BP-0033]
 sources:
-  - { title: OpenTelemetry GenAI semantic conventions, url: https://github.com/open-telemetry/semantic-conventions-genai }
+  - title: OpenTelemetry GenAI semantic conventions
+    url: https://github.com/open-telemetry/semantic-conventions-genai
+    note: The gen_ai attribute set for model and tool spans, still evolving, which is why rule 6 says check the current repository
 ---
-
 ## Rules
 
 1. **MUST** give every agent run a run ID and record it as one trace, with child spans for each model call, tool call, retrieval and sub-agent.
@@ -58,6 +59,3 @@ trace run=wf-ci-triage-20261124 (orchestrator)            12m04s  $3.10  status=
 - [ ] Content capture opt-in, redacted, retained by policy
 - [ ] Alerts on runaway, failing and blocked runs
 
-## References
-
-- [OpenTelemetry GenAI semantic conventions](https://github.com/open-telemetry/semantic-conventions-genai)

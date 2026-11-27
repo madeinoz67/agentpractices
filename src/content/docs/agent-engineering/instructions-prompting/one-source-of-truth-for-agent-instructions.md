@@ -7,16 +7,19 @@ type: pattern
 roles: [implementer, any]
 stage: [plan, build, operate]
 status: draft
-version: 1.0.0
-updated: 2026-11-24
-reviewed: 2026-11-24
-review_by: 2027-05-24
+version: 1.0.1
+updated: 2026-11-27
+reviewed: 2026-11-27
+review_by: 2027-05-27
 related: [BP-0015, BP-0016]
 sources:
-  - { title: AGENTS.md, url: https://agents.md/ }
-  - { title: Claude Code docs — Share one file with other coding tools, url: https://code.claude.com/docs/en/claude-md }
+  - title: AGENTS.md
+    url: https://agents.md/
+    note: The shared convention most coding agents already read, which makes a single instruction file enough
+  - title: "Claude Code docs — Share one file with other coding tools"
+    url: https://code.claude.com/docs/en/claude-md
+    note: Confirms Claude Code reads AGENTS.md only through an import once a CLAUDE.md exists
 ---
-
 ## Rules
 
 1. **MUST** keep shared project instructions in one file, `AGENTS.md`, and nowhere else.
@@ -59,7 +62,3 @@ Any repository used with more than one coding agent, or likely to be.
 - [ ] CI check for the reference
 - [ ] Load confirmed in each tool
 
-## References
-
-- [AGENTS.md](https://agents.md/)
-- [Claude Code — Share one file with other coding tools](https://code.claude.com/docs/en/claude-md)

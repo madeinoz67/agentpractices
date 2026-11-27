@@ -7,16 +7,19 @@ type: guideline
 roles: [any]
 stage: [build]
 status: draft
-version: 1.0.1
-updated: 2026-11-25
-reviewed: 2026-11-25
-review_by: 2027-05-25
+version: 1.0.2
+updated: 2026-11-27
+reviewed: 2026-11-27
+review_by: 2027-05-27
 related: [BP-0014]
 sources:
-  - { title: W3C SKOS Reference, url: https://www.w3.org/TR/skos-reference/ }
-  - { title: 'ANSI/NISO Z39.19', url: https://www.niso.org/publications/ansiniso-z3919-2005-r2010 }
+  - title: W3C SKOS Reference
+    url: https://www.w3.org/TR/skos-reference/
+    note: Concept IDs, scope notes and deprecation with replacement pointers, which rules 1, 2 and 5 depend on
+  - title: "ANSI/NISO Z39.19"
+    url: https://www.niso.org/publications/ansiniso-z3919-2005-r2010
+    note: "Thesaurus construction rules: preferred terms, broader and narrower relationships, scope notes, and where polyhierarchy is allowed"
 ---
-
 ## Rules
 
 1. **MUST** reference concepts by stable ID, never by label; labels change, IDs do not.
@@ -59,6 +62,3 @@ Tagging documents or records, filing a new practice on this site, mapping items 
 - [ ] Every assignment has confidence + rationale
 - [ ] Gap candidates reported, not forced
 
-## References
-
-- [W3C SKOS Reference](https://www.w3.org/TR/skos-reference/)

@@ -7,19 +7,28 @@ type: guideline
 roles: [orchestrator, implementer]
 stage: [plan, build, operate]
 status: draft
-version: 1.0.0
-updated: 2026-11-24
-reviewed: 2026-11-24
-review_by: 2027-05-24
+version: 1.0.1
+updated: 2026-11-27
+reviewed: 2026-11-27
+review_by: 2027-05-27
 related: [BP-0032, BP-0033, BP-0062, BP-0055, BP-0046, BP-0040, BP-0060, BP-0044]
 sources:
-  - { title: OpenBao documentation, url: https://openbao.org/docs/ }
-  - { title: OpenBao — Agent (auto-auth, templates, process supervisor), url: https://openbao.org/docs/agent-and-proxy/agent/ }
-  - { title: OpenBao — Database secrets engine, url: https://openbao.org/docs/secrets/databases/ }
-  - { title: OpenBao 2.6.x release notes, url: https://openbao.org/community/release-notes/2-6-0/ }
-  - { title: 'InfoQ — OpenBao 2.7 (governance, licence)', url: https://infoq.com/news/2026/11/vault-fork-openbao-27 }
+  - title: OpenBao documentation
+    url: https://openbao.org/docs/
+    note: Product documentation for the self-hosted vault this practice recommends, covering secrets engines, auth methods and audit devices
+  - title: "OpenBao — Agent (auto-auth, templates, process supervisor)"
+    url: https://openbao.org/docs/agent-and-proxy/agent/
+    note: The auto-auth and template mechanism that renders credentials for a wrapper script so the model only ever sees names
+  - title: "OpenBao — Database secrets engine"
+    url: https://openbao.org/docs/secrets/databases/
+    note: Dynamic database users with leases and TTLs, the model for per-task credentials that are revoked when the run ends
+  - title: OpenBao 2.6.x release notes
+    url: https://openbao.org/community/release-notes/2-6-0/
+    note: What changed in the 2.6 line, useful when checking the agent and template options against the version you actually run
+  - title: "InfoQ — OpenBao 2.7 (governance, licence)"
+    url: https://infoq.com/news/2026/11/vault-fork-openbao-27
+    note: The governance and licence story of the Vault fork, the reason a self-hosted OpenBao default is defensible
 ---
-
 Agents need credentials to do anything useful, and every credential an agent holds is one an injected prompt, a bad plan or a leaked transcript can misuse. A secrets vault turns "a key in an `.env` file the agent can read" into "a short-lived credential, scoped to one task, issued to one identity, logged, and revoked when the task ends".
 
 OpenBao is a good default for self-hosting. It is the community fork of HashiCorp Vault, now under the Linux Foundation's OpenSSF and licensed MPL 2.0. It provides secrets engines (KV, database, PKI, SSH, transit), auth methods, audit devices, and an agent daemon that authenticates and injects secrets for applications.
@@ -131,9 +140,3 @@ Check the auth-method and template options against the documentation for the Ope
 - [ ] Audit device on, logs shipped and alerted on; agents cannot administer the vault
 - [ ] Vault run as critical infrastructure: HA, unseal plan, backups, patched
 
-## References
-
-- [OpenBao documentation](https://openbao.org/docs/)
-- [OpenBao — Agent](https://openbao.org/docs/agent-and-proxy/agent/)
-- [OpenBao — Database secrets engine](https://openbao.org/docs/secrets/databases/)
-- [OpenBao 2.6.x release notes](https://openbao.org/community/release-notes/2-6-0/)

@@ -7,19 +7,26 @@ type: guideline
 roles: [implementer]
 stage: [build]
 status: draft
-version: 1.0.0
+version: 1.0.1
 updated: 2026-11-27
 reviewed: 2026-11-27
 review_by: 2027-05-27
 related: [BP-0001, BP-0055, BP-0051]
 superseded_by: null
 sources:
-  - { title: Command Line Interface Guidelines — Robustness, url: https://clig.dev/#robustness-guidelines }
-  - { title: Command Line Interface Guidelines — Signals and control characters, url: https://clig.dev/#signals }
-  - { title: Crash-only software — More than meets the eye, url: https://lwn.net/Articles/191059/ }
-  - { title: 12 Factor CLI Apps, url: https://medium.com/@jdxcode/12-factor-cli-apps-dd3c227a0e46 }
+  - title: "Command Line Interface Guidelines — Robustness"
+    url: https://clig.dev/#robustness-guidelines
+    note: Backs the rules on bounded cleanup, resumability and not repeating a finished side effect
+  - title: "Command Line Interface Guidelines — Signals and control characters"
+    url: https://clig.dev/#signals
+    note: Sets the expected behaviour on Ctrl-C, including a first interrupt that stops and a second that skips cleanup
+  - title: "Crash-only software — More than meets the eye"
+    url: https://lwn.net/Articles/191059/
+    note: The argument that a process should be safe to kill at any moment, which justifies idempotent, resumable steps
+  - title: 12 Factor CLI Apps
+    url: https://medium.com/@jdxcode/12-factor-cli-apps-dd3c227a0e46
+    note: The twelve-factor framing behind timeouts, stderr progress and a state-changing command that can be rerun
 ---
-
 A command that works for thirty seconds while printing nothing is indistinguishable from one that has hung. A person presses Ctrl-C. An agent times out and starts the command again, and the second run repeats work the first run already finished. Both leave state half changed.
 
 These rules keep the caller informed, bound the wait, and make the work safe to kill and run again. They apply to the command itself. A dashboard that watches the job is [BP-0051](/operations/observability/observe-agent-workflows/); that practice reports to an operator, not to the person waiting at the terminal.
@@ -87,9 +94,3 @@ The second command does the same work with no output, so a caller cannot tell it
 - [ ] A second run does not repeat a finished side effect
 - [ ] The final state and the next command are printed
 
-## References
-
-- [Command Line Interface Guidelines — Robustness](https://clig.dev/#robustness-guidelines)
-- [Command Line Interface Guidelines — Signals and control characters](https://clig.dev/#signals)
-- [Crash-only software: More than meets the eye](https://lwn.net/Articles/191059/)
-- [12 Factor CLI Apps](https://medium.com/@jdxcode/12-factor-cli-apps-dd3c227a0e46)

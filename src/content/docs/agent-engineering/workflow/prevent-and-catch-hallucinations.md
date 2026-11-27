@@ -7,16 +7,19 @@ type: guideline
 roles: [any]
 stage: [build, verify]
 status: draft
-version: 1.0.0
-updated: 2026-11-24
-reviewed: 2026-11-24
-review_by: 2027-05-24
+version: 1.0.1
+updated: 2026-11-27
+reviewed: 2026-11-27
+review_by: 2027-05-27
 related: [BP-0053, BP-0002, BP-0028, BP-0010, BP-0044, BP-0036, BP-0006]
 sources:
-  - { title: Claude Platform docs — Reduce hallucinations, url: https://platform.claude.com/docs/en/test-and-evaluate/strengthen-guardrails/reduce-hallucinations }
-  - { title: 'Spracklen et al. — We Have a Package for You! Package hallucinations by code-generating LLMs (USENIX Security 2025)', url: https://arxiv.org/abs/2406.10279 }
+  - title: "Claude Platform docs — Reduce hallucinations"
+    url: https://platform.claude.com/docs/en/test-and-evaluate/strengthen-guardrails/reduce-hallucinations
+    note: Quote-first grounding, answers restricted to supplied documents, and explicit permission to say it does not know
+  - title: "Spracklen et al. — We Have a Package for You! Package hallucinations by code-generating LLMs (USENIX Security 2025)"
+    url: https://arxiv.org/abs/2406.10279
+    note: Commercial code models invent importable names at scale, and attackers can register those names before anyone checks
 ---
-
 A hallucination is output that is stated as fact but is not supported by the inputs or the world: an invented function, package, citation, file, number or event. Techniques reduce it; none remove it. Design so the ones that get through are caught before they do harm.
 
 ## Rules
@@ -100,7 +103,3 @@ Instruction snippet for an agent file:
 - [ ] Packages, APIs, paths, URLs and numbers checked mechanically
 - [ ] Code run before claimed working; high-stakes output independently verified
 
-## References
-
-- [Claude Platform — Reduce hallucinations](https://platform.claude.com/docs/en/test-and-evaluate/strengthen-guardrails/reduce-hallucinations)
-- [Spracklen et al. — We Have a Package for You!](https://arxiv.org/abs/2406.10279)

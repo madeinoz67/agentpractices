@@ -7,17 +7,20 @@ type: guideline
 roles: [implementer, reviewer]
 stage: [build, verify, operate]
 status: draft
-version: 1.0.0
+version: 1.0.1
 updated: 2026-11-27
 reviewed: 2026-11-27
 review_by: 2027-05-27
 related: [BP-0001, BP-0071]
 superseded_by: null
 sources:
-  - { title: Command Line Interface Guidelines — Future-proofing, url: https://clig.dev/#future-proofing }
-  - { title: Semantic Versioning 2.0.0, url: https://semver.org/ }
+  - title: "Command Line Interface Guidelines — Future-proofing"
+    url: https://clig.dev/#future-proofing
+    note: The guidance behind keeping a CLI additive and warning before a flag's meaning changes
+  - title: Semantic Versioning 2.0.0
+    url: https://semver.org/
+    note: Defines what a minor and a major release mean, which fixes how long a deprecation period must run
 ---
-
 A command name, a flag name, a flag meaning and an exit code are an interface. A script or an agent depends on each of them. A rename without notice breaks every caller at once, and the caller sees a failure that does not name the cause. [BP-0071](/software-engineering/api-interface-design/design-and-evolve-api-surfaces/) gives this discipline for HTTP and RPC surfaces; a CLI needs the same rules.
 
 `--json` and a stable schema are [BP-0001](/software-engineering/cli-design/design-clis-for-agents/) rule 1. This practice covers what happens after release: additive change, deprecation and the record of the change.
@@ -77,7 +80,3 @@ The changelog entry names the release and the action:
 - [ ] Every CLI change is in the changelog
 - [ ] CI compares the flag set and JSON schema
 
-## References
-
-- [Command Line Interface Guidelines — Future-proofing](https://clig.dev/#future-proofing)
-- [Semantic Versioning 2.0.0](https://semver.org/)

@@ -7,19 +7,28 @@ type: guideline
 roles: [orchestrator, planner, implementer]
 stage: [plan, build, operate]
 status: draft
-version: 1.0.0
-updated: 2026-11-24
-reviewed: 2026-11-24
-review_by: 2027-05-24
+version: 1.0.1
+updated: 2026-11-27
+reviewed: 2026-11-27
+review_by: 2027-05-27
 related: [BP-0046, BP-0033, BP-0012, BP-0031, BP-0039, BP-0040, BP-0060, BP-0061, BP-0064, BP-0049]
 sources:
-  - { title: OAIC — APP 8 Cross-border disclosure of personal information, url: https://www.oaic.gov.au/privacy/australian-privacy-principles/australian-privacy-principles-guidelines/chapter-8-app-8-cross-border-disclosure-of-personal-information }
-  - { title: OAIC — APP 1 (automated decision transparency from 10 December 2026), url: https://www.oaic.gov.au/privacy/australian-privacy-principles-guidelines/chapter-1-app-1-open-and-transparent-management-of-personal-information/ }
-  - { title: GDPR — Chapter V (transfers to third countries), url: https://gdpr-info.eu/chapter-5/ }
-  - { title: Claude Platform docs — Data residency, url: https://platform.claude.com/docs/en/manage-claude/data-residency }
-  - { title: Anthropic — Fable and Mythos access (June 2026), url: https://www.anthropic.com/news/fable-mythos-access }
+  - title: "OAIC — APP 8 Cross-border disclosure of personal information"
+    url: https://www.oaic.gov.au/privacy/australian-privacy-principles/australian-privacy-principles-guidelines/chapter-8-app-8-cross-border-disclosure-of-personal-information
+    note: The Australian rule that sending personal information to an overseas provider is generally a cross-border disclosure the local entity stays accountable for
+  - title: "OAIC — APP 1 (automated decision transparency from 10 December 2026)"
+    url: https://www.oaic.gov.au/privacy/australian-privacy-principles-guidelines/chapter-1-app-1-open-and-transparent-management-of-personal-information/
+    note: The automated decision transparency obligation applying from 10 December 2026, which the disclosure rule implements
+  - title: "GDPR — Chapter V (transfers to third countries)"
+    url: https://gdpr-info.eu/chapter-5/
+    note: The EU conditions for transfers out of the union, the equivalent obligation this practice requires alongside APP 8
+  - title: "Claude Platform docs — Data residency"
+    url: https://platform.claude.com/docs/en/manage-claude/data-residency
+    note: Which models and regions the provider actually offers, and the inference_geo and workspace controls the residency rule relies on
+  - title: "Anthropic — Fable and Mythos access (June 2026)"
+    url: https://www.anthropic.com/news/fable-mythos-access
+    note: The June 2026 US export-control suspension of two models, the concrete case behind planning an evaluated fallback provider
 ---
-
 Agents move data further and faster than people do. A single run can send a customer record to a model provider in one country, write a summary to a memory store in another, push traces to an observability SaaS, index a document into a vector database, post a result into a chat channel, and copy all of it into backups. Sovereignty (which jurisdiction's law reaches the data) and privacy (what you may do with personal information) have to be designed in, not checked at the end.
 
 This page is practice guidance, not legal advice; confirm obligations for your jurisdiction and sector.
@@ -111,10 +120,3 @@ export function pseudonymise(text: string, fields: Record<string, string>) {
 - [ ] Automated decisions disclosed where required; PIA done; breaches covered
 - [ ] Fallback provider evaluated for critical roles
 
-## References
-
-- [OAIC — APP 8 guidelines](https://www.oaic.gov.au/privacy/australian-privacy-principles/australian-privacy-principles-guidelines/chapter-8-app-8-cross-border-disclosure-of-personal-information)
-- [OAIC — APP 1 guidelines (automated decisions)](https://www.oaic.gov.au/privacy/australian-privacy-principles-guidelines/chapter-1-app-1-open-and-transparent-management-of-personal-information/)
-- [GDPR Chapter V](https://gdpr-info.eu/chapter-5/)
-- [Claude Platform — Data residency](https://platform.claude.com/docs/en/manage-claude/data-residency)
-- [Anthropic — Fable and Mythos access](https://www.anthropic.com/news/fable-mythos-access)

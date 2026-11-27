@@ -7,15 +7,16 @@ type: guideline
 roles: [implementer, reviewer, any]
 stage: [build, verify]
 status: draft
-version: 1.0.0
-updated: 2026-11-24
-reviewed: 2026-11-24
-review_by: 2027-05-24
+version: 1.0.1
+updated: 2026-11-27
+reviewed: 2026-11-27
+review_by: 2027-05-27
 related: [BP-0037, BP-0036, BP-0006]
 sources:
-  - { title: Anthropic — Claude Code best practices, url: https://www.anthropic.com/engineering/claude-code-best-practices }
+  - title: "Anthropic — Claude Code best practices"
+    url: https://www.anthropic.com/engineering/claude-code-best-practices
+    note: "The agent guidance behind this rule: fix the code, not the test, when verification fails"
 ---
-
 ## Rules
 
 1. **MUST NOT** delete, skip, disable, or mark as expected-to-fail a test to make a change pass.
@@ -58,6 +59,3 @@ Good response: "`parseTags('')` returns `[]` instead of throwing; the test is ri
 - [ ] Wrong tests changed only with approval and a recorded reason
 - [ ] Failures and flaky tests reported by name
 
-## References
-
-- [Anthropic — Claude Code best practices](https://www.anthropic.com/engineering/claude-code-best-practices)

@@ -48,11 +48,15 @@ describe('validatePractices', () => {
   test('bold MUST satisfies the normative rule', () =>
     expect(codes([p({ body: '## Rules\n1. **MUST** do the thing' })])).toEqual([]));
   test('source without a url', () =>
-    expect(codes([p({ sources: [{ title: 'x' }] as any })])).toContain('E_SOURCE'));
+    expect(codes([p({ sources: [{ title: 'x', note: 'n' }] as any })])).toContain('E_SOURCE'));
   test('source with a non-http url', () =>
-    expect(codes([p({ sources: [{ title: 'x', url: 'ftp://x' }] })])).toContain('E_SOURCE'));
-  test('https source passes', () =>
-    expect(codes([p({ sources: [{ title: 'x', url: 'https://x.test' }] })])).toEqual([]));
+    expect(codes([p({ sources: [{ title: 'x', url: 'ftp://x', note: 'n' }] })])).toContain('E_SOURCE'));
+  test('source without a note', () =>
+    expect(codes([p({ sources: [{ title: 'x', url: 'https://x.test' }] as any })])).toContain('E_SOURCE_NOTE'));
+  test('source with a blank note', () =>
+    expect(codes([p({ sources: [{ title: 'x', url: 'https://x.test', note: '   ' }] })])).toContain('E_SOURCE_NOTE'));
+  test('https source with a note passes', () =>
+    expect(codes([p({ sources: [{ title: 'x', url: 'https://x.test', note: 'why it matters' }] })])).toEqual([]));
 });
 
 describe('path follows taxonomy', () => {
@@ -105,10 +109,17 @@ describe('review dates', () => {
 
 import { sourceLinks } from '../scripts/lib/practices';
 describe('sourceLinks', () => {
-  test('returns title, url and host for each http(s) source, in order', () =>
-    expect(sourceLinks([{ title: 'NIST AI RMF', url: 'https://www.nist.gov/itl/ai-risk-management-framework' }, { title: 'Paper', url: 'http://arxiv.org/abs/1' }]))
-      .toEqual([{ title: 'NIST AI RMF', url: 'https://www.nist.gov/itl/ai-risk-management-framework', host: 'nist.gov' }, { title: 'Paper', url: 'http://arxiv.org/abs/1', host: 'arxiv.org' }]));
+  test('returns title, url, host and note for each http(s) source, in order', () =>
+    expect(sourceLinks([
+      { title: 'NIST AI RMF', url: 'https://www.nist.gov/itl/ai-risk-management-framework', note: 'the risk categories the rules map to' },
+      { title: 'Paper', url: 'http://arxiv.org/abs/1', note: 'the measured effect' },
+    ])).toEqual([
+      { title: 'NIST AI RMF', url: 'https://www.nist.gov/itl/ai-risk-management-framework', host: 'nist.gov', note: 'the risk categories the rules map to' },
+      { title: 'Paper', url: 'http://arxiv.org/abs/1', host: 'arxiv.org', note: 'the measured effect' },
+    ]));
   test('drops anything that is not an http(s) URL', () =>
-    expect(sourceLinks([{ title: 'bad', url: 'javascript:alert(1)' }, { title: 'rel', url: '/x' }, { title: 'ok', url: 'https://example.org' }]).map((s) => s.title)).toEqual(['ok']));
+    expect(sourceLinks([{ title: 'bad', url: 'javascript:alert(1)', note: 'n' }, { title: 'rel', url: '/x', note: 'n' }, { title: 'ok', url: 'https://example.org', note: 'n' }]).map((s) => s.title)).toEqual(['ok']));
+  test('trims the note', () =>
+    expect(sourceLinks([{ title: 'ok', url: 'https://example.org', note: '  spaced  ' }])[0].note).toBe('spaced'));
   test('handles missing sources', () => expect(sourceLinks(undefined)).toEqual([]));
 });

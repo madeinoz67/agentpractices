@@ -7,18 +7,23 @@ type: guideline
 roles: [implementer]
 stage: [build]
 status: draft
-version: 1.0.0
+version: 1.0.1
 updated: 2026-11-27
 reviewed: 2026-11-27
 review_by: 2027-05-27
 related: [BP-0001, BP-0055, BP-0073]
 superseded_by: null
 sources:
-  - { title: Command Line Interface Guidelines — Errors, url: https://clig.dev/#errors }
-  - { title: Google Technical Writing — Writing helpful error messages, url: https://developers.google.com/tech-writing/error-messages }
-  - { title: Nielsen Norman Group — Error-Message Guidelines, url: https://www.nngroup.com/articles/error-message-guidelines/ }
+  - title: "Command Line Interface Guidelines — Errors"
+    url: https://clig.dev/#errors
+    note: Sets the error conventions the rules follow, including what to keep out of the default message
+  - title: "Google Technical Writing — Writing helpful error messages"
+    url: https://developers.google.com/tech-writing/error-messages
+    note: The style guidance behind naming the fix and keeping the important words last
+  - title: "Nielsen Norman Group — Error-Message Guidelines"
+    url: https://www.nngroup.com/articles/error-message-guidelines/
+    note: The usability research behind short messages, grouped errors and wording the caller can act on
 ---
-
 An error message is the documentation a caller reads at the moment of failure. "invalid input" sends a person back to the help page and sends an agent into a retry loop with the same bad argument. A stack trace names the code path, not the fix.
 
 These rules make the message carry the failure, the cause and the next command. [BP-0055](/agent-engineering/tool-use/prefer-api-wrapper-scripts-to-mcp/) asks a wrapper for one clear error line, and [BP-0073](/agent-engineering/tool-use/build-clis-and-mcp-servers-from-one-core/) asks an MCP tool error to say what to change; this practice gives the CLI rules behind both.
@@ -88,8 +93,3 @@ The bad message gives the caller a file name and line number inside the program,
 - [ ] Unexpected errors give the version and a bug report URL
 - [ ] One wording per failure across commands
 
-## References
-
-- [Command Line Interface Guidelines — Errors](https://clig.dev/#errors)
-- [Google Technical Writing — Writing helpful error messages](https://developers.google.com/tech-writing/error-messages)
-- [Nielsen Norman Group — Error-Message Guidelines](https://www.nngroup.com/articles/error-message-guidelines/)

@@ -6,7 +6,10 @@ import { z } from 'astro/zod';
 import { docsLoader } from '@astrojs/starlight/loaders';
 import { docsSchema } from '@astrojs/starlight/schema';
 
-const source = z.object({ title: z.string(), url: z.string().url() });
+// Every source carries `note`: one line saying why that source matters to this practice's rules.
+// The note is required. A source with no note is a bare link, and the body's old References
+// section is what used to carry these notes, so dropping it without `note` loses content.
+const source = z.object({ title: z.string(), url: z.string().url(), note: z.string().min(1) });
 
 export const collections = {
   docs: defineCollection({

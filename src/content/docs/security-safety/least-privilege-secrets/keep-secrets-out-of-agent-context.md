@@ -7,16 +7,19 @@ type: guideline
 roles: [any, implementer, orchestrator]
 stage: [build, operate]
 status: draft
-version: 1.0.1
-updated: 2026-11-25
-reviewed: 2026-11-25
-review_by: 2027-05-25
+version: 1.0.2
+updated: 2026-11-27
+reviewed: 2026-11-27
+review_by: 2027-05-27
 related: [BP-0032, BP-0012, BP-0013, BP-0016, BP-0022]
 sources:
-  - { title: OWASP LLM02:2026 Sensitive Information Disclosure, url: https://genai.owasp.org/resource/owasp-genai-llm-top-10-2026/ }
-  - { title: OWASP Secrets Management Cheat Sheet, url: https://cheatsheetseries.owasp.org/cheatsheets/Secrets_Management_Cheat_Sheet.html }
+  - title: "OWASP LLM02:2026 Sensitive Information Disclosure"
+    url: https://genai.owasp.org/resource/owasp-genai-llm-top-10-2026/
+    note: "The disclosure risk this practice addresses: secrets and personal data leaking through prompts, output, memory and logs"
+  - title: OWASP Secrets Management Cheat Sheet
+    url: https://cheatsheetseries.owasp.org/cheatsheets/Secrets_Management_Cheat_Sheet.html
+    note: Storage, rotation and detection practices for secrets kept in one managed store with audit logging and scanning
 ---
-
 ## Rules
 
 1. **MUST** inject credentials at the tool or transport boundary (environment of the tool process, a secret manager, OAuth handled by the client) so the model never sees the secret value.
@@ -54,7 +57,3 @@ Bad: "Here is the API key: sk-…" pasted into chat; the agent stores it in long
 - [ ] Secret scanning on commits, logs, memory and outputs; redaction in place
 - [ ] Exposed secrets rotated
 
-## References
-
-- [OWASP LLM02:2026 Sensitive Information Disclosure](https://genai.owasp.org/resource/owasp-genai-llm-top-10-2026/)
-- [OWASP Secrets Management Cheat Sheet](https://cheatsheetseries.owasp.org/cheatsheets/Secrets_Management_Cheat_Sheet.html)

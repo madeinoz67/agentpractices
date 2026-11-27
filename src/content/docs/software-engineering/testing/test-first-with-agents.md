@@ -7,15 +7,16 @@ type: pattern
 roles: [implementer, any]
 stage: [build, verify]
 status: draft
-version: 1.0.0
-updated: 2026-11-24
-reviewed: 2026-11-24
-review_by: 2027-05-24
+version: 1.0.1
+updated: 2026-11-27
+reviewed: 2026-11-27
+review_by: 2027-05-27
 related: [BP-0038, BP-0002, BP-0008, BP-0034]
 sources:
-  - { title: Anthropic — Claude Code best practices, url: https://www.anthropic.com/engineering/claude-code-best-practices }
+  - title: "Anthropic — Claude Code best practices"
+    url: https://www.anthropic.com/engineering/claude-code-best-practices
+    note: "Anthropic's account of test-first work with an agent: write the test, watch it fail, then implement, with tests as the done-criterion"
 ---
-
 ## Rules
 
 1. **MUST** write or update a test that expresses the required behaviour before changing production code for a feature or bug fix.
@@ -57,6 +58,3 @@ Any agent change that adds or alters behaviour in code that has, or should have,
 - [ ] Bugs reproduced by a failing test first
 - [ ] Edge cases and error paths covered
 
-## References
-
-- [Anthropic — Claude Code best practices](https://www.anthropic.com/engineering/claude-code-best-practices)

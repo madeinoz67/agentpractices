@@ -7,18 +7,25 @@ type: guideline
 roles: [implementer, reviewer]
 stage: [build, verify, operate]
 status: draft
-version: 2.1.0
-updated: 2026-11-25
-reviewed: 2026-11-25
-review_by: 2027-05-25
+version: 2.1.1
+updated: 2026-11-27
+reviewed: 2026-11-27
+review_by: 2027-05-27
 related: [BP-0004, BP-0007, BP-0072]
 sources:
-  - { title: W3C SKOS Reference, url: https://www.w3.org/TR/skos-reference/ }
-  - { title: Semantic Versioning 2.0.0, url: https://semver.org/ }
-  - { title: Architectural fitness function (Thoughtworks), url: https://www.thoughtworks.com/insights/blog/architectural-fitness-function }
-  - { title: 'Design by Contract — Bertrand Meyer', url: https://se.ethz.ch/~meyer/publications/computer/contract.pdf }
+  - title: W3C SKOS Reference
+    url: https://www.w3.org/TR/skos-reference/
+    note: mapping and correspondences between concept schemes
+  - title: Semantic Versioning 2.0.0
+    url: https://semver.org/
+    note: independently versioned artefacts and dependency pinning
+  - title: Architectural fitness function (Thoughtworks)
+    url: https://www.thoughtworks.com/insights/blog/architectural-fitness-function
+    note: an automated check that fails when a required structural property breaks
+  - title: "Design by Contract — Bertrand Meyer"
+    url: https://se.ethz.ch/~meyer/publications/computer/contract.pdf
+    note: invariants as checkable assertions
 ---
-
 ## Rules
 
 1. **MUST** treat a member declared by one standard and absent from the standard that has to cover it as a gap in the corpus, not as a defect in the consumer that hit it.
@@ -65,9 +72,3 @@ The same corpus also carries a compatibility table whose own note asks for a cit
 - [ ] Each gap has a ledger row in the declaring standard's repository, read by the gate
 - [ ] Exceptions are explicit, with a reason and an owner
 
-## References
-
-- [W3C SKOS Reference](https://www.w3.org/TR/skos-reference/) — mapping and correspondences between concept schemes
-- [Semantic Versioning 2.0.0](https://semver.org/) — independently versioned artefacts and dependency pinning
-- [Architectural fitness function](https://www.thoughtworks.com/insights/blog/architectural-fitness-function) — an automated check that fails when a required structural property breaks
-- [Design by Contract — Bertrand Meyer](https://se.ethz.ch/~meyer/publications/computer/contract.pdf) — invariants as checkable assertions

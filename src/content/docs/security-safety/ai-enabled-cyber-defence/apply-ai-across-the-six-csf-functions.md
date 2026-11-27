@@ -7,19 +7,28 @@ type: guideline
 roles: [planner, orchestrator, reviewer]
 stage: [plan, build, operate]
 status: draft
-version: 1.0.0
-updated: 2026-11-26
-reviewed: 2026-11-26
-review_by: 2027-02-26
+version: 1.0.1
+updated: 2026-11-27
+reviewed: 2026-11-27
+review_by: 2027-02-27
 related: [BP-0077, BP-0069, BP-0064, BP-0005, BP-0062, BP-0063, BP-0040, BP-0070, BP-0060, BP-0052, BP-0050, BP-0078]
 sources:
-  - { title: NIST — CSF 2.0 released (six functions), url: https://www.nist.gov/news-events/news/2024/02/nist-releases-version-20-landmark-cybersecurity-framework }
-  - { title: NIST SP 1299 — CSF 2.0 Resource and Overview Guide, url: https://nvlpubs.nist.gov/nistpubs/SpecialPublications/NIST.SP.1299.pdf }
-  - { title: NIST IR 8596 (preliminary draft) — Cyber AI Profile, url: https://csrc.nist.gov/pubs/ir/8596/iprd }
-  - { title: NIST — Preliminary draft Cyber AI Profile (focus areas Secure, Defend, Thwart), url: https://www.nist.gov/node/1901136 }
-  - { title: Vectra — Agentic SOC autonomy levels and adoption survey, url: https://www.vectra.ai/topics/agentic-soc }
+  - title: "NIST — CSF 2.0 released (six functions)"
+    url: https://www.nist.gov/news-events/news/2024/02/nist-releases-version-20-landmark-cybersecurity-framework
+    note: Establishes the six-function CSF 2.0 structure, including the new Govern function that frames this practice's per-function table
+  - title: "NIST SP 1299 — CSF 2.0 Resource and Overview Guide"
+    url: https://nvlpubs.nist.gov/nistpubs/SpecialPublications/NIST.SP.1299.pdf
+    note: Supplies the category-level identifiers such as DE.AE and RS.AN that the inventory rule requires for each AI use
+  - title: "NIST IR 8596 (preliminary draft) — Cyber AI Profile"
+    url: https://csrc.nist.gov/pubs/ir/8596/iprd
+    note: Defines the three Cyber AI Profile focus areas, and this practice addresses the second, using AI for cyber defence
+  - title: "NIST — Preliminary draft Cyber AI Profile (focus areas Secure, Defend, Thwart)"
+    url: https://www.nist.gov/node/1901136
+    note: Lists the draft profile's three focus areas and confirms preliminary status, so this practice covers only the defence focus area
+  - title: "Vectra — Agentic SOC autonomy levels and adoption survey"
+    url: https://www.vectra.ai/topics/agentic-soc
+    note: Source of the survey finding that 57 percent still require human review of every verdict
 ---
-
 NIST CSF 2.0 organises security work into six functions: Govern, Identify, Protect, Detect, Respond and Recover. NIST's draft Cyber AI Profile adds three focus areas on top: securing AI systems, using AI for cyber defence, and thwarting AI-enabled attacks. This practice covers the second, using AI and agents to do the work in each function. Securing the agents themselves is [BP-0077](/security-safety/ai-security-frameworks-threat-modelling/map-agent-risks-to-ai-security-frameworks/) and the other security practices.
 
 ## Rules

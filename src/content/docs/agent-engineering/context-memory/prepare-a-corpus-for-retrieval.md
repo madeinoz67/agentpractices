@@ -7,16 +7,19 @@ type: guideline
 roles: [implementer, any]
 stage: [build, operate]
 status: draft
-version: 1.0.1
-updated: 2026-11-25
-reviewed: 2026-11-25
-review_by: 2027-05-25
+version: 1.0.2
+updated: 2026-11-27
+reviewed: 2026-11-27
+review_by: 2027-05-27
 related: [BP-0028, BP-0029, BP-0025, BP-0024]
 sources:
-  - { title: Anthropic — Introducing Contextual Retrieval, url: https://www.anthropic.com/news/contextual-retrieval }
-  - { title: OWASP LLM09:2026 Vector and Embedding Weaknesses, url: https://genai.owasp.org/resource/owasp-genai-llm-top-10-2026/ }
+  - title: "Anthropic — Introducing Contextual Retrieval"
+    url: https://www.anthropic.com/news/contextual-retrieval
+    note: Prepends a situating summary to each chunk before embedding, cutting the retrieval failures chunking alone causes
+  - title: "OWASP LLM09:2026 Vector and Embedding Weaknesses"
+    url: https://genai.owasp.org/resource/owasp-genai-llm-top-10-2026/
+    note: Embedding-layer risks that force trust and access labels onto every chunk at ingest
 ---
-
 ## Rules
 
 1. **MUST** ingest only sources with a known owner and trust level, and record that trust level on every chunk. Validate and authenticate content before it is embedded; what goes into the index is what the agent will later believe.
@@ -69,7 +72,3 @@ A chunk record:
 - [ ] Re-index and delete on source change; single embedding model per index
 - [ ] No secrets or unauthorised personal data embedded
 
-## References
-
-- [Anthropic — Introducing Contextual Retrieval](https://www.anthropic.com/news/contextual-retrieval)
-- [OWASP LLM09:2026 Vector and Embedding Weaknesses](https://genai.owasp.org/resource/owasp-genai-llm-top-10-2026/)

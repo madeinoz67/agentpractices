@@ -7,19 +7,26 @@ type: guideline
 roles: [implementer]
 stage: [build]
 status: draft
-version: 1.0.0
+version: 1.0.1
 updated: 2026-11-27
 reviewed: 2026-11-27
 review_by: 2027-05-27
 related: [BP-0001, BP-0055, BP-0071]
 superseded_by: null
 sources:
-  - { title: Command Line Interface Guidelines — Arguments and flags, url: https://clig.dev/#arguments-and-flags }
-  - { title: Command Line Interface Guidelines — Subcommands, url: https://clig.dev/#subcommands }
-  - { title: Command Line Interface Guidelines — Help, url: https://clig.dev/#help }
-  - { title: GNU Coding Standards — Command-Line Interfaces, url: https://www.gnu.org/prep/standards/html_node/Command_002dLine-Interfaces.html }
+  - title: "Command Line Interface Guidelines — Arguments and flags"
+    url: https://clig.dev/#arguments-and-flags
+    note: Sets the conventions for long and short flag forms and for not inventing a new word for an old idea
+  - title: "Command Line Interface Guidelines — Subcommands"
+    url: https://clig.dev/#subcommands
+    note: Backs the noun verb subcommand shape and the warning against names a caller can confuse
+  - title: "Command Line Interface Guidelines — Help"
+    url: https://clig.dev/#help
+    note: The reason help must repeat the standard flags, since a caller arrives without reading it first
+  - title: "GNU Coding Standards — Command-Line Interfaces"
+    url: https://www.gnu.org/prep/standards/html_node/Command_002dLine-Interfaces.html
+    note: Fixes long option names and allows options after positional arguments, which is why a flag works on either side
 ---
-
 An agent calls a CLI without a full help read. It guesses the usual names: `--json`, `--dry-run`, `--quiet`, `-h`. A tool that invents `--format json` or `--simulate` costs the agent a help read and one more turn. A person has the same problem when a tool uses a different word for the same idea in each subcommand.
 
 These rules keep the names a caller can guess. [BP-0001](/software-engineering/cli-design/design-clis-for-agents/) sets the behaviour a CLI must have; this practice sets the names it uses, and [BP-0091](/software-engineering/cli-design/evolve-a-cli-without-breaking-its-callers/) covers changing them later.
@@ -94,9 +101,3 @@ $ parts delete R-10K
 - [ ] Flags work on either side of the subcommand
 - [ ] A near-miss suggestion waits for the caller to confirm
 
-## References
-
-- [Command Line Interface Guidelines — Arguments and flags](https://clig.dev/#arguments-and-flags)
-- [Command Line Interface Guidelines — Subcommands](https://clig.dev/#subcommands)
-- [Command Line Interface Guidelines — Help](https://clig.dev/#help)
-- [GNU Coding Standards — Command-Line Interfaces](https://www.gnu.org/prep/standards/html_node/Command_002dLine-Interfaces.html)

@@ -7,19 +7,28 @@ type: guideline
 roles: [orchestrator, reviewer]
 stage: [verify, operate]
 status: draft
-version: 1.0.0
-updated: 2026-11-26
-reviewed: 2026-11-26
-review_by: 2027-05-26
+version: 1.0.1
+updated: 2026-11-27
+reviewed: 2026-11-27
+review_by: 2027-05-27
 related: [BP-0050, BP-0051, BP-0040, BP-0021, BP-0078, BP-0059, BP-0065, BP-0011]
 sources:
-  - { title: Laban et al. — LLMs get lost in multi-turn conversation (ICLR 2026), url: https://arxiv.org/abs/2505.06120 }
-  - { title: When attention closes — how LLMs lose the thread in multi-turn interaction (review of instruction forgetting), url: https://arxiv.org/pdf/2605.12922 }
-  - { title: Asymmetric drift — coding agents violating system-prompt constraints under pressure, url: https://arxiv.org/pdf/2603.03456v1.pdf }
-  - { title: Harness updating is not harness benefit — adherence across a trajectory, url: https://arxiv.org/pdf/2605.30621 }
-  - { title: Arike et al. — Evaluating goal drift in language model agents (AIES), url: https://arxiv.org/abs/2505.02709 }
+  - title: "Laban et al. — LLMs get lost in multi-turn conversation (ICLR 2026)"
+    url: https://arxiv.org/abs/2505.06120
+    note: Accuracy and instruction-following fall as turns accumulate, the basis for comparing early and late steps within a session
+  - title: "When attention closes — how LLMs lose the thread in multi-turn interaction (review of instruction forgetting)"
+    url: https://arxiv.org/pdf/2605.12922
+    note: Instruction forgetting is traced to attention and context pressure, which rule 5 treats as long-session decay rather than a model change
+  - title: "Asymmetric drift — coding agents violating system-prompt constraints under pressure"
+    url: https://arxiv.org/pdf/2603.03456v1.pdf
+    note: Constraints that hold in quiet runs break under pressure, which is why rule 7 probes deliberately instead of waiting
+  - title: "Harness updating is not harness benefit — adherence across a trajectory"
+    url: https://arxiv.org/pdf/2605.30621
+    note: Adding rules to the harness does not by itself raise adherence, so conformance has to be measured across a trajectory
+  - title: "Arike et al. — Evaluating goal drift in language model agents (AIES)"
+    url: https://arxiv.org/abs/2505.02709
+    note: Methods for measuring goal drift over an agent trajectory, which the per-rule violation rate borrows
 ---
-
 An agent that follows its practices at the start of a session, on today's model, with today's skills, may not follow them next month or forty steps later. Instruction-following measurably fades as conversations and trajectories get longer, and agents break constraints more readily when the environment pushes against them. Model drift ([BP-0050](/operations/evaluation/detect-model-drift/)) asks whether the same prompt still gives the same answer; practice drift asks whether the agent still does what its rules say. You find out only by checking its actions, continuously.
 
 ## Rules
