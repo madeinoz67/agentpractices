@@ -17,7 +17,7 @@ sources:
     url: https://www.oaic.gov.au/privacy/australian-privacy-principles/australian-privacy-principles-guidelines/chapter-8-app-8-cross-border-disclosure-of-personal-information
     note: The Australian rule that sending personal information to an overseas provider is generally a cross-border disclosure the local entity stays accountable for
   - title: "OAIC — APP 1 (automated decision transparency from 10 December 2026)"
-    url: https://www.oaic.gov.au/privacy/australian-privacy-principles-guidelines/chapter-1-app-1-open-and-transparent-management-of-personal-information/
+    url: https://www.oaic.gov.au/privacy/australian-privacy-principles/australian-privacy-principles-guidelines/chapter-1-app-1-open-and-transparent-management-of-personal-information/
     note: The automated decision transparency obligation applying from 10 December 2026, which the disclosure rule implements
   - title: "GDPR — Chapter V (transfers to third countries)"
     url: https://gdpr-info.eu/chapter-5/
