@@ -2,7 +2,7 @@
 title: Practice template
 description: Copy-paste template for a new practice page.
 sidebar:
-  order: 4
+  order: 5
 ---
 
 Copy everything in the block below into a new file.
@@ -24,7 +24,9 @@ review_by: YYYY-MM-DD  # next review due; at most 12 months after reviewed (3 mo
 related: []
 superseded_by: null
 sources:
-  - { title: Source title, url: https://example.org }
+  - title: Source title
+    url: https://example.org
+    note: Why this source matters to the rules above
 ---
 
 ## Rules
@@ -44,6 +46,8 @@ sources:
 ## Checklist
 
 - [ ] …
-
-## References
 ````
+
+Each source needs a `note`: one line that says what that source contributes to the rules above. `bun run check` rejects a source with an empty note or a `TODO` note.
+
+The page renders its **Sources** section from the frontmatter `sources` list, and its **See also** block from `related`. Do not write either one in the body.

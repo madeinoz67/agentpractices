@@ -7,16 +7,22 @@ type: guideline
 roles: [orchestrator, implementer]
 stage: [plan, build, operate]
 status: draft
-version: 1.0.0
-updated: 2026-11-24
-reviewed: 2026-11-24
-review_by: 2027-05-24
+version: 1.1.0
+updated: 2026-11-27
+reviewed: 2026-11-27
+review_by: 2027-05-27
 related: [BP-0039, BP-0011, BP-0028, BP-0008, BP-0006]
 sources:
-  - { title: Claude Platform docs — Prompt caching, url: https://platform.claude.com/docs/en/build-with-claude/prompt-caching }
-  - { title: Claude Platform docs — Batch processing, url: https://platform.claude.com/docs/en/build-with-claude/batch-processing }
+  - title: "Claude Platform docs — Prompt caching"
+    url: https://platform.claude.com/docs/en/build-with-claude/prompt-caching
+    note: Cache write and cache read breakpoints, the mechanism behind the stable-prefix rule, and the usage figures that confirm hits
+  - title: "Claude Platform docs — Batch processing"
+    url: https://platform.claude.com/docs/en/build-with-claude/batch-processing
+    note: A discounted asynchronous path for bulk, non-urgent work, which rule 8 weighs against the wait
+  - title: "Ai insider — Lauren Tan reveals how to build a 21+ agent GrokBot team"
+    url: https://www.youtube.com/watch?v=PcO998TSzIz
+    note: Upfront token spend on refactoring and environment work judged as return on investment, offset by cheaper work later and by avoided repeated review; behind rule 11
 ---
-
 ## Rules
 
 ### Budgets
@@ -37,6 +43,10 @@ sources:
 8. **SHOULD** use batch processing for work that does not need an immediate answer (bulk classification, nightly summaries), where the provider offers it at lower cost.
 9. **SHOULD** run independent sub-tasks in parallel to cut wall-clock time, but count the extra tokens each sub-agent spends re-reading context, and prefer one agent for small tasks.
 10. **SHOULD** cap output length per step, and ask for structured output where free text is not needed.
+
+### Environment work
+
+11. **SHOULD** treat upfront environment work (refactors, lints, verification, feature maps) as a cost offset: estimate the tokens it saves per completed task, and compare that with the tokens it costs to build.
 
 ## When to apply
 
@@ -67,7 +77,3 @@ Any agent workload that runs repeatedly, unattended, at scale, or on a budget.
 - [ ] Smallest adequate model per step, verified by evals
 - [ ] Batch for non-urgent work; parallelism justified; output capped
 
-## References
-
-- [Claude Platform — Prompt caching](https://platform.claude.com/docs/en/build-with-claude/prompt-caching)
-- [Claude Platform — Batch processing](https://platform.claude.com/docs/en/build-with-claude/batch-processing)

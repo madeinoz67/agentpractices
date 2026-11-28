@@ -7,16 +7,19 @@ type: guideline
 roles: [any]
 stage: [build]
 status: draft
-version: 1.1.0
-updated: 2026-11-25
-reviewed: 2026-11-25
-review_by: 2027-05-25
+version: 1.1.1
+updated: 2026-11-27
+reviewed: 2026-11-27
+review_by: 2027-05-27
 related: [BP-0001, BP-0004, BP-0009]
 sources:
-  - { title: The /llms.txt file, url: https://llmstxt.org/ }
-  - { title: 'RFC 2119 — Key words for use in RFCs', url: https://www.rfc-editor.org/rfc/rfc2119 }
+  - title: "The /llms.txt file"
+    url: https://llmstxt.org/
+    note: "llms.txt convention cited by rule 4: a root Markdown index, one link and description per page, so agents find the file without crawling HTML"
+  - title: "RFC 2119 — Key words for use in RFCs"
+    url: https://www.rfc-editor.org/rfc/rfc2119
+    note: "The RFC behind rule 1: MUST, SHOULD and MAY, and the exact strength each keyword carries for a reader"
 ---
-
 ## Rules
 
 1. **MUST** put the actionable rules first, as a numbered list using RFC 2119 keywords (**MUST**, **SHOULD**, **MAY**).
@@ -54,7 +57,3 @@ This site: every practice follows Rules → When to apply → Procedure → Exam
 - [ ] `content_hash` per page, unchanged by metadata refreshes
 - [ ] Raw `.md` and `llms.txt` published
 
-## References
-
-- [The /llms.txt file](https://llmstxt.org/)
-- [RFC 2119](https://www.rfc-editor.org/rfc/rfc2119)

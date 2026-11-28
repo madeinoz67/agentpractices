@@ -7,17 +7,22 @@ type: guideline
 roles: [orchestrator, reviewer, implementer]
 stage: [verify, operate]
 status: draft
-version: 1.0.0
-updated: 2026-11-24
-reviewed: 2026-11-24
-review_by: 2027-05-24
+version: 1.0.1
+updated: 2026-11-27
+reviewed: 2026-11-27
+review_by: 2027-05-27
 related: [BP-0006, BP-0051, BP-0039, BP-0046, BP-0049, BP-0044]
 sources:
-  - { title: Claude Platform docs — Model IDs and versions, url: https://platform.claude.com/docs/en/about-claude/models/model-ids-and-versions }
-  - { title: Claude Platform docs — Model deprecations, url: https://platform.claude.com/docs/en/about-claude/model-deprecations }
-  - { title: OpenTelemetry GenAI semantic conventions, url: https://github.com/open-telemetry/semantic-conventions-genai }
+  - title: "Claude Platform docs — Model IDs and versions"
+    url: https://platform.claude.com/docs/en/about-claude/models/model-ids-and-versions
+    note: A snapshot ID's weights stay fixed while an alias moves to the newest snapshot, the reason rule 1 pins
+  - title: "Claude Platform docs — Model deprecations"
+    url: https://platform.claude.com/docs/en/about-claude/model-deprecations
+    note: The retirement schedule rule 10 tracks, so a deprecation is planned for rather than discovered from an error message
+  - title: OpenTelemetry GenAI semantic conventions
+    url: https://github.com/open-telemetry/semantic-conventions-genai
+    note: The gen_ai.request.model and gen_ai.response.model attributes whose mismatch exposes a silent fallback or alias move
 ---
-
 Model drift is a change in agent behaviour that you did not make on purpose. It comes from more places than the model weights:
 
 | Source | Example |
@@ -120,8 +125,3 @@ app.gateway.route       = coder-primary
 - [ ] Baseline and thresholds set in advance; judge pinned
 - [ ] Lifecycle notices tracked; canary and rollback in the gateway
 
-## References
-
-- [Claude Platform — Model IDs and versions](https://platform.claude.com/docs/en/about-claude/models/model-ids-and-versions)
-- [Claude Platform — Model deprecations](https://platform.claude.com/docs/en/about-claude/model-deprecations)
-- [OpenTelemetry GenAI semantic conventions](https://github.com/open-telemetry/semantic-conventions-genai)

@@ -39,4 +39,4 @@ sidebar:
 
 ## For agents
 
-Agents may file proposals and problem reports through the same issue forms (for example with `gh issue create --template propose-practice.yml`). Fill every required field, cite sources, and do not start writing the practice until the issue is accepted and has an ID.
+Agents may file proposals and problem reports through the same issue forms (for example with `gh issue create --template propose-practice.yml`). The [create-practice skill](../create-practice-skill/) runs this whole route for a Claude Code agent: duplicate search, a validated proposal, then the scaffold, verify and pull request once the ID is assigned. Fill every required field, cite sources, and do not start writing the practice until the issue is accepted and has an ID.

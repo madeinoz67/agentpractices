@@ -5,7 +5,8 @@ import { join, relative } from 'node:path';
 import matter from 'gray-matter';
 import { dirOf, slugify, type Issue, type Taxonomy } from './taxonomy';
 
-export interface Source { title: string; url: string }
+/** One cited source. `note` says why the source matters to this practice's rules; it is required. */
+export interface Source { title: string; url: string; note: string }
 export interface Practice {
   id: string;
   title: string;
@@ -114,9 +115,13 @@ export function validatePractices(ps: Practice[], t: Taxonomy, opts: { checkPath
         if (p.review_by < today) issues.push({ level: 'warn', code: 'W_REVIEW_DUE', msg: `${p.id} (${p.file}): review was due ${p.review_by}` });
       }
     }
-    for (const s of p.sources)
+    for (const s of p.sources) {
       if (!/^https?:\/\//i.test(String(s?.url ?? '')))
         err('E_SOURCE', p, `source "${s?.title ?? ''}" needs an http:// or https:// url`);
+      const note = String(s?.note ?? '').trim();
+      if (!note) err('E_SOURCE_NOTE', p, `source "${s?.title ?? ''}" needs a note that says why it matters to the rules`);
+      else if (/^TODO\b/i.test(note)) err('E_SOURCE_NOTE', p, `source "${s?.title ?? ''}" still has a TODO note; say why the source matters`);
+    }
   }
   return issues;
 }
@@ -133,6 +138,19 @@ export function seeAlso(p: Pick<Practice, 'id' | 'related'>, all: Pick<Practice,
     if (!x || seen.has(id)) continue;
     seen.add(id);
     out.push({ id: x.id, title: x.title, slug: x.slug });
+  }
+  return out;
+}
+
+export interface SourceLink { title: string; url: string; host: string; note: string }
+/** Sources to show on a practice page: http(s) only, in the order the page lists them. */
+export function sourceLinks(sources: Source[] | undefined): SourceLink[] {
+  const out: SourceLink[] = [];
+  for (const s of sources ?? []) {
+    let u: URL;
+    try { u = new URL(s.url); } catch { continue; }
+    if (u.protocol !== 'https:' && u.protocol !== 'http:') continue;
+    out.push({ title: s.title, url: s.url, host: u.hostname.replace(/^www\./, ''), note: String(s.note ?? '').trim() });
   }
   return out;
 }

@@ -7,16 +7,19 @@ type: guideline
 roles: [implementer, researcher, any]
 stage: [build, operate]
 status: draft
-version: 1.0.0
-updated: 2026-11-24
-reviewed: 2026-11-24
-review_by: 2027-05-24
+version: 1.0.1
+updated: 2026-11-27
+reviewed: 2026-11-27
+review_by: 2027-05-27
 related: [BP-0027, BP-0029, BP-0010, BP-0011]
 sources:
-  - { title: Anthropic — Introducing Contextual Retrieval, url: https://www.anthropic.com/news/contextual-retrieval }
-  - { title: Claude Cookbook — Enhancing RAG with contextual retrieval, url: https://platform.claude.com/cookbook/capabilities-contextual-embeddings-guide }
+  - title: "Anthropic — Introducing Contextual Retrieval"
+    url: https://www.anthropic.com/news/contextual-retrieval
+    note: Measures hybrid BM25 plus embedding search with reranking, the combination rules 2 and 3 require
+  - title: "Claude Cookbook — Enhancing RAG with contextual retrieval"
+    url: https://platform.claude.com/cookbook/capabilities-contextual-embeddings-guide
+    note: Code for building contextual embeddings and searching them, with an accuracy check you can rerun on your corpus
 ---
-
 ## Rules
 
 1. **MUST** enforce access control in the retrieval layer, before ranking: filter by the caller's tenant, groups and classification server-side. Never retrieve first and ask the model to hide what the user may not see.
@@ -63,7 +66,3 @@ Bad: an answer with no sources, mixing a 2019 procedure with the current one, fr
 - [ ] Wide candidate set reranked; few passages passed
 - [ ] Every claim cited; gaps and conflicts stated
 
-## References
-
-- [Anthropic — Introducing Contextual Retrieval](https://www.anthropic.com/news/contextual-retrieval)
-- [Claude Cookbook — Contextual retrieval](https://platform.claude.com/cookbook/capabilities-contextual-embeddings-guide)

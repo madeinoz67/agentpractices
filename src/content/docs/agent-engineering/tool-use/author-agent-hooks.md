@@ -7,16 +7,19 @@ type: guideline
 roles: [implementer, any]
 stage: [build, verify]
 status: draft
-version: 1.0.0
-updated: 2026-11-24
-reviewed: 2026-11-24
-review_by: 2027-05-24
+version: 1.0.1
+updated: 2026-11-27
+reviewed: 2026-11-27
+review_by: 2027-05-27
 related: [BP-0021, BP-0018, BP-0005, BP-0001]
 sources:
-  - { title: Claude Code docs — Hooks reference, url: https://code.claude.com/docs/en/hooks }
-  - { title: Claude Code docs — Hooks guide, url: https://code.claude.com/docs/en/hooks-guide }
+  - title: "Claude Code docs — Hooks reference"
+    url: https://code.claude.com/docs/en/hooks
+    note: Exit code 2 as the blocking signal, the JSON event schema and which non-zero exits let the action proceed
+  - title: "Claude Code docs — Hooks guide"
+    url: https://code.claude.com/docs/en/hooks-guide
+    note: Matcher patterns, the CLAUDE_PROJECT_DIR path anchor and the command-plus-args exec form, shown as a worked setup
 ---
-
 ## Rules
 
 1. **MUST** attach each hook to the narrowest event and matcher that covers its job (for example `PreToolUse` with matcher `Bash` or `Edit|Write`), not to every event or tool.
@@ -98,7 +101,3 @@ echo 'not json' | bun .claude/hooks/protect-paths.ts; echo $?                   
 - [ ] Fast; project-anchored path; exec form; no secrets
 - [ ] Tested with allow, block, malformed and timeout payloads
 
-## References
-
-- [Claude Code — Hooks reference](https://code.claude.com/docs/en/hooks)
-- [Claude Code — Hooks guide](https://code.claude.com/docs/en/hooks-guide)

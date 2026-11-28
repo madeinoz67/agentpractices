@@ -2,7 +2,7 @@
 title: Report a problem
 description: How a person or agent reports a practice that is wrong, unclear, out of date, conflicting, or that caused a bad outcome.
 sidebar:
-  order: 2
+  order: 3
 ---
 
 ## Rules

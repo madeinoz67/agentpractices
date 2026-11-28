@@ -7,15 +7,16 @@ type: guideline
 roles: [orchestrator, implementer]
 stage: [build, operate]
 status: draft
-version: 1.0.0
-updated: 2026-11-24
-reviewed: 2026-11-24
-review_by: 2027-05-24
+version: 1.0.1
+updated: 2026-11-27
+reviewed: 2026-11-27
+review_by: 2027-05-27
 related: [BP-0039, BP-0048, BP-0050, BP-0049, BP-0041, BP-0040]
 sources:
-  - { title: OpenTelemetry GenAI semantic conventions, url: https://github.com/open-telemetry/semantic-conventions-genai }
+  - title: OpenTelemetry GenAI semantic conventions
+    url: https://github.com/open-telemetry/semantic-conventions-genai
+    note: The invoke_workflow, invoke_agent and gen_ai.request.reasoning.level names the workflow, unit and effort spans use
 ---
-
 Run-level tracing ([BP-0039](/operations/observability/trace-agent-runs/)) shows what one agent did. A workflow ([BP-0048](/multi-agent-systems/coordination-handoff/orchestrate-agent-workflows/)) spans many runs, agents, retries and human waits. Observe it as one thing.
 
 ## Rules
@@ -101,6 +102,3 @@ Alert rules (pseudo):
 - [ ] Heartbeats and stall, loop, retry and budget alerts with owners
 - [ ] Drift signals shown alongside; regular review changes the workflow
 
-## References
-
-- [OpenTelemetry GenAI semantic conventions](https://github.com/open-telemetry/semantic-conventions-genai)

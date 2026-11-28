@@ -7,16 +7,19 @@ type: guideline
 roles: [implementer, any]
 stage: [build]
 status: draft
-version: 1.0.0
-updated: 2026-11-24
-reviewed: 2026-11-24
-review_by: 2027-05-24
+version: 1.0.1
+updated: 2026-11-27
+reviewed: 2026-11-27
+review_by: 2027-05-27
 related: [BP-0035, BP-0036, BP-0037, BP-0002, BP-0033]
 sources:
-  - { title: Conventional Commits 1.0.0, url: https://www.conventionalcommits.org/en/v1.0.0/ }
-  - { title: GitHub Docs — Creating a commit with multiple authors, url: https://docs.github.com/en/pull-requests/committing-changes-to-your-project/creating-and-editing-commits/creating-a-commit-with-multiple-authors }
+  - title: Conventional Commits 1.0.0
+    url: https://www.conventionalcommits.org/en/v1.0.0/
+    note: "Fixes the message form the practice names: a typed, imperative subject and a body that carries the reason"
+  - title: "GitHub Docs — Creating a commit with multiple authors"
+    url: https://docs.github.com/en/pull-requests/committing-changes-to-your-project/creating-and-editing-commits/creating-a-commit-with-multiple-authors
+    note: The trailer syntax behind marking agent-authored work so reviewers and audits can tell it apart
 ---
-
 ## Rules
 
 1. **MUST** work on a branch named for the task (for example `feat/issue-42-json-output`), created from the latest default branch. Never commit directly to `main` or another protected branch.
@@ -76,7 +79,3 @@ Cleaning up existing orphan tags (separate issue #43).
 - [ ] Latest default branch integrated; tests re-run
 - [ ] PR states what, why, evidence, not done; CI green
 
-## References
-
-- [Conventional Commits](https://www.conventionalcommits.org/en/v1.0.0/)
-- [GitHub — Commits with multiple authors](https://docs.github.com/en/pull-requests/committing-changes-to-your-project/creating-and-editing-commits/creating-a-commit-with-multiple-authors)

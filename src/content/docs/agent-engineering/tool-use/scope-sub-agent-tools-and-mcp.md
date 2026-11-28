@@ -7,16 +7,19 @@ type: guideline
 roles: [orchestrator, implementer]
 stage: [plan, build]
 status: draft
-version: 1.0.0
-updated: 2026-11-24
-reviewed: 2026-11-24
-review_by: 2027-05-24
+version: 1.0.1
+updated: 2026-11-27
+reviewed: 2026-11-27
+review_by: 2027-05-27
 related: [BP-0032, BP-0042, BP-0022, BP-0023, BP-0049, BP-0055, BP-0035, BP-0021]
 sources:
-  - { title: Claude Code docs — Subagents, url: https://code.claude.com/docs/en/sub-agents }
-  - { title: Claude Code docs — Permissions, url: https://code.claude.com/docs/en/permissions }
+  - title: "Claude Code docs — Subagents"
+    url: https://code.claude.com/docs/en/sub-agents
+    note: The tools, disallowedTools, inline mcpServers and nesting-limit fields that make an explicit per-role allowlist possible
+  - title: "Claude Code docs — Permissions"
+    url: https://code.claude.com/docs/en/permissions
+    note: Deny rules that apply even when the sub-agent inherits a bypassing parent mode, so its own permission setting is ignored
 ---
-
 A sub-agent with every tool its parent has is a second copy of the parent's blast radius, running with less oversight. In Claude Code, for example, a sub-agent with no `tools` list inherits the built-in and MCP tools of the main conversation (minus a few interactive ones). The fix is the same in any framework: decide per role what the agent may touch, and configure it.
 
 ## Rules
@@ -122,7 +125,3 @@ Claude Code applies `disallowedTools` first, then resolves `tools` against what 
 - [ ] Spawning depth and turns limited; writers isolated
 - [ ] Definitions versioned and reviewed; limits tested
 
-## References
-
-- [Claude Code — Subagents](https://code.claude.com/docs/en/sub-agents)
-- [Claude Code — Permissions](https://code.claude.com/docs/en/permissions)

@@ -7,16 +7,19 @@ type: guideline
 roles: [implementer, orchestrator, any]
 stage: [plan, build, operate]
 status: draft
-version: 1.0.0
-updated: 2026-11-24
-reviewed: 2026-11-24
-review_by: 2027-05-24
+version: 1.0.1
+updated: 2026-11-27
+reviewed: 2026-11-27
+review_by: 2027-05-27
 related: [BP-0023, BP-0016, BP-0021, BP-0013]
 sources:
-  - { title: Claude Code docs — Connect Claude Code to tools via MCP, url: https://code.claude.com/docs/en/mcp }
-  - { title: MCP Specification — Authorization, url: https://modelcontextprotocol.io/specification/latest/basic/authorization }
+  - title: "Claude Code docs — Connect Claude Code to tools via MCP"
+    url: https://code.claude.com/docs/en/mcp
+    note: The scope names, the .mcp.json location and the precedence order that decides which duplicate definition wins
+  - title: "MCP Specification — Authorization"
+    url: https://modelcontextprotocol.io/specification/latest/basic/authorization
+    note: The sign-in flow that replaces a token committed in .mcp.json, letting each user authorize their own access
 ---
-
 ## Rules
 
 1. **MUST** choose the scope by who needs the server, not by convenience:
@@ -82,6 +85,3 @@ claude mcp add --transport http staging-db https://staging.example.com/mcp
 - [ ] One definition per server name
 - [ ] Unused servers removed
 
-## References
-
-- [Claude Code — MCP installation scopes](https://code.claude.com/docs/en/mcp)

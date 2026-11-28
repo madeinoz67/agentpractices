@@ -24,24 +24,30 @@ All under `https://agentpractices.dev/`.
 | --- | --- |
 | `llms.txt` | Index: one line per practice — `ID@version [status] description`, link to raw `.md` |
 | `llms-full.txt` / `llms-small.txt` | All content in one file / abridged |
-| `catalog.json` | Every practice: id, title, description, domain, `domain_path`, type, roles, stage, status, version, updated, reviewed, review_by, `content_hash` (changes only when the content changes; a new hash always comes with a new version), related, superseded_by, sources, `url`, `md_url`, `report_url` |
+| `catalog.json` | Every practice: id, title, description, domain, `domain_path`, type, roles, stage, status, version, updated, reviewed, review_by, `content_hash` (changes only when the content changes; a new hash always comes with a new version), related, superseded_by, sources (each with `title`, `url` and `note`), `url`, `md_url`, `report_url` |
 | `taxonomy.jsonld` | Domains and facets as SKOS JSON-LD |
 | `taxonomy.json` | Same taxonomy as a plain nested tree |
 | `<page>.md` | Raw Markdown (with frontmatter) of any page |
 | `AGENTS.md` | This page as raw Markdown |
 
-## Claude Code plugin
+## Claude Code plugins
 
-The corpus also ships as a Claude Code plugin from the site repository. The plugin carries this contract, so the agent does not write its own fetch and filter each time.
+The corpus also ships as Claude Code plugins from the site repository, in one marketplace.
 
 ```sh
 /plugin marketplace add madeinoz67/agentpractices
 /plugin install agentpractices@agentpractices-marketplace
+/plugin install create-practice@agentpractices-marketplace
 ```
 
-The skill calls `skills/agentpractices/scripts/practices.ts` with four commands: `list`, `get`, `check` and `sync`. It reads the files in the table above. It contacts `agentpractices.dev` only and sends nothing.
+| Plugin | For | What it does |
+| --- | --- | --- |
+| `agentpractices` | Agents applying practices | Carries this contract, so the agent does not write its own fetch and filter each time |
+| `create-practice` | People and agents writing practices | Runs [Add a practice](/contributing/add-a-practice/) end to end; see [Contribute with the create-practice skill](/contributing/create-practice-skill/) |
 
-The plugin is optional. The `curl` route below stays valid, and it is cheaper for an agent that has a shell.
+The `agentpractices` skill calls `skills/agentpractices/scripts/practices.ts` with five commands: `list`, `get`, `check`, `domains` and `sync`. It reads the files in the table above. It contacts `agentpractices.dev` only and sends nothing.
+
+The plugins are optional. The `curl` route below stays valid, and it is cheaper for an agent that has a shell.
 
 ## Filtering
 
@@ -62,4 +68,4 @@ curl -s https://agentpractices.dev/catalog.json \
 
 ## Page structure
 
-Every practice uses the same sections, in order: Rules, When to apply, Procedure, Examples, Anti-patterns, Checklist, References.
+Every practice uses the same sections, in order: Rules, When to apply, Procedure, Examples, Anti-patterns, Checklist. The page's Sources section is generated from the frontmatter `sources` list and its See also block from `related`, so neither is written in the body.

@@ -3,11 +3,53 @@
 ## Unreleased
 
 - `catalog.json`'s `generated` is now the source commit's time, not the build's wall clock, and the build job has its own `pages-build-*` concurrency group with `cancel-in-progress: true`. A scheduled build that checked out an older commit can no longer deploy after a newer build, and if it did its old timestamp would lose to the newer cached copy. Agent contract rule 6 now says a metadata-only commit moves `generated` and the daily star-count refresh does not (#27).
-
+- BP-0108 Nudge the agent at the moment a rule applies (D.AGT.TOOL, draft) (#106).
+- BP-0107 Enrich records with agents: when, why, and how (D.KNO.SEM, draft) (#104).
+- BP-0041 1.1.0: add R11 on environment work as a cost offset (#102).
+- BP-0102 1.1.0: add R13 on the fleet and cloud stage (#100).
+- BP-0018 1.2.0: add R15 to R17 on skill evals (#98).
+- BP-0106 Give agents a control skill and a feature map (D.AGT.WF, draft) (#95).
+- BP-0105 Enforce codebase invariants in the compiler and CI, not in review (D.SWE.QLT, draft) (#94).
+- BP-0018 1.1.0: add R14 on deriving a skill from recorded interventions (#92).
+- BP-0104 Sample review when agent output outpaces review (D.SWE.VCS, draft) (#88).
+- BP-0103 Amend the agent environment when the same failure repeats (D.AGT.WF, draft) (#87).
+- BP-0102 Earn agent autonomy with verification evidence (D.AGT.WF, draft) (#86).
+- BP-0101 Feed inner-loop agents with a separate outer-loop context agent (D.MAS.HND, draft) (#83).
+- Plugin skill 0.2.2, from the dogfood audit (#77): `-h`/`--help` and a no-argument help path; exit 2 for a usage error and 1 for a failure; a near-miss suggestion for an unknown command; the host announced on stderr before each network call, with a default timeout, `--timeout`, `--offline`, `--plain`, `--quiet` and `sync --dry-run`; the skill version and the report page on an unexpected error; `XDG_CACHE_HOME` for the cache path. The catalogue cache now compares content identity and refuses a rollback, so a build timestamp can no longer replace good content with old content (BP-0007 rule 12, issue #27).
+- BP-0100 Use pstack through poteto-mode (D.AGT.SKL, draft) (#79).
+- BP-0099 Dogfood the product you build before you release it (D.SWE.REL, draft) (#78).
+- Sources and References are now one section. Every `sources` entry carries a required `note` that says what that source contributes to the practice's rules; `bun run check` fails a source with an empty note or a `TODO` note, and the page renders Sources from the frontmatter list. The body's `## References` section is gone from the practice template, the create-practice scaffold and every practice page; its annotations moved into `note`. Every practice that cites sources takes a patch bump (#72).
+- Repaired 20 source titles that flow-style YAML had silently truncated at the first comma inside an unquoted title, such as `Gortex — code intelligence engine (graph, MCP, CLI)` and `pstack (Cursor plugins) — prove-it-works, blast-radius, interrogate, create-verification-skill, show-me-your-work`. Source entries are now block-style with quoted scalars, so a comma in a title cannot do this again (#72).
+- create-practice plugin 0.2.0: `validateDraft` refuses a source with no note, the scaffold writes `note:` and no longer emits a References section, and the proposal body renders each source with its note. Plugin and skill versions bump together (#72).
+- Site: *How agents use this site* and *Practice template* describe the required `note` and the generated Sources section, and the *Propose a practice* form asks for it.
+- BP-0098 Measure agent line flow, not just individual runs (D.OPS.OBS, draft) (#70).
+- BP-0097 Carry one definition of done from work item to delivery (D.MAS.HND, draft) (#69).
+- BP-0096 Design repeatable agent work as a production line with station checks (D.MAS.TOP, draft) (#68).
+- BP-0073 1.1.0: rules 23–24 add the surface inventory and the per-pair gate, so an API, a UI, a TUI or the documentation cannot drift behind the CLI and the MCP server (#67).
+- BP-0095 Run concurrent agents on disjoint work and settle conflicts with evidence (D.MAS.HND, draft) (#65).
+- BP-0094 Name CLI flags and subcommands so callers can guess them (D.SWE.CLI, draft) (#54).
+- BP-0001 1.1.0: rules 10–16 add the output switches (`--plain`, `-q`, `-` for stdin and stdout, the pager), confirmation levels for a severe action, the rule against a secret as a flag value, the help entry points, and `TERM=dumb` (#58).
+- BP-0093 Choose a CLI name and argument shape that callers can remember (D.SWE.CLI, draft) (#62).
+- BP-0092 Make a command declare the files and network calls it uses (D.SWE.CLI, draft) (#61).
+- BP-0091 Evolve a CLI without breaking its callers (D.SWE.CLI, draft) (#60).
+- BP-0090 Document a CLI on the web, in the terminal and in man pages (D.SWE.CLI, draft) (#59).
+- BP-0089 Distribute a CLI so it is easy to install and remove (D.SWE.CLI, draft) (#57).
+- BP-0088 Configure a CLI with one predictable precedence (D.SWE.CLI, draft) (#56).
+- BP-0087 Write CLI error messages that say what to do (D.SWE.CLI, draft) (#55).
+- BP-0086 Keep long-running commands responsive and resumable (D.SWE.CLI, draft) (#53).
+- Site: new page [Contribute with the create-practice skill](/contributing/create-practice-skill/) (install, phases, script commands, safety). *How agents use this site* now lists both plugins, the home page links contributors to it, and *Add a practice* points agents at it.
+- New Claude Code plugin `create-practice` 0.1.0 in the marketplace (`/plugin install create-practice@agentpractices-marketplace`): guides a contributor through the governed route for a new practice — duplicate search against `catalog.json`, domain and facet choice from the taxonomy, rule drafting with MUST/SHOULD/MAY, a validated *Propose a practice* issue body and prefilled URL, then, after the owner assigns the ID, `scaffold` writes the page in its `dirOf` folder with draft status and review dates and adds the CHANGELOG line. Never assigns a `BP-NNNN` itself. `bun run security` now also scans `plugins/`.
 - BP-0007 1.1.0: rules 10–12 define the caching contract that rule 3 named but never stated — publish a `content_hash` per page in the machine-readable catalogue (10), never move a version or hash when only metadata refreshes (11), and have consumers cache by content identity rather than on a clock (12). Examples, anti-patterns and checklist follow (#26).
 - Agent contract rule 6 now separates the two objects: refetch `catalog.json` at task start or when its `generated` is newer, then refetch a practice only when its `version` or `content_hash` differs. The daily star-count refresh moves `generated` without changing any practice, which made every agent refetch daily for nothing (#21). `content_hash` detects change; it is not a signature.
 - Plugin skill 0.2.1: the `sync` guidance no longer says to refetch when `catalog_generated` is older than a day. `sync` now also drops the cached practice bodies, so it really does recover a corrupt cache; practice files are cached as `<ID>@<version>.md` and are otherwise refetched only on a version bump. Cache writes go through a temp file and a rename, so an interrupted fetch cannot leave a truncated body behind.
 - Plugin skill 0.2.1 hardening, from the branch review's backlog: a catalogue `version` can no longer name a cache file outside the cache directory; redirects are followed only while every hop stays on the configured origin; and a read-only cache directory no longer discards a value already fetched.
+- BP-0079 Classify by function, service and activity, not by org chart or system (D.KNO.TAX), with a tested Bun validator for schemes and filed items.
+- BP-0082 Run a validated threat intelligence cycle with agents (direction, collection, processing, analysis, dissemination, feedback), with a tested indicator pipeline and TLP gate.
+- BP-0083 Build self-improving agents that cannot grade their own homework, with a tested improvement gate.
+- BP-0084 Detect agents drifting from the practices they follow, with tested conformance and drift checks over traces.
+- BP-0085 Detect drift between a PRD and the work actually done (D.DOC.SPC), with a tested structural drift check and pull-request gate. BP-0058 1.0.1: links BP-0085 from rule 11 and related.
+- BP-0081 Detect coordinated disinformation campaigns by behaviour, not viewpoint, including campaigns aimed at AI sources; new concept D.SEC.INF (Information Integrity & Influence Operations).
+- BP-0080 Apply AI and agents across the six NIST CSF functions, with autonomy set per action and a tested action gate; new concept D.SEC.CYD (AI-Enabled Cyber Defence).
 - BP-0078 Agents never push to main — issue, branch, pull request, then clean up the branch and worktree after merge. AGENTS.md rule 1 now requires the same flow for agents working on this repository, and `.githooks/pre-push` refuses pushes to `main` (enable with `git config core.hooksPath .githooks`).
 - BP-0014 2.1.0: rule 5 now says where the gap ledger lives — as data in the repository that owns the declaring standard, read by the rule 3 gate, which fails on unrecorded or stale rows (#22).
 - Plugin skill 0.2.0: four fixes to `skills/agentpractices`. Every command now runs the script from the skill's base directory, so it works once installed as a plugin (was repo-relative). Repeated `--domain` flags add up like the comma form, and every flag value is validated against `taxonomy.json`, so a typo in a domain, role, stage, type or status exits 1 naming the valid values instead of returning an empty result. `AGENTPRACTICES_URL` now applies to practice pages as well as the catalogue: an absolute `md_url` is resolved onto the configured base. Unknown flags are a usage error. New `domains` subcommand prints the domain tree; `list` and `get` report `review_overdue`; `check` reports `change` (none, patch, minor, major, older) by numeric version comparison.

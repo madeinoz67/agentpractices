@@ -7,19 +7,28 @@ type: guideline
 roles: [planner, implementer, reviewer]
 stage: [build, verify]
 status: draft
-version: 1.0.0
-updated: 2026-11-24
-reviewed: 2026-11-24
-review_by: 2027-05-24
+version: 1.0.1
+updated: 2026-11-27
+reviewed: 2026-11-27
+review_by: 2027-05-27
 related: [BP-0064, BP-0065, BP-0006, BP-0028, BP-0052, BP-0040]
 sources:
-  - { title: 'Zheng et al. — Large Language Models Are Not Robust Multiple Choice Selectors (ICLR 2024)', url: https://arxiv.org/abs/2309.03882 }
-  - { title: 'Fragile Preferences: A Deep Dive into Order Effects in Large Language Models (2025)', url: https://arxiv.org/abs/2506.14092 }
-  - { title: 'Prompt Perturbations Reveal Human-Like Biases in LLM survey responses (2025)', url: https://arxiv.org/abs/2507.07188 }
-  - { title: 'Auditing Multimodal LLM Raters: Central Tendency Bias in Clinical Ordinal Scoring (2026)', url: https://arxiv.org/abs/2605.16386 }
-  - { title: 'Liu et al. — Lost in the Middle: How Language Models Use Long Contexts', url: https://arxiv.org/abs/2307.03172 }
+  - title: "Zheng et al. — Large Language Models Are Not Robust Multiple Choice Selectors (ICLR 2024)"
+    url: https://arxiv.org/abs/2309.03882
+    note: Selection bias from option ID tokens, and a debiasing method that estimates the model's prior over each position
+  - title: "Fragile Preferences: A Deep Dive into Order Effects in Large Language Models (2025)"
+    url: https://arxiv.org/abs/2506.14092
+    note: Order alone can flip a model's preference and make it pick a strictly inferior option
+  - title: Prompt Perturbations Reveal Human-Like Biases in LLM survey responses (2025)
+    url: https://arxiv.org/abs/2507.07188
+    note: Survey formats inherit human response biases, with option order shifting answers by as much as 20 points
+  - title: "Auditing Multimodal LLM Raters: Central Tendency Bias in Clinical Ordinal Scoring (2026)"
+    url: https://arxiv.org/abs/2605.16386
+    note: Clinical ordinal raters bunch scores towards the middle and avoid both extremes of the scale
+  - title: "Liu et al. — Lost in the Middle: How Language Models Use Long Contexts"
+    url: https://arxiv.org/abs/2307.03172
+    note: Information buried in the middle of a long prompt is retrieved far less reliably than at either end
 ---
-
 When a model picks from options, the answer depends partly on *where* and *how* the options are shown, not only on what they say. The effects are documented:
 
 | Bias | What happens | Evidence |
@@ -128,10 +137,3 @@ After:  "Which best describes the impact?
 - [ ] Key context at the start and end of long prompts
 - [ ] Decisions about people counterbalanced, recorded and audited by position
 
-## References
-
-- [Large Language Models Are Not Robust Multiple Choice Selectors](https://arxiv.org/abs/2309.03882)
-- [Fragile Preferences: Order Effects in LLMs](https://arxiv.org/abs/2506.14092)
-- [Prompt Perturbations Reveal Human-Like Biases](https://arxiv.org/abs/2507.07188)
-- [Central Tendency Bias in LLM Raters](https://arxiv.org/abs/2605.16386)
-- [Lost in the Middle](https://arxiv.org/abs/2307.03172)

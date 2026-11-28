@@ -7,16 +7,19 @@ type: guideline
 roles: [any]
 stage: [build, operate]
 status: draft
-version: 1.0.0
-updated: 2026-11-24
-reviewed: 2026-11-24
-review_by: 2027-05-24
+version: 1.0.1
+updated: 2026-11-27
+reviewed: 2026-11-27
+review_by: 2027-05-27
 related: [BP-0002, BP-0010, BP-0012, BP-0013]
 sources:
-  - { title: Anthropic — Effective context engineering for AI agents, url: https://www.anthropic.com/engineering/effective-context-engineering-for-ai-agents }
-  - { title: 'Claude Cookbook — Context engineering: memory, compaction, and tool clearing', url: https://platform.claude.com/cookbook/tool-use-context-engineering-context-engineering-tools }
+  - title: "Anthropic — Effective context engineering for AI agents"
+    url: https://www.anthropic.com/engineering/effective-context-engineering-for-ai-agents
+    note: Frames the window as a finite budget loaded just in time, the case for compacting at task boundaries
+  - title: "Claude Cookbook — Context engineering: memory, compaction, and tool clearing"
+    url: https://platform.claude.com/cookbook/tool-use-context-engineering-context-engineering-tools
+    note: Worked code for compaction and for clearing bulky tool results once their conclusion is recorded
 ---
-
 ## Rules
 
 1. **MUST** treat the context window as a limited budget. Load information when a step needs it (by path, query or ID), not up front "in case".
@@ -65,7 +68,3 @@ Touched: cmd/list.go, schema/list.json
 - [ ] Bulky output summarised once used
 - [ ] Facts re-read after compaction before acting
 
-## References
-
-- [Anthropic — Effective context engineering for AI agents](https://www.anthropic.com/engineering/effective-context-engineering-for-ai-agents)
-- [Claude Cookbook — memory, compaction and tool clearing](https://platform.claude.com/cookbook/tool-use-context-engineering-context-engineering-tools)

@@ -7,19 +7,28 @@ type: guideline
 roles: [implementer, any]
 stage: [build]
 status: draft
-version: 1.0.0
-updated: 2026-11-24
-reviewed: 2026-11-24
-review_by: 2027-05-24
+version: 1.0.1
+updated: 2026-11-27
+reviewed: 2026-11-27
+review_by: 2027-05-27
 related: [BP-0024, BP-0026, BP-0012, BP-0013]
 sources:
-  - { title: DCMI Metadata Terms, url: https://www.dublincore.org/specifications/dublin-core/dcmi-terms/ }
-  - { title: schema.org, url: https://schema.org/ }
-  - { title: W3C PROV-O The PROV Ontology, url: https://www.w3.org/TR/prov-o/ }
-  - { title: W3C DCAT Data Catalog Vocabulary, url: https://www.w3.org/TR/vocab-dcat-3/ }
-  - { title: W3C JSON-LD 1.1, url: https://www.w3.org/TR/json-ld11/ }
+  - title: DCMI Metadata Terms
+    url: https://www.dublincore.org/specifications/dublin-core/dcmi-terms/
+    note: Standard properties for title, creator, dates, licence, subject and identifier, the first row of the vocabulary table
+  - title: schema.org
+    url: https://schema.org/
+    note: Vocabulary for web pages, products, people, organisations and events, the resources DCMI Terms does not cover
+  - title: W3C PROV-O The PROV Ontology
+    url: https://www.w3.org/TR/prov-o/
+    note: Entities, activities and agents modelling where data came from, which process generated it and when
+  - title: W3C DCAT Data Catalog Vocabulary
+    url: https://www.w3.org/TR/vocab-dcat-3/
+    note: Catalogue vocabulary for describing datasets and their distributions, so data holdings carry standard discoverable properties
+  - title: W3C JSON-LD 1.1
+    url: https://www.w3.org/TR/json-ld11/
+    note: Context and expansion model that turns a document into checkable triples, the test rule 5 requires
 ---
-
 ## Rules
 
 1. **MUST** look for an existing standard property before inventing a field: title, creator, date, licence, subject, identifier and source all have standard terms.
@@ -76,10 +85,3 @@ Provenance for an agent-written summary:
 - [ ] JSON-LD expanded and checked; one shared context
 - [ ] Custom properties namespaced and defined
 
-## References
-
-- [DCMI Metadata Terms](https://www.dublincore.org/specifications/dublin-core/dcmi-terms/)
-- [schema.org](https://schema.org/)
-- [PROV-O](https://www.w3.org/TR/prov-o/)
-- [DCAT 3](https://www.w3.org/TR/vocab-dcat-3/)
-- [JSON-LD 1.1](https://www.w3.org/TR/json-ld11/)

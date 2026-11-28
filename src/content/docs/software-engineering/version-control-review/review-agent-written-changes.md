@@ -7,15 +7,16 @@ type: checklist
 roles: [reviewer, any]
 stage: [verify]
 status: draft
-version: 1.0.1
-updated: 2026-11-25
-reviewed: 2026-11-25
-review_by: 2027-05-25
+version: 1.0.2
+updated: 2026-11-27
+reviewed: 2026-11-27
+review_by: 2027-05-27
 related: [BP-0034, BP-0038, BP-0006, BP-0005]
 sources:
-  - { title: OWASP Top 10 for LLM Applications 2026, url: https://genai.owasp.org/resource/owasp-genai-llm-top-10-2026/ }
+  - title: OWASP Top 10 for LLM Applications 2026
+    url: https://genai.owasp.org/resource/owasp-genai-llm-top-10-2026/
+    note: Names the LLM application risks that make the change description itself untrusted input to the reviewer
 ---
-
 ## Rules
 
 1. **MUST** have every agent-written change reviewed by someone other than its author: a person, or an independent reviewer agent followed by a person for anything that ships.
@@ -42,6 +43,3 @@ Every pull request or change set produced wholly or partly by an agent.
 - [ ] Security-relevant changes checked; dependencies real and pinned
 - [ ] Recurring findings turned into rules, hooks or tests
 
-## References
-
-- [OWASP Top 10 for LLM Applications 2026](https://genai.owasp.org/resource/owasp-genai-llm-top-10-2026/)

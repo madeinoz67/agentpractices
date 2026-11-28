@@ -1,26 +1,35 @@
 ---
 title: Build CLIs and MCP servers from one core, and choose daemon or per-client deliberately
-description: Put the logic in one tested library and expose it through thin adapters — a CLI for people and shell-using agents, an MCP server for MCP clients, an MCP App when a UI helps. Target the current MCP specification (2026-07-28, stateless) with an official SDK; design few, task-shaped tools with strict schemas, structured output and errors the model can fix; secure transports and tokens; and decide whether the server runs per client over stdio or as a shared daemon.
+description: Put the logic in one tested library and expose it through thin adapters — a CLI for people and shell-using agents, an MCP server for MCP clients, an MCP App when a UI helps. Target the current MCP specification (2026-07-28, stateless) with an official SDK; design few, task-shaped tools with strict schemas, structured output and errors the model can fix; secure transports and tokens; decide whether the server runs per client over stdio or as a shared daemon; and keep a list of every surface that exposes the core, with a gate for each pair that must stay in step.
 id: BP-0073
 domain: D.AGT.TOOL
 type: guideline
 roles: [implementer, reviewer]
 stage: [plan, build, verify]
 status: draft
-version: 1.0.0
-updated: 2026-11-25
-reviewed: 2026-11-25
-review_by: 2027-02-25
-related: [BP-0001, BP-0055, BP-0022, BP-0023, BP-0062, BP-0071, BP-0044, BP-0063, BP-0005]
+version: 1.1.1
+updated: 2026-11-27
+reviewed: 2026-11-27
+review_by: 2027-02-27
+related: [BP-0001, BP-0055, BP-0022, BP-0023, BP-0062, BP-0071, BP-0044, BP-0063, BP-0005, BP-0014, BP-0085, BP-0090, BP-0091]
 sources:
-  - { title: MCP specification 2026-07-28 — changelog, url: https://modelcontextprotocol.io/specification/2026-07-28/changelog }
-  - { title: MCP blog — The 2026-07-28 specification, url: https://blog.modelcontextprotocol.io/posts/2026-07-28/ }
-  - { title: MCP — Security best practices, url: https://modelcontextprotocol.io/specification/latest/basic/security_best_practices }
-  - { title: MCP blog — MCP Apps (official extension), url: https://blog.modelcontextprotocol.io/posts/2026-01-26-mcp-apps/ }
-  - { title: MCP TypeScript SDK v2 — Tools, url: https://ts.sdk.modelcontextprotocol.io/v2/servers/tools }
+  - title: "MCP specification 2026-07-28 — changelog"
+    url: https://modelcontextprotocol.io/specification/2026-07-28/changelog
+    note: The changes that made the protocol stateless and deprecated HTTP+SSE, Roots, Sampling and Logging, so new servers must not build on them
+  - title: "MCP blog — The 2026-07-28 specification"
+    url: https://blog.modelcontextprotocol.io/posts/2026-07-28/
+    note: The rationale for per-request protocol versions and client capabilities replacing session state in the 2026-07-28 release
+  - title: "MCP — Security best practices"
+    url: https://modelcontextprotocol.io/specification/latest/basic/security_best_practices
+    note: Token audience checks, the ban on passing a client token downstream and Origin validation for localhost daemons
+  - title: "MCP blog — MCP Apps (official extension)"
+    url: https://blog.modelcontextprotocol.io/posts/2026-01-26-mcp-apps/
+    note: "The ui:// resource convention and the hosted-UI model that MCP Apps extend, including the text fallback requirement"
+  - title: "MCP TypeScript SDK v2 — Tools"
+    url: https://ts.sdk.modelcontextprotocol.io/v2/servers/tools
+    note: The registerTool API with its input and output schemas, structuredContent and annotation hints that the adapter example is built from
 ---
-
-The same capability often needs three front ends: a CLI people and shell-using agents can run, an MCP server for MCP clients, and sometimes an MCP App that renders a UI in the conversation. Build the capability once and keep the front ends thin, so behaviour, validation and tests do not drift apart. For whether you need MCP at all, see [BP-0055](/agent-engineering/tool-use/prefer-api-wrapper-scripts-to-mcp/); for CLI design rules, [BP-0001](/software-engineering/cli-design/design-clis-for-agents/).
+The same capability often needs three front ends: a CLI people and shell-using agents can run, an MCP server for MCP clients, and sometimes an MCP App that renders a UI in the conversation. An API, a web UI, a TUI and the documentation usually join them. Build the capability once and keep every surface thin, so behaviour, validation, tests and docs do not drift apart. For whether you need MCP at all, see [BP-0055](/agent-engineering/tool-use/prefer-api-wrapper-scripts-to-mcp/); for CLI design rules, [BP-0001](/software-engineering/cli-design/design-clis-for-agents/).
 
 ## Rules
 
@@ -78,9 +87,14 @@ The same capability often needs three front ends: a CLI people and shell-using a
 21. **MUST** test through a real client: an in-memory or stdio client in automated tests, and the MCP Inspector or your target clients by hand.
 22. **MUST** version and release like any dependency: changelog, signed or pinned releases, and published metadata (for example a registry entry) so users can verify what they install ([BP-0044](/security-safety/supply-chain/vet-and-pin-agent-dependencies/)).
 
+### Every surface, not only the front ends
+
+23. **MUST** list every surface that exposes the core (CLI, MCP server, API, UI, TUI, documentation), and name the generator or the owner of each. A surface with no owner, or one edited by hand where a generator could produce it, is a defect.
+24. **MUST** change the surfaces together, and gate every pair that must stay in step: a contract diff for the API ([BP-0071](/software-engineering/api-interface-design/design-and-evolve-api-surfaces/)), a coverage invariant for two versioned surfaces ([BP-0014](/knowledge-modelling/ontology/close-corpus-coverage-gaps/)), a generated-documentation check ([BP-0090](/software-engineering/cli-design/document-a-cli-on-the-web-in-the-terminal-and-in-man-pages/)) and a CLI compatibility check ([BP-0091](/software-engineering/cli-design/evolve-a-cli-without-breaking-its-callers/)). The gate fails the build rather than relying on someone to remember the pair.
+
 ## When to apply
 
-Building a CLI, an MCP server or an MCP App, or exposing an existing library or API to agents.
+Building a CLI, an MCP server or an MCP App, or exposing an existing library or API to agents. Also applies when a change touches any other surface that exposes the same core: an API, a UI, a TUI or the documentation.
 
 ## Examples
 
@@ -222,6 +236,7 @@ WantedBy=default.target
 - A localhost daemon with no authentication.
 - `readOnlyHint: true` on a tool that writes.
 - An MCP App whose buttons call the backend directly, bypassing tool approval.
+- An API, a UI or a documentation page that no one owns and no gate compares, so it drifts behind the core.
 
 ## Checklist
 
@@ -232,11 +247,5 @@ WantedBy=default.target
 - [ ] Per-client vs daemon decided and recorded; daemons authenticated, loopback or socket, monitored
 - [ ] MCP Apps with text fallback; UI actions through tools
 - [ ] Tested through real clients; versioned, signed or pinned, published
+- [ ] Every surface that exposes the core is listed with a generator or an owner, and each pair that must stay in step has a gate that fails the build
 
-## References
-
-- [MCP 2026-07-28 changelog](https://modelcontextprotocol.io/specification/2026-07-28/changelog)
-- [MCP blog — The 2026-07-28 specification](https://blog.modelcontextprotocol.io/posts/2026-07-28/)
-- [MCP — Security best practices](https://modelcontextprotocol.io/specification/latest/basic/security_best_practices)
-- [MCP blog — MCP Apps](https://blog.modelcontextprotocol.io/posts/2026-01-26-mcp-apps/)
-- [MCP TypeScript SDK v2 — Tools](https://ts.sdk.modelcontextprotocol.io/v2/servers/tools)

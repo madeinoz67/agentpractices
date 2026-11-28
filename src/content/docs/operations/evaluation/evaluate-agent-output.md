@@ -7,13 +7,12 @@ type: guideline
 roles: [reviewer, orchestrator]
 stage: [verify, operate]
 status: draft
-version: 1.0.0
-updated: 2026-11-24
-reviewed: 2026-11-24
-review_by: 2027-05-24
+version: 1.0.1
+updated: 2026-11-27
+reviewed: 2026-11-27
+review_by: 2027-05-27
 related: [BP-0002]
 ---
-
 ## Rules
 
 1. **MUST** define pass/fail criteria before reviewing, derived from the original request.

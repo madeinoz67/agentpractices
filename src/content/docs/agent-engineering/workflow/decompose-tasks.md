@@ -7,16 +7,19 @@ type: guideline
 roles: [planner, orchestrator]
 stage: [plan]
 status: draft
-version: 1.0.0
-updated: 2026-11-24
-reviewed: 2026-11-24
-review_by: 2027-05-24
+version: 1.0.1
+updated: 2026-11-27
+reviewed: 2026-11-27
+review_by: 2027-05-27
 related: [BP-0002, BP-0003, BP-0006]
 sources:
-  - { title: Anthropic — Building effective agents, url: https://www.anthropic.com/research/building-effective-agents }
-  - { title: Anthropic — How we built our multi-agent research system, url: https://www.anthropic.com/engineering/multi-agent-research-system }
+  - title: "Anthropic — Building effective agents"
+    url: https://www.anthropic.com/research/building-effective-agents
+    note: The orchestrator-workers decomposition the task-splitting rules are built on, with its handoff contract
+  - title: "Anthropic — How we built our multi-agent research system"
+    url: https://www.anthropic.com/engineering/multi-agent-research-system
+    note: The delegation brief shape and task sizing that keep a worker's assignment bounded and checkable
 ---
-
 ## Rules
 
 1. **MUST** give every unit a checkable done-criterion (a test, a command and its expected output, a file that must exist with stated content). A unit without one is not a unit; merge it into the unit whose check covers it.
@@ -97,7 +100,3 @@ Bad decomposition:
 - [ ] Dependency order and parallel groups marked
 - [ ] Riskiest unit scheduled early
 
-## References
-
-- [Anthropic — Building effective agents](https://www.anthropic.com/research/building-effective-agents) (orchestrator-workers pattern)
-- [Anthropic — How we built our multi-agent research system](https://www.anthropic.com/engineering/multi-agent-research-system) (delegation briefs and task sizing)
