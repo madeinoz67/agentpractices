@@ -11,6 +11,9 @@ on:
 permissions: {}
 jobs:
   build:
+    # A newer build supersedes an older one instead of both racing to deploy (#27). Its own group:
+    # cancelling a build must never cancel a deploy in progress.
+    concurrency: { group: 'pages-build-${{ github.ref }}', cancel-in-progress: true }
     runs-on: ubuntu-latest
     permissions:
       contents: read

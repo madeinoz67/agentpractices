@@ -2,6 +2,7 @@
 
 ## Unreleased
 
+- `catalog.json`'s `generated` is now the source commit's time, not the build's wall clock, and the build job has its own `pages-build-*` concurrency group with `cancel-in-progress: true`. A scheduled build that checked out an older commit can no longer deploy after a newer build, and if it did its old timestamp would lose to the newer cached copy. Agent contract rule 6 now says a metadata-only commit moves `generated` and the daily star-count refresh does not (#27).
 - BP-0108 Nudge the agent at the moment a rule applies (D.AGT.TOOL, draft) (#106).
 - BP-0107 Enrich records with agents: when, why, and how (D.KNO.SEM, draft) (#104).
 - BP-0041 1.1.0: add R11 on environment work as a cost offset (#102).
